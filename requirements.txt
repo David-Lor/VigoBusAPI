@@ -1,0 +1,9 @@
+zeep
+flask
+requests-html
+beautifulsoup4
+roman
+gevent
+timeout-decorator
+python-dotenv
+git+https://github.com/David-Lor/PyBuses.git#egg=pybuses
