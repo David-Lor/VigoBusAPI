@@ -20,6 +20,11 @@ The goal of this API is to keep the different data sources and APIs available on
 
 - 0.1.0 - Initial release
 
+## TODO
+
+- Add experimental MQTT API endpoints
+- Add static route information endpoints
+
 ## Disclaimer
 
 This project is not endorsed by, directly affiliated with, maintained, sponsored, endorsed by or in any way officially connected with the company or companies responsible for the public transport service of the city of Vigo.
