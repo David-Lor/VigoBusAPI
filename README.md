@@ -12,9 +12,9 @@ The goal of this API is to keep the different data sources and APIs available on
 
 ## Endpoints
 
-- /stop/<stopid> : Get information about a Stop (name, location), given the Stop ID
-- /buses/<stopid> : Get the Buses that will arrive to a Stop, given the Stop ID
-- /nearstops/<lat>/<lon> : Get the Stops available near the given location, given the latitude and longitude
+- `/stop/<stopid>` : Get information about a Stop (name, location), given the Stop ID
+- `/buses/<stopid>` : Get the Buses that will arrive to a Stop, given the Stop ID
+- `/nearstops/<lat>/<lon>` : Get the Stops available near the given location, given the latitude and longitude
 
 ## Changelog
 
