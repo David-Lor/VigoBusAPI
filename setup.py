@@ -26,7 +26,7 @@ setup(
         "pybuses",
     ),
     dependency_links=(
-        "git+https://github.com/David-Lor/PyBuses.git#egg=pybuses"
+        "git+https://github.com/David-Lor/PyBuses.git#egg=pybuses",
     ),
     entry_points={
             'console_scripts': ['vigobusapi=vigobusapi:run'],
