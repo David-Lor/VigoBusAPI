@@ -8,6 +8,7 @@ from requests_async import HTTPError
 # noinspection PyPackageRequirements
 from starlette.status import HTTP_408_REQUEST_TIMEOUT, HTTP_500_INTERNAL_SERVER_ERROR
 from pybuses import StopNotExist, GetterResourceUnavailable
+import uvicorn
 
 # # Project # #
 from vigobusapi.settings_handler import load_settings
@@ -40,3 +41,11 @@ async def get_stop(stop_id: int):
     except StopNotExist:
         stop = None
     return stop_to_json(stop)
+
+
+def run():
+    uvicorn.run(app, host=settings[API_HOST], port=settings[API_PORT], log_level=settings[API_LOG_LEVEL])
+
+
+if __name__ == '__main__':
+    run()

@@ -24,6 +24,7 @@ def load_settings(dotenv_location: Optional[str] = None) -> Dict:
         API_NAME: getenv(API_NAME, DEFAULT_API_NAME),
         API_DESCRIPTION: getenv(API_DESCRIPTION),
         API_VERSION: getenv(API_VERSION, DEFAULT_API_VERSION),
+        API_LOG_LEVEL: getenv(API_LOG_LEVEL, DEFAULT_API_LOG_LEVEL),
         HTTP_REMOTE_API: getenv(HTTP_REMOTE_API),
         WSDL_REMOTE_API: getenv(WSDL_REMOTE_API),
         HTTP_TIMEOUT: getenv(HTTP_TIMEOUT)

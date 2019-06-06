@@ -1,4 +1,4 @@
 
-from vigobusapi import run
+from vigobusapi.app import run
 
 run()
