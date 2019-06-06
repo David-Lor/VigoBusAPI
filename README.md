@@ -22,7 +22,7 @@ The goal of this API is to keep the different data sources and APIs available on
 
 ## TODO
 
-- Add experimental MQTT API endpoints
+- Migrate from Flask to [FastAPI](https://github.com/tiangolo/fastapi)
 - Add static route information endpoints
 - Add tests (at least for String Fixing)
 
