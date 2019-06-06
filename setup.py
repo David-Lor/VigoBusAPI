@@ -15,13 +15,10 @@ setup(
     url="https://github.com/David-Lor/Python_VigoBusAPI",
     packages=("vigobusapi",),
     install_requires=(
-        "zeep",
-        "flask",
-        "requests-html",
+        "fastapi",
+        "uvicorn",
         "beautifulsoup4",
         "roman",
-        "gevent",
-        "timeout-decorator",
         "python-dotenv",
         "pybuses",
     ),
@@ -29,6 +26,6 @@ setup(
         "git+https://github.com/David-Lor/PyBuses.git#egg=pybuses",
     ),
     entry_points={
-            'console_scripts': ['vigobusapi=vigobusapi:run'],
+        'console_scripts': ['vigobusapi=vigobusapi:run'],
     },
 )
