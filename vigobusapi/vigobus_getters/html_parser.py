@@ -8,49 +8,54 @@ from bs4 import BeautifulSoup
 
 # # Package # #
 from .string_fixes import fix_bus
+from .exceptions import ParseError
 
 
 def parse_html(content: str, buses: bool) -> Union[Stop, List[Bus]]:
     """Parse the HTML content returned after requesting the HTML data source, and parse the Stop info and List of buses
     :param content: HTML source code as string
     :param buses: if True, parse the Buses
-    :raises: pybuses.StopNotExist | pybuses.GetterResourceUnavailable
+    :raises: pybuses.StopNotExist | pybuses.GetterResourceUnavailable | vigobus_getters.exceptions.ParseError
     """
-    if "Parada Inexistente" in content:
-        raise StopNotExist()
+    try:
+        if "Parada Inexistente" in content:
+            raise StopNotExist()
 
-    html = BeautifulSoup(content, "html.parser")
+        html = BeautifulSoup(content, "html.parser")
 
-    if not buses:
-        # Parse Stop info
-        stop_name = html.find("span", {"id": "lblNombre"}).text
-        if not stop_name:
-            raise GetterResourceUnavailable("Parsed Stop Name is empty")
-        return Stop(
-            stopid=0,  # TODO Parse stop id
-            name=stop_name
-        )
+        if not buses:
+            # Parse Stop info
 
-    else:
-        # Parse Buses
-        buses = list()
-        rows_all = html.find("tr")
-        rows = [
-            r for r in rows_all
-            if "style" in r.attrs.keys()
-               and ("color:#333333;background-color:#F7F6F3;" in r.attrs["style"]
-                    or "color:#284775;background-color:White;" in r.attrs["style"])
-        ]
-        for row in rows:
-            # TODO add Try with possible exceptions based on wrong parse keys
-            cols = row.find("td")
-            line = cols[0].text.replace(" ", "")
-            route = cols[1].text.lstrip()
-            time = cols[2].text
-            line, route = fix_bus(line, route)
-            buses.append(Bus(
-                line=line,
-                route=route,
-                time=int(time)
-            ))
-        return buses
+            stop_id = int(html.find("span", {"id": "lblParada"}).text)
+            stop_name = html.find("span", {"id": "lblNombre"}).text
+            if not stop_name:
+                raise GetterResourceUnavailable("Parsed Stop Name is empty")
+            return Stop(
+                stopid=stop_id,
+                name=stop_name
+            )
+
+        else:
+            # Parse Buses
+            buses = list()
+            buses_table = html.find("table", {"id": "GridView1"})
+            buses_rows = buses_table.find_all("tr")
+
+            for row in buses_rows:
+                bus_data_columns = row.find_all("td")
+
+                if len(bus_data_columns) == 3:  # The header is a row but without <td>; <th> instead
+                    line = bus_data_columns[0].text.replace(" ", "")
+                    route = bus_data_columns[1].text.strip()
+                    time = int(bus_data_columns[2].text)
+                    line, route = fix_bus(line, route)
+                    buses.append(Bus(
+                        line=line,
+                        route=route,
+                        time=time
+                    ))
+
+            return buses
+
+    except (ValueError, AttributeError):
+        raise ParseError()
