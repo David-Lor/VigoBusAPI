@@ -1,3 +1,6 @@
+"""HTML_REQUEST
+Async Functions to request the HTML external data source and return the raw result returned by the source.
+"""
 
 # # Native # #
 from asyncio import wait_for
@@ -9,6 +12,7 @@ from requests_async import get, Response
 from vigobusapi.settings_handler import load_settings
 from vigobusapi.settings_handler.const import *
 
+__all__ = ("request_html",)
 
 settings = load_settings()
 

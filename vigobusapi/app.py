@@ -1,4 +1,5 @@
-"""Module with all the available endpoints and the FastAPI initialization
+"""APP
+Module with all the available endpoints and the FastAPI initialization.
 """
 
 # # Native # #
@@ -17,10 +18,11 @@ from vigobusapi.settings_handler import load_settings
 from vigobusapi.settings_handler.const import *
 
 # # Package # #
-from .vigobus_getters import html
+from .vigobus_getters import html_get_buses, html_get_stop
 from .vigobus_getters.exceptions import ParseError
 from .json_generator import stop_to_json, buses_to_json
 
+__all__ = ("app", "run")
 
 settings = load_settings()
 
@@ -35,7 +37,7 @@ app = FastAPI(
 async def get_stop(stop_id: int):
     # TODO try-except-except-except... with a context manager/decorator?
     try:
-        stop = await html.get_stop(stop_id)
+        stop = await html_get_stop(stop_id)
     except TimeoutError:
         raise HTTPException(status_code=HTTP_408_REQUEST_TIMEOUT, detail="Timeout on external source")
     except HTTPError:
@@ -55,7 +57,7 @@ async def get_buses(stop_id: int):
     buses = list()
     stop_exists = True
     try:
-        buses = await html.get_buses(stop_id)
+        buses = await html_get_buses(stop_id)
     except TimeoutError:
         raise HTTPException(status_code=HTTP_408_REQUEST_TIMEOUT, detail="Timeout on external source")
     except HTTPError:

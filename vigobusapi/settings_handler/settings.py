@@ -1,3 +1,6 @@
+"""SETTINGS
+Settings loader. Load the DotEnv file and provide a function to return all the available settings as a Dict.
+"""
 
 # # Native # #
 from typing import Dict, Optional

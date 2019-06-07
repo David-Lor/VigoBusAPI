@@ -1,5 +1,5 @@
-"""STRING FIXES
-Functions that help fixing the Strings returned by the API
+"""STRING_FIXES
+Functions that help fixing the Strings returned by the API.
 """
 
 # # Native # #
@@ -9,7 +9,6 @@ from typing import Tuple
 # # Installed # #
 from roman import fromRoman
 from roman import InvalidRomanNumeralError as NoRoman
-
 
 __all__ = ("fix_stop_name", "fix_bus")
 

@@ -1,4 +1,5 @@
-"""Module to generate JSON responses for endpoint requests
+"""JSON_GENERATOR
+Module to generate JSON responses for endpoint requests.
 """
 
 # # Native # #
@@ -6,6 +7,8 @@ from typing import Optional, Dict, List
 
 # # Installed # #
 from pybuses import Stop, Bus
+
+__all__ = ("stop_to_json", "buses_to_json")
 
 
 def stop_to_json(stop: Optional[Stop]) -> Dict:

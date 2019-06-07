@@ -1,3 +1,6 @@
+"""HTML
+Async functions to fetch data from the HTML external data source and parse them to return the final objects.
+"""
 
 # # Native # #
 from typing import List
@@ -8,6 +11,8 @@ from pybuses import Stop, Bus
 # # Package # #
 from .html_request import request_html
 from .html_parser import parse_html
+
+__all__ = ("get_stop", "get_buses")
 
 
 async def get_stop(stopid: int) -> Stop:

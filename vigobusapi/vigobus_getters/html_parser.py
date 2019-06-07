@@ -1,3 +1,6 @@
+"""HTML_PARSER
+Parsers for the HTML external data source.
+"""
 
 # # Native # #
 from typing import List, Union
@@ -9,6 +12,8 @@ from bs4 import BeautifulSoup
 # # Package # #
 from .string_fixes import fix_bus
 from .exceptions import ParseError
+
+__all__ = ("parse_html",)
 
 
 def parse_html(content: str, buses: bool) -> Union[Stop, List[Bus]]:

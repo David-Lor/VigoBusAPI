@@ -1,3 +1,6 @@
+"""CONST
+Const variables for Settings.
+"""
 
 # Env (not-dotenv) vars
 DOTENV_LOCATION = "DOTENV_LOCATION"
