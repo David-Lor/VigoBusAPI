@@ -2,12 +2,9 @@
 Module with all the available endpoints and the FastAPI initialization.
 """
 
-# # Native # #
-from asyncio import TimeoutError
-
 # # Installed # #
 from fastapi import FastAPI, HTTPException
-from requests_async import HTTPError
+from requests_async import HTTPError, Timeout
 # noinspection PyPackageRequirements
 from starlette.status import HTTP_408_REQUEST_TIMEOUT, HTTP_500_INTERNAL_SERVER_ERROR
 from pybuses import StopNotExist, GetterResourceUnavailable
@@ -38,7 +35,7 @@ async def get_stop(stop_id: int):
     # TODO try-except-except-except... with a context manager/decorator?
     try:
         stop = await html_get_stop(stop_id)
-    except TimeoutError:
+    except Timeout:
         raise HTTPException(status_code=HTTP_408_REQUEST_TIMEOUT, detail="Timeout on external source")
     except HTTPError:
         raise HTTPException(status_code=HTTP_500_INTERNAL_SERVER_ERROR, detail="Generic HTTP error on external source")
@@ -58,7 +55,7 @@ async def get_buses(stop_id: int):
     stop_exists = True
     try:
         buses = await html_get_buses(stop_id)
-    except TimeoutError:
+    except Timeout:
         raise HTTPException(status_code=HTTP_408_REQUEST_TIMEOUT, detail="Timeout on external source")
     except HTTPError:
         raise HTTPException(status_code=HTTP_500_INTERNAL_SERVER_ERROR, detail="Generic HTTP error on external source")
