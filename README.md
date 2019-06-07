@@ -22,7 +22,7 @@ The goal of this API is to keep the different data sources and APIs available on
 
 ## TODO
 
-- Migrate from Flask to [FastAPI](https://github.com/tiangolo/fastapi)
+- Migrate from Flask to [FastAPI](https://github.com/tiangolo/fastapi) - Work in Progress @ branch [feature/fastapi](https://github.com/David-Lor/Python_VigoBusAPI/tree/feature/fastapi)
 - Add static route information endpoints
 - Add tests (at least for String Fixing)
 
