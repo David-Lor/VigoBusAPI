@@ -16,7 +16,7 @@ settings = load_settings()
 
 async def request_html(stopid: int) -> str:
     """Async function to request the webpage data source, returning the HTML content.
-    :raises: requests_async.RequestTimeout | requests_async.HTTPError
+    :raises: requests_async.RequestTimeout | requests_async.RequestException
     """
     response: Response = await get(settings[HTTP_REMOTE_API] + str(stopid), timeout=settings[HTTP_TIMEOUT])
     response.raise_for_status()

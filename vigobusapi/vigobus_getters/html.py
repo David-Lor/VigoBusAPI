@@ -17,7 +17,7 @@ __all__ = ("get_stop", "get_buses")
 
 async def get_stop(stopid: int) -> Stop:
     """Async function to get information of a Stop (only name) from the HTML data source.
-    :raises: asyncio.TimeoutError | requests_async.HTTPError | pybuses.StopNotExist | pybuses.GetterResourceUnavailable
+    :raises: requests_async.RequestTimeout | requests_async.RequestException | pybuses.StopNotExist
     """
     html = await request_html(stopid)
     return parse_html(content=html, buses=False)
@@ -25,7 +25,7 @@ async def get_stop(stopid: int) -> Stop:
 
 async def get_buses(stopid: int) -> List[Bus]:
     """Async function to get the buses incoming on a Stop from the HTML data source.
-    :raises: asyncio.TimeoutError | requests_async.HTTPError | pybuses.StopNotExist | pybuses.GetterResourceUnavailable
+    :raises: requests_async.RequestTimeout | requests_async.RequestException | pybuses.StopNotExist
     """
     html = await request_html(stopid)
     return parse_html(content=html, buses=True)

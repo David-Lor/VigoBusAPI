@@ -6,12 +6,12 @@ Parsers for the HTML external data source.
 from typing import List, Union
 
 # # Installed # #
-from pybuses import Stop, Bus, StopNotExist, GetterResourceUnavailable
+from pybuses import Stop, Bus, StopNotExist
 from bs4 import BeautifulSoup
 
 # # Package # #
 from .string_fixes import fix_bus
-from .exceptions import ParseError
+from .exceptions import ParseError, ParsingExceptions
 
 __all__ = ("parse_html",)
 
@@ -20,7 +20,7 @@ def parse_html(content: str, buses: bool) -> Union[Stop, List[Bus]]:
     """Parse the HTML content returned after requesting the HTML data source, and parse the Stop info and List of buses
     :param content: HTML source code as string
     :param buses: if True, parse the Buses
-    :raises: pybuses.StopNotExist | pybuses.GetterResourceUnavailable | vigobus_getters.exceptions.ParseError
+    :raises: pybuses.StopNotExist | vigobus_getters.exceptions.ParseError
     """
     try:
         if "Parada Inexistente" in content:
@@ -30,11 +30,10 @@ def parse_html(content: str, buses: bool) -> Union[Stop, List[Bus]]:
 
         if not buses:
             # Parse Stop info
-
             stop_id = int(html.find("span", {"id": "lblParada"}).text)
             stop_name = html.find("span", {"id": "lblNombre"}).text
             if not stop_name:
-                raise GetterResourceUnavailable("Parsed Stop Name is empty")
+                raise ParseError("Parsed Stop Name is empty")
             return Stop(
                 stopid=stop_id,
                 name=stop_name
@@ -62,5 +61,5 @@ def parse_html(content: str, buses: bool) -> Union[Stop, List[Bus]]:
 
             return buses
 
-    except (ValueError, AttributeError):
+    except ParsingExceptions:
         raise ParseError()

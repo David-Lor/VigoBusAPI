@@ -4,10 +4,10 @@ Module with all the available endpoints and the FastAPI initialization.
 
 # # Installed # #
 from fastapi import FastAPI, HTTPException
-from requests_async import HTTPError, Timeout
+from requests_async import RequestException, Timeout
 # noinspection PyPackageRequirements
 from starlette.status import HTTP_408_REQUEST_TIMEOUT, HTTP_500_INTERNAL_SERVER_ERROR
-from pybuses import StopNotExist, GetterResourceUnavailable
+from pybuses import StopNotExist
 import uvicorn
 
 # # Project # #
@@ -37,10 +37,8 @@ async def get_stop(stop_id: int):
         stop = await html_get_stop(stop_id)
     except Timeout:
         raise HTTPException(status_code=HTTP_408_REQUEST_TIMEOUT, detail="Timeout on external source")
-    except HTTPError:
+    except RequestException:
         raise HTTPException(status_code=HTTP_500_INTERNAL_SERVER_ERROR, detail="Generic HTTP error on external source")
-    except GetterResourceUnavailable:
-        raise HTTPException(status_code=HTTP_500_INTERNAL_SERVER_ERROR)
     except ParseError:
         raise HTTPException(status_code=HTTP_500_INTERNAL_SERVER_ERROR, detail="Error parsing external source data")
     except StopNotExist:
@@ -57,10 +55,8 @@ async def get_buses(stop_id: int):
         buses = await html_get_buses(stop_id)
     except Timeout:
         raise HTTPException(status_code=HTTP_408_REQUEST_TIMEOUT, detail="Timeout on external source")
-    except HTTPError:
+    except RequestException:
         raise HTTPException(status_code=HTTP_500_INTERNAL_SERVER_ERROR, detail="Generic HTTP error on external source")
-    except GetterResourceUnavailable:
-        raise HTTPException(status_code=HTTP_500_INTERNAL_SERVER_ERROR)
     except ParseError:
         raise HTTPException(status_code=HTTP_500_INTERNAL_SERVER_ERROR, detail="Error parsing external source data")
     except StopNotExist:
