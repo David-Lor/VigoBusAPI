@@ -15,7 +15,7 @@ from vigobusapi.settings_handler import load_settings
 from vigobusapi.settings_handler.const import *
 
 # # Package # #
-from .vigobus_getters import html_get_buses, html_get_stop
+from .vigobus_getters import html_get_buses, html_get_stop, wsdl_get_stop
 from .vigobus_getters.exceptions import ParseError
 from .json_generator import stop_to_json, buses_to_json
 
@@ -34,7 +34,8 @@ app = FastAPI(
 async def get_stop(stop_id: int):
     # TODO try-except-except-except... with a context manager/decorator?
     try:
-        stop = await html_get_stop(stop_id)
+        # stop = await html_get_stop(stop_id)
+        stop = await wsdl_get_stop(stop_id)
     except Timeout:
         raise HTTPException(status_code=HTTP_408_REQUEST_TIMEOUT, detail="Timeout on external source")
     except RequestException:
