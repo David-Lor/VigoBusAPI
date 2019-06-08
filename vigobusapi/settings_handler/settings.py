@@ -30,6 +30,6 @@ def load_settings(dotenv_location: Optional[str] = None) -> Dict:
         API_LOG_LEVEL: getenv(API_LOG_LEVEL, DEFAULT_API_LOG_LEVEL),
         HTTP_REMOTE_API: getenv(HTTP_REMOTE_API),
         WSDL_REMOTE_API: getenv(WSDL_REMOTE_API),
-        HTTP_TIMEOUT: float(getenv(HTTP_TIMEOUT)),
-        WSDL_TIMEOUT: float(getenv(WSDL_TIMEOUT))
+        HTTP_TIMEOUT: float(getenv(HTTP_TIMEOUT, DEFAULT_HTTP_TIMEOUT)),
+        WSDL_TIMEOUT: float(getenv(WSDL_TIMEOUT, DEFAULT_WSDL_TIMEOUT))
     }
