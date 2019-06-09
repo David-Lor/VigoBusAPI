@@ -35,7 +35,54 @@ EXTRA_DATA_PAGE = "page"
 HTML_PARSER = "html.parser"
 
 # # # # #
-# # Parsers for Page Numbers (kwargs for html.find_all)
+# # Parsers for Stop (kwargs for html.find/find_all)
+# # # # #
+
+PARSER_STOP_ID = {
+    "name": "span",
+    "attrs": {
+        "id": "lblParada"
+    }
+}
+
+PARSER_STOP_NAME = {
+    "name": "span",
+    "attrs": {
+        "id": "lblNombre"
+    }
+}
+
+# # # # #
+# # Parsers for Buses (kwargs for html.find/find_all)
+# # # # #
+
+# Table that contains all the buses
+PARSER_BUSES_TABLE = {
+    "name": "table",
+    "attrs": {
+        "id": "GridView1"
+    }
+}
+
+# Table Rows, each one being an bus, containing 3 <td> with the bus info (line, route, time)
+# Two different types of rows
+PARSERS_BUSES_ROWS_INSIDE_TABLE = [
+    {
+        "name": "tr",
+        "attrs": {
+            "style": "color:#333333;background-color:#F7F6F3;"
+        }
+    },
+    {
+        "name": "tr",
+        "attrs": {
+            "style": "color:#284775;background-color:White;"
+        }
+    }
+]
+
+# # # # #
+# # Parsers for Page Numbers (kwargs for html.find/find_all)
 # # # # #
 
 # Table that contains all the page numbers

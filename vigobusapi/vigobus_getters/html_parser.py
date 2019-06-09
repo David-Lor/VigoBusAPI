@@ -29,8 +29,8 @@ def parse_stop(html_source: str) -> Stop:
     # TODO Pasar como parámetro el BeautifulSoup parsed en lugar de parsear en cada método
 
     try:
-        stop_id = int(html.find("span", {"id": "lblParada"}).text)
-        stop_name = html.find("span", {"id": "lblNombre"}).text
+        stop_id = int(html.find(**PARSER_STOP_ID).text)
+        stop_name = html.find(**PARSER_STOP_NAME).text
         if not stop_name:
             raise ParseError("Parsed Stop Name is empty")
         stop_name = fix_stop_name(stop_name)
@@ -55,10 +55,12 @@ def parse_buses(html_source: str) -> List[Bus]:
     html = BeautifulSoup(html_source, HTML_PARSER)
 
     try:
-        buses_table = html.find("table", {"id": "GridView1"})
+        buses_table = html.find(**PARSER_BUSES_TABLE)
         # If buses_table is not found, means no buses are available
         if buses_table:
-            buses_rows = buses_table.find_all("tr")
+            buses_rows = list()
+            for PARSER in PARSERS_BUSES_ROWS_INSIDE_TABLE:
+                buses_rows.extend(buses_table.find_all(**PARSER))
 
             for row in buses_rows:
                 bus_data_columns = row.find_all("td")
@@ -171,7 +173,6 @@ def assert_page_number(html_source: str, expected_current_page: int):
     """
     try:
         current_page, pages_left = parse_pages(html_source)
-        print("current page", current_page, "pages left", pages_left)
         assert current_page == expected_current_page
     except ParsingExceptions:
         raise ParseError()
