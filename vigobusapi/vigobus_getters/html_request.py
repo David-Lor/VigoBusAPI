@@ -3,6 +3,7 @@ Async Functions to request the HTML external data source and return the raw resu
 """
 
 # # Native # #
+from copy import deepcopy
 from typing import Dict, Optional
 
 # # Installed # #
@@ -33,9 +34,14 @@ async def request_html(stopid: int, page: Optional[int] = None, extra_params: Op
 
     # Generate body if required
     body = None
+    headers = HEADERS
     if extra_params is not None:
         extra_params[EXTRA_DATA_PAGE] = page
         body = EXTRA_DATA.format(**extra_params)
+        headers = deepcopy(HEADERS_NEXT_LOADS)
+        headers[HEADERS_NEXT_LOADS_REFERER] = settings[HTTP_REMOTE_API] + HEADERS_NEXT_LOADS_REFERER_PARAMS.format(
+            stopid=stopid
+        )
 
     # Getting first page is GET request, getting other pages is POST request
     method = get if page is None else post
@@ -44,7 +50,7 @@ async def request_html(stopid: int, page: Optional[int] = None, extra_params: Op
         url=settings[HTTP_REMOTE_API],
         params=params,
         data=body,
-        headers=HEADERS,
+        headers=headers,
         timeout=settings[HTTP_TIMEOUT]
     )
     response.raise_for_status()

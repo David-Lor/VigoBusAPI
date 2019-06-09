@@ -10,11 +10,25 @@ HEADERS = {
     'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'accept-encoding': 'accept-encoding',
     'accept-language': 'es,en-US;q=0.7,en;q=0.3',
+    'connection': 'keep-alive',
     'content-type': 'application/x-www-form-urlencoded',
-    'dnt': '1',
+    'upgrade-insecure-requests': '1',
     'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:67.0) Gecko/20100101 Firefox/67.0'
 }
 """Headers to be used on requests"""
+
+HEADERS_NEXT_LOADS = {
+    'dnt': '1',
+    'referer': None
+}
+"""Additional Headers to be used on more page loads after first page.
+Referer is the HTML data source URL + the formatted HEADERS_NEXT_LOADS_REFERER_PARAMS"""
+
+HEADERS_NEXT_LOADS_REFERER = "referer"
+"""Key for the referer Header"""
+
+HEADERS_NEXT_LOADS_REFERER_PARAMS = "?parada={stopid}"
+"""Value for the 'referer' key on HEADERS_NEXT_LOADS; 'stopid' is a placeholder so the string must be formatted"""
 
 EXTRA_DATA_REQUIRED = ("__VIEWSTATE", "__VIEWSTATEGENERATOR", "__EVENTVALIDATION")
 """Extra Data fields that must be fetched from the HTML source code, and used on the EXTRA_DATA str as placeholders"""
