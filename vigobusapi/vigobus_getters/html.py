@@ -7,6 +7,8 @@ from typing import List
 
 # # Installed # #
 from pybuses import Stop, Bus
+from cachetools import TTLCache
+from asyncache import cached
 from requests_async import RequestException
 
 # # Package # #
@@ -16,7 +18,11 @@ from .html_parser import *
 
 __all__ = ("get_stop", "get_buses")
 
+stops_cache = TTLCache(maxsize=1000, ttl=86400)
+buses_cache = TTLCache(maxsize=500, ttl=15)
 
+
+@cached(stops_cache)
 async def get_stop(stopid: int) -> Stop:
     """Async function to get information of a Stop (only name) from the HTML data source.
     :param stopid: Stop ID
@@ -27,6 +33,7 @@ async def get_stop(stopid: int) -> Stop:
     return parse_stop(html_source)
 
 
+@cached(buses_cache)
 async def get_buses(stopid: int, get_all_pages: bool = False) -> List[Bus]:
     """Async function to get the buses incoming on a Stop from the HTML data source.
     :param stopid: Stop ID
