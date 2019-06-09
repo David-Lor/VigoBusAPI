@@ -7,10 +7,12 @@ from typing import List
 
 # # Installed # #
 from pybuses import Stop, Bus
+from requests_async import RequestException
 
 # # Package # #
 from .html_request import request_html
-from .html_parser import parse_stop, parse_buses
+from .exceptions import ParseError
+from .html_parser import *
 
 __all__ = ("get_stop", "get_buses")
 
@@ -18,11 +20,11 @@ __all__ = ("get_stop", "get_buses")
 async def get_stop(stopid: int) -> Stop:
     """Async function to get information of a Stop (only name) from the HTML data source.
     :param stopid: Stop ID
-    :raises: requests_async.RequestTimeout | requests_async.RequestException |
+    :raises: requests_async.Timeout | requests_async.RequestException |
              pybuses.StopNotExist | vigobus_getters.exceptions.ParseError
     """
-    html = await request_html(stopid)
-    return parse_stop(html)
+    html_source = await request_html(stopid)
+    return parse_stop(html_source)
 
 
 async def get_buses(stopid: int, get_all_pages: bool = False) -> List[Bus]:
@@ -32,6 +34,24 @@ async def get_buses(stopid: int, get_all_pages: bool = False) -> List[Bus]:
     :raises: requests_async.RequestTimeout | requests_async.RequestException |
              pybuses.StopNotExist | vigobus_getters.exceptions.ParseError
     """
-    html = await request_html(stopid)
-    buses, pages = parse_buses(html)
+    html_source = await request_html(stopid)
+    buses = parse_buses(html_source)
+
+    # Parse extra pages available
+    if get_all_pages and buses:
+        cp, pages_available = parse_pages(html_source)
+
+        if pages_available:
+            extra_parameters = parse_extra_parameters(html_source)
+
+            for current_page in range(2, pages_available + 2):
+                try:
+                    html_source = await request_html(stopid, page=current_page, extra_params=extra_parameters)
+                    assert_page_number(html_source, current_page)
+                    more_buses = parse_buses(html_source)
+                    # TODO check buses? if not repeated ?)
+                    buses.extend(more_buses)
+                except (ParseError, RequestException):
+                    break
+
     return buses

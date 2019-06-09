@@ -34,8 +34,8 @@ app = FastAPI(
 async def get_stop(stop_id: int):
     # TODO try-except-except-except... with a context manager/decorator?
     try:
-        # stop = await html_get_stop(stop_id)
-        stop = await wsdl_get_stop(stop_id)
+        stop = await html_get_stop(stop_id)
+        # stop = await wsdl_get_stop(stop_id)
     except Timeout:
         raise HTTPException(status_code=HTTP_408_REQUEST_TIMEOUT, detail="Timeout on external source")
     except RequestException:
@@ -53,7 +53,7 @@ async def get_buses(stop_id: int):
     buses = list()
     stop_exists = True
     try:
-        buses = await html_get_buses(stop_id)
+        buses = await html_get_buses(stop_id, True)
     except Timeout:
         raise HTTPException(status_code=HTTP_408_REQUEST_TIMEOUT, detail="Timeout on external source")
     except RequestException:
