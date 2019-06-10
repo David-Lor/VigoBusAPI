@@ -38,7 +38,7 @@ async def request_html(stopid: int, page: Optional[int] = None, extra_params: Op
     if extra_params is not None:
         extra_params[EXTRA_DATA_PAGE] = page
         body = EXTRA_DATA.format(**extra_params)
-        headers = deepcopy(HEADERS_NEXT_LOADS)
+        headers.update(HEADERS_NEXT_LOADS)
         headers[HEADERS_NEXT_LOADS_REFERER] = settings[HTTP_REMOTE_API] + HEADERS_NEXT_LOADS_REFERER_PARAMS.format(
             stopid=stopid
         )

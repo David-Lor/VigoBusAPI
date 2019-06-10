@@ -4,7 +4,6 @@ Parsers for the HTML external data source.
 
 # # Native # #
 from typing import List, Tuple, Dict
-from copy import deepcopy
 
 # # Installed # #
 from pybuses import Stop, Bus, StopNotExist
@@ -75,8 +74,6 @@ def parse_buses(html_source: str) -> List[Bus]:
                         route=route,
                         time=time
                     ))
-
-                # TODO TOFIX Sometimes, Page numbers parsed as a bus!!!
 
         return buses
 
@@ -173,6 +170,7 @@ def assert_page_number(html_source: str, expected_current_page: int):
     """
     try:
         current_page, pages_left = parse_pages(html_source)
-        assert current_page == expected_current_page
-    except ParsingExceptions:
-        raise ParseError()
+        assert current_page == expected_current_page, \
+            f"Pages won't match. Current page is {current_page}, should be {expected_current_page}"
+    except ParsingExceptions as ex:
+        raise ParseError(ex)
