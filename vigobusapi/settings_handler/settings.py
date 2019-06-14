@@ -21,7 +21,7 @@ def load_settings(dotenv_location: Optional[str] = None) -> Dict:
     load_dotenv(dotenv_path=dotenv_location)
 
     return {
-        ENDPOINT_REQUEST_TIMEOUT: int(getenv(ENDPOINT_REQUEST_TIMEOUT, DEFAULT_ENDPOINT_REQUEST_TIMEOUT)),
+        ENDPOINT_TIMEOUT: float(getenv(ENDPOINT_TIMEOUT, DEFAULT_ENDPOINT_TIMEOUT)),
         API_HOST: getenv(API_HOST, DEFAULT_API_HOST),
         API_PORT: int(getenv(API_PORT, DEFAULT_API_PORT)),
         API_NAME: getenv(API_NAME, DEFAULT_API_NAME),
@@ -31,5 +31,6 @@ def load_settings(dotenv_location: Optional[str] = None) -> Dict:
         HTTP_REMOTE_API: getenv(HTTP_REMOTE_API),
         WSDL_REMOTE_API: getenv(WSDL_REMOTE_API),
         HTTP_TIMEOUT: float(getenv(HTTP_TIMEOUT, DEFAULT_HTTP_TIMEOUT)),
-        WSDL_TIMEOUT: float(getenv(WSDL_TIMEOUT, DEFAULT_WSDL_TIMEOUT))
+        WSDL_TIMEOUT: float(getenv(WSDL_TIMEOUT, DEFAULT_WSDL_TIMEOUT)),
+        HTTP_RETRIES: int(getenv(HTTP_RETRIES, DEFAULT_HTTP_RETRIES))
     }

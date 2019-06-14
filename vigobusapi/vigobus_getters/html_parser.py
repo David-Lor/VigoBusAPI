@@ -25,7 +25,7 @@ def parse_stop(html_source: str) -> Stop:
     """
     parse_stop_exists(html_source)
     html = BeautifulSoup(html_source, HTML_PARSER)
-    # TODO Pasar como parámetro el BeautifulSoup parsed en lugar de parsear en cada método
+    # TODO BeautifulSoup-parsed object should be passed instead of raw HTML string
 
     try:
         stop_id = int(html.find(**PARSER_STOP_ID).text)

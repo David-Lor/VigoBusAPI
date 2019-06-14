@@ -3,11 +3,10 @@ Async Functions to request the HTML external data source and return the raw resu
 """
 
 # # Native # #
-from copy import deepcopy
 from typing import Dict, Optional
 
 # # Installed # #
-from requests_async import get, post, Response
+from requests_async import get, post, Response, RequestException
 
 # # Project # #
 from vigobusapi.settings_handler import load_settings
@@ -45,13 +44,20 @@ async def request_html(stopid: int, page: Optional[int] = None, extra_params: Op
 
     # Getting first page is GET request, getting other pages is POST request
     method = get if page is None else post
+    last_error = None
 
-    response: Response = await method(
-        url=settings[HTTP_REMOTE_API],
-        params=params,
-        data=body,
-        headers=headers,
-        timeout=settings[HTTP_TIMEOUT]
-    )
-    response.raise_for_status()
-    return response.text
+    for i in range(settings[HTTP_RETRIES]):
+        try:
+            response: Response = await method(
+                url=settings[HTTP_REMOTE_API],
+                params=params,
+                data=body,
+                headers=headers,
+                timeout=settings[HTTP_TIMEOUT]
+            )
+            response.raise_for_status()
+            return response.text
+        except RequestException as ex:
+            last_error = ex
+
+    raise last_error

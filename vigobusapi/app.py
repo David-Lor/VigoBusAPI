@@ -2,6 +2,9 @@
 Module with all the available endpoints and the FastAPI initialization.
 """
 
+# # Native # #
+import asyncio
+
 # # Installed # #
 from fastapi import FastAPI, HTTPException
 from requests_async import RequestException, Timeout
@@ -34,9 +37,9 @@ app = FastAPI(
 async def get_stop(stop_id: int):
     # TODO try-except-except-except... with a context manager/decorator?
     try:
-        stop = await html_get_stop(stop_id)
+        stop = await asyncio.wait_for(html_get_stop(stop_id), timeout=settings[ENDPOINT_TIMEOUT])
         # stop = await wsdl_get_stop(stop_id)
-    except Timeout:
+    except (Timeout, asyncio.TimeoutError):
         raise HTTPException(status_code=HTTP_408_REQUEST_TIMEOUT, detail="Timeout on external source")
     except RequestException:
         raise HTTPException(status_code=HTTP_500_INTERNAL_SERVER_ERROR, detail="Generic HTTP error on external source")
@@ -53,8 +56,8 @@ async def get_buses(stop_id: int):
     buses = list()
     stop_exists = True
     try:
-        buses = await html_get_buses(stop_id, True)
-    except Timeout:
+        buses = await asyncio.wait_for(html_get_buses(stop_id, True), timeout=settings[ENDPOINT_TIMEOUT])
+    except (Timeout, asyncio.TimeoutError):
         raise HTTPException(status_code=HTTP_408_REQUEST_TIMEOUT, detail="Timeout on external source")
     except RequestException:
         raise HTTPException(status_code=HTTP_500_INTERNAL_SERVER_ERROR, detail="Generic HTTP error on external source")
