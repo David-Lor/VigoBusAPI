@@ -4,6 +4,7 @@ Async Functions to request the HTML external data source and return the raw resu
 
 # # Native # #
 from typing import Dict, Optional
+import copy
 
 # # Installed # #
 from requests_async import get, post, Response, RequestException
@@ -31,21 +32,27 @@ async def request_html(stopid: int, page: Optional[int] = None, extra_params: Op
     # Generate params (Stop ID)
     params = {"parada": stopid}
 
-    # Generate body if required
-    body = None
-    headers = HEADERS
+    # Extra params available = next pages, requiring body & updated headers
     if extra_params is not None:
-        extra_params[EXTRA_DATA_PAGE] = page
-        body = EXTRA_DATA.format(**extra_params)
-        headers.update(HEADERS_NEXT_LOADS)
+        # Body/Data
+        extra_params[EXTRA_DATA_PAGE] = page  # add the Page number to the extra_params
+        body = EXTRA_DATA.format(**extra_params)  # format the request Body with the extra_params
+        # Headers
+        headers = copy.deepcopy(HEADERS)
+        headers.update(HEADERS_NEXT_LOADS)  # update the original Headers with the extra items used on next pages
         headers[HEADERS_NEXT_LOADS_REFERER] = settings[HTTP_REMOTE_API] + HEADERS_NEXT_LOADS_REFERER_PARAMS.format(
-            stopid=stopid
+            stopid=stopid  # update the Referer header with the URL with the stopid as parameter
         )
+    # Extra params not available = this is the first page, body not required & use unmodified headers
+    else:
+        headers = HEADERS
+        body = None
 
     # Getting first page is GET request, getting other pages is POST request
     method = get if page is None else post
     last_error = None
 
+    # Run the Requests, with Retries support
     for i in range(settings[HTTP_RETRIES]):
         try:
             response: Response = await method(

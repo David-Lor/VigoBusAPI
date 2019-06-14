@@ -3,6 +3,7 @@ Parsers for the HTML external data source.
 """
 
 # # Native # #
+import urllib.parse
 from typing import List, Tuple, Dict
 
 # # Installed # #
@@ -110,7 +111,8 @@ def parse_extra_parameters(html_source: str) -> Dict:
         params = {key: None for key in EXTRA_DATA_REQUIRED}
         for key in params.keys():
             value = html.find("input", {"id": key})["value"]
-            params[key] = value
+            # Values must be URL-Parsed (e.g. replace '/' by '%2F' - https://www.urlencoder.io/python/)
+            params[key] = urllib.parse.quote(value, safe="")
 
         return params
 

@@ -3,7 +3,6 @@ Async functions to fetch data from the HTML external data source and parse them 
 """
 
 # # Native # #
-import asyncio
 from typing import List
 
 # # Installed # #
@@ -52,26 +51,16 @@ async def get_buses(stopid: int, get_all_pages: bool = False) -> List[Bus]:
         if pages_available:
             # Get and Parse extra pages available
             extra_parameters = parse_extra_parameters(html_source)
-            tasks = [  # async request_html() tasks (one request per page)
-                request_html(stopid, page=current_page, extra_params=extra_parameters)
-                for current_page in list(range(2, pages_available + 2))
-            ]
 
             try:
-                # execute all the requests async and wait for their responses
-                tasks_results = await asyncio.gather(*tasks)
-            except RequestException:
-                # if the extra buses could not be fetched, ignore this error and return the first page of results
+                for page in range(2, pages_available + 2):
+                    html_source = await request_html(stopid, page=page, extra_params=extra_parameters)
+                    assert_page_number(html_source, page)
+                    more_buses = parse_buses(html_source)
+                    # extra_parameters = parse_extra_parameters(html_source)  # Update extra_parameters
+                    buses.extend(more_buses)
+            except (RequestException, *ParsingExceptions):
+                # Ignore exceptions while iterating the pages; Keep & return the buses that could be fetched
                 pass
-            else:
-                try:
-                    # parse the received responses
-                    for current_page, html_source in enumerate(tasks_results, 2):
-                        assert_page_number(html_source, current_page)
-                        more_buses = parse_buses(html_source)
-                        buses.extend(more_buses)
-                except ParsingExceptions:
-                    # if processing the extra buses give a Parsing exception, ignore this error
-                    pass
 
     return buses
