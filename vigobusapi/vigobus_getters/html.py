@@ -56,5 +56,7 @@ async def get_buses(stopid: int, get_all_buses: bool = False) -> List[Bus]:
             except (RequestException, *ParsingExceptions):
                 # Ignore exceptions while iterating the pages; Keep & return the buses that could be fetched
                 pass
+            finally:
+                clear_duplicated_buses(buses)
 
     return buses
