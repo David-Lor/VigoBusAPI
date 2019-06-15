@@ -21,8 +21,7 @@ setup(
         "roman",
         "python-dotenv",
         "pybuses",
-        "cachetools",
-        "asyncache"
+        "cachetools"
     ),
     dependency_links=(
         "git+https://github.com/David-Lor/PyBuses.git#egg=pybuses",

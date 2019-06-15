@@ -9,4 +9,5 @@ ParsingExceptions = (AttributeError, ValueError, TypeError, KeyError, AssertionE
 
 
 class ParseError(Exception):
+    """Exception raised when an error happened while parsing the data received from an external data source"""
     pass

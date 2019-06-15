@@ -7,4 +7,3 @@ roman  # Check for roman numbers in string chunks
 python-dotenv  # dotenv setting files
 git+https://github.com/David-Lor/PyBuses.git#egg=pybuses  # PyBuses
 cachetools  # TTLCache
-asyncache  # cached decorator for async functions

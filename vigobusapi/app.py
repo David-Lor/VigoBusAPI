@@ -18,8 +18,7 @@ from vigobusapi.settings_handler import load_settings
 from vigobusapi.settings_handler.const import *
 
 # # Package # #
-from .vigobus_getters import html_get_buses, html_get_stop, wsdl_get_stop
-from .vigobus_getters.exceptions import ParseError
+from .vigobus_getters import get_stop, get_buses, ParseError
 from .json_generator import stop_to_json, buses_to_json
 
 __all__ = ("app", "run")
@@ -37,8 +36,10 @@ app = FastAPI(
 async def get_stop(stop_id: int):
     # TODO try-except-except-except... with a context manager/decorator?
     try:
-        stop = await asyncio.wait_for(html_get_stop(stop_id), timeout=settings[ENDPOINT_TIMEOUT])
-        # stop = await wsdl_get_stop(stop_id)
+        stop = await asyncio.wait_for(
+            get_stop(stop_id),
+            timeout=settings[ENDPOINT_TIMEOUT]
+        )
     except (Timeout, asyncio.TimeoutError):
         raise HTTPException(status_code=HTTP_408_REQUEST_TIMEOUT, detail="Timeout on external source")
     except RequestException:
@@ -51,12 +52,15 @@ async def get_stop(stop_id: int):
 
 
 @app.get("/buses/{stop_id}")
-async def get_buses(stop_id: int):
+async def get_buses(stop_id: int, get_all_buses: bool = False):
     # TODO try-except-except-except... with a context manager/decorator?
     buses = list()
     stop_exists = True
     try:
-        buses = await asyncio.wait_for(html_get_buses(stop_id, True), timeout=settings[ENDPOINT_TIMEOUT])
+        buses = await asyncio.wait_for(
+            get_buses(stop_id, get_all_buses),
+            timeout=settings[ENDPOINT_TIMEOUT]
+        )
     except (Timeout, asyncio.TimeoutError):
         raise HTTPException(status_code=HTTP_408_REQUEST_TIMEOUT, detail="Timeout on external source")
     except RequestException:
