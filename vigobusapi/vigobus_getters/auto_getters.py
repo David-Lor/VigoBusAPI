@@ -9,7 +9,7 @@ import inspect
 from typing import List
 
 # # Installed # #
-from pybuses import Stop, Bus, StopNotExist
+from pybuses_entities import Stop, Bus, StopNotExist
 
 # # Package # #
 from . import html, wsdl, cache
@@ -42,7 +42,7 @@ async def get_stop(stopid: int) -> Stop:
     4.- Remote
     :param stopid: Stop ID
     :raises: requests_async.Timeout | requests_async.RequestException |
-             pybuses.StopNotExist | vigobus_getters.exceptions.ParseError
+             pybuses_entities.StopNotExist | vigobus_getters.exceptions.ParseError
     """
     last_exception = None
 

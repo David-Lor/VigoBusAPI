@@ -1,6 +1,6 @@
 
 # # Installed # #
-from pybuses import Stop
+from pybuses_entities import Stop
 from bs4 import BeautifulSoup
 
 # # Package # #
@@ -40,7 +40,7 @@ def parse_xml_error_stop_not_exist(content: str) -> bool:
     """When a call to the WSDL API is unsuccessful, the response text must be fed to this method in order to check
     if the error was caused because the Stop not exists.
     Returns True if the Stop NOT EXISTS, and False if that was not the problem which caused the request to fail.
-    :raise: pybuses.StopNotExist
+    :raise: pybuses_entities.StopNotExist
     """
     if "No hay ninguna fila en la posición" in content:
         return True

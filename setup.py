@@ -20,11 +20,8 @@ setup(
         "beautifulsoup4",
         "roman",
         "python-dotenv",
-        "pybuses",
+        "pybuses_entities-entities",
         "cachetools"
-    ),
-    dependency_links=(
-        "git+https://github.com/David-Lor/PyBuses.git#egg=pybuses",
     ),
     entry_points={
         'console_scripts': ['vigobusapi=vigobusapi:run'],

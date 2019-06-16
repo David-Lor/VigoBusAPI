@@ -1,6 +1,6 @@
 
 # # Installed # #
-from pybuses import Stop, StopNotExist
+from pybuses_entities import Stop, StopNotExist
 from requests_async import HTTPError
 
 # # Package # #
@@ -13,7 +13,7 @@ __all__ = ("get_stop",)
 
 async def get_stop(stopid: int) -> Stop:
     """Async function to get information of a Stop (only name) from the WSDL API.
-    :raises: requests_async.RequestTimeout | requests_async.RequestException | pybuses.StopNotExist
+    :raises: requests_async.RequestTimeout | requests_async.RequestException | pybuses_entities.StopNotExist
     """
     try:
         xml = await request_wsdl_stop(stopid)

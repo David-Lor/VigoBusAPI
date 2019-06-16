@@ -7,7 +7,7 @@ from typing import List, Optional
 
 # # Installed # #
 from cachetools import TTLCache
-from pybuses import Stop, Bus
+from pybuses_entities import Stop, Bus
 
 # # Project # #
 from vigobusapi.settings_handler import load_settings

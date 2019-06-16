@@ -5,5 +5,5 @@ beautifulsoup4  # HTML/XML parser for HTTP & WSDL external data sources
 lxml  # XML parser used by BeautifulSoup
 roman  # Check for roman numbers in string chunks
 python-dotenv  # dotenv setting files
-git+https://github.com/David-Lor/PyBuses.git#egg=pybuses  # PyBuses
+pybuses-entities  # Stop/Bus entities
 cachetools  # TTLCache
