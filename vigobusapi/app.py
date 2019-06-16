@@ -4,14 +4,14 @@ Module with all the available endpoints and the FastAPI initialization.
 
 # # Native # #
 import asyncio
+import contextlib
 
 # # Installed # #
 import uvicorn
 import fastapi
-from pybuses_entities import StopNotExist
+from starlette import status as statuscode
+from pybuses_entities import Stop, StopNotExist, BusesResult
 from requests_async import RequestException, Timeout
-# noinspection PyPackageRequirements
-from starlette.status import HTTP_408_REQUEST_TIMEOUT, HTTP_500_INTERNAL_SERVER_ERROR
 
 # # Project # #
 from vigobusapi.settings_handler import load_settings
@@ -19,7 +19,6 @@ from vigobusapi.settings_handler.const import *
 
 # # Package # #
 from .vigobus_getters import get_stop, get_buses, ParseError
-from .json_generator import stop_to_json, buses_to_json
 
 __all__ = ("app", "run")
 
@@ -32,31 +31,41 @@ app = fastapi.FastAPI(
 )
 
 
+@contextlib.contextmanager
+def manage_endpoint_exceptions():
+    """ContextManager to catch exceptions that can be raised when getting information from external data sources,
+    and return an HTTP Status Code to the client depending on the exception raised.
+    """
+    try:
+        yield
+    except (Timeout, asyncio.TimeoutError):
+        raise fastapi.HTTPException(
+            status_code=statuscode.HTTP_408_REQUEST_TIMEOUT, detail="Timeout on external source"
+        )
+    except RequestException:
+        raise fastapi.HTTPException(
+            status_code=statuscode.HTTP_500_INTERNAL_SERVER_ERROR, detail="Generic HTTP error on external source"
+        )
+    except ParseError:
+        raise fastapi.HTTPException(
+            status_code=statuscode.HTTP_500_INTERNAL_SERVER_ERROR, detail="Error parsing external source data"
+        )
+    except StopNotExist:
+        raise fastapi.HTTPException(
+            status_code=statuscode.HTTP_404_NOT_FOUND, detail="Stop not exists"
+        )
+
+
 @app.get("/stop/{stop_id}")
 async def endpoint_get_stop(stop_id: int):
     """Endpoint to get information of a Stop giving the Stop ID
     """
-    # TODO try-except-except-except... with a context manager/decorator?
-    try:
-        stop = await asyncio.wait_for(
+    with manage_endpoint_exceptions():
+        stop: Stop = await asyncio.wait_for(
             get_stop(stop_id),
             timeout=settings[ENDPOINT_TIMEOUT]
         )
-    except (Timeout, asyncio.TimeoutError):
-        raise fastapi.HTTPException(
-            status_code=HTTP_408_REQUEST_TIMEOUT, detail="Timeout on external source"
-        )
-    except RequestException:
-        raise fastapi.HTTPException(
-            status_code=HTTP_500_INTERNAL_SERVER_ERROR, detail="Generic HTTP error on external source"
-        )
-    except ParseError:
-        raise fastapi.HTTPException(
-            status_code=HTTP_500_INTERNAL_SERVER_ERROR, detail="Error parsing external source data"
-        )
-    except StopNotExist:
-        stop = None
-    return stop_to_json(stop)
+        return stop.get_dict()
 
 
 @app.get("/buses/{stop_id}")
@@ -64,29 +73,12 @@ async def endpoint_get_buses(stop_id: int, get_all_buses: bool = False):
     """Endpoint to get a list of Buses coming to a Stop giving the Stop ID.
     By default the shortest available list of buses is returned, unless 'get_all_buses' param is True
     """
-    # TODO try-except-except-except... with a context manager/decorator?
-    buses = list()
-    stop_exists = True
-    try:
-        buses = await asyncio.wait_for(
+    with manage_endpoint_exceptions():
+        buses_result: BusesResult = await asyncio.wait_for(
             get_buses(stop_id, get_all_buses),
             timeout=settings[ENDPOINT_TIMEOUT]
         )
-    except (Timeout, asyncio.TimeoutError):
-        raise fastapi.HTTPException(
-            status_code=HTTP_408_REQUEST_TIMEOUT, detail="Timeout on external source"
-        )
-    except RequestException:
-        raise fastapi.HTTPException(
-            status_code=HTTP_500_INTERNAL_SERVER_ERROR, detail="Generic HTTP error on external source"
-        )
-    except ParseError:
-        raise fastapi.HTTPException(
-            status_code=HTTP_500_INTERNAL_SERVER_ERROR, detail="Error parsing external source data"
-        )
-    except StopNotExist:
-        stop_exists = False
-    return buses_to_json(buses, stop_exists)
+        return buses_result.get_dict()
 
 
 def run():
