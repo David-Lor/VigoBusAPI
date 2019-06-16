@@ -6,8 +6,7 @@ Async functions to fetch data from the HTML external data source and parse them 
 from typing import List
 
 # # Installed # #
-from pybuses_entities import Stop, Bus
-from cachetools import TTLCache
+from pybuses_entities import Stop, Bus, BusSort
 from requests_async import RequestException
 
 # # Package # #
@@ -59,4 +58,4 @@ async def get_buses(stopid: int, get_all_buses: bool = False) -> List[Bus]:
             finally:
                 clear_duplicated_buses(buses)
 
-    return buses
+    return sorted(buses, key=BusSort.time_line_route)
