@@ -3,6 +3,7 @@ Parsers for the HTML external data source.
 """
 
 # # Native # #
+import contextlib
 import urllib.parse
 from collections import Counter
 from typing import List, Tuple, Dict
@@ -13,13 +14,24 @@ from bs4 import BeautifulSoup
 
 # # Package # #
 from .html_const import *
-from .string_fixes import fix_bus, fix_stop_name
+from .string_fixes import fix_bus, fix_stop_name, fix_chars
 from .exceptions import ParseError, ParsingExceptions
 
 __all__ = (
     "parse_stop", "parse_buses", "parse_pages", "parse_extra_parameters",
     "assert_page_number", "clear_duplicated_buses"
 )
+
+
+@contextlib.contextmanager
+def parsing():
+    """ContextManager to run code that parse HTML. If any of ParsingExceptions is raised inside the CM,
+    ParseError is raised to the outside.
+    """
+    try:
+        yield
+    except ParsingExceptions as ex:
+        raise ParseError(ex)
 
 
 def parse_stop(html_source: str) -> Stop:
@@ -32,7 +44,7 @@ def parse_stop(html_source: str) -> Stop:
     html = BeautifulSoup(html_source, HTML_PARSER)
     # TODO BeautifulSoup-parsed object should be passed instead of raw HTML string
 
-    try:
+    with parsing():
         stop_id = int(html.find(**PARSER_STOP_ID).text)
         stop_name = html.find(**PARSER_STOP_NAME).text
         if not stop_name:
@@ -43,9 +55,6 @@ def parse_stop(html_source: str) -> Stop:
             stopid=stop_id,
             name=stop_name
         )
-
-    except ParsingExceptions:
-        raise ParseError()
 
 
 def parse_buses(html_source: str) -> List[Bus]:
@@ -58,13 +67,13 @@ def parse_buses(html_source: str) -> List[Bus]:
     buses = list()
     html = BeautifulSoup(html_source, HTML_PARSER)
 
-    try:
+    with parsing():
         buses_table = html.find(**PARSER_BUSES_TABLE)
         # If buses_table is not found, means no buses are available
         if buses_table:
             buses_rows = list()
-            for PARSER in PARSERS_BUSES_ROWS_INSIDE_TABLE:
-                buses_rows.extend(buses_table.find_all(**PARSER))
+            for parser in PARSERS_BUSES_ROWS_INSIDE_TABLE:
+                buses_rows.extend(buses_table.find_all(**parser))
 
             for row in buses_rows:
                 bus_data_columns = row.find_all("td")
@@ -76,14 +85,11 @@ def parse_buses(html_source: str) -> List[Bus]:
                     line, route = fix_bus(line, route)
                     buses.append(Bus(
                         line=line,
-                        route=route,
+                        route=fix_chars(route),
                         time=time
                     ))
 
         return buses
-
-    except ParsingExceptions:
-        raise ParseError()
 
 
 def parse_stop_exists(html_source: str, raise_exception: bool = True) -> bool:
@@ -110,7 +116,7 @@ def parse_extra_parameters(html_source: str) -> Dict:
     :return: Dict with the extra parameters
     :raises: vigobus_getters.exceptions.ParseError
     """
-    try:
+    with parsing():
         html = BeautifulSoup(html_source, HTML_PARSER)
 
         params = {key: None for key in EXTRA_DATA_REQUIRED}
@@ -121,9 +127,6 @@ def parse_extra_parameters(html_source: str) -> Dict:
 
         return params
 
-    except ParsingExceptions:
-        raise ParseError()
-
 
 def parse_pages(html_source: str) -> Tuple[int, int]:
     """Parse the pages on the current page, returning the current page number, and how many pages
@@ -132,14 +135,17 @@ def parse_pages(html_source: str) -> Tuple[int, int]:
     :return: Current page number; Ammount of pages available after the current
     :raises: vigobus_getters.exceptions.ParseError
     """
-    try:
+    with parsing():
         html = BeautifulSoup(html_source, HTML_PARSER)
         href_pages = set()  # Pages with <a> tag, meaning they are not the current number
 
         # Table that contains the page numbers
         numbers_table = html.find(**PARSER_PAGE_NUMBERS_TABLE)
-        if numbers_table is None:  # No table found = no more pages available
-            raise ZeroDivisionError()
+
+        # No table found = no more pages available
+        if numbers_table is None:
+            # return: current page = 1; additional pages available = 0)
+            return 1, 0
 
         # Current page inside that table
         current_page = int(numbers_table.find(**PARSER_PAGE_NUMBER_CURRENT_INSIDE_TABLE).text)
@@ -160,13 +166,6 @@ def parse_pages(html_source: str) -> Tuple[int, int]:
 
         return current_page, pages_left
 
-    except ZeroDivisionError:
-        # Raised this error when No pages available (return: current page = 1; additional pages available = 0)
-        return 1, 0
-
-    except ParsingExceptions:
-        raise ParseError()
-
 
 def assert_page_number(html_source: str, expected_current_page: int):
     """Parse the page number of the current page and assert (compare) with the expected page number.
@@ -175,12 +174,10 @@ def assert_page_number(html_source: str, expected_current_page: int):
     :param expected_current_page: expected current page number
     :raises: vigobus_getters.exceptions.ParseError
     """
-    try:
+    with parsing():
         current_page, pages_left = parse_pages(html_source)
         assert current_page == expected_current_page, \
             f"Pages won't match. Current page is {current_page}, should be {expected_current_page}"
-    except ParsingExceptions as ex:
-        raise ParseError(ex)
 
 
 def clear_duplicated_buses(buses: List[Bus]) -> List[Bus]:

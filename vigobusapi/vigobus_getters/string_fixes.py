@@ -10,7 +10,7 @@ from typing import Tuple
 from roman import fromRoman
 from roman import InvalidRomanNumeralError as NoRoman
 
-__all__ = ("fix_stop_name", "fix_bus")
+__all__ = ("fix_stop_name", "fix_bus", "fix_chars")
 
 
 def is_roman(text: str) -> bool:
