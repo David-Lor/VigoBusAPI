@@ -2,11 +2,8 @@
 Async functions to fetch data from the HTML external data source and parse them to return the final objects.
 """
 
-# # Native # #
-from typing import Tuple
-
 # # Installed # #
-from pybuses_entities import Stop, BusSort, Buses
+from pybuses_entities import Stop, BusSort, BusesResult
 from requests_async import RequestException
 
 # # Package # #
@@ -27,21 +24,22 @@ async def get_stop(stopid: int) -> Stop:
     return parse_stop(html_source)
 
 
-async def get_buses(stopid: int, get_all_buses: bool = False) -> Tuple[Buses, bool]:
+async def get_buses(stopid: int, get_all_buses: bool = False) -> BusesResult:
     """Async function to get the buses incoming on a Stop from the HTML data source.
     Return the List of Buses AND True if more bus pages available, False if the current bus list was the only page.
     :param stopid: Stop ID
     :param get_all_buses: if True, get all Buses through all the HTML pages available
-    :return: List of Buses; True/False
     :raises: requests_async.RequestTimeout | requests_async.RequestException |
              pybuses_entities.StopNotExist | vigobus_getters.exceptions.ParseError
     """
     html_source = await request_html(stopid)
+    # stop = parse_stop(html_source)
     buses = parse_buses(html_source)
     current_page, pages_available = parse_pages(html_source)
+    more_buses_available = bool(pages_available)
 
     # Try to parse extra pages available, if any
-    if get_all_buses and pages_available:
+    if get_all_buses and more_buses_available:
         # Get and Parse extra pages available
         extra_parameters = parse_extra_parameters(html_source)
 
@@ -57,7 +55,14 @@ async def get_buses(stopid: int, get_all_buses: bool = False) -> Tuple[Buses, bo
             # Ignore exceptions while iterating the pages; Keep & return the buses that could be fetched
             pass
 
+        else:
+            more_buses_available = False
+
         finally:
             clear_duplicated_buses(buses)
 
-    return sorted(buses, key=BusSort.time_line_route), bool(pages_available)
+    return BusesResult(
+        buses=sorted(buses, key=BusSort.time_line_route),
+        more_buses_available=more_buses_available,
+        # stop=stop
+    )

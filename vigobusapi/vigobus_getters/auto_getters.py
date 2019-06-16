@@ -6,10 +6,10 @@ Usually they will use a main data source and an extra data source as a backup
 
 # # Native # #
 import inspect
-from typing import List
+from typing import Optional
 
 # # Installed # #
-from pybuses_entities import Stop, Bus, StopNotExist
+from pybuses_entities import Stop, BusesResult, StopNotExist
 
 # # Package # #
 from . import html, wsdl, cache
@@ -71,15 +71,15 @@ async def get_stop(stopid: int) -> Stop:
     raise last_exception
 
 
-async def get_buses(stopid: int, get_all_buses: bool) -> List[Bus]:
+async def get_buses(stopid: int, get_all_buses: bool) -> BusesResult:
     last_exception = None
 
     for bus_getter in BUS_GETTERS:
         try:
             if inspect.iscoroutinefunction(bus_getter):
-                buses: List[Bus] = await bus_getter(stopid, get_all_buses)
+                buses_result: Optional[BusesResult] = await bus_getter(stopid, get_all_buses)
             else:
-                buses: List[Bus] = bus_getter(stopid, get_all_buses)
+                buses_result: Optional[BusesResult] = bus_getter(stopid, get_all_buses)
 
         except StopNotExist as ex:
             last_exception = ex
@@ -89,11 +89,11 @@ async def get_buses(stopid: int, get_all_buses: bool) -> List[Bus]:
             last_exception = ex
 
         else:
-            if buses is not None:
+            if buses_result is not None:
                 if BUS_GETTERS.index(bus_getter) > 0:
-                    # Save the Buses in cache if not found by the cache
-                    cache.save_buses(stopid, get_all_buses, buses)
-                return buses
+                    # Save the Buses in cache if bus list not found by the cache itself
+                    cache.save_buses(stopid, get_all_buses, buses_result.buses)
+                return buses_result
 
     # If Buses not returned, raise the Last Exception
     raise last_exception

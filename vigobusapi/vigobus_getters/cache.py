@@ -7,7 +7,7 @@ from typing import List, Optional
 
 # # Installed # #
 from cachetools import TTLCache
-from pybuses_entities import Stop, Bus
+from pybuses_entities import Stop, Buses, BusesResult
 
 # # Project # #
 from vigobusapi.settings_handler import load_settings
@@ -30,7 +30,7 @@ def save_stop(stop: Stop):
     stops_cache[stop.stopid] = stop
 
 
-def save_buses(stopid: int, get_all_buses: bool, buses: List[Bus]):
+def save_buses(stopid: int, get_all_buses: bool, buses: Buses):
     """This function must be executed whenever a List of Buses for a Stop is found by any getter,
     other than the Stops Cache
     """
@@ -43,7 +43,7 @@ def get_stop(stopid: int) -> Optional[Stop]:
     return stops_cache.get(stopid)
 
 
-def get_buses(stopid: int, get_all_buses: bool) -> Optional[List[Bus]]:
+def get_buses(stopid: int, get_all_buses: bool) -> Optional[BusesResult]:
     """Get List of Buses from the Buses Cache, by Stop ID and All Buses wanted (True/False).
     If the list of buses for the given Stop ID is not cached, None is returned.
     """
@@ -52,4 +52,5 @@ def get_buses(stopid: int, get_all_buses: bool) -> Optional[List[Bus]]:
         # If NOT All Buses are requested, and a Not All Buses query is not cached, but an All Buses query is cached,
         # return it, since it is still valid
         buses = buses_cache.get((stopid, True))
-    return buses
+    if buses is not None:
+        return BusesResult(buses=buses)
