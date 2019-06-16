@@ -6,10 +6,10 @@ Parsers for the HTML external data source.
 import contextlib
 import urllib.parse
 from collections import Counter
-from typing import List, Tuple, Dict
+from typing import Tuple, Dict
 
 # # Installed # #
-from pybuses_entities import Stop, Bus, StopNotExist
+from pybuses_entities import Stop, Bus, Buses, StopNotExist
 from bs4 import BeautifulSoup
 
 # # Package # #
@@ -57,7 +57,7 @@ def parse_stop(html_source: str) -> Stop:
         )
 
 
-def parse_buses(html_source: str) -> List[Bus]:
+def parse_buses(html_source: str) -> Buses:
     """Parse the HTML content returned after requesting the HTML data source, and parse the Stop info and List of buses.
     :param html_source: HTML source code as string
     :return: List of buses
@@ -180,7 +180,7 @@ def assert_page_number(html_source: str, expected_current_page: int):
             f"Pages won't match. Current page is {current_page}, should be {expected_current_page}"
 
 
-def clear_duplicated_buses(buses: List[Bus]) -> List[Bus]:
+def clear_duplicated_buses(buses: Buses) -> Buses:
     """Given a List of Buses, find possible duplicated bus and remove them.
     Buses can be duplicated when getting all the pages from the HTML data source,
     and changes on the list of buses happen while fetching all the pages.
