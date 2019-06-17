@@ -3,7 +3,7 @@ Async functions to fetch data from the WSDL external data source and parse them 
 """
 
 # # Installed # #
-from pybuses_entities import Stop, StopNotExist
+from pybusent import Stop, StopNotExist
 from requests_async import HTTPError
 
 # # Package # #
@@ -16,7 +16,7 @@ __all__ = ("get_stop",)
 
 async def get_stop(stopid: int) -> Stop:
     """Async function to get information of a Stop (only name) from the WSDL API.
-    :raises: requests_async.RequestTimeout | requests_async.RequestException | pybuses_entities.StopNotExist
+    :raises: requests_async.RequestTimeout | requests_async.RequestException | pybusent.StopNotExist
     """
     try:
         xml = await request_wsdl_stop(stopid)

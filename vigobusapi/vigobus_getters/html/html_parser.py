@@ -9,7 +9,7 @@ from collections import Counter
 from typing import Tuple, Dict
 
 # # Installed # #
-from pybuses_entities import Stop, Bus, Buses, StopNotExist
+from pybusent import Stop, Bus, Buses, StopNotExist
 from bs4 import BeautifulSoup
 
 # # Parent Package # #
@@ -40,7 +40,7 @@ def parse_stop(html_source: str) -> Stop:
     """Parse the HTML content returned after requesting the HTML data source,
     parsing parse the Stop info and returning a Stop object.
     :param html_source: HTML source code as string
-    :raises: pybuses_entities.StopNotExist | vigobus_getters.exceptions.ParseError
+    :raises: pybusent.StopNotExist | vigobus_getters.exceptions.ParseError
     """
     parse_stop_exists(html_source)
     html = BeautifulSoup(html_source, HTML_PARSER)
@@ -63,7 +63,7 @@ def parse_buses(html_source: str) -> Buses:
     """Parse the HTML content returned after requesting the HTML data source, and parse the Stop info and List of buses.
     :param html_source: HTML source code as string
     :return: List of buses
-    :raises: pybuses_entities.StopNotExist | vigobus_getters.exceptions.ParseError
+    :raises: pybusent.StopNotExist | vigobus_getters.exceptions.ParseError
     """
     parse_stop_exists(html_source)
     buses = list()
@@ -97,12 +97,12 @@ def parse_buses(html_source: str) -> Buses:
 def parse_stop_exists(html_source: str, raise_exception: bool = True) -> bool:
     """Given the HTML source code returned by HTTP request (str), detect if the stop was found or not.
     Must be called at the beggining of parse_stop/parse_buses helpers.
-    If raise_exception is True, pybuses_entities.StopNotExist is raised if the stop not exists.
+    If raise_exception is True, pybusent.StopNotExist is raised if the stop not exists.
     Otherwise, return True if the stop exists, return False if not exists.
     :param html_source: HTML source code
     :param raise_exception: if True, raise StopNotExist if the stop not exists (default=True)
     :return: True if stop exists; False if stop not exists (only if raise_exception=False)
-    :raises: pybuses_entities.StopNotExist
+    :raises: pybusent.StopNotExist
     """
     exists = "Parada Inexistente" not in html_source
     if raise_exception and not exists:

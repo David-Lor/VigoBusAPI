@@ -3,7 +3,7 @@ Async functions to fetch data from the HTML external data source and parse them 
 """
 
 # # Installed # #
-from pybuses_entities import Stop, BusSort, BusesResult
+from pybusent import Stop, BusSort, BusesResult
 from requests_async import RequestException
 
 # # Parent Package # #
@@ -20,7 +20,7 @@ async def get_stop(stopid: int) -> Stop:
     """Async function to get information of a Stop (only name) from the HTML data source.
     :param stopid: Stop ID
     :raises: requests_async.Timeout | requests_async.RequestException |
-             pybuses_entities.StopNotExist | vigobus_getters.exceptions.ParseError
+             pybusent.StopNotExist | vigobus_getters.exceptions.ParseError
     """
     html_source = await request_html(stopid)
     return parse_stop(html_source)
@@ -32,7 +32,7 @@ async def get_buses(stopid: int, get_all_buses: bool = False) -> BusesResult:
     :param stopid: Stop ID
     :param get_all_buses: if True, get all Buses through all the HTML pages available
     :raises: requests_async.RequestTimeout | requests_async.RequestException |
-             pybuses_entities.StopNotExist | vigobus_getters.exceptions.ParseError
+             pybusent.StopNotExist | vigobus_getters.exceptions.ParseError
     """
     html_source = await request_html(stopid)
     # stop = parse_stop(html_source)

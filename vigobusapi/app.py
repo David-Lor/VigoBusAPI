@@ -10,7 +10,7 @@ import contextlib
 import uvicorn
 import fastapi
 from starlette import status as statuscode
-from pybuses_entities import Stop, StopNotExist, BusesResult
+from pybusent import Stop, StopNotExist, BusesResult
 from requests_async import RequestException, Timeout
 
 # # Project # #
