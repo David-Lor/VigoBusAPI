@@ -12,10 +12,12 @@ from typing import Tuple, Dict
 from pybuses_entities import Stop, Bus, Buses, StopNotExist
 from bs4 import BeautifulSoup
 
+# # Parent Package # #
+from ..string_fixes import fix_bus, fix_stop_name, fix_chars
+from ..exceptions import ParseError, ParsingExceptions
+
 # # Package # #
 from .html_const import *
-from .string_fixes import fix_bus, fix_stop_name, fix_chars
-from .exceptions import ParseError, ParsingExceptions
 
 __all__ = (
     "parse_stop", "parse_buses", "parse_pages", "parse_extra_parameters",

@@ -3,9 +3,9 @@
 from pybuses_entities import Stop
 from bs4 import BeautifulSoup
 
-# # Package # #
-from .exceptions import ParseError, ParsingExceptions
-from .string_fixes import fix_stop_name
+# # Parent Package # #
+from ..exceptions import ParseError, ParsingExceptions
+from ..string_fixes import fix_stop_name
 
 
 def parse_xml_stop(content: str) -> Stop:

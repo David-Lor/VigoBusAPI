@@ -6,10 +6,12 @@ Async functions to fetch data from the HTML external data source and parse them 
 from pybuses_entities import Stop, BusSort, BusesResult
 from requests_async import RequestException
 
+# # Parent Package # #
+from ..exceptions import ParsingExceptions
+
 # # Package # #
 from .html_request import request_html
 from .html_parser import *
-from .exceptions import ParsingExceptions
 
 __all__ = ("get_stop", "get_buses")
 

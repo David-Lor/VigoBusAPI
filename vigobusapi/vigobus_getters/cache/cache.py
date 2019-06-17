@@ -1,9 +1,9 @@
-"""CACHE
-Cache local storage for Stops and Buses
+"""CACHE DATA SOURCE
+Cached local storages with TTL for Stops and Buses
 """
 
 # # Native # #
-from typing import List, Optional
+from typing import Optional
 
 # # Installed # #
 from cachetools import TTLCache
