@@ -17,10 +17,13 @@ setup(
     install_requires=(
         "fastapi",
         "uvicorn",
+        "starlette",
+        "requests-async",
         "beautifulsoup4",
+        "lxml",
         "roman",
         "python-dotenv",
-        "pybuses_entities-entities",
+        "pybuses-entities",
         "cachetools"
     ),
     entry_points={
