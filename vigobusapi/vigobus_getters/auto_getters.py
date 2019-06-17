@@ -92,7 +92,7 @@ async def get_buses(stopid: int, get_all_buses: bool) -> BusesResult:
             if buses_result is not None:
                 if BUS_GETTERS.index(bus_getter) > 0:
                     # Save the Buses in cache if bus list not found by the cache itself
-                    cache.save_buses(stopid, get_all_buses, buses_result.buses)
+                    cache.save_buses(stopid, get_all_buses, buses_result)
                 return buses_result
 
     # If Buses not returned, raise the Last Exception
