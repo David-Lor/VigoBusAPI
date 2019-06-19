@@ -87,7 +87,7 @@ def parse_buses(html_source: str) -> Buses:
                     line, route = fix_bus(line, route)
                     buses.append(Bus(
                         line=line,
-                        route=fix_chars(route),
+                        route=route,
                         time=time
                     ))
 
