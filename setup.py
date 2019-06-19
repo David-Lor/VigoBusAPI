@@ -24,7 +24,9 @@ setup(
         "roman",
         "python-dotenv",
         "pybuses-entities",
-        "cachetools"
+        "cachetools",
+        "pymongo",
+        "motor"
     ),
     entry_points={
         'console_scripts': ['vigobusapi=vigobusapi:run'],

@@ -3,8 +3,11 @@ Async functions to fetch data from the WSDL external data source and parse them 
 """
 
 # # Installed # #
-from pybusent import Stop, StopNotExist
+from pybusent import StopNotExist
 from requests_async import HTTPError
+
+# # Parent Package # #
+from ..entities import Stop
 
 # # Package # #
 from .wsdl_request import request_wsdl_stop

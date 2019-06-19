@@ -3,10 +3,11 @@ Async functions to fetch data from the HTML external data source and parse them 
 """
 
 # # Installed # #
-from pybusent import Stop, BusSort, BusesResult
+from pybusent import BusSort, BusesResult
 from requests_async import RequestException
 
 # # Parent Package # #
+from ..entities import Stop
 from ..exceptions import ParsingExceptions
 
 # # Package # #

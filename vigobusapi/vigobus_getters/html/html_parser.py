@@ -9,11 +9,12 @@ from collections import Counter
 from typing import Tuple, Dict
 
 # # Installed # #
-from pybusent import Stop, Bus, Buses, StopNotExist
+from pybusent import Bus, Buses, StopNotExist
 from bs4 import BeautifulSoup
 
 # # Parent Package # #
-from ..string_fixes import fix_bus, fix_stop_name, fix_chars
+from ..entities import Stop
+from ..string_fixes import fix_bus, fix_stop_name
 from ..exceptions import ParseError, ParsingExceptions
 
 # # Package # #

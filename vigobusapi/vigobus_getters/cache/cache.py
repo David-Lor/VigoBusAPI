@@ -7,11 +7,14 @@ from typing import Optional
 
 # # Installed # #
 from cachetools import TTLCache
-from pybusent import Stop, BusesResult
+from pybusent import BusesResult
 
 # # Project # #
 from vigobusapi.settings_handler import load_settings
 from vigobusapi.settings_handler.const import *
+
+# # Parent Package # #
+from ..entities import Stop
 
 __all__ = ("stops_cache", "buses_cache", "save_stop", "save_buses", "get_stop", "get_buses")
 

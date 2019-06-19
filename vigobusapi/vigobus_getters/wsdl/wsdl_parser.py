@@ -1,9 +1,9 @@
 
 # # Installed # #
-from pybusent import Stop
 from bs4 import BeautifulSoup
 
 # # Parent Package # #
+from ..entities import Stop
 from ..exceptions import ParseError, ParsingExceptions
 from ..string_fixes import fix_stop_name
 
