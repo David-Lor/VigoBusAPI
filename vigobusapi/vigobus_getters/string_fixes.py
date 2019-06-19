@@ -24,11 +24,23 @@ def is_roman(text: str) -> bool:
         return True
 
 
+PREPOSITIONS = (
+    "a", "de", "en", "por", "sin", "so", "do", "da", "dos", "das", "no", "na", "nos", "nas", "sen", "o", "a",
+    "lo", "la", "los", "las", "os", "as", "y", "e"
+)
+
+
 def fix_stop_name(name: str) -> str:
     """Fix the Stop names given by the original data sources.
     """
-    # Capitalize each word on the name (if the word is at least 3 characters long) & fix chars
-    name = ' '.join(word.capitalize() if len(word) > 2 else word for word in fix_chars(name).split())
+    print("input:", name)
+    # Capitalize each word on the name (if the word is at least 3 characters long);
+    # Set prepositions to lowercase;
+    # Fix chars
+    name = ' '.join(
+        word.capitalize() if word.strip().lower() not in PREPOSITIONS else word.lower()
+        for word in fix_chars(name).split()
+    )
     # Replace - with commas
     name = name.replace("-", ",")
     # Force one space after each comma
@@ -41,6 +53,7 @@ def fix_stop_name(name: str) -> str:
     name = name.replace(").", ")")
     # Turn roman numbers to uppercase
     name = ' '.join(word.upper() if is_roman(word) else word for word in name.split())
+    print("output:", name)
     return name
 
 
