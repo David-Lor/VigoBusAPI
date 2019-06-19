@@ -14,6 +14,7 @@ from pybusent import BusesResult, StopNotExist
 # # Package # #
 from . import html, wsdl, cache, mongo
 from .entities import Stop
+from .helpers import *
 
 __all__ = ("get_stop", "get_buses")
 
@@ -63,12 +64,17 @@ async def get_stop(stopid: int) -> Stop:
 
         else:
             if stop is not None:
+                # Save the Stop on local data storages
                 if STOP_GETTERS.index(stop_getter) > 0:
                     # Save the Stop in cache if not found by the cache
                     cache.save_stop(stop)
                 if STOP_GETTERS.index(stop_getter) > 1:
                     # Save the Stop in MongoDB if not found by Mongo
                     await mongo.save_stop(stop)
+
+                # Add the Source to the returned data
+                stop.source = get_package(stop_getter)
+
                 return stop
 
     # If Stop not returned, raise the Last Exception
