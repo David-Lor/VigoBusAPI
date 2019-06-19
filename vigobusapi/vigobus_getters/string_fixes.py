@@ -33,14 +33,20 @@ PREPOSITIONS = (
 def fix_stop_name(name: str) -> str:
     """Fix the Stop names given by the original data sources.
     """
-    print("input:", name)
     # Capitalize each word on the name (if the word is at least 3 characters long);
     # Set prepositions to lowercase;
     # Fix chars
-    name = ' '.join(
-        word.capitalize() if word.strip().lower() not in PREPOSITIONS else word.lower()
-        for word in fix_chars(name).split()
-    )
+    name_words = fix_chars(name).split()
+    for index, word in enumerate(name_words):
+        word = word.strip().lower()
+        if word not in PREPOSITIONS:
+            if word.startswith("("):
+                char = word[1]
+                word = word.replace(char, char.upper())
+            else:
+                word = word.capitalize()
+        name_words[index] = word
+    name = " ".join(name_words)
     # Replace - with commas
     name = name.replace("-", ",")
     # Force one space after each comma
@@ -53,7 +59,6 @@ def fix_stop_name(name: str) -> str:
     name = name.replace(").", ")")
     # Turn roman numbers to uppercase
     name = ' '.join(word.upper() if is_roman(word) else word for word in name.split())
-    print("output:", name)
     return name
 
 
