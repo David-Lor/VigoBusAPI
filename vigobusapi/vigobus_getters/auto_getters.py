@@ -70,7 +70,8 @@ async def get_stop(stopid: int) -> Stop:
                     cache.save_stop(stop)
                 if STOP_GETTERS.index(stop_getter) > 1:
                     # Save the Stop in MongoDB if not found by Mongo
-                    await mongo.save_stop(stop)
+                    add_stop_created_timestamp(stop)  # Add "created" field
+                    await mongo.save_stop(stop)  # non-blocking
 
                 # Add the Source to the returned data
                 stop.source = get_package(stop_getter)

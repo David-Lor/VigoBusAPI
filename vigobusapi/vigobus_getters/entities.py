@@ -18,6 +18,7 @@ class Stop(AdvancedStop):
     """Custom Stop entity inherited from pybusent.AdvancedStop.
     Required to add special fields and special format/parsing to write on and read from MongoDB.
     """
+    created: Optional[int]
 
     def __init__(self, **kwargs):
         # From Mongo to Python: translate _id to stopid

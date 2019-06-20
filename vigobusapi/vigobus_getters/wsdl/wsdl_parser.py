@@ -19,7 +19,8 @@ def parse_xml_stop(content: str) -> Stop:
         xml = BeautifulSoup(content, "lxml")
         stop_data = xml.find("Parada") or xml.find("parada")
         stop_id = int(stop_data["idparada"])
-        stop_name = fix_stop_name(stop_data["nombre"])
+        stop_original_name = stop_data["nombre"]
+        stop_name = fix_stop_name(stop_original_name)
         stop_lat = stop_data.get("latitud")
         stop_lon = stop_data.get("longitud")
         if stop_lat and stop_lon:
@@ -28,6 +29,7 @@ def parse_xml_stop(content: str) -> Stop:
         return Stop(
             stopid=stop_id,
             name=stop_name,
+            original_name=stop_original_name,
             lat=stop_lat,
             lon=stop_lon
         )

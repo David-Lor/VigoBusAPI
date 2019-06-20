@@ -49,14 +49,15 @@ def parse_stop(html_source: str) -> Stop:
 
     with parsing():
         stop_id = int(html.find(**PARSER_STOP_ID).text)
-        stop_name = html.find(**PARSER_STOP_NAME).text
-        if not stop_name:
+        stop_original_name = html.find(**PARSER_STOP_NAME).text
+        if not stop_original_name:
             raise ParseError("Parsed Stop Name is empty")
-        stop_name = fix_stop_name(stop_name)
+        stop_name = fix_stop_name(stop_original_name)
 
         return Stop(
             stopid=stop_id,
-            name=stop_name
+            name=stop_name,
+            original_name=stop_original_name
         )
 
 
