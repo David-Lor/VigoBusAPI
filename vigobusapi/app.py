@@ -9,9 +9,10 @@ import contextlib
 # # Installed # #
 import uvicorn
 import fastapi
-from starlette import status as statuscode
 from pybusent import Stop, StopNotExist, BusesResult
 from requests_async import RequestException, Timeout
+# noinspection PyPackageRequirements
+from starlette import status as statuscode
 
 # # Project # #
 from vigobusapi.settings_handler import load_settings

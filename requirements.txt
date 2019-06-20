@@ -1,6 +1,5 @@
 fastapi  # API framework
 uvicorn  # API deployment tool
-starlette  # HTTP status codes (installed with fastapi)
 requests-async  # HTTP external data sources
 beautifulsoup4  # HTML/XML parser for HTTP & WSDL external data sources
 lxml  # XML parser used by BeautifulSoup

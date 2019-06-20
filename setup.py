@@ -17,7 +17,6 @@ setup(
     install_requires=(
         "fastapi",
         "uvicorn",
-        "starlette",
         "requests-async",
         "beautifulsoup4",
         "lxml",
