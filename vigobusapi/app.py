@@ -15,20 +15,17 @@ from requests_async import RequestException, Timeout
 from starlette import status as statuscode
 
 # # Project # #
-from vigobusapi.settings_handler import load_settings
-from vigobusapi.settings_handler.const import *
+from vigobusapi.settings_handler import settings
 
 # # Package # #
 from .vigobus_getters import get_stop, get_buses, ParseError
 
 __all__ = ("app", "run")
 
-settings = load_settings()
-
 app = fastapi.FastAPI(
-    title=settings[API_NAME],
-    description=settings[API_DESCRIPTION],
-    version=settings[API_VERSION]
+    title=settings.api_name,
+    description=settings.api_description,
+    version=settings.api_version
 )
 
 
@@ -64,7 +61,7 @@ async def endpoint_get_stop(stop_id: int):
     with manage_endpoint_exceptions():
         stop: Stop = await asyncio.wait_for(
             get_stop(stop_id),
-            timeout=settings[ENDPOINT_TIMEOUT]
+            timeout=settings.endpoint_timeout
         )
         return stop.get_dict()
 
@@ -77,7 +74,7 @@ async def endpoint_get_buses(stop_id: int, get_all_buses: bool = False):
     with manage_endpoint_exceptions():
         buses_result: BusesResult = await asyncio.wait_for(
             get_buses(stop_id, get_all_buses),
-            timeout=settings[ENDPOINT_TIMEOUT]
+            timeout=settings.endpoint_timeout
         )
         return buses_result.get_dict()
 
@@ -85,7 +82,12 @@ async def endpoint_get_buses(stop_id: int, get_all_buses: bool = False):
 def run():
     """Run the API using Uvicorn
     """
-    uvicorn.run(app, host=settings[API_HOST], port=settings[API_PORT], log_level=settings[API_LOG_LEVEL])
+    uvicorn.run(
+        app,
+        host=settings.api_host,
+        port=settings.api_port,
+        log_level=settings.api_log_level
+    )
 
 
 if __name__ == '__main__':

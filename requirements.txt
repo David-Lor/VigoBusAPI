@@ -9,3 +9,4 @@ pybuses-entities  # Stop/Bus entities
 cachetools  # TTLCache
 pymongo  # MongoDB client
 motor  # MongoDB Async client
+dotenv-settings-handler  # Settings Handler

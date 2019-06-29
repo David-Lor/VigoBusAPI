@@ -6,15 +6,12 @@ import html
 from requests_async import post, Response
 
 # # Project # #
-from vigobusapi.settings_handler import load_settings
-from vigobusapi.settings_handler.const import *
+from vigobusapi.settings_handler import settings
 
 # # Package # #
 from .wsdl_const import *
 
 __all__ = ("request_wsdl_stop",)
-
-settings = load_settings()
 
 
 async def request_wsdl_stop(stopid: int) -> str:
@@ -22,10 +19,10 @@ async def request_wsdl_stop(stopid: int) -> str:
     :raises: requests_async.RequestTimeout | requests_async.RequestException
     """
     response: Response = await post(
-        url=settings[WSDL_REMOTE_API],
+        url=settings.wsdl_remote_api,
         data=GET_STOP_BODY.format(stop_id=stopid),
         headers=HEADERS,
-        timeout=settings[WSDL_TIMEOUT]
+        timeout=settings.wsdl_timeout
     )
     response.raise_for_status()
     return html.unescape(response.text)
