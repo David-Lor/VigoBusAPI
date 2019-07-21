@@ -1,9 +1,12 @@
-zeep
-flask
-requests-html
-beautifulsoup4
-roman
-gevent
-timeout-decorator
-python-dotenv
-git+https://github.com/David-Lor/PyBuses.git#egg=pybuses
+fastapi  # API framework
+uvicorn  # API deployment tool
+requests-async  # HTTP external data sources
+beautifulsoup4  # HTML/XML parser for HTTP & WSDL external data sources
+lxml  # XML parser used by BeautifulSoup
+roman  # Check for roman numbers in string chunks
+python-dotenv  # dotenv setting files
+pybuses-entities  # Stop/Bus entities
+cachetools  # TTLCache
+pymongo  # MongoDB client
+motor  # MongoDB Async client
+dotenv-settings-handler  # Settings Handler

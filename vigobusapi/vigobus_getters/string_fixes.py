@@ -1,5 +1,5 @@
-"""STRING FIXES
-Functions that help fixing the Strings returned by the API
+"""STRING_FIXES
+Functions that help fixing the Strings returned by the API.
 """
 
 # # Native # #
@@ -10,16 +10,11 @@ from typing import Tuple
 from roman import fromRoman
 from roman import InvalidRomanNumeralError as NoRoman
 
-
 __all__ = ("fix_stop_name", "fix_bus")
 
 
 def is_roman(text: str) -> bool:
-    """Check if the given string is a Roman number.
-    :param text: String to test (should be a single word, previously split)
-    :type text: str
-    :return: True if is roman number, False if is not
-    :rtype: bool
+    """Check if the given string is a Roman number. Return True if it is, False if not.
     """
     try:
         fromRoman(text.strip().upper())
@@ -29,28 +24,41 @@ def is_roman(text: str) -> bool:
         return True
 
 
+PREPOSITIONS = (
+    "a", "de", "en", "por", "sin", "so", "do", "da", "dos", "das", "no", "na", "nos", "nas", "sen", "o", "a",
+    "lo", "la", "los", "las", "os", "as", "y", "e"
+)
+
+
 def fix_stop_name(name: str) -> str:
-    """Fix the Stop names given by the original API.
-    :param name: original Stop name
-    :type name: str
-    :return: fixed Stop name
-    :rtype: str
+    """Fix the Stop names given by the original data sources.
     """
-    # Capitalize each word on the name (if the word is at least 3 characters long)
-    name = ' '.join(word.capitalize() if len(word) > 2 else word for word in fix_chars(name).split())
+    # Capitalize each word on the name (if the word is at least 3 characters long);
+    # Set prepositions to lowercase;
+    # Fix chars
+    name_words = fix_chars(name).split()
+    for index, word in enumerate(name_words):
+        word = word.strip().lower()
+        if word not in PREPOSITIONS:
+            if word.startswith("("):
+                char = word[1]
+                word = word.replace(char, char.upper())
+            else:
+                word = word.capitalize()
+        name_words[index] = word
+    name = " ".join(name_words)
     # Replace - with commas
     name = name.replace("-", ",")
     # Force one space after each comma
     name = name.replace(",", ", ")
     # Remove double spaces
     name = re.sub(' +', ' ', name)
-    # Remove unneeded commas just before parenthesis
+    # Remove unnecessary commas just before parenthesis
     name = name.replace(", (", " (").replace(",(", " (")
-    # Remove unneeded dots after parenthesis
+    # Remove unnecessary dots after parenthesis
     name = name.replace(").", ")")
     # Turn roman numbers to uppercase
     name = ' '.join(word.upper() if is_roman(word) else word for word in name.split())
-    # Replace possible left double quote marks with simple quote marks
     return name
 
 
@@ -61,12 +69,6 @@ LINE_LETTERS = ('"A"', '"B"', '"C"', 'A   ', 'B   ', 'C   ', 'A ', 'B ', 'C ')
 
 def fix_bus(line: str, route: str) -> Tuple[str, str]:
     """Fix the Bus lines and routes given by the original API.
-    :param line: original Bus line string returned by API
-    :param route: original Bus route string returned by API
-    :type line: str
-    :type route: str
-    :return: tuple (line, route), both as strings fixed
-    :rtype: str, str
     """
     # ROUTE: just fix chars
     route = fix_chars(route)
@@ -109,10 +111,6 @@ CHARS_FIXED = {  # {"WrongChar" : "FixedChar"}
 def fix_chars(input_string: str) -> str:
     """Fix wrong characters from strings given by the WSDL API.
     Function will use the CHARS_FIXED dict {"WrongChar":"FixedChar"}
-    :param input_string: the string to be fixed (required)
-    :type input_string: str
-    :return: the given string with wrong chars fixed
-    :rtype: str
     """
     for wrong, fix in CHARS_FIXED.items():
         input_string = input_string.replace(wrong, fix)
