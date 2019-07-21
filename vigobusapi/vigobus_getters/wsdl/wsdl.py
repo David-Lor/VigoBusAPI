@@ -18,7 +18,7 @@ __all__ = ("get_stop",)
 
 
 async def get_stop(stopid: int) -> Stop:
-    """Async function to get information of a Stop (only name) from the WSDL API.
+    """Async function to get information of a Stop (name & location) from the WSDL API.
     :raises: requests_async.RequestTimeout | requests_async.RequestException | pybusent.StopNotExist
     """
     try:
