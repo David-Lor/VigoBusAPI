@@ -7,20 +7,20 @@ from typing import Optional
 
 # # Installed # #
 from cachetools import TTLCache
-from pybusent import Stop, BusesResult
+from pybusent import BusesResult
 
 # # Project # #
-from vigobusapi.settings_handler import load_settings
-from vigobusapi.settings_handler.const import *
+from vigobusapi.settings_handler import settings
+
+# # Parent Package # #
+from ..entities import Stop
 
 __all__ = ("stops_cache", "buses_cache", "save_stop", "save_buses", "get_stop", "get_buses")
 
-settings = load_settings()
-
-stops_cache = TTLCache(maxsize=settings[STOPS_CACHE_MAXSIZE], ttl=settings[STOPS_CACHE_TTL])
+stops_cache = TTLCache(maxsize=settings.stops_cache_maxsize, ttl=settings.stops_cache_ttl)
 """Stops Cache. Key: Stop ID. Value: Stop object."""
 
-buses_cache = TTLCache(maxsize=settings[BUSES_CACHE_MAXSIZE], ttl=settings[BUSES_CACHE_TTL])
+buses_cache = TTLCache(maxsize=settings.buses_cache_maxsize, ttl=settings.buses_cache_ttl)
 """Buses Cache. Key: tuple (Stop ID, bool GetAllBuses?). Value: BusesResult"""
 
 

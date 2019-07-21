@@ -10,15 +10,12 @@ import copy
 from requests_async import get, post, Response, RequestException
 
 # # Project # #
-from vigobusapi.settings_handler import load_settings
-from vigobusapi.settings_handler.const import *
+from vigobusapi.settings_handler import settings
 
 # # Package # #
 from .html_const import *
 
 __all__ = ("request_html",)
-
-settings = load_settings()
 
 
 async def request_html(stopid: int, page: Optional[int] = None, extra_params: Optional[Dict] = None) -> str:
@@ -40,7 +37,7 @@ async def request_html(stopid: int, page: Optional[int] = None, extra_params: Op
         # Headers
         headers = copy.deepcopy(HEADERS)
         headers.update(HEADERS_NEXT_LOADS)  # update the original Headers with the extra items used on next pages
-        headers[HEADERS_NEXT_LOADS_REFERER] = settings[HTTP_REMOTE_API] + HEADERS_NEXT_LOADS_REFERER_PARAMS.format(
+        headers[HEADERS_NEXT_LOADS_REFERER] = settings.html_remote_api + HEADERS_NEXT_LOADS_REFERER_PARAMS.format(
             stopid=stopid  # update the Referer header with the URL with the stopid as parameter
         )
     # Extra params not available = this is the first page, body not required & use unmodified headers
@@ -53,14 +50,14 @@ async def request_html(stopid: int, page: Optional[int] = None, extra_params: Op
     last_error = None
 
     # Run the Requests, with Retries support
-    for i in range(settings[HTTP_RETRIES]):
+    for i in range(settings.http_retries):
         try:
             response: Response = await method(
-                url=settings[HTTP_REMOTE_API],
+                url=settings.html_remote_api,
                 params=params,
                 data=body,
                 headers=headers,
-                timeout=settings[HTTP_TIMEOUT]
+                timeout=settings.http_timeout
             )
             response.raise_for_status()
             return response.text

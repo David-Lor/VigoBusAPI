@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name="VigoBusAPI",
-    version="0.1.0",
+    version="0.2.0",
     description="Python API that provide Stop and Bus information provided by the public transport system "
                 "of the city of Vigo (Galicia/Spain)",
     long_description="Intermediate Python API that provide Stop and Bus information provided by the public "
@@ -17,14 +17,16 @@ setup(
     install_requires=(
         "fastapi",
         "uvicorn",
-        "starlette",
         "requests-async",
         "beautifulsoup4",
         "lxml",
         "roman",
         "python-dotenv",
         "pybuses-entities",
-        "cachetools"
+        "cachetools",
+        "pymongo",
+        "motor",
+        "dotenv-settings-handler",
     ),
     entry_points={
         'console_scripts': ['vigobusapi=vigobusapi:run'],

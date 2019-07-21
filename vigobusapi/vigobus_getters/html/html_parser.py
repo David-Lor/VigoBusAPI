@@ -9,11 +9,12 @@ from collections import Counter
 from typing import Tuple, Dict
 
 # # Installed # #
-from pybusent import Stop, Bus, Buses, StopNotExist
+from pybusent import Bus, Buses, StopNotExist
 from bs4 import BeautifulSoup
 
 # # Parent Package # #
-from ..string_fixes import fix_bus, fix_stop_name, fix_chars
+from ..entities import Stop
+from ..string_fixes import fix_bus, fix_stop_name
 from ..exceptions import ParseError, ParsingExceptions
 
 # # Package # #
@@ -48,14 +49,15 @@ def parse_stop(html_source: str) -> Stop:
 
     with parsing():
         stop_id = int(html.find(**PARSER_STOP_ID).text)
-        stop_name = html.find(**PARSER_STOP_NAME).text
-        if not stop_name:
+        stop_original_name = html.find(**PARSER_STOP_NAME).text
+        if not stop_original_name:
             raise ParseError("Parsed Stop Name is empty")
-        stop_name = fix_stop_name(stop_name)
+        stop_name = fix_stop_name(stop_original_name)
 
         return Stop(
             stopid=stop_id,
-            name=stop_name
+            name=stop_name,
+            original_name=stop_original_name
         )
 
 

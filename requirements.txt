@@ -1,6 +1,5 @@
 fastapi  # API framework
 uvicorn  # API deployment tool
-starlette  # HTTP status codes (installed with fastapi)
 requests-async  # HTTP external data sources
 beautifulsoup4  # HTML/XML parser for HTTP & WSDL external data sources
 lxml  # XML parser used by BeautifulSoup
@@ -8,3 +7,6 @@ roman  # Check for roman numbers in string chunks
 python-dotenv  # dotenv setting files
 pybuses-entities  # Stop/Bus entities
 cachetools  # TTLCache
+pymongo  # MongoDB client
+motor  # MongoDB Async client
+dotenv-settings-handler  # Settings Handler

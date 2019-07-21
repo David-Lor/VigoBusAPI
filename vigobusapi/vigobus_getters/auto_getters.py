@@ -9,16 +9,18 @@ import inspect
 from typing import Optional
 
 # # Installed # #
-from pybusent import Stop, BusesResult, StopNotExist
+from pybusent import BusesResult, StopNotExist
 
 # # Package # #
-from . import html, wsdl, cache
+from . import html, wsdl, cache, mongo
+from .entities import Stop
+from .helpers import *
 
 __all__ = ("get_stop", "get_buses")
 
 STOP_GETTERS = (
     cache.get_stop,
-    # TODO Local Storage getter
+    mongo.get_stop,
     wsdl.get_stop,
     html.get_stop
 )
@@ -37,7 +39,7 @@ The first function always is a local Cache storage."""
 async def get_stop(stopid: int) -> Stop:
     """Async function to get information of a Stop, using the following getters in order:
     1.- Local Stops cache;
-    2.- Local Stops database; (TODO)
+    2.- Local Stops database;
     3.- Remote WSDL API data source
     4.- Remote
     :param stopid: Stop ID
@@ -62,9 +64,18 @@ async def get_stop(stopid: int) -> Stop:
 
         else:
             if stop is not None:
+                # Save the Stop on local data storages
                 if STOP_GETTERS.index(stop_getter) > 0:
                     # Save the Stop in cache if not found by the cache
                     cache.save_stop(stop)
+                if STOP_GETTERS.index(stop_getter) > 1:
+                    # Save the Stop in MongoDB if not found by Mongo
+                    add_stop_created_timestamp(stop)  # Add "created" field
+                    await mongo.save_stop(stop)  # non-blocking
+
+                # Add the Source to the returned data
+                stop.source = get_package(stop_getter)
+
                 return stop
 
     # If Stop not returned, raise the Last Exception
