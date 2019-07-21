@@ -37,7 +37,7 @@ async def request_html(stopid: int, page: Optional[int] = None, extra_params: Op
         # Headers
         headers = copy.deepcopy(HEADERS)
         headers.update(HEADERS_NEXT_LOADS)  # update the original Headers with the extra items used on next pages
-        headers[HEADERS_NEXT_LOADS_REFERER] = settings[HTTP_REMOTE_API] + HEADERS_NEXT_LOADS_REFERER_PARAMS.format(
+        headers[HEADERS_NEXT_LOADS_REFERER] = settings.html_remote_api + HEADERS_NEXT_LOADS_REFERER_PARAMS.format(
             stopid=stopid  # update the Referer header with the URL with the stopid as parameter
         )
     # Extra params not available = this is the first page, body not required & use unmodified headers
