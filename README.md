@@ -60,11 +60,13 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 
 ## Changelog
 
+- 0.2.1 - fix Stops endpoint, return empty array if no buses available
 - 0.2.0 - Migrated to FastAPI, new features, using MongoDB as local storage
 - 0.1.0 - Initial release
 
 ---
 
+- _0.2.1 - fix endpoint Stops, devolver array vacío si no hay autobuses disponibles_
 - _0.2.0 - Migrado a FastAPI, nuevas características, usando MongoDB como almacenamiento local_
 - _0.1.0 - Release inicial_
 
@@ -86,8 +88,8 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 
 ## Disclaimer
 
-This project is not endorsed by, directly affiliated with, maintained, sponsored or in any way officially connected with the company or companies responsible for the public transport service of the city of Vigo.
+This project is not endorsed by, directly affiliated with, maintained by, sponsored by or in any way officially connected with the company or companies responsible for the public transport service of the city of Vigo.
 
 ---
 
-_Este proyecto no cuenta con soporte, no está afiliado, mantenido, patrocinado ni en cualquier otra manera oficialmente conectado con la compañía o compañías responsables del sistema de transporte público de la ciudad de Vigo._
+_Este proyecto no cuenta con soporte, no está afiliado con, mantenido por, patrocinado por ni en cualquier otra manera oficialmente conectado con la compañía o compañías responsables del sistema de transporte público de la ciudad de Vigo._

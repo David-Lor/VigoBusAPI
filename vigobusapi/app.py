@@ -76,7 +76,7 @@ async def endpoint_get_buses(stop_id: int, get_all_buses: bool = False):
             get_buses(stop_id, get_all_buses),
             timeout=settings.endpoint_timeout
         )
-        return buses_result.get_dict()
+        return buses_result.get_dict(remove_empty_lists=False)
 
 
 def run():
