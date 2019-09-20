@@ -60,12 +60,14 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 
 ## Changelog
 
+- 0.2.2 - fix cache bus getter, was returning full list of buses when requesting a minimal list but a full list was cached
 - 0.2.1 - fix Stops endpoint, return empty array if no buses available
 - 0.2.0 - Migrated to FastAPI, new features, using MongoDB as local storage
 - 0.1.0 - Initial release
 
 ---
 
+- _0.2.2 - fix cache bus getter, devolvía listado completo de buses cuando se pedía un listado parcial pero uno completo estaba almacenado_
 - _0.2.1 - fix endpoint Stops, devolver array vacío si no hay autobuses disponibles_
 - _0.2.0 - Migrado a FastAPI, nuevas características, usando MongoDB como almacenamiento local_
 - _0.1.0 - Release inicial_

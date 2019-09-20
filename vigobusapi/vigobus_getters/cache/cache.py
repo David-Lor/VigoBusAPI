@@ -47,9 +47,11 @@ def get_buses(stopid: int, get_all_buses: bool) -> Optional[BusesResult]:
     """Get List of Buses from the Buses Cache, by Stop ID and All Buses wanted (True/False).
     If the list of buses for the given Stop ID is not cached, None is returned.
     """
-    buses_result = buses_cache.get((stopid, get_all_buses))
+    buses_result: Optional[BusesResult] = buses_cache.get((stopid, get_all_buses))
     if buses_result is None and not get_all_buses:
         # If NOT All Buses are requested, and a Not All Buses query is not cached, but an All Buses query is cached,
-        # return it, since it is still valid
+        # return it, since it is still valid - but limit the results
         buses_result = buses_cache.get((stopid, True))
+        if buses_result:
+            buses_result.buses = buses_result.buses[:settings.buses_normal_limit]
     return buses_result
