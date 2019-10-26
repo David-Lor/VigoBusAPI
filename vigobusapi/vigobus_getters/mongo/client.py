@@ -5,10 +5,9 @@ Manage the MongoDB async connection
 # # Installed # #
 from motor import motor_asyncio
 from pymongo.collection import Collection
-# from pymongo.database import Database
 
 # # Project # #
-from vigobusapi.settings_handler import settings
+from ...settings_handler import settings
 
 
 def get_collection(loop) -> Collection:

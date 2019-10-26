@@ -1,11 +1,18 @@
+"""WSDL PARSER
+Parsers for the WSDL API external data source.
+"""
 
 # # Installed # #
 from bs4 import BeautifulSoup
 
 # # Parent Package # #
-from ..entities import Stop
 from ..exceptions import ParseError, ParsingExceptions
 from ..string_fixes import fix_stop_name
+
+# # Project # #
+from ...entities import Stop
+
+__all__ = ("parse_xml_stop", "parse_xml_error_stop_not_exist")
 
 
 def parse_xml_stop(content: str) -> Stop:
@@ -27,7 +34,7 @@ def parse_xml_stop(content: str) -> Stop:
             stop_lat, stop_lon = float(stop_lat), float(stop_lon)
 
         return Stop(
-            stopid=stop_id,
+            stop_id=stop_id,
             name=stop_name,
             original_name=stop_original_name,
             lat=stop_lat,
@@ -42,12 +49,9 @@ def parse_xml_error_stop_not_exist(content: str) -> bool:
     """When a call to the WSDL API is unsuccessful, the response text must be fed to this method in order to check
     if the error was caused because the Stop not exists.
     Returns True if the Stop NOT EXISTS, and False if that was not the problem which caused the request to fail.
-    :raise: pybusent.StopNotExist
     """
-    if "No hay ninguna fila en la posición" in content:
-        return True
-    else:
-        return False
+    return "No hay ninguna fila en la posición" in content
+
 
 # def parse_xml_buses(content: str) -> List[Bus]:
 #     try:

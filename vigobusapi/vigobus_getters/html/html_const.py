@@ -27,8 +27,8 @@ Referer is the HTML data source URL + the formatted HEADERS_NEXT_LOADS_REFERER_P
 HEADERS_NEXT_LOADS_REFERER = "referer"
 """Key for the referer Header"""
 
-HEADERS_NEXT_LOADS_REFERER_PARAMS = "?parada={stopid}"
-"""Value for the 'referer' key on HEADERS_NEXT_LOADS; 'stopid' is a placeholder so the string must be formatted"""
+HEADERS_NEXT_LOADS_REFERER_PARAMS = "?parada={stop_id}"
+"""Value for the 'referer' key on HEADERS_NEXT_LOADS; 'stop_id' is a placeholder so the string must be formatted"""
 
 EXTRA_DATA_REQUIRED = ("__VIEWSTATE", "__VIEWSTATEGENERATOR", "__EVENTVALIDATION")
 """Extra Data fields that must be fetched from the HTML source code, and used on the EXTRA_DATA str as placeholders"""

@@ -7,13 +7,10 @@ using dotenv-settings-handler and python-dotenv.
 from typing import Optional
 
 # # Installed # #
-# noinspection PyPackageRequirements
 from dotenv import load_dotenv
 from dotenv_settings_handler import BaseSettingsHandler
 
 __all__ = ("settings",)
-
-load_dotenv()
 
 
 class Settings(BaseSettingsHandler):
@@ -39,4 +36,5 @@ class Settings(BaseSettingsHandler):
     api_description: Optional[str]
 
 
+load_dotenv()
 settings = Settings()

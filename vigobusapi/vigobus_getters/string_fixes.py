@@ -26,7 +26,7 @@ def is_roman(text: str) -> bool:
 
 PREPOSITIONS = (
     "a", "de", "en", "por", "sin", "so", "do", "da", "dos", "das", "no", "na", "nos", "nas", "sen", "o", "a",
-    "lo", "la", "los", "las", "os", "as", "y", "e"
+    "lo", "la", "los", "las", "os", "as", "y", "e", "del"
 )
 
 

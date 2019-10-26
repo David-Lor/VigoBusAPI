@@ -6,8 +6,8 @@ Helper misc functions for external data management
 import inspect
 import datetime
 
-# # Package # #
-from .entities import Stop
+# # Project # #
+from ..entities import Stop
 
 __all__ = ("get_package", "add_stop_created_timestamp")
 
