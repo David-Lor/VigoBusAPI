@@ -9,16 +9,18 @@ from collections import Counter
 from typing import Tuple, Dict
 
 # # Installed # #
-from pybusent import Bus, Buses, StopNotExist
 from bs4 import BeautifulSoup
-
-# # Parent Package # #
-from ..entities import Stop
-from ..string_fixes import fix_bus, fix_stop_name
-from ..exceptions import ParseError, ParsingExceptions
 
 # # Package # #
 from .html_const import *
+
+# # Parent Package # #
+from ..string_fixes import fix_bus, fix_stop_name
+from ..exceptions import ParseError, ParsingExceptions
+
+# # Project # #
+from ...entities import *
+from ...exceptions import *
 
 __all__ = (
     "parse_stop", "parse_buses", "parse_pages", "parse_extra_parameters",
@@ -41,7 +43,7 @@ def parse_stop(html_source: str) -> Stop:
     """Parse the HTML content returned after requesting the HTML data source,
     parsing parse the Stop info and returning a Stop object.
     :param html_source: HTML source code as string
-    :raises: pybusent.StopNotExist | vigobus_getters.exceptions.ParseError
+    :raises: exceptions.StopNotExist | exceptions.exceptions.ParseError
     """
     parse_stop_exists(html_source)
     html = BeautifulSoup(html_source, HTML_PARSER)
@@ -55,7 +57,7 @@ def parse_stop(html_source: str) -> Stop:
         stop_name = fix_stop_name(stop_original_name)
 
         return Stop(
-            stopid=stop_id,
+            stop_id=stop_id,
             name=stop_name,
             original_name=stop_original_name
         )
@@ -65,7 +67,7 @@ def parse_buses(html_source: str) -> Buses:
     """Parse the HTML content returned after requesting the HTML data source, and parse the Stop info and List of buses.
     :param html_source: HTML source code as string
     :return: List of buses
-    :raises: pybusent.StopNotExist | vigobus_getters.exceptions.ParseError
+    :raises: exceptions.StopNotExist | exceptions.exceptions.ParseError
     """
     parse_stop_exists(html_source)
     buses = list()
@@ -99,12 +101,12 @@ def parse_buses(html_source: str) -> Buses:
 def parse_stop_exists(html_source: str, raise_exception: bool = True) -> bool:
     """Given the HTML source code returned by HTTP request (str), detect if the stop was found or not.
     Must be called at the beggining of parse_stop/parse_buses helpers.
-    If raise_exception is True, pybusent.StopNotExist is raised if the stop not exists.
+    If raise_exception is True, exceptions.StopNotExist is raised if the stop not exists.
     Otherwise, return True if the stop exists, return False if not exists.
     :param html_source: HTML source code
     :param raise_exception: if True, raise StopNotExist if the stop not exists (default=True)
     :return: True if stop exists; False if stop not exists (only if raise_exception=False)
-    :raises: pybusent.StopNotExist
+    :raises: exceptions.StopNotExist
     """
     exists = "Parada Inexistente" not in html_source
     if raise_exception and not exists:
@@ -196,7 +198,7 @@ def clear_duplicated_buses(buses: Buses) -> Buses:
 
     # Add IDs of found buses to the Counter dict
     for bus in buses:
-        buses_ids[bus.busid] += 1
+        buses_ids[bus.bus_id] += 1
 
     # Remove not-duplicated Bus IDs from the Counter dict
     for bus_id in [bid for bid in buses_ids.keys() if buses_ids[bid] <= 1]:
@@ -206,7 +208,7 @@ def clear_duplicated_buses(buses: Buses) -> Buses:
     buses_keep = list()
     for bus_id in buses_ids.keys():
         _buses = sorted(  # Buses with the same Bus ID, sorted by time
-            [b for b in buses if b.busid == bus_id],
+            [b for b in buses if b.bus_id == bus_id],
             key=lambda _bus: _bus.time
         )
         for bus in _buses:
@@ -222,7 +224,7 @@ def clear_duplicated_buses(buses: Buses) -> Buses:
                 buses_keep.append(bus)
 
     # Remove the repeated buses from the original buses list
-    for bus in [b for b in buses if b.busid in buses_ids.keys()]:
+    for bus in [b for b in buses if b.bus_id in buses_ids.keys()]:
         buses.remove(bus)
 
     # Add the kept buses to the original buses list

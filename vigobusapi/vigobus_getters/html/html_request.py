@@ -9,25 +9,25 @@ import copy
 # # Installed # #
 from requests_async import get, post, Response, RequestException
 
-# # Project # #
-from vigobusapi.settings_handler import settings
-
 # # Package # #
 from .html_const import *
+
+# # Project # #
+from ...settings_handler import settings
 
 __all__ = ("request_html",)
 
 
-async def request_html(stopid: int, page: Optional[int] = None, extra_params: Optional[Dict] = None) -> str:
+async def request_html(stop_id: int, page: Optional[int] = None, extra_params: Optional[Dict] = None) -> str:
     """Async function to request the webpage data source, returning the HTML content.
-    :param stopid: Stop ID
+    :param stop_id: Stop ID
     :param page: Page to retrieve (default=None, so first page)
     :param extra_params: Additional parameters required by the data source when asking for a certain page higher than 1
                          (__VIEWSTATE, __VIEWSTATEGENERATOR, __EVENTVALIDATION), as dict
     :raises: requests_async.RequestTimeout | requests_async.RequestException
     """
     # Generate params (Stop ID)
-    params = {"parada": stopid}
+    params = {"parada": stop_id}
 
     # Extra params available = next pages, requiring body & updated headers
     if extra_params is not None:
@@ -38,7 +38,7 @@ async def request_html(stopid: int, page: Optional[int] = None, extra_params: Op
         headers = copy.deepcopy(HEADERS)
         headers.update(HEADERS_NEXT_LOADS)  # update the original Headers with the extra items used on next pages
         headers[HEADERS_NEXT_LOADS_REFERER] = settings.html_remote_api + HEADERS_NEXT_LOADS_REFERER_PARAMS.format(
-            stopid=stopid  # update the Referer header with the URL with the stopid as parameter
+            stop_id=stop_id  # update the Referer header with the URL with the stop_id as parameter
         )
     # Extra params not available = this is the first page, body not required & use unmodified headers
     else:

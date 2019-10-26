@@ -5,19 +5,19 @@ Async functions to fetch data from the MONGODB local data source and parse them 
 # # Native # #
 import asyncio
 
-# # Parent Package # #
-from ..entities import Stop, OptionalStop
-
 # # Package # #
 from .mongo_read import read_stop
 from .mongo_write import insert_stops
 
+# # Project # #
+from ...entities import Stop, OptionalStop
+
 __all__ = ("get_stop", "save_stop", "save_stops", "insert_stops")
 
 
-async def get_stop(stopid: int) -> OptionalStop:
+async def get_stop(stop_id: int) -> OptionalStop:
     """Find a Stop previously saved on MongoDB and return it if available"""
-    return await read_stop(stopid)
+    return await read_stop(stop_id)
 
 
 async def save_stops(*stops: Stop):

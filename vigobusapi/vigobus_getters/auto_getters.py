@@ -6,15 +6,15 @@ Usually they will use a main data source and an extra data source as a backup
 
 # # Native # #
 import inspect
-from typing import Optional
-
-# # Installed # #
-from pybusent import BusesResult, StopNotExist
+from typing import Optional, Callable
 
 # # Package # #
 from . import html, wsdl, cache, mongo
-from .entities import Stop
 from .helpers import *
+
+# # Project # #
+from ..entities import *
+from ..exceptions import *
 
 __all__ = ("get_stop", "get_buses")
 
@@ -36,24 +36,25 @@ BUS_GETTERS = (
 The first function always is a local Cache storage."""
 
 
-async def get_stop(stopid: int) -> Stop:
+async def get_stop(stop_id: int) -> Stop:
     """Async function to get information of a Stop, using the following getters in order:
     1.- Local Stops cache;
     2.- Local Stops database;
     3.- Remote WSDL API data source
     4.- Remote
-    :param stopid: Stop ID
+    :param stop_id: Stop ID
     :raises: requests_async.Timeout | requests_async.RequestException |
-             pybusent.StopNotExist | vigobus_getters.exceptions.ParseError
+             exceptions.StopNotExist | exceptions.ParseError
     """
     last_exception = None
 
+    stop_getter: Callable
     for stop_getter in STOP_GETTERS:
         try:
             if inspect.iscoroutinefunction(stop_getter):
-                stop: Stop = await stop_getter(stopid)
+                stop: Stop = await stop_getter(stop_id)
             else:
-                stop: Stop = stop_getter(stopid)
+                stop: Stop = stop_getter(stop_id)
 
         except StopNotExist as ex:
             last_exception = ex
@@ -82,15 +83,15 @@ async def get_stop(stopid: int) -> Stop:
     raise last_exception
 
 
-async def get_buses(stopid: int, get_all_buses: bool) -> BusesResult:
+async def get_buses(stop_id: int, get_all_buses: bool) -> BusesResponse:
     last_exception = None
 
     for bus_getter in BUS_GETTERS:
         try:
             if inspect.iscoroutinefunction(bus_getter):
-                buses_result: Optional[BusesResult] = await bus_getter(stopid, get_all_buses)
+                buses_result: Optional[BusesResponse] = await bus_getter(stop_id, get_all_buses)
             else:
-                buses_result: Optional[BusesResult] = bus_getter(stopid, get_all_buses)
+                buses_result: Optional[BusesResponse] = bus_getter(stop_id, get_all_buses)
 
         except StopNotExist as ex:
             last_exception = ex
@@ -103,7 +104,7 @@ async def get_buses(stopid: int, get_all_buses: bool) -> BusesResult:
             if buses_result is not None:
                 if BUS_GETTERS.index(bus_getter) > 0:
                     # Save the Buses in cache if bus list not found by the cache itself
-                    cache.save_buses(stopid, get_all_buses, buses_result)
+                    cache.save_buses(stop_id, get_all_buses, buses_result)
                 return buses_result
 
     # If Buses not returned, raise the Last Exception
