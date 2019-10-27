@@ -60,6 +60,7 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 
 ## Changelog
 
+- 0.3.1 - store StopNotExist status on local Stop cache
 - 0.3.0 - define data models on project (deprecate pybusent)
 - 0.2.2 - fix cache bus getter, was returning full list of buses when requesting a minimal list but a full list was cached
 - 0.2.1 - fix Stops endpoint, return empty array if no buses available
@@ -68,6 +69,7 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 
 ---
 
+- _0.3.1 - guardar estado StopNotExist en caché local de Stops_
 - _0.3.0 - definición de modelos de datos en proyecto (sin usar pybusent)_
 - _0.2.2 - fix cache bus getter, devolvía listado completo de buses cuando se pedía un listado parcial pero uno completo estaba almacenado_
 - _0.2.1 - fix endpoint Stops, devolver array vacío si no hay autobuses disponibles_

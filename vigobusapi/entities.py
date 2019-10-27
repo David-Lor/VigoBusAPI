@@ -5,12 +5,15 @@ Classes and data models used along the project
 # # Native # #
 import datetime
 import hashlib
-from typing import Optional, List
+from typing import Optional, Union, List
 
 # # Installed # #
 import pydantic
 
-__all__ = ("Stop", "OptionalStop", "Bus", "Buses", "BusesResponse")
+# # Package # #
+from .exceptions import StopNotExist
+
+__all__ = ("Stop", "OptionalStop", "StopOrNotExist", "Bus", "Buses", "BusesResponse")
 
 
 class BaseModel(pydantic.BaseModel):
@@ -77,4 +80,5 @@ class Stop(BaseModel):
 
 
 OptionalStop = Optional[Stop]
+StopOrNotExist = Union[Stop, StopNotExist]
 Buses = List[Bus]

@@ -38,8 +38,8 @@ The first function always is a local Cache storage."""
 
 async def get_stop(stop_id: int) -> Stop:
     """Async function to get information of a Stop, using the following getters in order:
-    1.- Local Stops cache;
-    2.- Local Stops database;
+    1.- Local Stops cache
+    2.- Local Stops database
     3.- Remote WSDL API data source
     4.- Remote
     :param stop_id: Stop ID
@@ -54,10 +54,16 @@ async def get_stop(stop_id: int) -> Stop:
             if inspect.iscoroutinefunction(stop_getter):
                 stop: Stop = await stop_getter(stop_id)
             else:
-                stop: Stop = stop_getter(stop_id)
+                stop: StopOrNotExist = stop_getter(stop_id)
+
+            if isinstance(stop, Exception):
+                raise stop
 
         except StopNotExist as ex:
             last_exception = ex
+            # Save the StopNotExist status in cache, if not found by the cache
+            if STOP_GETTERS.index(stop_getter) > 0:
+                cache.save_stop_not_exist(stop_id)
             break
 
         except Exception as ex:
@@ -84,7 +90,21 @@ async def get_stop(stop_id: int) -> Stop:
 
 
 async def get_buses(stop_id: int, get_all_buses: bool) -> BusesResponse:
+    """Async function to get information of a Stop, using the following getters in order:
+    1.- Local Stops cache
+    2.- Local Stops database
+    3.- Remote
+    :param stop_id: Stop ID
+    :param get_all_buses: if True, fetch all the available buses
+    :raises: requests_async.Timeout | requests_async.RequestException |
+             exceptions.StopNotExist | exceptions.ParseError
+    """
     last_exception = None
+
+    # Lookup the Stop in cache; if available, verify that it exists
+    cached_stop = cache.get_stop(stop_id)
+    if isinstance(cached_stop, StopNotExist):
+        raise cached_stop
 
     for bus_getter in BUS_GETTERS:
         try:
