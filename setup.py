@@ -22,7 +22,7 @@ setup(
         "lxml",
         "roman",
         "python-dotenv",
-        "pydantic",
+        # "pydantic",
         "cachetools",
         "pymongo",
         "motor",

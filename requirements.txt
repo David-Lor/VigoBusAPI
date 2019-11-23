@@ -5,7 +5,7 @@ beautifulsoup4  # HTML/XML parser for HTTP & WSDL external data sources
 lxml  # XML parser used by BeautifulSoup
 roman  # Check for roman numbers in string chunks
 python-dotenv  # dotenv setting files
-pydantic  # Stop/Bus entities
+#pydantic  # Stop/Bus entities - Install from fastapi requirements
 cachetools  # TTLCache
 pymongo  # MongoDB client
 motor  # MongoDB Async client
