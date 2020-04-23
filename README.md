@@ -16,7 +16,7 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 
 ## Features
 
-- API powered by FastAPI, offering a Flask-based web server, REST API focused, async and auto-generating documentation.
+- API powered by FastAPI, offering a REST API focused web server, fully async and auto-generating documentation.
 - Nice-looking, human-readable & easily-parseable endpoint response output as JSON, compared with original data sources.
 - Local data storages: Stop cache, Stop MongoDB, Buses cache; to reduce requests to the external API/data sources.
 - Original API/data source fixes in Stop names and Buses lines/routes.
@@ -60,6 +60,7 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 
 ## Changelog
 
+- 0.3.2 - fix buses endpoint returning null source; remove setup.py
 - 0.3.1 - store StopNotExist status on local Stop cache
 - 0.3.0 - define data models on project (deprecate pybusent)
 - 0.2.2 - fix cache bus getter, was returning full list of buses when requesting a minimal list but a full list was cached
@@ -69,6 +70,7 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 
 ---
 
+- _0.3.2 - fix endpoint buses devolviendo source null; borrar setup.py_
 - _0.3.1 - guardar estado StopNotExist en caché local de Stops_
 - _0.3.0 - definición de modelos de datos en proyecto (sin usar pybusent)_
 - _0.2.2 - fix cache bus getter, devolvía listado completo de buses cuando se pedía un listado parcial pero uno completo estaba almacenado_

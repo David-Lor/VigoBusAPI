@@ -125,6 +125,10 @@ async def get_buses(stop_id: int, get_all_buses: bool) -> BusesResponse:
                 if BUS_GETTERS.index(bus_getter) > 0:
                     # Save the Buses in cache if bus list not found by the cache itself
                     cache.save_buses(stop_id, get_all_buses, buses_result)
+
+                # Add the source to the returned data
+                buses_result.source = get_package(bus_getter)
+
                 return buses_result
 
     # If Buses not returned, raise the Last Exception
