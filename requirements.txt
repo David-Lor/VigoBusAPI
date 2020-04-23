@@ -1,8 +1,7 @@
 fastapi==0.54.1  # API framework
 uvicorn==0.11.3  # API deployment tool
 requests-async==0.6.2  # HTTP external data sources
-beautifulsoup4==4.9.0  # HTML/XML parser for HTTP & WSDL external data sources
-lxml==4.5.0  # XML parser used by BeautifulSoup
+beautifulsoup4==4.9.0  # HTML parser for HTTP external data sources
 roman==3.2  # Check for roman numbers in string chunks
 python-dotenv==0.13.0  # dotenv setting files
 pydantic==1.5  # Settings Handler & dataclasses

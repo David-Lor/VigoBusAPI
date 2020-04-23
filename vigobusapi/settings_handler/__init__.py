@@ -14,10 +14,8 @@ __all__ = ("settings",)
 
 class Settings(BaseSettings):
     html_remote_api: str
-    wsdl_remote_api: str
     endpoint_timeout: float = 30
     http_timeout: float = 5
-    wsdl_timeout: float = 10
     http_retries: int = 2
     stops_cache_maxsize: int = 500
     stops_cache_ttl: float = 3600

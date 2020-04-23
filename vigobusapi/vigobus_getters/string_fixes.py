@@ -109,7 +109,7 @@ CHARS_FIXED = {  # {"WrongChar" : "FixedChar"}
 
 
 def fix_chars(input_string: str) -> str:
-    """Fix wrong characters from strings given by the WSDL API.
+    """Fix wrong characters from strings.
     Function will use the CHARS_FIXED dict {"WrongChar":"FixedChar"}
     """
     for wrong, fix in CHARS_FIXED.items():

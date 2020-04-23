@@ -1,7 +1,6 @@
 """AUTO GETTERS
 Definition of getters that will run with the source='auto' (default).
 Usually they will use a main data source and an extra data source as a backup
-(e.g. the Stop getter will use the WSDL API as primary source; if it fails, it will try with the HTML data source)
 """
 
 # # Native # #
@@ -9,7 +8,7 @@ import inspect
 from typing import Optional, Callable
 
 # # Package # #
-from . import html, wsdl, cache, mongo
+from . import html, cache, mongo
 from .helpers import *
 
 # # Project # #
@@ -21,7 +20,6 @@ __all__ = ("get_stop", "get_buses")
 STOP_GETTERS = (
     cache.get_stop,
     mongo.get_stop,
-    wsdl.get_stop,
     html.get_stop
 )
 """List of Stop Getter functions. 
@@ -40,8 +38,7 @@ async def get_stop(stop_id: int) -> Stop:
     """Async function to get information of a Stop, using the following getters in order:
     1.- Local Stops cache
     2.- Local Stops database
-    3.- Remote WSDL API data source
-    4.- Remote
+    3.- Remote
     :param stop_id: Stop ID
     :raises: requests_async.Timeout | requests_async.RequestException |
              exceptions.StopNotExist | exceptions.ParseError
