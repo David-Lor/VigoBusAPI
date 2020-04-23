@@ -18,9 +18,7 @@ from .vigobus_getters import get_stop, get_buses
 __all__ = ("app", "run")
 
 app = fastapi.FastAPI(
-    title=settings.api_name,
-    description=settings.api_description,
-    version=settings.api_version
+    title=settings.api_name
 )
 
 

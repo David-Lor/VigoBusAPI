@@ -60,6 +60,7 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 
 ## Changelog
 
+- 0.3.3 - remove dotenv-settings-handler as dependency and use pydantic only; remove not required settings; freeze requirements versions
 - 0.3.2 - fix buses endpoint returning null source; remove setup.py
 - 0.3.1 - store StopNotExist status on local Stop cache
 - 0.3.0 - define data models on project (deprecate pybusent)
@@ -70,6 +71,7 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 
 ---
 
+- _0.3.3 - quitar la dependencia dotenv-settings-handler y usar sólo pydantic; borrar configuraciones no necesarias; congelar versiones de requirements_
 - _0.3.2 - fix endpoint buses devolviendo source null; borrar setup.py_
 - _0.3.1 - guardar estado StopNotExist en caché local de Stops_
 - _0.3.0 - definición de modelos de datos en proyecto (sin usar pybusent)_
