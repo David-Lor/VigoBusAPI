@@ -7,7 +7,7 @@ import inspect
 import datetime
 
 # # Project # #
-from ..entities import Stop
+from vigobusapi.entities import Stop
 
 __all__ = ("get_package", "add_stop_created_timestamp")
 

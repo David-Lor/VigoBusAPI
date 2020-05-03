@@ -11,7 +11,7 @@ from typing import Optional, Union, List
 import pydantic
 
 # # Package # #
-from .exceptions import StopNotExist
+from vigobusapi.exceptions import StopNotExist
 
 __all__ = ("Stop", "OptionalStop", "StopOrNotExist", "Bus", "Buses", "BusesResponse")
 

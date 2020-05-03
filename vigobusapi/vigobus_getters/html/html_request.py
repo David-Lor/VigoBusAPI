@@ -5,6 +5,7 @@ Async Functions to request the HTML external data source and return the raw resu
 # # Native # #
 from typing import Dict, Optional
 import copy
+import time
 
 # # Installed # #
 from requests_async import get, post, Response, RequestException
@@ -13,7 +14,8 @@ from requests_async import get, post, Response, RequestException
 from .html_const import *
 
 # # Project # #
-from ...settings_handler import settings
+from vigobusapi.settings_handler import settings
+from vigobusapi.logger import logger
 
 __all__ = ("request_html",)
 
@@ -50,18 +52,44 @@ async def request_html(stop_id: int, page: Optional[int] = None, extra_params: O
     last_error = None
 
     # Run the Requests, with Retries support
-    for i in range(settings.http_retries):
-        try:
-            response: Response = await method(
-                url=settings.html_remote_api,
-                params=params,
-                data=body,
-                headers=headers,
-                timeout=settings.http_timeout
-            )
-            response.raise_for_status()
-            return response.text
-        except RequestException as ex:
-            last_error = ex
+    retries = settings.http_retries
+    url = settings.html_remote_api
+    timeout = settings.http_timeout
+
+    for i in range(retries):
+        with logger.contextualize(
+                request_url=url,
+                request_attempt=i+1,
+                request_max_attempts=retries,
+                request_params=params,
+                request_body=body,
+                request_headers=headers,
+                request_timeout=timeout
+        ):
+            logger.debug("Requesting URL")
+
+            try:
+                start_time = time.time()
+                response: Response = await method(
+                    url=url,
+                    params=params,
+                    data=body,
+                    headers=headers,
+                    timeout=timeout
+                )
+
+                response_time = round(time.time() - start_time, 4)
+                logger.bind(
+                    response_elapsed_time=response_time,
+                    response_status_code=response.status_code,
+                    response_body=response.text
+                ).debug("Response received")
+
+                response.raise_for_status()
+                return response.text
+
+            except RequestException as ex:
+                logger.warning("Request failed")
+                last_error = ex
 
     raise last_error
