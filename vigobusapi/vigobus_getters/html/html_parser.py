@@ -11,16 +11,13 @@ from typing import Tuple, Dict
 # # Installed # #
 from bs4 import BeautifulSoup
 
-# # Package # #
-from .html_const import *
-
-# # Parent Package # #
-from ..string_fixes import fix_bus, fix_stop_name
-from ..exceptions import ParseError, ParsingExceptions
-
 # # Project # #
-from ...entities import *
-from ...exceptions import *
+from vigobusapi.vigobus_getters.html.html_const import *
+from vigobusapi.vigobus_getters.string_fixes import fix_bus, fix_stop_name
+from vigobusapi.vigobus_getters.exceptions import ParseError, ParsingExceptions
+from vigobusapi.entities import Stop, Bus, Buses
+from vigobusapi.exceptions import StopNotExist
+from vigobusapi.logger import logger
 
 __all__ = (
     "parse_stop", "parse_buses", "parse_pages", "parse_extra_parameters",
@@ -56,11 +53,13 @@ def parse_stop(html_source: str) -> Stop:
             raise ParseError("Parsed Stop Name is empty")
         stop_name = fix_stop_name(stop_original_name)
 
-        return Stop(
+        stop = Stop(
             stop_id=stop_id,
             name=stop_name,
             original_name=stop_original_name
         )
+        logger.bind(stop_data=stop.dict()).debug("Parsed stop")
+        return stop
 
 
 def parse_buses(html_source: str) -> Buses:
@@ -95,6 +94,7 @@ def parse_buses(html_source: str) -> Buses:
                         time=time
                     ))
 
+        logger.bind(buses=buses).debug(f"Parsed {len(buses)} buses")
         return buses
 
 
@@ -109,10 +109,13 @@ def parse_stop_exists(html_source: str, raise_exception: bool = True) -> bool:
     :raises: exceptions.StopNotExist
     """
     exists = "Parada Inexistente" not in html_source
-    if raise_exception and not exists:
-        raise StopNotExist()
-    else:
-        return exists
+
+    if not exists:
+        logger.debug("The stop does not exist")
+        if raise_exception:
+            raise StopNotExist()
+
+    return exists
 
 
 def parse_extra_parameters(html_source: str) -> Dict:
@@ -131,6 +134,7 @@ def parse_extra_parameters(html_source: str) -> Dict:
             # Values must be URL-Parsed (e.g. replace '/' by '%2F' - https://www.urlencoder.io/python/)
             params[key] = urllib.parse.quote(value, safe="")
 
+        logger.bind(extra_parameters=params).debug("Parsed extra parameters")
         return params
 
 
@@ -138,7 +142,7 @@ def parse_pages(html_source: str) -> Tuple[int, int]:
     """Parse the pages on the current page, returning the current page number, and how many pages
     are available after the current one.
     :param html_source: HTML source code
-    :return: Current page number; Ammount of pages available after the current
+    :return: [Current page number, Ammount of pages available after the current]
     :raises: vigobus_getters.exceptions.ParseError
     """
     with parsing():
@@ -150,6 +154,7 @@ def parse_pages(html_source: str) -> Tuple[int, int]:
 
         # No table found = no more pages available
         if numbers_table is None:
+            logger.debug("No extra pages found")
             # return: current page = 1; additional pages available = 0)
             return 1, 0
 
@@ -170,6 +175,7 @@ def parse_pages(html_source: str) -> Tuple[int, int]:
         # Get how many pages are left after the current page
         pages_left = sum(1 for n in href_pages if n > current_page)
 
+        logger.debug(f"Current page is {current_page}, with {pages_left} additional pages")
         return current_page, pages_left
 
 
@@ -183,7 +189,7 @@ def assert_page_number(html_source: str, expected_current_page: int):
     with parsing():
         current_page, pages_left = parse_pages(html_source)
         assert current_page == expected_current_page, \
-            f"Pages won't match. Current page is {current_page}, should be {expected_current_page}"
+            f"Pages do not match. Current page is {current_page}, should be {expected_current_page}"
 
 
 def clear_duplicated_buses(buses: Buses) -> Buses:
@@ -194,39 +200,47 @@ def clear_duplicated_buses(buses: Buses) -> Buses:
     of 1 minute or less, they are considered duplicates.
     Duplicated bus/es are removed from the list in-place, so the same object is returned.
     """
-    buses_ids = Counter()
+    # TODO Fix - false positives
+    with logger.contextualize(buses=buses):
+        buses_start = len(buses)
+        logger.debug("Clearing duplicated buses")
+        buses_ids = Counter()
 
-    # Add IDs of found buses to the Counter dict
-    for bus in buses:
-        buses_ids[bus.bus_id] += 1
+        # Add IDs of found buses to the Counter dict
+        for bus in buses:
+            buses_ids[bus.bus_id] += 1
 
-    # Remove not-duplicated Bus IDs from the Counter dict
-    for bus_id in [bid for bid in buses_ids.keys() if buses_ids[bid] <= 1]:
-        buses_ids.pop(bus_id)
+        # Remove not-duplicated Bus IDs from the Counter dict
+        for bus_id in [bid for bid in buses_ids.keys() if buses_ids[bid] <= 1]:
+            buses_ids.pop(bus_id)
 
-    # Keep one of each duplicated buses depending on time
-    buses_keep = list()
-    for bus_id in buses_ids.keys():
-        _buses = sorted(  # Buses with the same Bus ID, sorted by time
-            [b for b in buses if b.bus_id == bus_id],
-            key=lambda _bus: _bus.time
-        )
-        for bus in _buses:
-            # Time range of bus.time +/- 1 minute
-            time_range = [i for i in range(bus.time - 1, bus.time + 2)]
-            # Search the already-kept buses with the same Bus ID in the time range
-            n_repeated_buses = sum(  # 0 if no buses with a similar time are found
-                1 for b in buses_keep
-                if b.time in time_range
+        # Keep one of each duplicated buses depending on time
+        buses_keep = list()
+        for bus_id in buses_ids.keys():
+            _buses = sorted(  # Buses with the same Bus ID, sorted by time
+                [b for b in buses if b.bus_id == bus_id],
+                key=lambda _bus: _bus.time
             )
-            if not n_repeated_buses:
-                # Keep the bus with the lowest time in the buses list
-                buses_keep.append(bus)
+            for bus in _buses:
+                # Time range of bus.time +/- 1 minute
+                time_range = [i for i in range(bus.time - 1, bus.time + 2)]
+                # Search the already-kept buses with the same Bus ID in the time range
+                n_repeated_buses = sum(  # 0 if no buses with a similar time are found
+                    1 for b in buses_keep
+                    if b.time in time_range
+                )
+                if not n_repeated_buses:
+                    # Keep the bus with the lowest time in the buses list
+                    buses_keep.append(bus)
 
-    # Remove the repeated buses from the original buses list
-    for bus in [b for b in buses if b.bus_id in buses_ids.keys()]:
-        buses.remove(bus)
+        # Remove the repeated buses from the original buses list
+        for bus in [b for b in buses if b.bus_id in buses_ids.keys()]:
+            buses.remove(bus)
 
-    # Add the kept buses to the original buses list
-    buses.extend(buses_keep)
-    return buses
+        # Add the kept buses to the original buses list
+        buses.extend(buses_keep)
+
+        buses_diff = buses_start - len(buses)
+        logger.bind(buses_diff=buses_diff).debug(f"Cleared {buses_diff} duplicated buses")
+
+        return buses

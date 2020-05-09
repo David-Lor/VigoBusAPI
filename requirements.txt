@@ -8,3 +8,4 @@ pydantic==1.5  # Settings Handler & dataclasses
 cachetools==4.1.0  # TTLCache
 pymongo==3.10.1  # MongoDB client
 motor==2.1.0  # MongoDB Async client
+loguru==0.4.1  # Logging

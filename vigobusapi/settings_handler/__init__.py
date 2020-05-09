@@ -1,10 +1,6 @@
 """SETTINGS HANDLER
-Declaration of the Settings class and instance that can be used to get any setting required,
-using dotenv-settings-handler and python-dotenv.
+Declaration of the Settings class and instance that can be used to get any setting required
 """
-
-# # Native # #
-from typing import Optional
 
 # # Installed # #
 from pydantic import BaseSettings
@@ -29,6 +25,7 @@ class Settings(BaseSettings):
     api_port: int = 5000
     api_name = "VigoBusAPI"
     api_log_level = "info"
+    log_level = "info"
 
     class Config:
         env_file = ".env"

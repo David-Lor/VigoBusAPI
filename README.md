@@ -60,6 +60,7 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 
 ## Changelog
 
+- 0.5.0 - refactor request & error handling, imports & cache; add logging
 - 0.4.0 - remove WSDL data sources
 - 0.3.3 - remove dotenv-settings-handler as dependency and use pydantic only; remove not required settings; freeze requirements versions
 - 0.3.2 - fix buses endpoint returning null source; remove setup.py
@@ -72,6 +73,7 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 
 ---
 
+- _0.5.0 - refactorización de request y error handling, imports y cache; añadir sistema de logs_
 - _0.4.0 - quitar fuentes de datos WSDL_
 - _0.3.3 - quitar la dependencia dotenv-settings-handler y usar sólo pydantic; borrar configuraciones no necesarias; congelar versiones de requirements_
 - _0.3.2 - fix endpoint buses devolviendo source null; borrar setup.py_

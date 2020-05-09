@@ -4,43 +4,69 @@ Handle exceptions occurred on endpoints
 
 # # Native # #
 import asyncio
-import contextlib
 import traceback
 
 # # Installed # #
-import fastapi
-from requests_async import RequestException, Timeout
-from starlette import status as statuscode
+from fastapi import status as statuscode
+from fastapi.responses import JSONResponse
+from requests_async import RequestException, Timeout, ConnectTimeout
 
 # # Package # #
-from .exceptions import *
-from .vigobus_getters.exceptions import *
+from vigobusapi.exceptions import *
+from vigobusapi.vigobus_getters.exceptions import *
+from vigobusapi.logger import logger
 
-__all__ = ("manage_endpoint_exceptions",)
+__all__ = ("handle_exception",)
 
 
-@contextlib.contextmanager
-def manage_endpoint_exceptions():
-    """ContextManager to catch exceptions that can be raised when getting information from external data sources,
-    returning a HTTP Status Code to the client depending on the exception raised.
-    """
+class Responses:
+    stop_not_exists = JSONResponse(
+        status_code=statuscode.HTTP_404_NOT_FOUND,
+        content={"detail": "Stop not exists"}
+    )
+    external_source_timeout = JSONResponse(
+        status_code=statuscode.HTTP_408_REQUEST_TIMEOUT,
+        content={"detail": "Timeout on external source"}
+    )
+    external_source_error = JSONResponse(
+        status_code=statuscode.HTTP_500_INTERNAL_SERVER_ERROR,
+        content={"detail": "Generic HTTP error on external source"}
+    )
+    parsing_error = JSONResponse(
+        status_code=statuscode.HTTP_500_INTERNAL_SERVER_ERROR,
+        content={"detail": "Error parsing external source data"}
+    )
+    generic_error = JSONResponse(
+        status_code=statuscode.HTTP_500_INTERNAL_SERVER_ERROR,
+        content={"detail": "Unknown internal error"}
+    )
+
+
+EXCEPTIONS_RESPONSES = {
+    StopNotExist: Responses.stop_not_exists,
+    Timeout: Responses.external_source_timeout,
+    asyncio.TimeoutError: Responses.external_source_timeout,
+    RequestException: Responses.external_source_error,
+    ParseError: Responses.parsing_error
+}
+"""Relation between exceptions and the response to return. Exception class inheritance is supported"""
+
+EXCEPTIONS_NO_ERROR_LOG = (StopNotExist, Timeout, asyncio.TimeoutError)
+"""Exceptions that will not log an error"""
+
+
+def handle_exception(exception):
     try:
-        yield
-    except StopNotExist:
-        raise fastapi.HTTPException(
-            status_code=statuscode.HTTP_404_NOT_FOUND, detail="Stop not exists"
+        response = next(
+            response for exception_iter, response in EXCEPTIONS_RESPONSES.items()
+            if isinstance(exception, exception_iter)
         )
-    except (Timeout, asyncio.TimeoutError):
-        raise fastapi.HTTPException(
-            status_code=statuscode.HTTP_408_REQUEST_TIMEOUT, detail="Timeout on external source"
-        )
-    except RequestException:
-        traceback.print_exc()
-        raise fastapi.HTTPException(
-            status_code=statuscode.HTTP_500_INTERNAL_SERVER_ERROR, detail="Generic HTTP error on external source"
-        )
-    except ParseError:
-        traceback.print_exc()
-        raise fastapi.HTTPException(
-            status_code=statuscode.HTTP_500_INTERNAL_SERVER_ERROR, detail="Error parsing external source data"
-        )
+    except StopIteration:
+        response = Responses.generic_error
+
+    try:
+        next(exception_iter for exception_iter in EXCEPTIONS_NO_ERROR_LOG if isinstance(exception, exception_iter))
+    except StopIteration:
+        logger.exception("Error on request")
+
+    return response

@@ -1,19 +1,18 @@
 """AUTO GETTERS
-Definition of getters that will run with the source='auto' (default).
-Usually they will use a main data source and an extra data source as a backup
+Functions called from request handlers to acquire data from local or external data sources,
+depending on the availability.
 """
 
 # # Native # #
 import inspect
 from typing import Optional, Callable
 
-# # Package # #
-from . import html, cache, mongo
-from .helpers import *
-
 # # Project # #
-from ..entities import *
-from ..exceptions import *
+from vigobusapi.vigobus_getters import html, cache, mongo
+from vigobusapi.vigobus_getters.helpers import *
+from vigobusapi.entities import *
+from vigobusapi.exceptions import *
+from vigobusapi.logger import logger
 
 __all__ = ("get_stop", "get_buses")
 
@@ -24,26 +23,28 @@ STOP_GETTERS = (
 )
 """List of Stop Getter functions. 
 The first function always is a local Cache storage. 
-The second function always is a local Database storage."""
+The second function always is a local Database storage.
+Next functions are external data sources.
+"""
 
 BUS_GETTERS = (
     cache.get_buses,
     html.get_buses
 )
 """List of Bus Getter functions.
-The first function always is a local Cache storage."""
+The first function always is a local Cache storage.
+Next functions are external data sources.
+"""
 
 
 async def get_stop(stop_id: int) -> Stop:
-    """Async function to get information of a Stop, using the following getters in order:
-    1.- Local Stops cache
-    2.- Local Stops database
-    3.- Remote
+    """Async function to get information of a Stop, using the STOP_GETTERS in order
     :param stop_id: Stop ID
     :raises: requests_async.Timeout | requests_async.RequestException |
              exceptions.StopNotExist | exceptions.ParseError
     """
     last_exception = None
+    logger.debug(f"Getting stop {stop_id}")
 
     stop_getter: Callable
     for stop_getter in STOP_GETTERS:
@@ -87,10 +88,7 @@ async def get_stop(stop_id: int) -> Stop:
 
 
 async def get_buses(stop_id: int, get_all_buses: bool) -> BusesResponse:
-    """Async function to get information of a Stop, using the following getters in order:
-    1.- Local Stops cache
-    2.- Local Stops database
-    3.- Remote
+    """Async function to get information of a Stop, using the BUS_GETTERS in order
     :param stop_id: Stop ID
     :param get_all_buses: if True, fetch all the available buses
     :raises: requests_async.Timeout | requests_async.RequestException |
