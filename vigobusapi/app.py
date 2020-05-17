@@ -7,10 +7,10 @@ import uvicorn
 from fastapi import FastAPI, Response
 
 # # Package # #
-from vigobusapi.entities import Stop, BusesResponse
+from vigobusapi.entities import Stop, Stops, BusesResponse
 from vigobusapi.request_handler import request_handler
 from vigobusapi.settings_handler import settings
-from vigobusapi.vigobus_getters import get_stop, get_buses
+from vigobusapi.vigobus_getters import get_stop, get_buses, search_stops
 from vigobusapi.logger import logger
 
 __all__ = ("app", "run")
@@ -29,6 +29,15 @@ async def endpoint_status():
         media_type="text/plain",
         status_code=200
     )
+
+
+@app.get("/stops", response_model=Stops)
+async def endpoint_get_stops(stop_name: str):
+    """Endpoint to search stops by a given name
+    """
+    with logger.contextualize(**locals()):
+        stops = await search_stops(stop_name=stop_name)
+        return [stop.dict() for stop in stops]
 
 
 @app.get("/stop/{stop_id}", response_model=Stop)

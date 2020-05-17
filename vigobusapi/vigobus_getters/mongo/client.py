@@ -2,16 +2,31 @@
 Manage the MongoDB async connection
 """
 
+# # Native # #
+import asyncio
+
 # # Installed # #
 from motor import motor_asyncio
+from pymongo import TEXT
 from pymongo.collection import Collection
 
 # # Project # #
 from vigobusapi.settings_handler import settings
 
+index_created = False
 
-def get_collection(loop) -> Collection:
+
+def get_collection(loop: asyncio.AbstractEventLoop) -> Collection:
     """Get the MongoDB Stops collection, using the given asyncio Loop"""
-    # TODO how to initialize client only once?
+    # TODO Initialize client only once
+    global index_created
     client = motor_asyncio.AsyncIOMotorClient(settings.mongo_uri, io_loop=loop)
-    return client[settings.mongo_stops_db][settings.mongo_stops_collection]
+    collection: Collection = client[settings.mongo_stops_db][settings.mongo_stops_collection]
+
+    # Create a Text Index on stop name, for search
+    # https://docs.mongodb.com/manual/core/index-text/#create-text-index
+    if not index_created:
+        asyncio.ensure_future(collection.create_index([("name", TEXT)]))
+        index_created = True
+
+    return collection
