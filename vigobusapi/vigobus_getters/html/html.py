@@ -2,6 +2,10 @@
 Async functions to fetch data from the HTML external data source and parse them to return the final objects.
 """
 
+# # Native # #
+import asyncio
+from typing import List
+
 # # Installed # #
 from requests_async import RequestException
 
@@ -26,11 +30,12 @@ async def get_stop(stop_id: int) -> Stop:
     return parse_stop(html_source)
 
 
-async def get_buses(stop_id: int, get_all_buses: bool = False) -> BusesResponse:
+async def get_buses(stop_id: int, get_all_buses: bool = False, async_extra_pages: bool = True) -> BusesResponse:
     """Async function to get the buses incoming on a Stop from the HTML data source.
     Return the List of Buses AND True if more bus pages available, False if the current bus list was the only page.
     :param stop_id: Stop ID
     :param get_all_buses: if True, get all Buses through all the HTML pages available
+    :param async_extra_pages: if True, request additional pages (from 2) asynchronously
     :raises: requests_async.RequestTimeout | requests_async.RequestException |
              exceptions.StopNotExist | exceptions.exceptions.ParseError
     """
@@ -54,21 +59,40 @@ async def get_buses(stop_id: int, get_all_buses: bool = False) -> BusesResponse:
         extra_parameters = parse_extra_parameters(html_source)
 
         try:
-            for page in range(2, pages_available + 2):
-                with logger.contextualize(current_page=page, pages_available=pages_available):
-                    logger.debug(f"Searching buses on page {page}")
-                    html_source = await request_html(stop_id, page=page, extra_params=extra_parameters)
+            if not async_extra_pages:
+                for page in range(2, pages_available + 2):
+                    with logger.contextualize(current_page=page, pages_available=pages_available):
+                        logger.debug(f"Searching buses synchronously on page {page}")
+                        html_source = await request_html(stop_id, page=page, extra_params=extra_parameters)
 
-                    assert_page_number(html_source, page)
-                    more_buses = parse_buses(html_source)
-                    logger.bind(buses=more_buses).debug(f"Parsed {len(more_buses)} buses on page {page}")
+                        assert_page_number(html_source, page)
+                        more_buses = parse_buses(html_source)
+                        logger.bind(buses=more_buses).debug(f"Parsed {len(more_buses)} buses on page {page}")
 
-                    buses.extend(more_buses)
+                        buses.extend(more_buses)
+
+            else:
+                extra_pages_coros = [
+                    request_html(stop_id, page=page, extra_params=extra_parameters)
+                    for page in range(2, pages_available + 2)
+                ]
+
+                logger.debug(f"Searching buses asynchronously on {len(extra_pages_coros)} more pages")
+                extra_pages_html_source: List[str] = await asyncio.gather(*extra_pages_coros)
+
+                for page, page_html_source in enumerate(extra_pages_html_source, 2):
+                    logger.debug(f"Parsing buses on page {page}")
+                    assert_page_number(html_source=page_html_source, expected_current_page=page)
+
+                    page_buses = parse_buses(page_html_source)
+                    logger.bind(buses=page_buses).debug(f"Parsed {len(page_buses)} buses on page {page}")
+
+                    buses.extend(page_buses)
 
         except (RequestException, *ParsingExceptions):
             # Ignore exceptions while iterating the pages
             # Keep & return the buses that could be fetched
-            logger.opt(exception=True).warning("Error while iterating pages")
+            logger.opt(exception=True).error("Error while iterating pages")
 
         else:
             more_buses_available = False
@@ -79,5 +103,6 @@ async def get_buses(stop_id: int, get_all_buses: bool = False) -> BusesResponse:
         buses=sorted(buses, key=lambda bus: (bus.time, bus.route)),
         more_buses_available=more_buses_available
     )
+
     logger.bind(buses_response_data=response.dict()).debug("Generated BusesResponse")
     return response
