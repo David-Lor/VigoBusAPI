@@ -13,6 +13,7 @@ from requests_async import RequestException
 from vigobusapi.vigobus_getters.html.html_request import request_html
 from vigobusapi.vigobus_getters.html.html_parser import *
 from vigobusapi.vigobus_getters.exceptions import ParsingExceptions
+from vigobusapi.settings_handler import settings
 from vigobusapi.entities import Stop, BusesResponse
 from vigobusapi.logger import logger
 
@@ -30,12 +31,11 @@ async def get_stop(stop_id: int) -> Stop:
     return parse_stop(html_source)
 
 
-async def get_buses(stop_id: int, get_all_buses: bool = False, async_extra_pages: bool = True) -> BusesResponse:
+async def get_buses(stop_id: int, get_all_buses: bool = False) -> BusesResponse:
     """Async function to get the buses incoming on a Stop from the HTML data source.
     Return the List of Buses AND True if more bus pages available, False if the current bus list was the only page.
     :param stop_id: Stop ID
     :param get_all_buses: if True, get all Buses through all the HTML pages available
-    :param async_extra_pages: if True, request additional pages (from 2) asynchronously
     :raises: requests_async.RequestTimeout | requests_async.RequestException |
              exceptions.StopNotExist | exceptions.exceptions.ParseError
     """
@@ -59,7 +59,7 @@ async def get_buses(stop_id: int, get_all_buses: bool = False, async_extra_pages
         extra_parameters = parse_extra_parameters(html_source)
 
         try:
-            if not async_extra_pages:
+            if not settings.buses_pages_async:
                 for page in range(2, pages_available + 2):
                     with logger.contextualize(current_page=page, pages_available=pages_available):
                         logger.debug(f"Searching buses synchronously on page {page}")
