@@ -6,11 +6,11 @@ Async functions to fetch data from the MONGODB local data source and parse them 
 import asyncio
 
 # # Project # #
-from vigobusapi.vigobus_getters.mongo.mongo_read import read_stop
+from vigobusapi.vigobus_getters.mongo.mongo_read import read_stop, search_stops
 from vigobusapi.vigobus_getters.mongo.mongo_write import insert_stops
 from vigobusapi.entities import Stop, OptionalStop
 
-__all__ = ("get_stop", "save_stop", "save_stops", "insert_stops")
+__all__ = ("get_stop", "search_stops", "save_stop", "save_stops", "insert_stops")
 
 
 async def get_stop(stop_id: int) -> OptionalStop:
@@ -25,9 +25,9 @@ async def save_stops(*stops: Stop):
     Use the 'insert_stops' function to await for the stop/s to get saved and obtain the insertion result.
     """
     try:
-        asyncio.create_task(insert_stops(*stops))
+        asyncio.create_task(insert_stops(*stops, catch_errors=True))
     except AttributeError:
-        asyncio.ensure_future(insert_stops(*stops))
+        asyncio.ensure_future(insert_stops(*stops, catch_errors=True))
 
 
 save_stop = save_stops

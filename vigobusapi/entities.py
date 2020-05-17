@@ -13,7 +13,7 @@ import pydantic
 # # Package # #
 from vigobusapi.exceptions import StopNotExist
 
-__all__ = ("Stop", "OptionalStop", "StopOrNotExist", "Bus", "Buses", "BusesResponse")
+__all__ = ("Stop", "Stops", "OptionalStop", "StopOrNotExist", "Bus", "Buses", "BusesResponse")
 
 
 class BaseModel(pydantic.BaseModel):
@@ -81,4 +81,5 @@ class Stop(BaseModel):
 
 OptionalStop = Optional[Stop]
 StopOrNotExist = Union[Stop, StopNotExist]
+Stops = List[Stop]
 Buses = List[Bus]

@@ -16,15 +16,22 @@ from vigobusapi.logger import logger
 __all__ = ("insert_stops",)
 
 
-async def insert_stops(*stops: Stop) -> InsertManyResult:
+async def insert_stops(*stops: Stop, catch_errors: bool = False) -> InsertManyResult:
     """Insert one or multiple Stops in Mongo, provided as a single object or multiple args (comma separated).
     Return the Mongo Result on completion.
+    :param catch_errors: if True, log errors and avoid raising them (useful when called as async background task)
     """
-    insert_data = [stop.get_mongo_dict() for stop in stops]
+    try:
+        insert_data = [stop.get_mongo_dict() for stop in stops]
 
-    with logger.contextualize(mongo_insert_data=insert_data):
-        logger.debug("Inserting stops in Mongo")
-        result: InsertManyResult = await get_collection(asyncio.get_event_loop()).insert_many(insert_data)
+        with logger.contextualize(mongo_insert_data=insert_data):
+            logger.debug("Inserting stops in Mongo")
+            result: InsertManyResult = await get_collection(asyncio.get_event_loop()).insert_many(insert_data)
 
-        logger.bind(mongo_inserted_ids=result.inserted_ids).debug("Inserted stops in Mongo")
-        return result
+            logger.bind(mongo_inserted_ids=result.inserted_ids).debug("Inserted stops in Mongo")
+            return result
+
+    except Exception as ex:
+        if not catch_errors:
+            raise ex
+        logger.opt(exception=True).bind(stops=stops).error("Error while saving stop/s in MongoDB")
