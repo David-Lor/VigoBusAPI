@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     buses_cache_maxsize: int = 300
     buses_cache_ttl: float = 15
     buses_normal_limit: int = 5
+    buses_pages_async: bool = True
     mongo_uri = "mongodb://localhost:27017"
     mongo_stops_db = "vigobusapi"
     mongo_stops_collection = "stops"

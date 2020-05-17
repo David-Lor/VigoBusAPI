@@ -2,6 +2,10 @@
 Async functions to fetch data from the HTML external data source and parse them to return the final objects.
 """
 
+# # Native # #
+import asyncio
+from typing import List
+
 # # Installed # #
 from requests_async import RequestException
 
@@ -9,6 +13,7 @@ from requests_async import RequestException
 from vigobusapi.vigobus_getters.html.html_request import request_html
 from vigobusapi.vigobus_getters.html.html_parser import *
 from vigobusapi.vigobus_getters.exceptions import ParsingExceptions
+from vigobusapi.settings_handler import settings
 from vigobusapi.entities import Stop, BusesResponse
 from vigobusapi.logger import logger
 
@@ -54,21 +59,40 @@ async def get_buses(stop_id: int, get_all_buses: bool = False) -> BusesResponse:
         extra_parameters = parse_extra_parameters(html_source)
 
         try:
-            for page in range(2, pages_available + 2):
-                with logger.contextualize(current_page=page, pages_available=pages_available):
-                    logger.debug(f"Searching buses on page {page}")
-                    html_source = await request_html(stop_id, page=page, extra_params=extra_parameters)
+            if not settings.buses_pages_async:
+                for page in range(2, pages_available + 2):
+                    with logger.contextualize(current_page=page, pages_available=pages_available):
+                        logger.debug(f"Searching buses synchronously on page {page}")
+                        html_source = await request_html(stop_id, page=page, extra_params=extra_parameters)
 
-                    assert_page_number(html_source, page)
-                    more_buses = parse_buses(html_source)
-                    logger.bind(buses=more_buses).debug(f"Parsed {len(more_buses)} buses on page {page}")
+                        assert_page_number(html_source, page)
+                        more_buses = parse_buses(html_source)
+                        logger.bind(buses=more_buses).debug(f"Parsed {len(more_buses)} buses on page {page}")
 
-                    buses.extend(more_buses)
+                        buses.extend(more_buses)
+
+            else:
+                extra_pages_coros = [
+                    request_html(stop_id, page=page, extra_params=extra_parameters)
+                    for page in range(2, pages_available + 2)
+                ]
+
+                logger.debug(f"Searching buses asynchronously on {len(extra_pages_coros)} more pages")
+                extra_pages_html_source: List[str] = await asyncio.gather(*extra_pages_coros)
+
+                for page, page_html_source in enumerate(extra_pages_html_source, 2):
+                    logger.debug(f"Parsing buses on page {page}")
+                    assert_page_number(html_source=page_html_source, expected_current_page=page)
+
+                    page_buses = parse_buses(page_html_source)
+                    logger.bind(buses=page_buses).debug(f"Parsed {len(page_buses)} buses on page {page}")
+
+                    buses.extend(page_buses)
 
         except (RequestException, *ParsingExceptions):
             # Ignore exceptions while iterating the pages
             # Keep & return the buses that could be fetched
-            logger.opt(exception=True).warning("Error while iterating pages")
+            logger.opt(exception=True).error("Error while iterating pages")
 
         else:
             more_buses_available = False
@@ -79,5 +103,6 @@ async def get_buses(stop_id: int, get_all_buses: bool = False) -> BusesResponse:
         buses=sorted(buses, key=lambda bus: (bus.time, bus.route)),
         more_buses_available=more_buses_available
     )
+
     logger.bind(buses_response_data=response.dict()).debug("Generated BusesResponse")
     return response
