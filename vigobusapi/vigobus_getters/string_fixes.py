@@ -40,35 +40,44 @@ def fix_stop_name(name: str) -> str:
     with logger.contextualize(stop_name_original=name):
         logger.debug("Fixing stop name")
 
-        # Capitalize each word on the name (if the word is at least 3 characters long);
-        # Set prepositions to lowercase;
-        # Fix chars
-        name_words = fix_chars(name).split()
-        for index, word in enumerate(name_words):
-            word = word.strip().lower()
-            if word not in PREPOSITIONS:
-                if word.startswith("("):
-                    char = word[1]
-                    word = word.replace(char, char.upper())
-                else:
-                    word = word.capitalize()
-            name_words[index] = word
-        name = ' '.join(name_words)
+        # Remove double spaces
+        name = re.sub(' +', ' ', name)
 
         # Replace - with commas
         name = name.replace("-", ",")
 
-        # Force one space after each comma
-        name = name.replace(",", ", ")
-
-        # Remove double spaces
-        name = re.sub(' +', ' ', name)
+        # Force one space after each comma, remove unnecessary spaces before, remove duplicated commas
+        name = name.replace(",", ", ").replace(" ,", ",").replace(", ,", ",")
 
         # Remove unnecessary commas just before parenthesis
         name = name.replace(", (", " (").replace(",(", " (")
 
         # Remove unnecessary dots after parenthesis
         name = name.replace(").", ")")
+
+        # Remove unnecessary spaces after opening or before closing parenthesis
+        name = name.replace("( ", "(").replace(") ", ")")
+
+        # Capitalize each word on the name (if the word is at least 3 characters long);
+        # Set prepositions to lowercase;
+        # Fix chars
+        name_words = fix_chars(name).split()
+        for index, word in enumerate(name_words):
+            # noinspection PyBroadException
+            try:
+                word = word.strip().lower()
+                if word not in PREPOSITIONS:
+                    if word.startswith("("):
+                        char = word[1]
+                        word = word.replace(char, char.upper())
+                    else:
+                        word = word.capitalize()
+                name_words[index] = word
+
+            except Exception:
+                logger.opt(exception=True).bind(word=word).warning("Error fixing word")
+
+        name = ' '.join(name_words)
 
         # Turn roman numbers to uppercase
         name = ' '.join(word.upper() if is_roman(word) else word for word in name.split())
@@ -135,7 +144,6 @@ def fix_chars(input_string: str) -> str:
     """Fix wrong characters from strings.
     Function will use the CHARS_FIXED dict {"WrongChar":"FixedChar"}
     """
-    # TODO Deprecate? (was only required for WSDL?)
     for wrong, fix in CHARS_FIXED.items():
         input_string = input_string.replace(wrong, fix)
     return input_string
