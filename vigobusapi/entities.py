@@ -28,18 +28,17 @@ class Bus(BaseModel):
     line: str
     route: str
     time: int
-    bus_id: Optional[str]
+    bus_id: str = None
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.generate_bus_id()
-
-    def generate_bus_id(self) -> str:
-        md5 = hashlib.md5()
-        md5.update(self.line.encode())
-        md5.update(self.route.encode())
-        self.bus_id = md5.hexdigest()
-        return self.bus_id
+    @pydantic.root_validator(pre=True)
+    def _generate_bus_id(cls, data):
+        if not data.get("bus_id"):
+            md5 = hashlib.md5()
+            md5.update(data["line"].encode())
+            md5.update(data["route"].encode())
+            bus_id = md5.hexdigest()
+            return {**data, "bus_id": bus_id}
+        return data
 
 
 class BusesResponse(BaseModel):
