@@ -62,6 +62,7 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 
 ## Changelog
 
+- 0.6.1 - add unit tests; fix clear_duplicated_buses function by simplifying logic
 - 0.6.0 - add endpoint to search stops by name; get buses extra pages asynchronously
 - 0.5.0 - refactor request & error handling, imports & cache; add logging
 - 0.4.0 - remove WSDL data sources
@@ -76,6 +77,7 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 
 ---
 
+- _0.6.1 - tests unitarios; arreglada funcinón clear_duplicated_buses simplificando lógica_
 - _0.6.0 - endpoint para buscar paradas por nombre; leer páginas extra de buses asíncronamente_
 - _0.5.0 - refactorización de request y error handling, imports y cache; añadir sistema de logs_
 - _0.4.0 - quitar fuentes de datos WSDL_
