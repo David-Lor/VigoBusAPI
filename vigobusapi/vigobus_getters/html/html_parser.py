@@ -195,50 +195,25 @@ def assert_page_number(html_source: str, expected_current_page: int):
 def clear_duplicated_buses(buses: Buses) -> Buses:
     """Given a List of Buses, find possible duplicated bus and remove them.
     Buses can be duplicated when getting all the pages from the HTML data source,
-    and changes on the list of buses happen while fetching all the pages.
-    If two (or more) buses have the same ID (same line & route) and a remaining time difference
-    of 1 minute or less, they are considered duplicates.
+    as changes on the list of buses can happen while fetching all the pages.
+
+    If two (or more) buses have the same bus_id (same line-route) and same time, they are considered duplicates.
+    Still there is a small change of having two duplicated buses, with a diff of +/- 1min, since the time can change
+    between pages requested. However this is ignored by now, to reduce code complexity.
+
     Duplicated bus/es are removed from the list in-place, so the same object is returned.
     """
-    # TODO Fix - false positives
     with logger.contextualize(buses=buses):
         buses_start = len(buses)
-        logger.debug("Clearing duplicated buses")
-        buses_ids = Counter()
-
-        # Add IDs of found buses to the Counter dict
+        buses_ids_times = Counter()
+        """Counter with tuples (bus_id, time)"""
         for bus in buses:
-            buses_ids[bus.bus_id] += 1
+            buses_ids_times[(bus.bus_id, bus.time)] += 1
 
-        # Remove not-duplicated Bus IDs from the Counter dict
-        for bus_id in [bid for bid in buses_ids.keys() if buses_ids[bid] <= 1]:
-            buses_ids.pop(bus_id)
-
-        # Keep one of each duplicated buses depending on time
-        buses_keep = list()
-        for bus_id in buses_ids.keys():
-            _buses = sorted(  # Buses with the same Bus ID, sorted by time
-                [b for b in buses if b.bus_id == bus_id],
-                key=lambda _bus: _bus.time
-            )
-            for bus in _buses:
-                # Time range of bus.time +/- 1 minute
-                time_range = [i for i in range(bus.time - 1, bus.time + 2)]
-                # Search the already-kept buses with the same Bus ID in the time range
-                n_repeated_buses = sum(  # 0 if no buses with a similar time are found
-                    1 for b in buses_keep
-                    if b.time in time_range
-                )
-                if not n_repeated_buses:
-                    # Keep the bus with the lowest time in the buses list
-                    buses_keep.append(bus)
-
-        # Remove the repeated buses from the original buses list
-        for bus in [b for b in buses if b.bus_id in buses_ids.keys()]:
-            buses.remove(bus)
-
-        # Add the kept buses to the original buses list
-        buses.extend(buses_keep)
+        for bus_id, time in [tup for tup, count in buses_ids_times.items() if count > 1]:
+            for i, repeated_bus in enumerate([bus for bus in buses if bus.bus_id == bus_id and bus.time == time]):
+                if i > 0:
+                    buses.remove(repeated_bus)
 
         buses_diff = buses_start - len(buses)
         logger.bind(buses_diff=buses_diff).debug(f"Cleared {buses_diff} duplicated buses")
