@@ -19,8 +19,10 @@ __all__ = ("fix_stop_name", "fix_bus")
 def is_roman(text: str) -> bool:
     """Check if the given string is a Roman number. Return True if it is, False if not.
     """
+    text = text.strip().upper()
+    text = re.sub(r'[^A-Z]', "", text)
     try:
-        fromRoman(text.strip().upper())
+        fromRoman(text)
     except NoRoman:
         return False
     else:
