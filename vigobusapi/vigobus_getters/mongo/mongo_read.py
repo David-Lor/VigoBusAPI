@@ -4,6 +4,7 @@ Functions to async access and read Mongo data
 
 # # Native # #
 import asyncio
+from typing import Optional
 
 # # Installed # #
 # noinspection PyProtectedMember
@@ -25,14 +26,16 @@ async def read_stop(stop_id: int) -> OptionalStop:
         logger.debug("No document found in Mongo")
 
 
-async def search_stops(stop_name: str) -> Stops:
-    # TODO Support partial search? (regex?)
+async def search_stops(stop_name: str, limit: Optional[int] = None) -> Stops:
     documents = list()
     cursor: AsyncIOMotorCursor = get_collection(asyncio.get_event_loop()).find({
         "$text": {
             "$search": stop_name
         }
     })
+
+    if limit is not None:
+        cursor = cursor.limit(limit)
 
     async for document in cursor:
         documents.append(document)

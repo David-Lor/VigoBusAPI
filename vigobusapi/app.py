@@ -2,6 +2,9 @@
 Module with all the available endpoints and the FastAPI initialization.
 """
 
+# # Native # #
+from typing import Optional
+
 # # Installed # #
 import uvicorn
 from fastapi import FastAPI, Response
@@ -32,11 +35,11 @@ async def endpoint_status():
 
 
 @app.get("/stops", response_model=Stops)
-async def endpoint_get_stops(stop_name: str):
+async def endpoint_get_stops(stop_name: str, limit: Optional[int] = None):
     """Endpoint to search stops by a given name
     """
     with logger.contextualize(**locals()):
-        stops = await search_stops(stop_name=stop_name)
+        stops = await search_stops(stop_name=stop_name, limit=limit)
         return [stop.dict() for stop in stops]
 
 
