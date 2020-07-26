@@ -25,7 +25,7 @@ def get_collection(loop: asyncio.AbstractEventLoop) -> Collection:
     # Create a Text Index on stop name, for search
     # https://docs.mongodb.com/manual/core/index-text/#create-text-index
     if not __index_created:
-        asyncio.ensure_future(collection.create_index([("name", TEXT)], background=True))
+        asyncio.ensure_future(collection.create_index([("name", TEXT)], background=True, default_language="spanish"))
         __index_created = True
 
     return collection
