@@ -104,7 +104,7 @@
 {"_id":1260,"name":"Avda. Castelao, 21","lat":42.219775976508,"lon":-8.73625552264701,"original_name":"Avda. Castelao- 21","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":1270,"name":"Avda. Castelao, 48","lat":42.2187049369325,"lon":-8.74254445956501,"original_name":"Avda. Castelao- 48","created":{"$date":"2017-06-21T13:39:15.000Z"}}
 {"_id":1280,"name":"Avda. Castelao, 41","lat":42.218523314599,"lon":-8.7422346500889,"original_name":"Avda. Castelao- 41","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":1290,"name":"Avda. Castelao, 54 (AlcAmpo)","lat":42.2181582630684,"lon":-8.74579772686073,"original_name":"Avda. Castelao- 54 (Alcampo)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":1290,"name":"Avda. Castelao, 54 (Alcampo)","lat":42.2181582630684,"lon":-8.74579772686073,"original_name":"Avda. Castelao- 54 (Alcampo)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":1300,"name":"Avda. Castelao, 68","lat":42.2174663776024,"lon":-8.75124549882902,"original_name":"Avda. Castelao- 68","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":1310,"name":"Avda. Castelao, 73","lat":42.2177055282635,"lon":-8.74775332453754,"original_name":"Avda. Castelao- 73","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":1320,"name":"Avda. Castelao, 87","lat":42.2173022236201,"lon":-8.75110475205119,"original_name":"Avda. Castelao- 87","created":{"$date":"2017-06-21T13:12:06.000Z"}}
