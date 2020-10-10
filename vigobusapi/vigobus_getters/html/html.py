@@ -14,7 +14,7 @@ from vigobusapi.vigobus_getters.html.html_request import request_html
 from vigobusapi.vigobus_getters.html.html_parser import *
 from vigobusapi.vigobus_getters.exceptions import ParsingExceptions
 from vigobusapi.vigobus_getters.helpers import sort_buses
-from vigobusapi.settings_handler import settings
+from vigobusapi.settings import settings
 from vigobusapi.entities import Stop, BusesResponse
 from vigobusapi.logger import logger
 

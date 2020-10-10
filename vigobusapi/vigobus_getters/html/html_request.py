@@ -11,9 +11,11 @@ from .html_const import *
 
 # # Project # #
 from vigobusapi.support_services import http_request
-from vigobusapi.settings_handler import settings
+from vigobusapi.settings import settings
 
 __all__ = ("request_html",)
+
+ENDPOINT_URL = "http://infobus.vitrasa.es:8002/Default.aspx"
 
 
 async def request_html(stop_id: int, page: Optional[int] = None, extra_params: Optional[Dict] = None) -> str:
@@ -37,7 +39,7 @@ async def request_html(stop_id: int, page: Optional[int] = None, extra_params: O
         # Headers
         headers = copy.deepcopy(HEADERS)
         headers.update(HEADERS_NEXT_LOADS)  # update the original Headers with the extra items used on next pages
-        headers[HEADERS_NEXT_LOADS_REFERER] = settings.html_remote_api + HEADERS_NEXT_LOADS_REFERER_PARAMS.format(
+        headers[HEADERS_NEXT_LOADS_REFERER] = ENDPOINT_URL + HEADERS_NEXT_LOADS_REFERER_PARAMS.format(
             stop_id=stop_id  # update the Referer header with the URL with the stop_id as parameter
         )
 
@@ -54,6 +56,6 @@ async def request_html(stop_id: int, page: Optional[int] = None, extra_params: O
         params=params,
         body=body,
         headers=headers,
-        url=settings.html_remote_api
+        url=ENDPOINT_URL
     )
     return response.text

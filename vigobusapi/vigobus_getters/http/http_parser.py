@@ -7,7 +7,7 @@ from vigobusapi.entities import Bus, Buses, BusesResponse
 from vigobusapi.vigobus_getters.string_fixes import fix_bus
 from vigobusapi.vigobus_getters.helpers import sort_buses
 from vigobusapi.exceptions import StopNotExist
-from vigobusapi.settings_handler import settings
+from vigobusapi.settings import settings
 
 __all__ = ("parse_http_response",)
 

@@ -10,7 +10,7 @@ from typing import *
 from requests_async import request, Response, RequestException
 
 # # Project # #
-from vigobusapi.settings_handler import settings
+from vigobusapi.settings import settings
 from vigobusapi.logger import logger
 
 __all__ = ("http_request",)

@@ -1,4 +1,4 @@
-"""SETTINGS HANDLER
+"""SETTINGS
 Declaration of the Settings class and instance that can be used to get any setting required
 """
 
@@ -7,10 +7,10 @@ from pydantic import BaseSettings
 
 __all__ = ("settings",)
 
+# TODO Split Settings by sections/groups in multiple classes
+
 
 class Settings(BaseSettings):
-    html_remote_api: str
-    http_remote_api: str
     endpoint_timeout: float = 30
     http_timeout: float = 5
     http_retries: int = 2
