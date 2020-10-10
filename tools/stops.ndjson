@@ -904,7 +904,7 @@
 {"_id":14213,"name":"Ctra. Freixo Campo Futbol","lat":42.1691532411414,"lon":-8.7290014644239,"original_name":"Ctra. Freixo Campo Futbol","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":14214,"name":"Ctra. Freixo, 189","lat":42.1757609072851,"lon":-8.73451692353711,"original_name":"Ctra. Freixo- 189","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14215,"name":"Ctra. Freixo, 88","lat":42.1755921685963,"lon":-8.73447778772723,"original_name":"Ctra. Freixo- 88","created":{"$date":"2017-06-21T13:39:15.000Z"}}
-{"_id":14216,"name":"Crtra Freixo Campo Futbol (Vuelta)","lat":42.1691433013283,"lon":-8.72907656627632,"original_name":"Crtra Freixo campo futbol (vuelta)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":14216,"name":"Ctra. Freixo Campo Futbol (Vuelta)","lat":42.1691433013283,"lon":-8.72907656627632,"original_name":"Crtra Freixo campo futbol (vuelta)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14217,"name":"Ctra. Monte Alba, (Precisgal)","lat":42.1645708389255,"lon":-8.72456147486545,"original_name":"Ctra. Monte Alba- (Precisgal)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":14218,"name":"Ctra. Monte Alba, 17","lat":42.1652883050951,"lon":-8.72136730929336,"original_name":"Ctra. Monte Alba- 17","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14219,"name":"Camiño Pinal, 59","lat":42.1595005120482,"lon":-8.71824727938244,"original_name":"Camiño Pinal- 59","created":{"$date":"2017-06-21T13:34:35.000Z"}}
