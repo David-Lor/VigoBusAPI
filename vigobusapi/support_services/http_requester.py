@@ -10,6 +10,7 @@ from typing import *
 from requests_async import request, Response, RequestException
 
 # # Project # #
+from vigobusapi.settings_handler import settings
 from vigobusapi.logger import logger
 
 __all__ = ("http_request",)
@@ -21,8 +22,8 @@ async def http_request(
         params: Optional[dict] = None,
         body: Optional[Union[dict, str]] = None,
         headers: Optional[dict] = None,
-        timeout: float = 5,
-        retries: int = 1,
+        timeout: float = settings.http_timeout,
+        retries: int = settings.http_retries,
         raise_for_status: bool = True,
         not_retry_400_errors: bool = True
 ) -> Response:
@@ -33,8 +34,8 @@ async def http_request(
     :param params: URL query params as dict (default=None)
     :param body: request body, usually a dict or string (default=None)
     :param headers: request headers as dict (default=None)
-    :param timeout: timeout for each request retry in seconds (default=5)
-    :param retries: how many times to retry the request if it fails (default=1)
+    :param timeout: timeout for each request retry in seconds (default=from settings)
+    :param retries: how many times to retry the request if it fails (default=from settings)
     :param raise_for_status: if True, raise HTTPError if response is not successful (default=True)
     :param not_retry_400_errors: if True, do not retry requests failed with a ~400 status code (default=True)
     :return: the Response object

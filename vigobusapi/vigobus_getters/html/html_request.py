@@ -54,8 +54,6 @@ async def request_html(stop_id: int, page: Optional[int] = None, extra_params: O
         params=params,
         body=body,
         headers=headers,
-        url=settings.html_remote_api,
-        retries=settings.http_retries,
-        timeout=settings.http_timeout
+        url=settings.html_remote_api
     )
     return response.text

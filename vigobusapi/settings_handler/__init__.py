@@ -10,6 +10,7 @@ __all__ = ("settings",)
 
 class Settings(BaseSettings):
     html_remote_api: str
+    http_remote_api: str
     endpoint_timeout: float = 30
     http_timeout: float = 5
     http_retries: int = 2

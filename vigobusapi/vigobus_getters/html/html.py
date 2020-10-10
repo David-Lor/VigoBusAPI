@@ -13,6 +13,7 @@ from requests_async import RequestException
 from vigobusapi.vigobus_getters.html.html_request import request_html
 from vigobusapi.vigobus_getters.html.html_parser import *
 from vigobusapi.vigobus_getters.exceptions import ParsingExceptions
+from vigobusapi.vigobus_getters.helpers import sort_buses
 from vigobusapi.settings_handler import settings
 from vigobusapi.entities import Stop, BusesResponse
 from vigobusapi.logger import logger
@@ -99,9 +100,10 @@ async def get_buses(stop_id: int, get_all_buses: bool = False) -> BusesResponse:
             more_buses_available = False
 
     clear_duplicated_buses(buses)
+    sort_buses(buses)
 
     response = BusesResponse(
-        buses=sorted(buses, key=lambda bus: (bus.time, bus.route)),
+        buses=buses,
         more_buses_available=more_buses_available
     )
 

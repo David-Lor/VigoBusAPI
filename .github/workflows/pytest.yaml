@@ -31,5 +31,6 @@ jobs:
       - name: Test
         run: pytest -sv .
         env:
-          # TODO change when implementing systemintegration tests against real data source
+          # TODO faked required envs - change when implementing systemintegration tests against real data source
           html_remote_api: http://null.null
+          http_remote_api: http://null.null
