@@ -159,7 +159,7 @@
 {"_id":1830,"name":"Avda. de Vigo, 13","lat":42.2740385009485,"lon":-8.66694993166453,"original_name":"Avda. DE VIGO- 13","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":1840,"name":"Avda. de Vigo, 74","lat":42.2715943604922,"lon":-8.66638973508921,"original_name":"Avda. de Vigo- 74","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":1850,"name":"Avda. Europa (Frente Colegio)","original_name":"Avda. Europa (frente colegio)","created":{"$date":"2017-05-31T00:34:37.000Z"}}
-{"_id":1860,"name":"Avda. Europa, (CruCe Pardaiña)","lat":42.2167415679919,"lon":-8.75712974187482,"original_name":"Avda. Europa- (Cruce Pardaiña)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":1860,"name":"Avda. Europa, (Cruce Pardaiña)","lat":42.2167415679919,"lon":-8.75712974187482,"original_name":"Avda. Europa- (Cruce Pardaiña)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":1870,"name":"Avda. Europa, 102","lat":42.2112350815438,"lon":-8.7734592936035,"original_name":"Avda. Europa- 102","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":1880,"name":"Avda. Europa, 19","lat":42.2166879325094,"lon":-8.75679446574796,"original_name":"Avda. EUROPA- 19","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":1890,"name":"Avda. Europa, 23","lat":42.2159136721798,"lon":-8.75990479654374,"original_name":"Avda. Europa- 23","created":{"$date":"2017-06-21T13:34:35.000Z"}}
@@ -197,13 +197,13 @@
 {"_id":2220,"name":"Avda. Sta. Mariña, 33","lat":42.2203386336331,"lon":-8.66866627139839,"original_name":"Avda. Sta. Mariña- 33","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":2230,"name":"Avda. Sta. Mariña, 52","lat":42.222347963115,"lon":-8.66284148183735,"original_name":"Avda. Sta. Mariña- 52","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":2240,"name":"Avda. Sta. Mariña, 77","lat":42.2224322091529,"lon":-8.66277345819267,"original_name":"Avda. Sta. Mariña- 77","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":2250,"name":"Avda. Sta. Mariña, 88 (CruCe Becerreira)","lat":42.2208261146264,"lon":-8.65965109361747,"original_name":"Avda. Sta. Mariña- 88 (Cruce Becerreira)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":2250,"name":"Avda. Sta. Mariña, 88 (Cruce Becerreira)","lat":42.2208261146264,"lon":-8.65965109361747,"original_name":"Avda. Sta. Mariña- 88 (Cruce Becerreira)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":2260,"name":"Avda. Sta. Mariña, 18","lat":42.2205046630563,"lon":-8.66805301395328,"original_name":"Avda. Sta. Mariña- 18","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":2270,"name":"Avda. Sta. Mariña, 103","lat":42.2211320098991,"lon":-8.65859162105659,"original_name":"Avda. Sta. Mariña-103","created":{"$date":"2017-06-21T13:39:15.000Z"}}
 {"_id":2280,"name":"Baixada a Laxe, 31","lat":42.2165084898649,"lon":-8.71917536808542,"original_name":"Baixada a Laxe- 31","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":2290,"name":"Baixada a Laxe, 42","lat":42.2164151255381,"lon":-8.71935507608941,"original_name":"Baixada a Laxe-42","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":2300,"name":"Baixada a Ponte Nova, 13","lat":42.2207873503147,"lon":-8.72272226121404,"original_name":"Baixada a Ponte Nova- 13","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":2310,"name":"Baixada a Praia (CruCe Autovia)","lat":42.1738213804357,"lon":-8.8105218833044,"original_name":"Baixada a praia-(CRUCE AUTOVIA)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":2310,"name":"Baixada a Praia (Cruce Autovia)","lat":42.1738213804357,"lon":-8.8105218833044,"original_name":"Baixada a praia-(CRUCE AUTOVIA)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":2320,"name":"Baixada a Praia, 121","lat":42.1725418917711,"lon":-8.80913328693867,"original_name":"Baixada a praia-121","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":2330,"name":"Baixada a Praia, 191","lat":42.1733169677364,"lon":-8.81100290974425,"original_name":"Baixada a praia-191","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":2340,"name":"Baixada a Praia, 44","lat":42.1679814436874,"lon":-8.8065042390821,"original_name":"Baixada a praia-44","created":{"$date":"2017-06-21T13:12:06.000Z"}}
@@ -219,10 +219,10 @@
 {"_id":2450,"name":"Barcelona, 36","lat":42.2260246916835,"lon":-8.72339080360473,"original_name":"Barcelona-36","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":2460,"name":"Rua Xeme, 55","lat":42.2033009425872,"lon":-8.69632085840428,"original_name":"Rua Xeme- 55","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":2480,"name":"Bayona, 15","lat":42.2146545875982,"lon":-8.75165191073251,"original_name":"Bayona-15","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":2490,"name":"Crta de Coutadas, 57 (Parking C.cultural","lat":42.1946357253888,"lon":-8.6995040315735,"original_name":"CRTA DE COUTADAS- 57 (Parking C.Cultural","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":2490,"name":"Ctra. de Coutadas, 57 (Parking C.cultural","lat":42.1946357253888,"lon":-8.6995040315735,"original_name":"CRTA DE COUTADAS- 57 (Parking C.Cultural","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":2500,"name":"Beade, Igrexa","lat":42.1919500624851,"lon":-8.70719351144965,"original_name":"BEADE- IGREXA","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":2510,"name":"Avda. Castrelos, 455","lat":42.1913238031489,"lon":-8.72104988710115,"original_name":"Avda. Castrelos- 455","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":2520,"name":"Crta de Bembrive, 238 (Igrexa)","lat":42.2045636648038,"lon":-8.68702535871981,"original_name":"Crta de Bembrive- 238 (IGREXA)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":2520,"name":"Ctra. de Bembrive, 238 (Igrexa)","lat":42.2045636648038,"lon":-8.68702535871981,"original_name":"Ctra. de Bembrive- 238 (IGREXA)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":2530,"name":"Bolivia, 39","original_name":"Bolivia,39","created":{"$date":"2017-05-31T00:34:37.000Z"}}
 {"_id":2550,"name":"Brea, 10","lat":42.2040865774397,"lon":-8.70483244471805,"original_name":"Brea-10","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":2560,"name":"Brea, 27","lat":42.2042971847004,"lon":-8.70494241528766,"original_name":"Brea- 27","created":{"$date":"2017-06-21T13:26:57.000Z"}}
@@ -244,7 +244,7 @@
 {"_id":2730,"name":"Cabeiro, 3","lat":42.2521875566977,"lon":-8.62375799311209,"original_name":"Cabeiro-3","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":2735,"name":"Rua de Cachamuiña, S/N","lat":42.2350333137119,"lon":-8.72720219773009,"original_name":"Rua de Cachamuiña- S/N","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":2740,"name":"Cacheno, 77","lat":42.2074514008542,"lon":-8.70119443218434,"original_name":"Cacheno- 77","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":2750,"name":"Cacheno, (CruCeiro)","lat":42.2064878182849,"lon":-8.69874021093571,"original_name":"CACHENO- (CRUCEIRO)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":2750,"name":"Cacheno, (Cruceiro)","lat":42.2064878182849,"lon":-8.69874021093571,"original_name":"CACHENO- (CRUCEIRO)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":2760,"name":"Cacheno, 66","lat":42.2081944428025,"lon":-8.70151897947514,"original_name":"Cacheno- 66","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":2770,"name":"Cacheno, 43","lat":42.2067222589218,"lon":-8.69916131775105,"original_name":"Cacheno- 43","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":2780,"name":"Avda. Camelias, 135","lat":42.2223871783743,"lon":-8.73120769760476,"original_name":"Avda. CAMELIAS-135","created":{"$date":"2017-06-21T13:39:15.000Z"}}
@@ -268,7 +268,7 @@
 {"_id":2990,"name":"Canteiros, 3","lat":42.2037925726908,"lon":-8.72963072343907,"original_name":"Canteiros- 3","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":3000,"name":"Canteiros, 49","lat":42.2011886767166,"lon":-8.73320896629136,"original_name":"CANTEIROS- 49","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":3010,"name":"Canteiros, 77","lat":42.2012125203802,"lon":-8.73571146730225,"original_name":"Canteiros- 77","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":3020,"name":"Canteiros, 80 (CruCe Revolta)","lat":42.2012184810405,"lon":-8.73350937370103,"original_name":"Canteiros-  80 (CRUCE REVOLTA)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3020,"name":"Canteiros, 80 (Cruce Revolta)","lat":42.2012184810405,"lon":-8.73350937370103,"original_name":"Canteiros-  80 (CRUCE REVOLTA)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":3030,"name":"Avda. Castrelos, 464","lat":42.1947025792468,"lon":-8.72102519453318,"original_name":"Avda. Castrelos- 464","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":3050,"name":"Casas","lat":42.1923602669068,"lon":-8.7566809589319,"original_name":"Casas","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":3052,"name":"Antonio Palacios","lat":42.2169666308608,"lon":-8.72981384494378,"original_name":"Antonio Palacios","created":{"$date":"2017-06-21T13:26:57.000Z"}}
@@ -280,8 +280,8 @@
 {"_id":3110,"name":"Cesareo Vázquez, 74","lat":42.1844166753908,"lon":-8.80217971281886,"original_name":"Cesareo Vázquez- 74","created":{"$date":"2017-06-21T13:39:15.000Z"}}
 {"_id":3120,"name":"Cesareo Vázquez, 141 (Colegio)","lat":42.1873207011025,"lon":-8.80112140664593,"original_name":"Cesareo Vázquez- 141 (COLEGIO)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":3130,"name":"Cesareo Vázquez, 169 (Estacion)","lat":42.1910304128649,"lon":-8.79959677338346,"original_name":"Cesareo Vázquez- 169 (ESTACION)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":3140,"name":"Crta de Marcosende, 255 (Cidans)","lat":42.1580034597411,"lon":-8.68613469146689,"original_name":"Crta de Marcosende- 255 (Cidans)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3150,"name":"Crta de Marcosende, 206","lat":42.1576614690086,"lon":-8.685973758926,"original_name":"Crta de Marcosende- 206","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":3140,"name":"Ctra. de Marcosende, 255 (Cidans)","lat":42.1580034597411,"lon":-8.68613469146689,"original_name":"Ctra. de Marcosende- 255 (Cidans)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3150,"name":"Ctra. de Marcosende, 206","lat":42.1576614690086,"lon":-8.685973758926,"original_name":"Ctra. de Marcosende- 206","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":3160,"name":"Falcoa, 12","lat":42.2065932455155,"lon":-8.72165179340055,"original_name":"Falcoa- 12","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":3170,"name":"Cño. das Coutadas, 90","lat":42.2209684462691,"lon":-8.72040082626185,"original_name":"Cño. Das Coutadas- 90","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":3180,"name":"Cño. Quiros, 94","lat":42.2195586302934,"lon":-8.71141011869321,"original_name":"Cño. Quiros- 94","created":{"$date":"2017-06-21T13:12:06.000Z"}}
@@ -296,155 +296,155 @@
 {"_id":3310,"name":"Costa, 56","lat":42.2092330232567,"lon":-8.7206663684621,"original_name":"Costa- 56","created":{"$date":"2017-06-21T13:39:15.000Z"}}
 {"_id":3320,"name":"Costa, 63","lat":42.2101548484315,"lon":-8.72090240285542,"original_name":"Costa- 63","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":3350,"name":"Couto, 1","lat":42.2309117959331,"lon":-8.72271125324605,"original_name":"Couto- 1","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":3360,"name":"Dr. Canoa, 8 (CruCe S. Lorenzo)","lat":42.2378035182261,"lon":-8.70440903090557,"original_name":"Dr. Canoa- 8 (Cruce S. Lorenzo)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3370,"name":"Crta de Bembrive (CruCe Eifonso)","lat":42.2056762263486,"lon":-8.69311204727711,"original_name":"Crta de Bembrive (CRUCE EIFONSO)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":3360,"name":"Dr. Canoa, 8 (Cruce S. Lorenzo)","lat":42.2378035182261,"lon":-8.70440903090557,"original_name":"Dr. Canoa- 8 (Cruce S. Lorenzo)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3370,"name":"Ctra. de Bembrive (Cruce Eifonso)","lat":42.2056762263486,"lon":-8.69311204727711,"original_name":"Ctra. de Bembrive (CRUCE EIFONSO)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":3380,"name":"Cruce Eifonso","lat":42.2056231077994,"lon":-8.693239334824,"original_name":"Cruce Eifonso","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3390,"name":"Crta de Bembrive, 160","lat":42.205296643969,"lon":-8.69255891360788,"original_name":"Crta de Bembrive- 160","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":3400,"name":"Crta de Gandara, (CruCe Sobreira)","lat":42.1635844514487,"lon":-8.7160887284135,"original_name":"Crta de Gandara- (CRUCE SOBREIRA)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3390,"name":"Ctra. de Bembrive, 160","lat":42.205296643969,"lon":-8.69255891360788,"original_name":"Ctra. de Bembrive- 160","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":3400,"name":"Ctra. de Gandara, (Cruce Sobreira)","lat":42.1635844514487,"lon":-8.7160887284135,"original_name":"Ctra. de Gandara- (CRUCE SOBREIRA)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":3420,"name":"Avda. de Castrelos Frente 117","lat":42.2080714947174,"lon":-8.73136608181403,"original_name":"Avda. de Castrelos  frente 117","created":{"$date":"2017-06-21T13:41:34.000Z"}}
 {"_id":3430,"name":"Avda. da Ponte, 86 (Ctrio de Puxeiros)","lat":42.2156212061988,"lon":-8.67221512001043,"original_name":"Avda. da Ponte- 86 (Ctrio de  Puxeiros)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3450,"name":"Crta de Camposancos, 155","lat":42.1947322858957,"lon":-8.76924532194869,"original_name":"Crta de Camposancos- 155","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":3460,"name":"Crta Camposancos, 19","lat":42.2031970309951,"lon":-8.75343772311942,"original_name":"CRTA CAMPOSANCOS- 19","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3470,"name":"Crta de Camposancos, 214 (Xurela)","lat":42.1935817090671,"lon":-8.77249615927474,"original_name":"Crta de Camposancos- 214 (XURELA)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":3480,"name":"Crta de Camposancos, 141","lat":42.1960954672515,"lon":-8.76623051901595,"original_name":"Crta de Camposancos-141","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3490,"name":"Crta de Camposancos, 171","lat":42.1936135041724,"lon":-8.77222257395522,"original_name":"Crta de Camposancos -171","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":3500,"name":"Crta de Camposancos, 190","lat":42.1945532409902,"lon":-8.77032558286919,"original_name":"Crta de Camposancos-190","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3510,"name":"Crta Camposancos, 28","lat":42.202849226749,"lon":-8.75387029100335,"original_name":"CRTA CAMPOSANCOS-  28","created":{"$date":"2017-06-21T13:39:15.000Z"}}
-{"_id":3520,"name":"Crta de Camposancos, 75","lat":42.2000000354988,"lon":-8.7591079129769,"original_name":"Crta de Camposancos- 75","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3530,"name":"Crta de Camposancos, 88","lat":42.199773285399,"lon":-8.75995884502663,"original_name":"Crta de Camposancos- 88","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":3540,"name":"Crta de Camposancos, 126","lat":42.1961738396009,"lon":-8.76629539247821,"original_name":"Crta de Camposancos- 126","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3550,"name":"Ctra Bembrive, 364","lat":42.1974776502014,"lon":-8.68815854337308,"original_name":"Ctra Bembrive- 364","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":3560,"name":"Ctra Bembrive, 104","lat":42.2091265179828,"lon":-8.69559984548761,"original_name":"Ctra Bembrive-104","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3570,"name":"Ctra Bembrive, 123","lat":42.2092381615195,"lon":-8.69549839984668,"original_name":"Ctra Bembrive- 123","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":3572,"name":"Ctra Bembrive, 112","lat":42.2084578152637,"lon":-8.69501735844776,"original_name":"Ctra Bembrive- 112","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3574,"name":"Ctra Bembrive 129","original_name":"Ctra Bembrive 129","created":{"$date":"2017-05-31T00:34:37.000Z"}}
-{"_id":3580,"name":"Ctra Bembrive, 180","lat":42.2044403177652,"lon":-8.69087180413752,"original_name":"Ctra Bembrive-180","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3590,"name":"Ctra Bembrive, 195","lat":42.2044584315089,"lon":-8.69076589452659,"original_name":"Ctra Bembrive- 195","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":3600,"name":"Ctra Bembrive, 24","lat":42.2124642396275,"lon":-8.69721884720906,"original_name":"Ctra Bembrive- 24","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3610,"name":"Ctra Bembrive, 239","lat":42.204446407255,"lon":-8.6880902098718,"original_name":"Ctra Bembrive-239","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":3620,"name":"Ctra Bembrive, 278","lat":42.2025629945486,"lon":-8.68543757722179,"original_name":"Ctra Bembrive-278","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3630,"name":"Ctra Bembrive, 269","lat":42.2027441804309,"lon":-8.684443742322,"original_name":"Ctra Bembrive-269","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":3640,"name":"Ctra Bembrive, 315","lat":42.1973594177938,"lon":-8.68811300425438,"original_name":"Ctra Bembrive-315","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3650,"name":"Ctra Bembrive, 344","lat":42.1992759186835,"lon":-8.68903294351193,"original_name":"Ctra Bembrive-344","created":{"$date":"2017-06-21T13:39:15.000Z"}}
-{"_id":3660,"name":"Ctra Bembrive, 39","lat":42.2122276564657,"lon":-8.69702861363481,"original_name":"Ctra Bembrive-39","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3670,"name":"Ctra Bembrive, 398","lat":42.1949688633751,"lon":-8.68920198111442,"original_name":"Ctra Bembrive-398","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":3680,"name":"Ctra Bembrive, 74","lat":42.2111449706307,"lon":-8.69652788980676,"original_name":"Ctra Bembrive-74","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3690,"name":"Ctra Bembrive, 89","lat":42.2109473453343,"lon":-8.69627481978162,"original_name":"Ctra Bembrive-89","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":3700,"name":"Ctra Bembrive, Esq. do Camiño Riomao","lat":42.1940553853978,"lon":-8.69207967702027,"original_name":"Ctra Bembrive- Esq. Do Camiño Riomao","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3710,"name":"Ctra Bembrive, 363","lat":42.1938461092936,"lon":-8.69200488953499,"original_name":"Ctra Bembrive- 363","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":3720,"name":"Ctra Bembrive, 341","lat":42.1948986002,"lon":-8.6892137536234,"original_name":"Ctra Bembrive- 341","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3730,"name":"Ctra Bembrive, 301","lat":42.1992034036697,"lon":-8.68888011603264,"original_name":"Ctra Bembrive- 301","created":{"$date":"2017-06-21T13:41:34.000Z"}}
-{"_id":3740,"name":"Ctra Canido (Igrexa)","lat":42.1974318816736,"lon":-8.79014497136569,"original_name":"Ctra Canido (Igrexa)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3750,"name":"Crta Canido (Playa)","lat":42.1931289336636,"lon":-8.79795794367536,"original_name":"CRTA CANIDO (Playa)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":3760,"name":"Ctra Canido (Toralla)","lat":42.1957320999685,"lon":-8.79521136164411,"original_name":"Ctra Canido-(Toralla)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3770,"name":"Ctra Canido, 135","lat":42.1950347996766,"lon":-8.79570184424932,"original_name":"Ctra Canido- 135","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":3780,"name":"Crta Canido, 201","lat":42.1930417926563,"lon":-8.79759045319437,"original_name":"CRTA CANIDO- 201","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3790,"name":"Ctra Canido, 15","lat":42.2018986969825,"lon":-8.78170674180484,"original_name":"Ctra Canido- 15","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":3800,"name":"Ctra Canido, 26","lat":42.1996395193712,"lon":-8.78572737311816,"original_name":"Ctra Canido- 26","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3810,"name":"Ctra Canido, 55","lat":42.2001064861367,"lon":-8.7851211938808,"original_name":"Ctra Canido- 55","created":{"$date":"2017-06-21T13:39:15.000Z"}}
+{"_id":3450,"name":"Ctra. de Camposancos, 155","lat":42.1947322858957,"lon":-8.76924532194869,"original_name":"Ctra. de Camposancos- 155","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":3460,"name":"Ctra. Camposancos, 19","lat":42.2031970309951,"lon":-8.75343772311942,"original_name":"CRTA CAMPOSANCOS- 19","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3470,"name":"Ctra. de Camposancos, 214 (Xurela)","lat":42.1935817090671,"lon":-8.77249615927474,"original_name":"Ctra. de Camposancos- 214 (XURELA)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":3480,"name":"Ctra. de Camposancos, 141","lat":42.1960954672515,"lon":-8.76623051901595,"original_name":"Ctra. de Camposancos-141","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3490,"name":"Ctra. de Camposancos, 171","lat":42.1936135041724,"lon":-8.77222257395522,"original_name":"Ctra. de Camposancos -171","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":3500,"name":"Ctra. de Camposancos, 190","lat":42.1945532409902,"lon":-8.77032558286919,"original_name":"Ctra. de Camposancos-190","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3510,"name":"Ctra. Camposancos, 28","lat":42.202849226749,"lon":-8.75387029100335,"original_name":"CRTA CAMPOSANCOS-  28","created":{"$date":"2017-06-21T13:39:15.000Z"}}
+{"_id":3520,"name":"Ctra. de Camposancos, 75","lat":42.2000000354988,"lon":-8.7591079129769,"original_name":"Ctra. de Camposancos- 75","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3530,"name":"Ctra. de Camposancos, 88","lat":42.199773285399,"lon":-8.75995884502663,"original_name":"Ctra. de Camposancos- 88","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":3540,"name":"Ctra. de Camposancos, 126","lat":42.1961738396009,"lon":-8.76629539247821,"original_name":"Ctra. de Camposancos- 126","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3550,"name":"Ctra. Bembrive, 364","lat":42.1974776502014,"lon":-8.68815854337308,"original_name":"Ctra. Bembrive- 364","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":3560,"name":"Ctra. Bembrive, 104","lat":42.2091265179828,"lon":-8.69559984548761,"original_name":"Ctra. Bembrive-104","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3570,"name":"Ctra. Bembrive, 123","lat":42.2092381615195,"lon":-8.69549839984668,"original_name":"Ctra. Bembrive- 123","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":3572,"name":"Ctra. Bembrive, 112","lat":42.2084578152637,"lon":-8.69501735844776,"original_name":"Ctra. Bembrive- 112","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3574,"name":"Ctra. Bembrive 129","original_name":"Ctra. Bembrive 129","created":{"$date":"2017-05-31T00:34:37.000Z"}}
+{"_id":3580,"name":"Ctra. Bembrive, 180","lat":42.2044403177652,"lon":-8.69087180413752,"original_name":"Ctra. Bembrive-180","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3590,"name":"Ctra. Bembrive, 195","lat":42.2044584315089,"lon":-8.69076589452659,"original_name":"Ctra. Bembrive- 195","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":3600,"name":"Ctra. Bembrive, 24","lat":42.2124642396275,"lon":-8.69721884720906,"original_name":"Ctra. Bembrive- 24","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3610,"name":"Ctra. Bembrive, 239","lat":42.204446407255,"lon":-8.6880902098718,"original_name":"Ctra. Bembrive-239","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":3620,"name":"Ctra. Bembrive, 278","lat":42.2025629945486,"lon":-8.68543757722179,"original_name":"Ctra. Bembrive-278","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3630,"name":"Ctra. Bembrive, 269","lat":42.2027441804309,"lon":-8.684443742322,"original_name":"Ctra. Bembrive-269","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":3640,"name":"Ctra. Bembrive, 315","lat":42.1973594177938,"lon":-8.68811300425438,"original_name":"Ctra. Bembrive-315","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3650,"name":"Ctra. Bembrive, 344","lat":42.1992759186835,"lon":-8.68903294351193,"original_name":"Ctra. Bembrive-344","created":{"$date":"2017-06-21T13:39:15.000Z"}}
+{"_id":3660,"name":"Ctra. Bembrive, 39","lat":42.2122276564657,"lon":-8.69702861363481,"original_name":"Ctra. Bembrive-39","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3670,"name":"Ctra. Bembrive, 398","lat":42.1949688633751,"lon":-8.68920198111442,"original_name":"Ctra. Bembrive-398","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":3680,"name":"Ctra. Bembrive, 74","lat":42.2111449706307,"lon":-8.69652788980676,"original_name":"Ctra. Bembrive-74","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3690,"name":"Ctra. Bembrive, 89","lat":42.2109473453343,"lon":-8.69627481978162,"original_name":"Ctra. Bembrive-89","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":3700,"name":"Ctra. Bembrive, Esq. do Camiño Riomao","lat":42.1940553853978,"lon":-8.69207967702027,"original_name":"Ctra. Bembrive- Esq. Do Camiño Riomao","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3710,"name":"Ctra. Bembrive, 363","lat":42.1938461092936,"lon":-8.69200488953499,"original_name":"Ctra. Bembrive- 363","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":3720,"name":"Ctra. Bembrive, 341","lat":42.1948986002,"lon":-8.6892137536234,"original_name":"Ctra. Bembrive- 341","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3730,"name":"Ctra. Bembrive, 301","lat":42.1992034036697,"lon":-8.68888011603264,"original_name":"Ctra. Bembrive- 301","created":{"$date":"2017-06-21T13:41:34.000Z"}}
+{"_id":3740,"name":"Ctra. Canido (Igrexa)","lat":42.1974318816736,"lon":-8.79014497136569,"original_name":"Ctra. Canido (Igrexa)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3750,"name":"Ctra. Canido (Playa)","lat":42.1931289336636,"lon":-8.79795794367536,"original_name":"CRTA CANIDO (Playa)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":3760,"name":"Ctra. Canido (Toralla)","lat":42.1957320999685,"lon":-8.79521136164411,"original_name":"Ctra. Canido-(Toralla)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3770,"name":"Ctra. Canido, 135","lat":42.1950347996766,"lon":-8.79570184424932,"original_name":"Ctra. Canido- 135","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":3780,"name":"Ctra. Canido, 201","lat":42.1930417926563,"lon":-8.79759045319437,"original_name":"CRTA CANIDO- 201","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3790,"name":"Ctra. Canido, 15","lat":42.2018986969825,"lon":-8.78170674180484,"original_name":"Ctra. Canido- 15","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":3800,"name":"Ctra. Canido, 26","lat":42.1996395193712,"lon":-8.78572737311816,"original_name":"Ctra. Canido- 26","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3810,"name":"Ctra. Canido, 55","lat":42.2001064861367,"lon":-8.7851211938808,"original_name":"Ctra. Canido- 55","created":{"$date":"2017-06-21T13:39:15.000Z"}}
 {"_id":3820,"name":"Rua do Falcoído, 16 (Porto)","lat":42.1826599544757,"lon":-8.69966344229051,"original_name":"Rua do Falcoído- 16 (Porto)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":3830,"name":"Rua do Falcoído, Esq. Camiño do Goldiño","lat":42.1806354049555,"lon":-8.69695824262195,"original_name":"Rua do Falcoído- esq. Camiño do Goldiño","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":3850,"name":"Clara Campoamor, Cruce Crta Marcosende","lat":42.1679339173026,"lon":-8.69275881146217,"original_name":"Clara Campoamor- cruce crta Marcosende","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3860,"name":"Clara Campoamor (CruCe Falcoído)","lat":42.1682480206482,"lon":-8.69260860775734,"original_name":"Clara Campoamor (cruce Falcoído).","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":3850,"name":"Clara Campoamor, Cruce Ctra. Marcosende","lat":42.1679339173026,"lon":-8.69275881146217,"original_name":"Clara Campoamor- cruce crta Marcosende","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3860,"name":"Clara Campoamor (Cruce Falcoído)","lat":42.1682480206482,"lon":-8.69260860775734,"original_name":"Clara Campoamor (cruce Falcoído).","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":3870,"name":"Falcoído, 13 (Beade)","lat":42.182749987633,"lon":-8.69995325435761,"original_name":"Falcoído- 13 (Beade)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3880,"name":"Ctra Coutada, 44 (C.Cultural)","lat":42.1948297345221,"lon":-8.69904032378105,"original_name":"Ctra Coutada- 44 (C.CULTURAL)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":3890,"name":"Ctra Coutada, 39","lat":42.1936252461571,"lon":-8.70142630034849,"original_name":"Ctra Coutada- 39","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3900,"name":"Ctra Coutada, 19","original_name":"Ctra Coutada,19","created":{"$date":"2017-05-31T00:34:37.000Z"}}
-{"_id":3910,"name":"Ctra Coutada, 68","lat":42.1954040219613,"lon":-8.69579485087303,"original_name":"Ctra Coutada-68","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3920,"name":"Ctra Coutada, 77","lat":42.1958234542443,"lon":-8.69703277046068,"original_name":"Ctra Coutada-77","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":3930,"name":"Ctra Coutada, 12","lat":42.1928783097583,"lon":-8.70350620179084,"original_name":"Ctra Coutada- 12","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3940,"name":"Ctra de Casas, 83","lat":42.1961652139892,"lon":-8.75989001121928,"original_name":"Ctra de Casas- 83","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":3950,"name":"Ctra de Casas, Esq. Camiño de Rial","lat":42.1960141931939,"lon":-8.75991951551845,"original_name":"Ctra de Casas- Esq. Camiño de Rial","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3880,"name":"Ctra. Coutada, 44 (C.Cultural)","lat":42.1948297345221,"lon":-8.69904032378105,"original_name":"Ctra. Coutada- 44 (C.CULTURAL)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":3890,"name":"Ctra. Coutada, 39","lat":42.1936252461571,"lon":-8.70142630034849,"original_name":"Ctra. Coutada- 39","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3900,"name":"Ctra. Coutada, 19","original_name":"Ctra. Coutada,19","created":{"$date":"2017-05-31T00:34:37.000Z"}}
+{"_id":3910,"name":"Ctra. Coutada, 68","lat":42.1954040219613,"lon":-8.69579485087303,"original_name":"Ctra. Coutada-68","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3920,"name":"Ctra. Coutada, 77","lat":42.1958234542443,"lon":-8.69703277046068,"original_name":"Ctra. Coutada-77","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":3930,"name":"Ctra. Coutada, 12","lat":42.1928783097583,"lon":-8.70350620179084,"original_name":"Ctra. Coutada- 12","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":3940,"name":"Ctra. de Casas, 83","lat":42.1961652139892,"lon":-8.75989001121928,"original_name":"Ctra. de Casas- 83","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":3950,"name":"Ctra. de Casas, Esq. Camiño de Rial","lat":42.1960141931939,"lon":-8.75991951551845,"original_name":"Ctra. de Casas- Esq. Camiño de Rial","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":3960,"name":"Residencia Asistida","lat":42.2139849068243,"lon":-8.68216051061953,"original_name":"RESIDENCIA ASISTIDA","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":3970,"name":"Enlace Autovia, Ctra. Vella de Madrid","lat":42.2158721232655,"lon":-8.67976529796923,"original_name":"Enlace Autovia- Ctra. Vella de Madrid","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":3980,"name":"Ctra Vella de Madrid, Cruce Hospital","lat":42.2162038598054,"lon":-8.68157042463625,"original_name":"Ctra Vella de Madrid- Cruce Hospital","created":{"$date":"2017-06-21T13:39:15.000Z"}}
+{"_id":3980,"name":"Ctra. Vella de Madrid, Cruce Hospital","lat":42.2162038598054,"lon":-8.68157042463625,"original_name":"Ctra. Vella de Madrid- Cruce Hospital","created":{"$date":"2017-06-21T13:39:15.000Z"}}
 {"_id":4000,"name":"Rua Manuel Lago Lago, 143","lat":42.1824349970088,"lon":-8.76471376140151,"original_name":"Rua Manuel Lago Lago- 143","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":4010,"name":"Rua Manuel Lago Lago, 144","lat":42.1841485656766,"lon":-8.76723731231971,"original_name":"Rua Manuel Lago Lago- 144","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":4020,"name":"Rua Manuel Lago Lago, 79","lat":42.1870561871699,"lon":-8.76960570287986,"original_name":"Rua Manuel Lago Lago- 79","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":4030,"name":"Rua Manuel Lago Lago, 111","lat":42.1841187533022,"lon":-8.76704955768867,"original_name":"Rua Manuel Lago Lago- 111","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":4040,"name":"Rua Manuel Lago Lago, 54","lat":42.1866209451275,"lon":-8.7695949740438,"original_name":"Rua Manuel Lago Lago- 54","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":4050,"name":"Rua Manuel Lago Lago, 166","lat":42.1821110263409,"lon":-8.76479690988097,"original_name":"Rua Manuel Lago Lago- 166","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":4060,"name":"Ctra Gandara, 7","lat":42.1643260878025,"lon":-8.71689261937888,"original_name":"Ctra Gandara- 7","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4070,"name":"Ctra Gandara, 45","lat":42.1622546588929,"lon":-8.71374079337323,"original_name":"Ctra Gandara- 45","created":{"$date":"2017-06-21T13:41:34.000Z"}}
-{"_id":4080,"name":"Ctra Gandara, 58","lat":42.1622526707136,"lon":-8.71400364985669,"original_name":"Ctra Gandara- 58","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4090,"name":"Ctra Garrida, 124","lat":42.1703696213304,"lon":-8.70850612250007,"original_name":"Ctra Garrida- 124","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":4100,"name":"Ctra Garrida, 207","lat":42.1697860196421,"lon":-8.70896728747906,"original_name":"Ctra Garrida- 207","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4110,"name":"Ctra Garrida, 40","lat":42.1653316112095,"lon":-8.71486258905787,"original_name":"Ctra Garrida- 40","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":4120,"name":"Ctra Garrida, 84","lat":42.1663997126736,"lon":-8.71123768398326,"original_name":"Ctra Garrida- 84","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4130,"name":"Ctra Garrida, 83","lat":42.1656119302312,"lon":-8.71458900373835,"original_name":"Ctra Garrida- 83","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":4140,"name":"Ctra Garrida, 169","lat":42.1662089443852,"lon":-8.7119925176338,"original_name":"Ctra Garrida- 169","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4150,"name":"Ctra Miraflores, 65","lat":42.2176209089425,"lon":-8.71242961241296,"original_name":"Ctra Miraflores- 65","created":{"$date":"2017-06-21T13:39:15.000Z"}}
-{"_id":4160,"name":"Ctra Miraflores, 36","lat":42.2178493639698,"lon":-8.71099471133131,"original_name":"Ctra Miraflores- 36","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4170,"name":"Ctra Miraflores, 42","lat":42.2173451855869,"lon":-8.71301133365893,"original_name":"Ctra Miraflores- 42","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":4180,"name":"Ctra Miraflores, 77","lat":42.2169494899964,"lon":-8.71442249371103,"original_name":"Ctra Miraflores- 77","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4190,"name":"Ctra Miraflores, 76","lat":42.2170686774658,"lon":-8.71442785812906,"original_name":"Ctra Miraflores- 76","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":4200,"name":"Ctra Moledo, 6 (CruCe Ctra. Freixo)","lat":42.215236994445,"lon":-8.70738497059071,"original_name":"Ctra Moledo- 6 (CRUCE CTRA. FREIXO)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4210,"name":"Ctra Moledo, 42","lat":42.2121410781656,"lon":-8.70456354495595,"original_name":"Ctra Moledo- 42","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":4220,"name":"Ctra Moledo, 22 (Fonte)","lat":42.2137375570632,"lon":-8.70628311532192,"original_name":"Ctra Moledo- 22 (FONTE)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4230,"name":"Crta de Moledo, 1","original_name":"Crta de Moledo, 1","created":{"$date":"2017-05-31T00:34:37.000Z"}}
-{"_id":4240,"name":"Crta de Moledo, 81","lat":42.2123783488959,"lon":-8.70472958366597,"original_name":"Crta de Moledo- 81","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4250,"name":"Crta de Moledo, 25","lat":42.2133775972892,"lon":-8.70601167957508,"original_name":"Crta de Moledo- 25","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":4280,"name":"Ctra Provincial, 80","lat":42.2245073373832,"lon":-8.71346553842747,"original_name":"Ctra Provincial- 80","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4290,"name":"Ctra Provincial, 3","lat":42.2277857394905,"lon":-8.71946088941414,"original_name":"Ctra Provincial- 3","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":4300,"name":"Ctra Provincial, 104","lat":42.2227892400514,"lon":-8.71175428907597,"original_name":"Ctra Provincial- 104","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4310,"name":"Ctra Provincial, 111","lat":42.2227137615185,"lon":-8.71155580560887,"original_name":"Ctra Provincial-111","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":4320,"name":"Ctra Provincial, 2","lat":42.2277162252942,"lon":-8.71975056798775,"original_name":"Ctra Provincial-2","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4330,"name":"Ctra Provincial, 23","lat":42.2264631464714,"lon":-8.71614062010943,"original_name":"Ctra Provincial-23","created":{"$date":"2017-06-21T13:39:15.000Z"}}
-{"_id":4340,"name":"Ctra Provincial, 54","lat":42.2261125028575,"lon":-8.71571837620706,"original_name":"Ctra Provincial-54","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4350,"name":"Ctra Provincial, 43","lat":42.2245629515732,"lon":-8.71339043657505,"original_name":"Ctra Provincial- 43","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":4360,"name":"Ctra Redondela, (CruCe dos Valos)","lat":42.2443681248959,"lon":-8.62507604214798,"original_name":"Ctra Redondela- (CRUCE DOS VALOS)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4370,"name":"Ctra Redondela, 33","lat":42.2367886567007,"lon":-8.63052480594524,"original_name":"Ctra Redondela- 33","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":4390,"name":"Ctra Redondela, 40 (Quintela)","lat":42.2363954600422,"lon":-8.63092177287945,"original_name":"Ctra Redondela- 40 (QUINTELA)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4400,"name":"Ctra Redondela, 5 (Vilar)","lat":42.2412148763566,"lon":-8.62780440510707,"original_name":"Ctra Redondela- 5 (VILAR)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":4440,"name":"Ctra San Xoan, 167","lat":42.1832750384054,"lon":-8.74243744394553,"original_name":"Ctra San Xoan- 167","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4450,"name":"Ctra San Xoan, 81","lat":42.1850811786415,"lon":-8.74802963423883,"original_name":"Ctra San Xoan- 81","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":4460,"name":"Ctra San Xoan, 141","lat":42.1836671200267,"lon":-8.74440277681359,"original_name":"Ctra San Xoan- 141","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4060,"name":"Ctra. Gandara, 7","lat":42.1643260878025,"lon":-8.71689261937888,"original_name":"Ctra. Gandara- 7","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4070,"name":"Ctra. Gandara, 45","lat":42.1622546588929,"lon":-8.71374079337323,"original_name":"Ctra. Gandara- 45","created":{"$date":"2017-06-21T13:41:34.000Z"}}
+{"_id":4080,"name":"Ctra. Gandara, 58","lat":42.1622526707136,"lon":-8.71400364985669,"original_name":"Ctra. Gandara- 58","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4090,"name":"Ctra. Garrida, 124","lat":42.1703696213304,"lon":-8.70850612250007,"original_name":"Ctra. Garrida- 124","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":4100,"name":"Ctra. Garrida, 207","lat":42.1697860196421,"lon":-8.70896728747906,"original_name":"Ctra. Garrida- 207","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4110,"name":"Ctra. Garrida, 40","lat":42.1653316112095,"lon":-8.71486258905787,"original_name":"Ctra. Garrida- 40","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":4120,"name":"Ctra. Garrida, 84","lat":42.1663997126736,"lon":-8.71123768398326,"original_name":"Ctra. Garrida- 84","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4130,"name":"Ctra. Garrida, 83","lat":42.1656119302312,"lon":-8.71458900373835,"original_name":"Ctra. Garrida- 83","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":4140,"name":"Ctra. Garrida, 169","lat":42.1662089443852,"lon":-8.7119925176338,"original_name":"Ctra. Garrida- 169","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4150,"name":"Ctra. Miraflores, 65","lat":42.2176209089425,"lon":-8.71242961241296,"original_name":"Ctra. Miraflores- 65","created":{"$date":"2017-06-21T13:39:15.000Z"}}
+{"_id":4160,"name":"Ctra. Miraflores, 36","lat":42.2178493639698,"lon":-8.71099471133131,"original_name":"Ctra. Miraflores- 36","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4170,"name":"Ctra. Miraflores, 42","lat":42.2173451855869,"lon":-8.71301133365893,"original_name":"Ctra. Miraflores- 42","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":4180,"name":"Ctra. Miraflores, 77","lat":42.2169494899964,"lon":-8.71442249371103,"original_name":"Ctra. Miraflores- 77","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4190,"name":"Ctra. Miraflores, 76","lat":42.2170686774658,"lon":-8.71442785812906,"original_name":"Ctra. Miraflores- 76","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":4200,"name":"Ctra. Moledo, 6 (Cruce Ctra. Freixo)","lat":42.215236994445,"lon":-8.70738497059071,"original_name":"Ctra. Moledo- 6 (CRUCE CTRA. FREIXO)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4210,"name":"Ctra. Moledo, 42","lat":42.2121410781656,"lon":-8.70456354495595,"original_name":"Ctra. Moledo- 42","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":4220,"name":"Ctra. Moledo, 22 (Fonte)","lat":42.2137375570632,"lon":-8.70628311532192,"original_name":"Ctra. Moledo- 22 (FONTE)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4230,"name":"Ctra. de Moledo, 1","original_name":"Ctra. de Moledo, 1","created":{"$date":"2017-05-31T00:34:37.000Z"}}
+{"_id":4240,"name":"Ctra. de Moledo, 81","lat":42.2123783488959,"lon":-8.70472958366597,"original_name":"Ctra. de Moledo- 81","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4250,"name":"Ctra. de Moledo, 25","lat":42.2133775972892,"lon":-8.70601167957508,"original_name":"Ctra. de Moledo- 25","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":4280,"name":"Ctra. Provincial, 80","lat":42.2245073373832,"lon":-8.71346553842747,"original_name":"Ctra. Provincial- 80","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4290,"name":"Ctra. Provincial, 3","lat":42.2277857394905,"lon":-8.71946088941414,"original_name":"Ctra. Provincial- 3","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":4300,"name":"Ctra. Provincial, 104","lat":42.2227892400514,"lon":-8.71175428907597,"original_name":"Ctra. Provincial- 104","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4310,"name":"Ctra. Provincial, 111","lat":42.2227137615185,"lon":-8.71155580560887,"original_name":"Ctra. Provincial-111","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":4320,"name":"Ctra. Provincial, 2","lat":42.2277162252942,"lon":-8.71975056798775,"original_name":"Ctra. Provincial-2","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4330,"name":"Ctra. Provincial, 23","lat":42.2264631464714,"lon":-8.71614062010943,"original_name":"Ctra. Provincial-23","created":{"$date":"2017-06-21T13:39:15.000Z"}}
+{"_id":4340,"name":"Ctra. Provincial, 54","lat":42.2261125028575,"lon":-8.71571837620706,"original_name":"Ctra. Provincial-54","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4350,"name":"Ctra. Provincial, 43","lat":42.2245629515732,"lon":-8.71339043657505,"original_name":"Ctra. Provincial- 43","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":4360,"name":"Ctra. Redondela, (Cruce dos Valos)","lat":42.2443681248959,"lon":-8.62507604214798,"original_name":"Ctra. Redondela- (CRUCE DOS VALOS)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4370,"name":"Ctra. Redondela, 33","lat":42.2367886567007,"lon":-8.63052480594524,"original_name":"Ctra. Redondela- 33","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":4390,"name":"Ctra. Redondela, 40 (Quintela)","lat":42.2363954600422,"lon":-8.63092177287945,"original_name":"Ctra. Redondela- 40 (QUINTELA)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4400,"name":"Ctra. Redondela, 5 (Vilar)","lat":42.2412148763566,"lon":-8.62780440510707,"original_name":"Ctra. Redondela- 5 (VILAR)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":4440,"name":"Ctra. San Xoan, 167","lat":42.1832750384054,"lon":-8.74243744394553,"original_name":"Ctra. San Xoan- 167","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4450,"name":"Ctra. San Xoan, 81","lat":42.1850811786415,"lon":-8.74802963423883,"original_name":"Ctra. San Xoan- 81","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":4460,"name":"Ctra. San Xoan, 141","lat":42.1836671200267,"lon":-8.74440277681359,"original_name":"Ctra. San Xoan- 141","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":4490,"name":"Rua M. Lago Lago, 28","lat":42.1875033425163,"lon":-8.77283240032477,"original_name":"Rua M. Lago Lago- 28","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":4500,"name":"Rua M. Lago Lago, 2","lat":42.1889103900303,"lon":-8.77627367449088,"original_name":"Rua M. Lago Lago- 2","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":4510,"name":"Rua M. Lago Lago, 51","lat":42.1875709135935,"lon":-8.77309525680823,"original_name":"Rua M. Lago Lago- 51","created":{"$date":"2017-06-21T13:39:15.000Z"}}
-{"_id":4520,"name":"Crta Universidade, Xestoso (C.merCantil)","lat":42.1758843845501,"lon":-8.67078902258348,"original_name":"Crta Universidade- Xestoso (C.Mercantil)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4530,"name":"Crta Universidade, Xestoso Frente Pouso","lat":42.1996810154872,"lon":-8.6688602893442,"original_name":"Crta Universidade- Xestoso frente Pouso","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":4540,"name":"Crta Xestoso, Universidade Frente Viveros","lat":42.1813704163607,"lon":-8.66786108417642,"original_name":"Crta Xestoso-Universidade frente Viveros","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4520,"name":"Ctra. Universidade, Xestoso (C.merCantil)","lat":42.1758843845501,"lon":-8.67078902258348,"original_name":"Ctra. Universidade- Xestoso (C.Mercantil)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4530,"name":"Ctra. Universidade, Xestoso Frente Pouso","lat":42.1996810154872,"lon":-8.6688602893442,"original_name":"Ctra. Universidade- Xestoso frente Pouso","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":4540,"name":"Ctra. Xestoso, Universidade Frente Viveros","lat":42.1813704163607,"lon":-8.66786108417642,"original_name":"Ctra. Xestoso-Universidade frente Viveros","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":4550,"name":"Xestoso, Universidade (Esq. C. do Pouso)","lat":42.1999451818914,"lon":-8.66908587334265,"original_name":"Xestoso- Universidade (esq. C. Do Pouso)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":4560,"name":"Ctra Valladares, 233 (Teleclub)","lat":42.1770177917032,"lon":-8.72151983182934,"original_name":"Ctra Valladares- 233 (TELECLUB)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4570,"name":"Ctra Valladares, 100","lat":42.1839878637167,"lon":-8.72415493916444,"original_name":"Ctra Valladares- 100","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":4580,"name":"Ctra Valladares, 146","lat":42.1802494733858,"lon":-8.72185000696066,"original_name":"Ctra Valladares- 146","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4590,"name":"Ctra Valladares, 173","lat":42.1806708460899,"lon":-8.72153350629691,"original_name":"Ctra Valladares- 173","created":{"$date":"2017-06-21T13:41:34.000Z"}}
-{"_id":4600,"name":"Ctra Valladares, 206","lat":42.1764194871374,"lon":-8.72197848957089,"original_name":"Ctra Valladares- 206","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4610,"name":"Ctra Valladares, 260","lat":42.1724812280224,"lon":-8.72390584231869,"original_name":"Ctra Valladares- 260","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":4620,"name":"Ctra Valladares, 329","lat":42.1723301505358,"lon":-8.72376636744991,"original_name":"Ctra Valladares- 329","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4630,"name":"Ctra Valladares, 406 (Alto da Garrida)","lat":42.165721528775,"lon":-8.72014627812877,"original_name":"Ctra Valladares- 406 (ALTO DA GARRIDA)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":4640,"name":"Ctra Valladares, 41","lat":42.1865993202815,"lon":-8.71961991304761,"original_name":"Ctra Valladares- 41","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4650,"name":"Ctra Valladares, 42","lat":42.1866410559639,"lon":-8.7198532652319,"original_name":"Ctra Valladares- 42","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":4660,"name":"Ctra Valladares, 99","lat":42.1839978011969,"lon":-8.72385721396378,"original_name":"Ctra Valladares- 99","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4670,"name":"Ctra Vao, 27","lat":42.193836069068,"lon":-8.77644168873564,"original_name":"Ctra Vao- 27","created":{"$date":"2017-06-21T13:39:15.000Z"}}
-{"_id":4680,"name":"Ctra Vao, 118","lat":42.1942969104036,"lon":-8.78657440508141,"original_name":"Ctra Vao-118","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4690,"name":"Crta Vao 147 Praia do Vao)","lat":42.1963071912676,"lon":-8.79077797269321,"original_name":"CRTA VAO 147 PRAIA DO VAO)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":4700,"name":"Ctra Vao, 46","lat":42.1940147207192,"lon":-8.77705524528756,"original_name":"Ctra Vao-46","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4710,"name":"Ctra Vao, 65 (Estacion)","lat":42.1940645922692,"lon":-8.7812240674092,"original_name":"Ctra Vao- 65 (ESTACION)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":4720,"name":"Ctra Vao, 90","lat":42.1939374160367,"lon":-8.78163417255445,"original_name":"Ctra Vao-90","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4730,"name":"Ctra Vao, 91","lat":42.1940526604902,"lon":-8.78551291962401,"original_name":"Ctra Vao-91","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":4740,"name":"Ctra Vao, S/N (Praia do Vao)","lat":42.1965953213996,"lon":-8.79101937150455,"original_name":"Ctra Vao-S/N (PRAIA DO VAO)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4750,"name":"Ctra Vella de Madrid, 6","original_name":"Ctra Vella de Madrid, 6","created":{"$date":"2017-05-31T00:34:37.000Z"}}
-{"_id":4760,"name":"Ctra Vella de Madrid, 34","lat":42.216359908133,"lon":-8.69304076939727,"original_name":"Ctra Vella de Madrid- 34","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4770,"name":"Ctra Vella de Madrid, 104","lat":42.2198229228983,"lon":-8.68419824721661,"original_name":"Ctra Vella de Madrid- 104","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":4780,"name":"Ctra Vella de Madrid, 136","lat":42.2208452014053,"lon":-8.6805819085231,"original_name":"Ctra Vella de Madrid- 136","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4790,"name":"Ctra Vella de Madrid, 121","lat":42.2204360167843,"lon":-8.68369058877136,"original_name":"Ctra Vella de Madrid- 121","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":4800,"name":"Ctra Vella de Madrid, 160 (I.f.p. Nâº 6)","lat":42.2180492879246,"lon":-8.67989940841997,"original_name":"Ctra Vella de Madrid-160 (I.F.P. NÂº 6)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4810,"name":"Ctra Vella de Madrid, 177 (I.f.p. R. Mel","lat":42.2182757399803,"lon":-8.67958827217424,"original_name":"Ctra Vella de Madrid-177 (I.F.P. R. MEL","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":4820,"name":"Ctra Vella de Madrid, 31","lat":42.2166876761927,"lon":-8.69391785174514,"original_name":"Ctra Vella de Madrid- 31","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4830,"name":"Ctra Vella de Madrid, 81","lat":42.2187197933629,"lon":-8.69001255541946,"original_name":"Ctra Vella de Madrid- 81","created":{"$date":"2017-06-21T13:39:15.000Z"}}
-{"_id":4840,"name":"Ctra Vella de Madrid, 76","lat":42.2187456166098,"lon":-8.68900940924789,"original_name":"Ctra Vella de Madrid-76","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4850,"name":"Crta Vella de Madrid, S/N (Bajando)","lat":42.2164481967605,"lon":-8.68163747986162,"original_name":"CRTA VELLA DE MADRID- S/N (Bajando)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":4860,"name":"Ctra Venda, 364","lat":42.1827444654913,"lon":-8.70286123036641,"original_name":"Ctra Venda- 364","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4870,"name":"Ctra Venda, 1","lat":42.1920298086166,"lon":-8.71262371458889,"original_name":"Ctra Venda- 1","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":4880,"name":"Ctra Venda, 240","lat":42.1880219022703,"lon":-8.71145759537696,"original_name":"Ctra Venda-240","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4890,"name":"Ctra Venda, 330","lat":42.1849932742274,"lon":-8.70874006505122,"original_name":"Ctra Venda- 330","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":4900,"name":"Ctra Venda, 37","lat":42.1883048454678,"lon":-8.71147474924388,"original_name":"Ctra Venda- 37","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":4910,"name":"Ctra Venda, 4","lat":42.1920576300178,"lon":-8.71272295632244,"original_name":"Ctra Venda- 4","created":{"$date":"2017-06-21T13:41:34.000Z"}}
-{"_id":4920,"name":"Ctra Venda, 65","lat":42.1849094698399,"lon":-8.70853147949853,"original_name":"Ctra Venda- 65","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4560,"name":"Ctra. Valladares, 233 (Teleclub)","lat":42.1770177917032,"lon":-8.72151983182934,"original_name":"Ctra. Valladares- 233 (TELECLUB)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4570,"name":"Ctra. Valladares, 100","lat":42.1839878637167,"lon":-8.72415493916444,"original_name":"Ctra. Valladares- 100","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":4580,"name":"Ctra. Valladares, 146","lat":42.1802494733858,"lon":-8.72185000696066,"original_name":"Ctra. Valladares- 146","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4590,"name":"Ctra. Valladares, 173","lat":42.1806708460899,"lon":-8.72153350629691,"original_name":"Ctra. Valladares- 173","created":{"$date":"2017-06-21T13:41:34.000Z"}}
+{"_id":4600,"name":"Ctra. Valladares, 206","lat":42.1764194871374,"lon":-8.72197848957089,"original_name":"Ctra. Valladares- 206","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4610,"name":"Ctra. Valladares, 260","lat":42.1724812280224,"lon":-8.72390584231869,"original_name":"Ctra. Valladares- 260","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":4620,"name":"Ctra. Valladares, 329","lat":42.1723301505358,"lon":-8.72376636744991,"original_name":"Ctra. Valladares- 329","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4630,"name":"Ctra. Valladares, 406 (Alto da Garrida)","lat":42.165721528775,"lon":-8.72014627812877,"original_name":"Ctra. Valladares- 406 (ALTO DA GARRIDA)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":4640,"name":"Ctra. Valladares, 41","lat":42.1865993202815,"lon":-8.71961991304761,"original_name":"Ctra. Valladares- 41","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4650,"name":"Ctra. Valladares, 42","lat":42.1866410559639,"lon":-8.7198532652319,"original_name":"Ctra. Valladares- 42","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":4660,"name":"Ctra. Valladares, 99","lat":42.1839978011969,"lon":-8.72385721396378,"original_name":"Ctra. Valladares- 99","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4670,"name":"Ctra. Vao, 27","lat":42.193836069068,"lon":-8.77644168873564,"original_name":"Ctra. Vao- 27","created":{"$date":"2017-06-21T13:39:15.000Z"}}
+{"_id":4680,"name":"Ctra. Vao, 118","lat":42.1942969104036,"lon":-8.78657440508141,"original_name":"Ctra. Vao-118","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4690,"name":"Ctra. Vao 147 Praia do Vao)","lat":42.1963071912676,"lon":-8.79077797269321,"original_name":"CRTA VAO 147 PRAIA DO VAO)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":4700,"name":"Ctra. Vao, 46","lat":42.1940147207192,"lon":-8.77705524528756,"original_name":"Ctra. Vao-46","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4710,"name":"Ctra. Vao, 65 (Estacion)","lat":42.1940645922692,"lon":-8.7812240674092,"original_name":"Ctra. Vao- 65 (ESTACION)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":4720,"name":"Ctra. Vao, 90","lat":42.1939374160367,"lon":-8.78163417255445,"original_name":"Ctra. Vao-90","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4730,"name":"Ctra. Vao, 91","lat":42.1940526604902,"lon":-8.78551291962401,"original_name":"Ctra. Vao-91","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":4740,"name":"Ctra. Vao, S/N (Praia do Vao)","lat":42.1965953213996,"lon":-8.79101937150455,"original_name":"Ctra. Vao-S/N (PRAIA DO VAO)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4750,"name":"Ctra. Vella de Madrid, 6","original_name":"Ctra. Vella de Madrid, 6","created":{"$date":"2017-05-31T00:34:37.000Z"}}
+{"_id":4760,"name":"Ctra. Vella de Madrid, 34","lat":42.216359908133,"lon":-8.69304076939727,"original_name":"Ctra. Vella de Madrid- 34","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4770,"name":"Ctra. Vella de Madrid, 104","lat":42.2198229228983,"lon":-8.68419824721661,"original_name":"Ctra. Vella de Madrid- 104","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":4780,"name":"Ctra. Vella de Madrid, 136","lat":42.2208452014053,"lon":-8.6805819085231,"original_name":"Ctra. Vella de Madrid- 136","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4790,"name":"Ctra. Vella de Madrid, 121","lat":42.2204360167843,"lon":-8.68369058877136,"original_name":"Ctra. Vella de Madrid- 121","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":4800,"name":"Ctra. Vella de Madrid, 160 (I.f.p. Nâº 6)","lat":42.2180492879246,"lon":-8.67989940841997,"original_name":"Ctra. Vella de Madrid-160 (I.F.P. NÂº 6)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4810,"name":"Ctra. Vella de Madrid, 177 (I.f.p. R. Mel","lat":42.2182757399803,"lon":-8.67958827217424,"original_name":"Ctra. Vella de Madrid-177 (I.F.P. R. MEL","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":4820,"name":"Ctra. Vella de Madrid, 31","lat":42.2166876761927,"lon":-8.69391785174514,"original_name":"Ctra. Vella de Madrid- 31","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4830,"name":"Ctra. Vella de Madrid, 81","lat":42.2187197933629,"lon":-8.69001255541946,"original_name":"Ctra. Vella de Madrid- 81","created":{"$date":"2017-06-21T13:39:15.000Z"}}
+{"_id":4840,"name":"Ctra. Vella de Madrid, 76","lat":42.2187456166098,"lon":-8.68900940924789,"original_name":"Ctra. Vella de Madrid-76","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4850,"name":"Ctra. Vella de Madrid, S/N (Bajando)","lat":42.2164481967605,"lon":-8.68163747986162,"original_name":"CRTA VELLA DE MADRID- S/N (Bajando)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":4860,"name":"Ctra. Venda, 364","lat":42.1827444654913,"lon":-8.70286123036641,"original_name":"Ctra. Venda- 364","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4870,"name":"Ctra. Venda, 1","lat":42.1920298086166,"lon":-8.71262371458889,"original_name":"Ctra. Venda- 1","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":4880,"name":"Ctra. Venda, 240","lat":42.1880219022703,"lon":-8.71145759537696,"original_name":"Ctra. Venda-240","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4890,"name":"Ctra. Venda, 330","lat":42.1849932742274,"lon":-8.70874006505122,"original_name":"Ctra. Venda- 330","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":4900,"name":"Ctra. Venda, 37","lat":42.1883048454678,"lon":-8.71147474924388,"original_name":"Ctra. Venda- 37","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4910,"name":"Ctra. Venda, 4","lat":42.1920576300178,"lon":-8.71272295632244,"original_name":"Ctra. Venda- 4","created":{"$date":"2017-06-21T13:41:34.000Z"}}
+{"_id":4920,"name":"Ctra. Venda, 65","lat":42.1849094698399,"lon":-8.70853147949853,"original_name":"Ctra. Venda- 65","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":4930,"name":"Devesa (AAvv)","lat":42.2460185582708,"lon":-8.6692870420907,"original_name":"Devesa-(AAVV)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":4940,"name":"Devesa, 50 (CruCe Zoo)","lat":42.2452333708291,"lon":-8.67271705218386,"original_name":"Devesa- 50 (CRUCE ZOO)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":4940,"name":"Devesa, 50 (Cruce Zoo)","lat":42.2452333708291,"lon":-8.67271705218386,"original_name":"Devesa- 50 (CRUCE ZOO)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":4960,"name":"Dr. Corbal, 123","lat":42.2562108750843,"lon":-8.69688272298279,"original_name":"Dr. Corbal- 123","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":4970,"name":"Dr. Corbal, 126","lat":42.2558833122349,"lon":-8.69681298554841,"original_name":"Dr. Corbal- 126","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":4980,"name":"a Guia (Dr. Corbal, 152)","lat":42.257539060886,"lon":-8.69701981358895,"original_name":"A Guia (Dr. Corbal-152)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
@@ -489,7 +489,7 @@
 {"_id":5450,"name":"Fragoso, 54","lat":42.2153486779577,"lon":-8.73627363806889,"original_name":"Fragoso- 54","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":5460,"name":"Fragoso, 73","lat":42.2153010016985,"lon":-8.73612343436406,"original_name":"Fragoso- 73","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":5470,"name":"Fragoso, 86","lat":42.213152639945,"lon":-8.73847080304168,"original_name":"Fragoso- 86","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":5480,"name":"Crta San Xoan, 25 (Freixo)","lat":42.1861797567011,"lon":-8.74888832936077,"original_name":"Crta San Xoan- 25 (Freixo)","created":{"$date":"2017-06-21T13:39:15.000Z"}}
+{"_id":5480,"name":"Ctra. San Xoan, 25 (Freixo)","lat":42.1861797567011,"lon":-8.74888832936077,"original_name":"Ctra. San Xoan- 25 (Freixo)","created":{"$date":"2017-06-21T13:39:15.000Z"}}
 {"_id":5490,"name":"Garcia Barbón (Calzada)","lat":42.2415575554167,"lon":-8.70709486121012,"original_name":"Garcia Barbón (Calzada)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":5500,"name":"Garcia Barbón, 126","lat":42.2417802497337,"lon":-8.70672093567975,"original_name":"Garcia Barbón-126","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":5510,"name":"Garcia Barbón, 127","lat":42.2382903576378,"lon":-8.71014103032624,"original_name":"Garcia Barbón- 127","created":{"$date":"2017-06-21T13:12:06.000Z"}}
@@ -516,8 +516,8 @@
 {"_id":5730,"name":"Gregorio Espino, 42","lat":42.2279701369808,"lon":-8.70802421725415,"original_name":"GREGORIO ESPINO- 42","created":{"$date":"2017-06-21T13:41:34.000Z"}}
 {"_id":5740,"name":"Gregorio Espino, 57","lat":42.2278317036914,"lon":-8.70785540740354,"original_name":"Gregorio Espino-57","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":5750,"name":"Gregorio Espino, 79","lat":42.2253496251215,"lon":-8.70891857357643,"original_name":"GREGORIO ESPINO- 79","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":5760,"name":"Crta de Valadares, 377","lat":42.1692954903376,"lon":-8.72324968654689,"original_name":"CRTA DE VALADARES- 377","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":5770,"name":"Crta Valladares, 310 (Groño)","lat":42.169110609973,"lon":-8.72390414554653,"original_name":"Crta Valladares- 310 (Groño)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":5760,"name":"Ctra. de Valadares, 377","lat":42.1692954903376,"lon":-8.72324968654689,"original_name":"CRTA DE VALADARES- 377","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":5770,"name":"Ctra. Valladares, 310 (Groño)","lat":42.169110609973,"lon":-8.72390414554653,"original_name":"Ctra. Valladares- 310 (Groño)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":5790,"name":"Hospital do Meixoeiro","lat":42.2145292192354,"lon":-8.68483199079836,"original_name":"HOSPITAL DO MEIXOEIRO","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":5800,"name":"Jenaro de la Fuente, 33","lat":42.2322022750622,"lon":-8.70379224637247,"original_name":"Jenaro de la Fuente- 33","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":5810,"name":"Jenaro de la Fuente, 10","lat":42.2322585141846,"lon":-8.70577062094617,"original_name":"Jenaro de la Fuente-10","created":{"$date":"2017-06-21T13:12:06.000Z"}}
@@ -531,7 +531,7 @@
 {"_id":5890,"name":"Lopez Mora, 86","lat":42.2224205328907,"lon":-8.7319969378845,"original_name":"LOPEZ MORA- 86","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":5900,"name":"Macal, 62","original_name":"Macal, 62","created":{"$date":"2017-05-31T00:34:37.000Z"}}
 {"_id":5910,"name":"Macal, 90","lat":42.1962133364218,"lon":-8.72113646683741,"original_name":"Macal- 90","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":5920,"name":"Macal (CruCe Carneiras)","lat":42.1961735941724,"lon":-8.72102381405878,"original_name":"Macal  (CRUCE CARNEIRAS)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":5920,"name":"Macal (Cruce Carneiras)","lat":42.1961735941724,"lon":-8.72102381405878,"original_name":"Macal  (CRUCE CARNEIRAS)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":5930,"name":"Falcoa, 3","lat":42.2020507748494,"lon":-8.72345413334028,"original_name":"Falcoa- 3","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":5940,"name":"Macal, 39","lat":42.1983473364177,"lon":-8.72148800316808,"original_name":"Macal- 39","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":5950,"name":"Maestro Goldar, 62","lat":42.2071273254018,"lon":-8.72663688819168,"original_name":"Maestro Goldar-62","created":{"$date":"2017-06-21T13:12:06.000Z"}}
@@ -552,8 +552,8 @@
 {"_id":6110,"name":"Manuel Costas Bastos, 53","lat":42.2439416355234,"lon":-8.66916902489405,"original_name":"Manuel Costas Bastos- 53","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":6130,"name":"Marco, 105","lat":42.2071325911456,"lon":-8.70696729500534,"original_name":"Marco- 105","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":6140,"name":"Marco, S/N (Colegio)","lat":42.2069259668871,"lon":-8.7070504434848,"original_name":"Marco-S/N (COLEGIO)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":6150,"name":"Crta de Marcosende, 233","lat":42.1606168457165,"lon":-8.69108840137445,"original_name":"Crta de Marcosende- 233","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":6160,"name":"Crta de Marcosende, 150","lat":42.1606359423442,"lon":-8.69145082973441,"original_name":"Crta de Marcosende- 150","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":6150,"name":"Ctra. de Marcosende, 233","lat":42.1606168457165,"lon":-8.69108840137445,"original_name":"Ctra. de Marcosende- 233","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":6160,"name":"Ctra. de Marcosende, 150","lat":42.1606359423442,"lon":-8.69145082973441,"original_name":"Ctra. de Marcosende- 150","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":6180,"name":"Marín (S. Francisco)","lat":42.2185045404162,"lon":-8.7538926336467,"original_name":"Marín (S. Francisco)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":6187,"name":"Martin Echegaray","lat":42.2152447117451,"lon":-8.7424422499563,"original_name":"Martin Echegaray","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":6190,"name":"Martinez Garrido, 106","lat":42.2249247966896,"lon":-8.70629360068952,"original_name":"Martinez Garrido-106","created":{"$date":"2017-06-21T13:12:06.000Z"}}
@@ -566,9 +566,9 @@
 {"_id":6260,"name":"Entrada da Balsa, 15 (MataMa)","lat":42.1995686432231,"lon":-8.7410305543535,"original_name":"ENTRADA DA BALSA- 15 (Matama)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":6280,"name":"Rua Molais, 116 (Grileira)","lat":42.2239381895126,"lon":-8.65331926862453,"original_name":"Rua Molais-116 (GRILEIRA)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":6290,"name":"Muiños","lat":42.2020317814838,"lon":-8.76950242425542,"original_name":"Muiños","created":{"$date":"2017-06-21T13:41:34.000Z"}}
-{"_id":6300,"name":"a Laxe","lat":42.2401295406139,"lon":-8.72715975875732,"original_name":"A LAXE","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":6310,"name":"o Feixón, 60","lat":42.2618956743498,"lon":-8.61640323342363,"original_name":"O Feixón- 60","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":6320,"name":"o Feixón, S/N","lat":42.2619194948885,"lon":-8.6161671990303,"original_name":"O Feixón- S/N","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":6300,"name":"A Laxe","lat":42.2401295406139,"lon":-8.72715975875732,"original_name":"A LAXE","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":6310,"name":"O Feixón, 60","lat":42.2618956743498,"lon":-8.61640323342363,"original_name":"O Feixón- 60","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":6320,"name":"O Feixón, S/N","lat":42.2619194948885,"lon":-8.6161671990303,"original_name":"O Feixón- S/N","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":6360,"name":"Pablo Iglesias (Colegio)","lat":42.2114262658843,"lon":-8.74316654314026,"original_name":"Pablo Iglesias-(COLEGIO)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":6370,"name":"Pablo Iglesias, (Rio)","lat":42.2101309655943,"lon":-8.74487242807373,"original_name":"PABLO IGLESIAS- (RIO)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":6380,"name":"Pablo Iglesias, 10","lat":42.2118116715932,"lon":-8.74242088903412,"original_name":"Pablo Iglesias- 10","created":{"$date":"2017-06-21T13:26:57.000Z"}}
@@ -593,10 +593,10 @@
 {"_id":6590,"name":"Policarpo Sanz, 12","lat":42.2375547488925,"lon":-8.72358206323713,"original_name":"POLICARPO SANZ- 12","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":6600,"name":"Policarpo Sanz, 15 (Casa das Artes)","lat":42.2375731828177,"lon":-8.72286004076966,"original_name":"POLICARPO SANZ-15 (Casa das Artes)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":6620,"name":"Policarpo Sanz, 40","lat":42.2375705190405,"lon":-8.72100884798462,"original_name":"POLICARPO SANZ- 40","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":6640,"name":"Porriño (AmbulAtorio)","lat":42.2155061751009,"lon":-8.75318656895485,"original_name":"Porriño (Ambulatorio)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":6650,"name":"Porriño (InstItuto)","lat":42.2155540546171,"lon":-8.75304246169239,"original_name":"Porriño (Instituto)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":6640,"name":"Porriño (Ambulatorio)","lat":42.2155061751009,"lon":-8.75318656895485,"original_name":"Porriño (Ambulatorio)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":6650,"name":"Porriño (Instituto)","lat":42.2155540546171,"lon":-8.75304246169239,"original_name":"Porriño (Instituto)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":6660,"name":"Porta do Sol","lat":42.2379152928961,"lon":-8.72484658707515,"original_name":"PORTA DO SOL","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":6670,"name":"Crta da Venda, 109 (Porto)","lat":42.1830048320782,"lon":-8.70260105609196,"original_name":"Crta da Venda- 109 (Porto).","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":6670,"name":"Ctra. da Venda, 109 (Porto)","lat":42.1830048320782,"lon":-8.70260105609196,"original_name":"Ctra. da Venda- 109 (Porto).","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":6680,"name":"Portoloureiro, 24","lat":42.2073118367853,"lon":-8.71865063504339,"original_name":"Portoloureiro- 24","created":{"$date":"2017-06-21T13:41:34.000Z"}}
 {"_id":6690,"name":"Portoloureiro, 5 4","lat":42.2049595596665,"lon":-8.7156955571204,"original_name":"Portoloureiro-5 4","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":6700,"name":"Portoloureiro, 43","lat":42.2049474063742,"lon":-8.71558964305757,"original_name":"Portoloureiro-43","created":{"$date":"2017-06-21T13:26:57.000Z"}}
@@ -604,7 +604,7 @@
 {"_id":6730,"name":"Rua do Couto, 29 (Pouleira)","lat":42.1993864114692,"lon":-8.69541701563335,"original_name":"Rua do Couto- 29 (Pouleira).","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":6740,"name":"Vista do Mar, 95 (Poulo)","lat":42.2429574792609,"lon":-8.69116776235055,"original_name":"VISTA DO MAR-  95 (Poulo).","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":6750,"name":"Avda. de Samil, (Praia da Fonte)","lat":42.2217835541153,"lon":-8.77351766860949,"original_name":"Avda. de Samil- (Praia da Fonte)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":6760,"name":"Crta Canido, (Praia das Barcas)","lat":42.2018470367017,"lon":-8.78220563268161,"original_name":"Crta Canido- (Praia das Barcas)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":6760,"name":"Ctra. Canido, (Praia das Barcas)","lat":42.2018470367017,"lon":-8.78220563268161,"original_name":"Ctra. Canido- (Praia das Barcas)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":6780,"name":"Avda. de Samil (Dunas)","lat":42.2102568433301,"lon":-8.77474062456807,"original_name":"Avda. DE SAMIL (Dunas)","created":{"$date":"2017-06-21T13:39:15.000Z"}}
 {"_id":6790,"name":"Avda. de Samil (Heladería)","lat":42.213640781818,"lon":-8.77458363828165,"original_name":"Avda. DE SAMIL (Heladería)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":6800,"name":"Avda. de Samil (Camaleón)","lat":42.2155788477595,"lon":-8.77488553771274,"original_name":"Avda. DE SAMIL (Camaleón)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
@@ -628,10 +628,10 @@
 {"_id":7000,"name":"Pza. Fernando Católico","lat":42.2324273172627,"lon":-8.71137107336926,"original_name":"Pza. Fernando Católico","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":7020,"name":"Pza. Isabel la Católica, 2","original_name":"Pza. Isabel la Católica, 2","created":{"$date":"2017-05-31T00:34:37.000Z"}}
 {"_id":7030,"name":"Pza. Manuel de Castro","lat":42.2128089515285,"lon":-8.74002299417481,"original_name":"Pza. Manuel de Castro","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":7040,"name":"Crta de Miraflores, 3 (Praza)","lat":42.2184353477762,"lon":-8.70992442919305,"original_name":"Crta de Miraflores- 3 (Praza)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":7040,"name":"Ctra. de Miraflores, 3 (Praza)","lat":42.2184353477762,"lon":-8.70992442919305,"original_name":"Ctra. de Miraflores- 3 (Praza)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":7050,"name":"Pza. Miraflores, 1 (AAvv)","lat":42.2185028857807,"lon":-8.71013364149621,"original_name":"Pza. Miraflores- 1 (AAVV)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":7060,"name":"Crta de Moledo, 70","lat":42.2104992864667,"lon":-8.70398319236409,"original_name":"Crta de Moledo- 70","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":7070,"name":"Crta de Moledo, 109","lat":42.2106201876454,"lon":-8.7041770486089,"original_name":"Crta de Moledo- 109","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":7060,"name":"Ctra. de Moledo, 70","lat":42.2104992864667,"lon":-8.70398319236409,"original_name":"Ctra. de Moledo- 70","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":7070,"name":"Ctra. de Moledo, 109","lat":42.2106201876454,"lon":-8.7041770486089,"original_name":"Ctra. de Moledo- 109","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":7080,"name":"Rua Rabadeira, 95","lat":42.2387970178043,"lon":-8.650399428985,"original_name":"Rua Rabadeira- 95","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":7090,"name":"Ramiro Pascual, 108","lat":42.1919184747948,"lon":-8.70686969189552,"original_name":"RAMIRO PASCUAL- 108","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":7100,"name":"Ramiro Pascual, 16","lat":42.1952441999492,"lon":-8.71956211971002,"original_name":"Ramiro Pascual-16","created":{"$date":"2017-06-21T13:39:15.000Z"}}
@@ -684,7 +684,7 @@
 {"_id":7650,"name":"Rabadeira, 64","lat":42.2390431207732,"lon":-8.65024788797842,"original_name":"RABADEIRA- 64","created":{"$date":"2017-06-21T13:39:15.000Z"}}
 {"_id":7660,"name":"Rua Rabadeira, 104","lat":42.2416108523591,"lon":-8.65186594380503,"original_name":"Rua Rabadeira- 104","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":7662,"name":"Rua Recaré, 4","lat":42.2110134620992,"lon":-8.68554294967979,"original_name":"Rua Recaré- 4","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":7664,"name":"Rua Recaré (CruCe Segade)","lat":42.2112013273881,"lon":-8.68883851690984,"original_name":"Rua Recaré (Cruce Segade)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":7664,"name":"Rua Recaré (Cruce Segade)","lat":42.2112013273881,"lon":-8.68883851690984,"original_name":"Rua Recaré (Cruce Segade)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":7666,"name":"Rua Recaré, 3","lat":42.210514541449,"lon":-8.68534977687676,"original_name":"Rua Recaré- 3","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":7668,"name":"Rua Recaré, 39","lat":42.2110225294899,"lon":-8.68831816836095,"original_name":"Rua Recaré- 39","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":7670,"name":"Rua S. Cristobo, 6","lat":42.2351691363394,"lon":-8.67117668539545,"original_name":"Rua S. Cristobo- 6","created":{"$date":"2017-06-21T13:26:57.000Z"}}
@@ -707,12 +707,12 @@
 {"_id":7820,"name":"Sa do Monte, 20","lat":42.2029605131239,"lon":-8.71120484359568,"original_name":"SA do monte- -20","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":7830,"name":"Rua do Sa, 74","original_name":"Rua do Sa, 74","created":{"$date":"2017-05-31T00:34:37.000Z"}}
 {"_id":7840,"name":"Sa do Monte, 71","lat":42.2030399890608,"lon":-8.71093662269419,"original_name":"Sa do Monte- 71","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":7850,"name":"Crta de Sa, 59","lat":42.202923204351,"lon":-8.70808523709871,"original_name":"Crta de Sa- 59","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":7850,"name":"Ctra. de Sa, 59","lat":42.202923204351,"lon":-8.70808523709871,"original_name":"Ctra. de Sa- 59","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":7860,"name":"Severino Cobas, 73 (Rio)","lat":42.2254362830982,"lon":-8.68893946000929,"original_name":"Severino Cobas- 73 (Rio)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":7870,"name":"Baixada a Praiz, 4 (SaianS)","lat":42.166897971422,"lon":-8.80220465803123,"original_name":"BAIXADA A PRAIZ- 4 (SAIANS)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":7880,"name":"Salgueira, 106 (Grupo Sindical)","lat":42.2223642356098,"lon":-8.71889825385841,"original_name":"Salgueira- 106 (Grupo Sindical).","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":7890,"name":"Cesareo Vazquez, 61 (San Miguel)","lat":42.1807494431802,"lon":-8.80242113947614,"original_name":"CESAREO VAZQUEZ- 61 (San Miguel).","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":7900,"name":"San Paio (CruCe Cño. Quintela)","lat":42.2049247197727,"lon":-8.7689042916451,"original_name":"San Paio (Cruce Cño. Quintela)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":7900,"name":"San Paio (Cruce Cño. Quintela)","lat":42.2049247197727,"lon":-8.7689042916451,"original_name":"San Paio (Cruce Cño. Quintela)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":7910,"name":"San Paio (Igrexa)","lat":42.2080400134645,"lon":-8.76745858098607,"original_name":"San Paio (Igrexa)","created":{"$date":"2017-06-21T13:39:15.000Z"}}
 {"_id":7920,"name":"San Paio (Torreiro)","lat":42.2089260961263,"lon":-8.76529403831105,"original_name":"San Paio (Torreiro)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":7930,"name":"San Paio, 194","lat":42.2089992108149,"lon":-8.76534675262292,"original_name":"San Paio- 194","created":{"$date":"2017-06-21T13:26:57.000Z"}}
@@ -808,16 +808,16 @@
 {"_id":9020,"name":"Xestoso","lat":42.207584621812,"lon":-8.67010819597522,"original_name":"XESTOSO","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":9040,"name":"Xestoso, Universidade, Esq. Cmño do Monte","lat":42.2083156404566,"lon":-8.67028243794584,"original_name":"Xestoso-Universidade- esq. Cmño do Monte","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":9050,"name":"Zamans (Igrexa)","lat":42.1546469711232,"lon":-8.68834906173694,"original_name":"Zamans-(IGREXA)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":10061,"name":"Crta San Xoan, 193","lat":42.1852774722818,"lon":-8.74155895272128,"original_name":"Crta San Xoan- 193","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":14101,"name":"Ctra Garrida, 181","lat":42.1680085388537,"lon":-8.71041543805836,"original_name":"Ctra Garrida- 181","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":14102,"name":"Ctra Garrida, 114","lat":42.1682828821535,"lon":-8.71006675088643,"original_name":"Ctra Garrida- 114","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":10061,"name":"Ctra. San Xoan, 193","lat":42.1852774722818,"lon":-8.74155895272128,"original_name":"Ctra. San Xoan- 193","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":14101,"name":"Ctra. Garrida, 181","lat":42.1680085388537,"lon":-8.71041543805836,"original_name":"Ctra. Garrida- 181","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":14102,"name":"Ctra. Garrida, 114","lat":42.1682828821535,"lon":-8.71006675088643,"original_name":"Ctra. Garrida- 114","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14105,"name":"Ciencias Xuridicas (Cuvi)","lat":42.1672379782832,"lon":-8.68113570397894,"original_name":"Ciencias Xuridicas (Cuvi)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":14106,"name":"Avda. Aeropuerto, 90","lat":42.2341615819085,"lon":-8.69507456390335,"original_name":"Avda. Aeropuerto- 90","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14107,"name":"Rotonda Autopista","lat":42.2578472045692,"lon":-8.67769650722121,"original_name":"Rotonda Autopista","created":{"$date":"2017-06-21T13:39:15.000Z"}}
 {"_id":14108,"name":"Gorxal Solo Hospital","lat":42.2140174104929,"lon":-8.67133083009838,"original_name":"Gorxal solo Hospital","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":14111,"name":"Crta Bembrive (Centro de Saude)","lat":42.2042626567452,"lon":-8.68480180143635,"original_name":"Crta Bembrive  (CENTRO DE SAUDE)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":14112,"name":"Ctra Bembrive, 258","lat":42.2040471976983,"lon":-8.68469728753368,"original_name":"Ctra Bembrive- 258","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":14113,"name":"Crta Coutadas, 30","lat":42.1934585773954,"lon":-8.70206585554985,"original_name":"Crta Coutadas- 30","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":14111,"name":"Ctra. Bembrive (Centro de Saude)","lat":42.2042626567452,"lon":-8.68480180143635,"original_name":"Ctra. Bembrive  (CENTRO DE SAUDE)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":14112,"name":"Ctra. Bembrive, 258","lat":42.2040471976983,"lon":-8.68469728753368,"original_name":"Ctra. Bembrive- 258","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":14113,"name":"Ctra. Coutadas, 30","lat":42.1934585773954,"lon":-8.70206585554985,"original_name":"Ctra. Coutadas- 30","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":14117,"name":"Couto S. Honorato, 26","lat":42.2285747019432,"lon":-8.71286454798454,"original_name":"Couto S. Honorato- 26","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14118,"name":"Vazquez Varela (Xeral)","lat":42.2291337579213,"lon":-8.71612513246708,"original_name":"Vazquez Varela (XERAL)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":14119,"name":"Couto S. Honorato, 80","lat":42.2293207885857,"lon":-8.71039055088013,"original_name":"Couto S. Honorato- 80","created":{"$date":"2017-06-21T13:12:06.000Z"}}
@@ -837,8 +837,8 @@
 {"_id":14134,"name":"Avda. Galicia 182","lat":42.2532087926865,"lon":-8.68699559131289,"original_name":"Avda. Galicia 182","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":14135,"name":"S. Amaro(gasolinera)","lat":42.2291741448086,"lon":-8.72014305524624,"original_name":"S. AMARO(GASOLINERA)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14136,"name":"Avda. Galicia 18","lat":42.2504843716461,"lon":-8.69487880359165,"original_name":"Avda. Galicia 18","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":14137,"name":"Crta de Matama Pazó (IgrexIa S. Andres)","lat":42.200003406436,"lon":-8.75316899999694,"original_name":"Crta de Matama Pazó (Igrexia S. Andres)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":14138,"name":"Enlace Autovia, Crta Vella de Madrid.","lat":42.216459200795,"lon":-8.67859170943404,"original_name":"Enlace Autovia- Crta Vella de Madrid.","created":{"$date":"2017-06-21T13:39:15.000Z"}}
+{"_id":14137,"name":"Ctra. de Matama Pazó (IgrexIa S. Andres)","lat":42.200003406436,"lon":-8.75316899999694,"original_name":"Ctra. de Matama Pazó (Igrexia S. Andres)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":14138,"name":"Enlace Autovia, Ctra. Vella de Madrid.","lat":42.216459200795,"lon":-8.67859170943404,"original_name":"Enlace Autovia- Ctra. Vella de Madrid.","created":{"$date":"2017-06-21T13:39:15.000Z"}}
 {"_id":14139,"name":"Martinez Garrido, 27","lat":42.2274927575041,"lon":-8.7004133664519,"original_name":"Martinez Garrido- 27","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14140,"name":"Martinez Garrido, 30","lat":42.2282108773925,"lon":-8.69999935395623,"original_name":"Martinez Garrido- 30","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":14141,"name":"Jenaro de la Fuente 43","lat":42.2313792020047,"lon":-8.69987621275715,"original_name":"Jenaro de la Fuente 43","created":{"$date":"2017-06-21T13:12:06.000Z"}}
@@ -847,7 +847,7 @@
 {"_id":14144,"name":"Hispanidad, 82","lat":42.2267604360964,"lon":-8.7273853032606,"original_name":"Hispanidad- 82","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":14150,"name":"P. Don Rua, 9","lat":42.2320765605537,"lon":-8.71905523574731,"original_name":"P. Don Rua- 9","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14152,"name":"Camiño Novelos, 4","lat":42.2048154022016,"lon":-8.68716896894594,"original_name":"Camiño Novelos- 4","created":{"$date":"2017-06-21T13:41:34.000Z"}}
-{"_id":14153,"name":"Crta de Bembrive, 173 (CruCe Eifonso)","lat":42.2053572326771,"lon":-8.69249573854563,"original_name":"Crta de Bembrive- 173 (cruce eifonso)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":14153,"name":"Ctra. de Bembrive, 173 (Cruce Eifonso)","lat":42.2053572326771,"lon":-8.69249573854563,"original_name":"Ctra. de Bembrive- 173 (cruce eifonso)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14154,"name":"Rua Chans, 95","lat":42.1936025797968,"lon":-8.6772589927044,"original_name":"Rua chans- 95","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":14156,"name":"Rua do Xeme, 46","lat":42.2033784312095,"lon":-8.6966668633672,"original_name":"Rua do Xeme- 46","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14157,"name":"Rua do Xeme, Cruce Rua de Eifonso.","lat":42.2029790662929,"lon":-8.69406512062275,"original_name":"Rua do Xeme- Cruce Rua de Eifonso.","created":{"$date":"2017-06-21T13:34:35.000Z"}}
@@ -889,28 +889,28 @@
 {"_id":14198,"name":"Riomao, 21","lat":42.2272313008404,"lon":-8.65999796907161,"original_name":"Riomao- 21","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14199,"name":"Bouciña, 79","lat":42.2237554641378,"lon":-8.68204191137849,"original_name":"Bouciña- 79","created":{"$date":"2017-06-21T13:39:15.000Z"}}
 {"_id":14200,"name":"Severino Cobas, 119","lat":42.2251126550573,"lon":-8.68340268353265,"original_name":"Severino Cobas- 119","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":14201,"name":"Sta Mariña, (CruCe Vía do Tranvía)","lat":42.2262910558215,"lon":-8.6416475913461,"original_name":"Sta Mariña - (Cruce Vía do Tranvía)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":14201,"name":"Sta Mariña, (Cruce Vía do Tranvía)","lat":42.2262910558215,"lon":-8.6416475913461,"original_name":"Sta Mariña - (Cruce Vía do Tranvía)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":14202,"name":"Jenaro de la Fuente, 58","lat":42.2312737858673,"lon":-8.70014564481647,"original_name":"Jenaro de la Fuente- 58","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14203,"name":"Rua do Tranvía, S/N 2âª","lat":42.2265244006892,"lon":-8.66125178591111,"original_name":"Rua do Tranvía- S/N 2Âª","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":14204,"name":"Manuel Alvarez, 151","lat":42.2231268796317,"lon":-8.6818646333154,"original_name":"Manuel Alvarez- 151","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14205,"name":"Ctrio Particular de Valladares","lat":42.1784086293897,"lon":-8.73319854922192,"original_name":"Ctrio particular de Valladares","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":14206,"name":"Gran Vía (InstItuto)","lat":42.2205140426847,"lon":-8.73170021692383,"original_name":"Gran Vía (Instituto)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14207,"name":"Camiño Pinal, 19","original_name":"camiño pinal, 19","created":{"$date":"2017-05-31T00:34:37.000Z"}}
-{"_id":14208,"name":"Crta Valladares, 452","lat":42.1622372067044,"lon":-8.71885530995522,"original_name":"crta valladares- 452","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":14209,"name":"Crta Garrida, 245","lat":42.1733338216105,"lon":-8.7054398027808,"original_name":"crta Garrida- 245","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":14210,"name":"Crta Garrida S/N (Frente 245)","lat":42.1730773941549,"lon":-8.70565974392002,"original_name":"Crta Garrida S/N (frente 245)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":14211,"name":"Crta Monte Alba, 16","lat":42.1654791616152,"lon":-8.72177500506362,"original_name":"crta Monte Alba- 16","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":14212,"name":"Crta Monte Alba, 54","lat":42.1646941014072,"lon":-8.72447296196796,"original_name":"Crta Monte Alba- 54","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":14213,"name":"Crta Freixo Campo Futbol","lat":42.1691532411414,"lon":-8.7290014644239,"original_name":"Crta Freixo Campo Futbol","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":14214,"name":"Crta Freixo, 189","lat":42.1757609072851,"lon":-8.73451692353711,"original_name":"Crta Freixo- 189","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":14215,"name":"Crta Freixo, 88","lat":42.1755921685963,"lon":-8.73447778772723,"original_name":"Crta Freixo- 88","created":{"$date":"2017-06-21T13:39:15.000Z"}}
-{"_id":14216,"name":"Crtra Freixo Campo Futbol (Vuelta)","lat":42.1691433013283,"lon":-8.72907656627632,"original_name":"Crtra Freixo campo futbol (vuelta)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":14217,"name":"Crta Monte Alba, (Precisgal)","lat":42.1645708389255,"lon":-8.72456147486545,"original_name":"Crta Monte Alba- (Precisgal)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":14218,"name":"Crta Monte Alba, 17","lat":42.1652883050951,"lon":-8.72136730929336,"original_name":"Crta Monte Alba- 17","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":14208,"name":"Ctra. Valladares, 452","lat":42.1622372067044,"lon":-8.71885530995522,"original_name":"crta valladares- 452","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":14209,"name":"Ctra. Garrida, 245","lat":42.1733338216105,"lon":-8.7054398027808,"original_name":"crta Garrida- 245","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":14210,"name":"Ctra. Garrida S/N (Frente 245)","lat":42.1730773941549,"lon":-8.70565974392002,"original_name":"Ctra. Garrida S/N (frente 245)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":14211,"name":"Ctra. Monte Alba, 16","lat":42.1654791616152,"lon":-8.72177500506362,"original_name":"crta Monte Alba- 16","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":14212,"name":"Ctra. Monte Alba, 54","lat":42.1646941014072,"lon":-8.72447296196796,"original_name":"Ctra. Monte Alba- 54","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":14213,"name":"Ctra. Freixo Campo Futbol","lat":42.1691532411414,"lon":-8.7290014644239,"original_name":"Ctra. Freixo Campo Futbol","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":14214,"name":"Ctra. Freixo, 189","lat":42.1757609072851,"lon":-8.73451692353711,"original_name":"Ctra. Freixo- 189","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":14215,"name":"Ctra. Freixo, 88","lat":42.1755921685963,"lon":-8.73447778772723,"original_name":"Ctra. Freixo- 88","created":{"$date":"2017-06-21T13:39:15.000Z"}}
+{"_id":14216,"name":"Ctra. Freixo Campo Futbol (Vuelta)","lat":42.1691433013283,"lon":-8.72907656627632,"original_name":"Crtra Freixo campo futbol (vuelta)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":14217,"name":"Ctra. Monte Alba, (Precisgal)","lat":42.1645708389255,"lon":-8.72456147486545,"original_name":"Ctra. Monte Alba- (Precisgal)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":14218,"name":"Ctra. Monte Alba, 17","lat":42.1652883050951,"lon":-8.72136730929336,"original_name":"Ctra. Monte Alba- 17","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14219,"name":"Camiño Pinal, 59","lat":42.1595005120482,"lon":-8.71824727938244,"original_name":"Camiño Pinal- 59","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":14220,"name":"Bouciña, 10","lat":42.2256573208275,"lon":-8.6814676663812,"original_name":"Bouciña- 10","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14221,"name":"Bouciña, 41","lat":42.2258092176696,"lon":-8.68165299107133,"original_name":"Bouciña - 41","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":14222,"name":"Camiño Pinal, 1 (CruCe)","lat":42.1629595245719,"lon":-8.71654136497082,"original_name":"Camiño Pinal- 1  ( cruce)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":14222,"name":"Camiño Pinal, 1 (Cruce)","lat":42.1629595245719,"lon":-8.71654136497082,"original_name":"Camiño Pinal- 1  ( cruce)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14223,"name":"Gaiteiro Portela (GuezuraGa)","lat":42.2352262330747,"lon":-8.73147190357673,"original_name":"Gaiteiro Portela (Guezuraga)","created":{"$date":"2017-06-21T13:41:34.000Z"}}
 {"_id":14224,"name":"Torrecedeira, 12","lat":42.2342859273087,"lon":-8.73126650716955,"original_name":"Torrecedeira- 12","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14225,"name":"Torrecedeira, 50","lat":42.2317165737623,"lon":-8.73230873723001,"original_name":"Torrecedeira- 50","created":{"$date":"2017-06-21T13:26:57.000Z"}}
@@ -934,7 +934,7 @@
 {"_id":14245,"name":"Garcia Barbon 45","lat":42.2369172803121,"lon":-8.71674314277311,"original_name":"Garcia barbon 45","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":14247,"name":"Camiño Muiños, 75","lat":42.2005111791424,"lon":-8.76911057304133,"original_name":"Camiño Muiños- 75","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14248,"name":"Camiño Muiños, 74","lat":42.2005807232885,"lon":-8.76911861966838,"original_name":"Camiño Muiños- 74","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":14249,"name":"Cesareo Vazquez (CruCe)","lat":42.177662554391,"lon":-8.80015792254835,"original_name":"Cesareo Vazquez (cruce)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":14249,"name":"Cesareo Vazquez (Cruce)","lat":42.177662554391,"lon":-8.80015792254835,"original_name":"Cesareo Vazquez (cruce)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14250,"name":"Avda. Aeroporto 463","lat":42.2349148142526,"lon":-8.65898341133044,"original_name":"Avda. Aeroporto 463","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":14251,"name":"Avda. Aeroporto 528","lat":42.2348176019266,"lon":-8.65882026963902,"original_name":"Avda. Aeroporto 528","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14252,"name":"Clara Campoamor, Inst. Valladares.","lat":42.1659342083592,"lon":-8.70724300137991,"original_name":"Clara Campoamor - Inst. Valladares.","created":{"$date":"2017-06-21T13:26:57.000Z"}}
@@ -970,13 +970,13 @@
 {"_id":14299,"name":"Avda. de Samil (Frente Verbum)","lat":42.2138712227952,"lon":-8.77461582478983,"original_name":"Avda. DE SAMIL (Frente Verbum)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14300,"name":"Florida, 26","lat":42.2179075475897,"lon":-8.73707435954969,"original_name":"Florida- 26","created":{"$date":"2017-06-21T13:41:34.000Z"}}
 {"_id":14301,"name":"Florida, 47","lat":42.2182574586376,"lon":-8.73632879817092,"original_name":"Florida- 47","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":14302,"name":"Crta Vella de Madrid, 7","lat":42.2145420944682,"lon":-8.69643161886319,"original_name":"Crta Vella de Madrid- 7","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":14304,"name":"Crta Vella de Madrid, 145","lat":42.2213139752328,"lon":-8.68194447070266,"original_name":"Crta Vella de Madrid- 145","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":14302,"name":"Ctra. Vella de Madrid, 7","lat":42.2145420944682,"lon":-8.69643161886319,"original_name":"Ctra. Vella de Madrid- 7","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":14304,"name":"Ctra. Vella de Madrid, 145","lat":42.2213139752328,"lon":-8.68194447070266,"original_name":"Ctra. Vella de Madrid- 145","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14307,"name":"Pintor Colmeiro 7","lat":42.2244644157404,"lon":-8.72796734261684,"original_name":"Pintor Colmeiro 7","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":14308,"name":"Camiño Pinal, 4","lat":42.1632855804175,"lon":-8.71670766192975,"original_name":"Camiño Pinal- 4","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14309,"name":"Camiño Pinal, 26","lat":42.1610670288294,"lon":-8.71646862836604,"original_name":"Camiño Pinal- 26","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":14310,"name":"Camiño Pinal, Frente Al 57","lat":42.1595641365219,"lon":-8.71829555914471,"original_name":"Camiño Pinal - frente al 57","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":14311,"name":"Crta Valladares, 507","lat":42.1627203369102,"lon":-8.71890090750847,"original_name":"Crta Valladares- 507","created":{"$date":"2017-06-21T13:39:15.000Z"}}
+{"_id":14311,"name":"Ctra. Valladares, 507","lat":42.1627203369102,"lon":-8.71890090750847,"original_name":"Ctra. Valladares- 507","created":{"$date":"2017-06-21T13:39:15.000Z"}}
 {"_id":14314,"name":"Mantelas 16","lat":42.2272125683839,"lon":-8.72018303197655,"original_name":"mantelas 16","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14315,"name":"Mantelas 90","lat":42.223933380402,"lon":-8.71692414802345,"original_name":"mantelas 90","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":14317,"name":"Salgueira Iglesia","lat":42.2227239327526,"lon":-8.71915028276678,"original_name":"Salgueira iglesia","created":{"$date":"2017-06-21T13:12:06.000Z"}}
@@ -1020,13 +1020,13 @@
 {"_id":14360,"name":"Teixugueiras, 19 Portal 5.","lat":42.2089658571391,"lon":-8.75702056746238,"original_name":"Teixugueiras-19 Portal 5.","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14361,"name":"Teixugueiras 19","lat":42.209770472003,"lon":-8.7552959070658,"original_name":"Teixugueiras 19","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":14362,"name":"Rua Canido (Public, Samil)","lat":42.2029378716127,"lon":-8.77683048581576,"original_name":"Rua Canido (Public- Samil)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":14364,"name":"Crta Xestoso, Universidade (F.mercantil)","lat":42.1757571858695,"lon":-8.67107437057626,"original_name":"Crta Xestoso- Universidade (F.Mercantil)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":14365,"name":"Crta Universidade, Xestoso (ViVeros)","lat":42.1816501974626,"lon":-8.66751572262874,"original_name":"Crta Universidade- Xestoso (Viveros).","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":14364,"name":"Ctra. Xestoso, Universidade (F.mercantil)","lat":42.1757571858695,"lon":-8.67107437057626,"original_name":"Ctra. Xestoso- Universidade (F.Mercantil)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":14365,"name":"Ctra. Universidade, Xestoso (ViVeros)","lat":42.1816501974626,"lon":-8.66751572262874,"original_name":"Ctra. Universidade- Xestoso (Viveros).","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14366,"name":"Subida a Hermida (Presa)","lat":42.2455553840695,"lon":-8.66083073766356,"original_name":"Subida a Hermida (Presa)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":14367,"name":"Subida a Hermida, 27","lat":42.2453528566621,"lon":-8.66111505181914,"original_name":"Subida a Hermida- 27","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14368,"name":"Subida a Hermida, Cmño Gumersindo","lat":42.2471577292647,"lon":-8.65915269116516,"original_name":"Subida a Hermida- Cmño Gumersindo","created":{"$date":"2017-06-21T13:39:15.000Z"}}
 {"_id":14369,"name":"Subida a Hermida, 41","lat":42.2471478017179,"lon":-8.65946382741089,"original_name":"Subida a Hermida- 41","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":14370,"name":"Monte da Facha (CruCe Vixiador)","lat":42.2497845042271,"lon":-8.66105745273015,"original_name":"Monte da Facha (cruce Vixiador)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":14370,"name":"Monte da Facha (Cruce Vixiador)","lat":42.2497845042271,"lon":-8.66105745273015,"original_name":"Monte da Facha (cruce Vixiador)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":14371,"name":"Camiño da Facha, Esq. Herminda","original_name":"Camiño da Facha, esq. Herminda","created":{"$date":"2017-05-31T00:34:37.000Z"}}
 {"_id":14372,"name":"Rua Sta Lucia, 22 (G. S. Salgueira)","lat":42.2218875257275,"lon":-8.72001137059959,"original_name":"Rua Sta Lucia- 22 (G. S. Salgueira)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14373,"name":"Pza. S. Mauro Esq. M. Comingues.","lat":42.2005125467419,"lon":-8.73924177224006,"original_name":"Pza. S. Mauro Esq. M. Comingues.","created":{"$date":"2017-06-21T13:26:57.000Z"}}
@@ -1058,17 +1058,17 @@
 {"_id":14404,"name":"Dr Corbal, 58","lat":42.2517856415656,"lon":-8.69687199414673,"original_name":"Dr Corbal - 58","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":14406,"name":"Enrique Lorenzo, 32","lat":42.249462772217,"lon":-8.69977295179987,"original_name":"Enrique Lorenzo- 32","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14408,"name":"Rua de Pedro Alvarado, 5","lat":42.2488850064485,"lon":-8.69812875767374,"original_name":"Rua de Pedro Alvarado- 5","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":14409,"name":"Estr. das Prantas (Fr. Crta do Rebullon)","lat":42.2041884414817,"lon":-8.67025712584677,"original_name":"Estr. das Prantas (fr. crta do rebullon)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":14410,"name":"Estr. das Prantas (De. Crta do Rebullon)","lat":-8.67032954549,"lon":42.2046394573,"original_name":"Estr. das Prantas (de. crta do rebullon)","created":{"$date":"2018-08-21T16:24:35.000Z"}}
+{"_id":14409,"name":"Estr. das Prantas (Fr. Ctra. do Rebullon)","lat":42.2041884414817,"lon":-8.67025712584677,"original_name":"Estr. das Prantas (fr. crta do rebullon)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":14410,"name":"Estr. das Prantas (De. Ctra. do Rebullon)","lat":-8.67032954549,"lon":42.2046394573,"original_name":"Estr. das Prantas (de. crta do rebullon)","created":{"$date":"2018-08-21T16:24:35.000Z"}}
 {"_id":14411,"name":"Rúa de Xeme, 1","lat":42.2051745429446,"lon":-8.69820913355076,"original_name":"Rúa de Xeme- 1","created":{"$date":"2017-06-21T13:39:15.000Z"}}
 {"_id":14412,"name":"Rúa de Xeme, 6","lat":42.2049758596275,"lon":-8.69795700590336,"original_name":"Rúa de Xeme- 6","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14414,"name":"Avda. Sta Mariña (Antes del Nâº 38)","lat":42.221587211153,"lon":-8.66507844415577,"original_name":"Avda. Sta Mariña (antes del nÂº 38)","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":14415,"name":"Avda. Sta. Mariña (Antes del Nâº 49)","lat":42.2215574164389,"lon":-8.66538153377445,"original_name":"Avda. Sta. Mariña (antes del nÂº 49)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14416,"name":"Rua de Severino Cobas, 118","lat":42.2254686229503,"lon":-8.69149108146985,"original_name":"Rua de Severino Cobas- 118","created":{"$date":"2017-06-21T13:34:35.000Z"}}
-{"_id":14419,"name":"Crta de Bembrive (Ant. Cño Rapadouros)","lat":42.2011387342214,"lon":-8.688585073041,"original_name":"Crta de Bembrive (ant. Cño Rapadouros)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":14420,"name":"Crta. de Bembrive, 318","lat":42.2014192333176,"lon":-8.68852606920359,"original_name":"Crta. de Bembrive- 318","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":14421,"name":"Crta das Prantas, (Ent. Up563)","lat":42.1866832639263,"lon":-8.66932070289306,"original_name":"Crta das Prantas- (ent. UP563)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":14422,"name":"Crta das Prantas, (D. Campo de Beisbol)","lat":42.1869531495361,"lon":-8.66951406607046,"original_name":"Crta das Prantas- (d. Campo de beisbol)","created":{"$date":"2017-06-21T13:41:34.000Z"}}
+{"_id":14419,"name":"Ctra. de Bembrive (Ant. Cño Rapadouros)","lat":42.2011387342214,"lon":-8.688585073041,"original_name":"Ctra. de Bembrive (ant. Cño Rapadouros)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":14420,"name":"Ctra.. de Bembrive, 318","lat":42.2014192333176,"lon":-8.68852606920359,"original_name":"Ctra.. de Bembrive- 318","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":14421,"name":"Ctra. das Prantas, (Ent. Up563)","lat":42.1866832639263,"lon":-8.66932070289306,"original_name":"Ctra. das Prantas- (ent. UP563)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":14422,"name":"Ctra. das Prantas, (D. Campo de Beisbol)","lat":42.1869531495361,"lon":-8.66951406607046,"original_name":"Ctra. das Prantas- (d. Campo de beisbol)","created":{"$date":"2017-06-21T13:41:34.000Z"}}
 {"_id":14423,"name":"Tomas A. Alonso, 113","lat":42.2237981389723,"lon":-8.73894043734933,"original_name":"TOMAS A. ALONSO- 113","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14424,"name":"Tomas A. Alonso, 72","lat":42.2238377655756,"lon":-8.73917318875368,"original_name":"TOMAS A. ALONSO- 72","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":14425,"name":"Gregorio Espino, 2","lat":42.2322537917903,"lon":-8.70720857463104,"original_name":"GREGORIO ESPINO- 2","created":{"$date":"2017-06-21T13:12:06.000Z"}}
@@ -1093,8 +1093,8 @@
 {"_id":14907,"name":"Rabadeira, 24","lat":42.233655478727,"lon":-8.65330024183737,"original_name":"Rabadeira- 24","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":14908,"name":"Rabadeira, 17","lat":42.2338290750619,"lon":-8.65345825896645,"original_name":"Rabadeira- 17","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":14909,"name":"Rabadeira, 11","lat":42.232663197575,"lon":-8.65509705940972,"original_name":"Rabadeira- 11","created":{"$date":"2017-06-21T13:39:15.000Z"}}
-{"_id":14910,"name":"Crta Marco, 4","lat":42.2102509499095,"lon":-8.70403698630125,"original_name":"Crta Marco- 4","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":14911,"name":"Crta Marco, 16","lat":42.2088307369752,"lon":-8.70697117435742,"original_name":"Crta Marco- 16","created":{"$date":"2017-06-21T13:26:57.000Z"}}
+{"_id":14910,"name":"Ctra. Marco, 4","lat":42.2102509499095,"lon":-8.70403698630125,"original_name":"Ctra. Marco- 4","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":14911,"name":"Ctra. Marco, 16","lat":42.2088307369752,"lon":-8.70697117435742,"original_name":"Ctra. Marco- 16","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":15001,"name":"P.t.l.1","lat":42.1760536287561,"lon":-8.70946013220043,"original_name":"P.T.L.1","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":15004,"name":"P.t.l.4","lat":42.1765030166186,"lon":-8.71000730283947,"original_name":"P.T.L.4","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":20008,"name":"Torrecedeira, 37","lat":42.2326071899494,"lon":-8.73188263567121,"original_name":"TORRECEDEIRA- 37","created":{"$date":"2017-06-21T13:26:57.000Z"}}
@@ -1126,19 +1126,19 @@
 {"_id":20045,"name":"Camiño Xestoso 1","lat":42.2005329888619,"lon":-8.67407544652662,"original_name":"CAMIÑO XESTOSO 1","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":20046,"name":"Camiño Xestoso 2","lat":42.2019684440601,"lon":-8.67477878976663,"original_name":"CAMIÑO XESTOSO 2","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":20047,"name":"Camiño Xestoso 3","lat":42.2043303057662,"lon":-8.67467048333822,"original_name":"CAMIÑO XESTOSO  3","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":20048,"name":"Cesareo Vazquez (CruCe Camiño Amariz)","lat":42.1826844062649,"lon":-8.80240236401303,"original_name":"CESAREO VAZQUEZ (cruce camiño amariz)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":20048,"name":"Cesareo Vazquez (Cruce Camiño Amariz)","lat":42.1826844062649,"lon":-8.80240236401303,"original_name":"CESAREO VAZQUEZ (cruce camiño amariz)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":20049,"name":"Cesareo Vazquez, 62","original_name":"CESAREO VAZQUEZ, 62","created":{"$date":"2017-05-31T00:34:37.000Z"}}
 {"_id":20050,"name":"Severino Cobas, 186","lat":42.2255500585088,"lon":-8.68668456291516,"original_name":"SEVERINO COBAS- 186","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":20051,"name":"Severino Cobas Frente 186","lat":42.2256529037297,"lon":-8.68662401655953,"original_name":"SEVERINO COBAS FRENTE 186","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":20052,"name":"Aragon, 21","lat":42.2327484139652,"lon":-8.70253965476252,"original_name":"ARAGON- 21","created":{"$date":"2017-06-21T13:12:06.000Z"}}
-{"_id":20053,"name":"Angel de Lema, S/N (CruCe Paraixal)","lat":42.248962857677,"lon":-8.68827230335543,"original_name":"ANGEL DE LEMA- S/N (CRUCE PARAIXAL)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
+{"_id":20053,"name":"Angel de Lema, S/N (Cruce Paraixal)","lat":42.248962857677,"lon":-8.68827230335543,"original_name":"ANGEL DE LEMA- S/N (CRUCE PARAIXAL)","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":20054,"name":"Angel de Lema, 33","lat":42.2488973769537,"lon":-8.68915071368383,"original_name":"ANGEL DE LEMA- 33","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":20057,"name":"Estacion Ferrocarril","lat":42.2388439111123,"lon":-8.71300850372944,"original_name":"ESTACION FERROCARRIL","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":20058,"name":"Canceleiro","lat":42.2384354706342,"lon":-8.7144136865023,"original_name":"CANCELEIRO","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":20059,"name":"Manuel Alvarez, 103","lat":42.2227455215355,"lon":-8.67793251489957,"original_name":"MANUEL ALVAREZ- 103","created":{"$date":"2017-06-21T13:39:15.000Z"}}
 {"_id":20060,"name":"Manuel Alvarez, Frente 103","lat":42.2228258604622,"lon":-8.67807760645448,"original_name":"MANUEL ALVAREZ- FRENTE 103","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":20061,"name":"Martin Echegaray, 1","lat":42.2175681734405,"lon":-8.74401851118606,"original_name":"MARTIN ECHEGARAY-1","created":{"$date":"2017-06-21T13:26:57.000Z"}}
-{"_id":20062,"name":"Beiramar (AlmAs Perdidas)","lat":42.2361437063135,"lon":-8.73180717970359,"original_name":"BEIRAMAR (ALMAS PERDIDAS)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":20062,"name":"Beiramar (Almas Perdidas)","lat":42.2361437063135,"lon":-8.73180717970359,"original_name":"BEIRAMAR (ALMAS PERDIDAS)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":20068,"name":"Torrecedeira, 34","lat":42.2330484274769,"lon":-8.73184743363756,"original_name":"TORRECEDEIRA- 34","created":{"$date":"2017-06-21T13:34:35.000Z"}}
 {"_id":20071,"name":"Camiño Xestoso (Frente 105)","lat":42.2055116531745,"lon":-8.67282480315703,"original_name":"CAMIÑO XESTOSO (FRENTE 105)","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":20072,"name":"Camiño de Pouso","lat":42.1966436937009,"lon":-8.67166321780212,"original_name":"CAMIÑO DE POUSO","created":{"$date":"2017-06-21T13:26:57.000Z"}}
@@ -1154,7 +1154,7 @@
 {"_id":20086,"name":"Seixiños 1","lat":42.1906452811138,"lon":-8.69615058295022,"original_name":"SEIXIÑOS 1","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":20087,"name":"Seixiños 2","lat":42.1946078271428,"lon":-8.69649122349512,"original_name":"SEIXIÑOS 2","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":20088,"name":"Roteas","lat":42.1853388805815,"lon":-8.78726478821702,"original_name":"ROTEAS","created":{"$date":"2017-06-21T13:39:15.000Z"}}
-{"_id":20089,"name":"Porriño, Padre Seixas Â©","lat":42.2130445661907,"lon":-8.75139683497565,"original_name":"PORRIÑO - PADRE SEIXAS Â©","created":{"$date":"2017-06-21T13:12:06.000Z"}}
+{"_id":20089,"name":"Porriño, Padre Seixas","lat":42.2130445661907,"lon":-8.75139683497565,"original_name":"PORRIÑO - PADRE SEIXAS Â©","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":20091,"name":"Miragalla","lat":42.2381648028282,"lon":-8.71121276081965,"original_name":"MIRAGALLA","created":{"$date":"2017-06-21T13:26:57.000Z"}}
 {"_id":20092,"name":"Roteas Pabellon","lat":42.186191392002,"lon":-8.78309574605242,"original_name":"ROTEAS PABELLON","created":{"$date":"2017-06-21T13:12:06.000Z"}}
 {"_id":20093,"name":"Roteas Frente Pabellon","lat":42.1861257528484,"lon":-8.78315239376042,"original_name":"ROTEAS FRENTE PABELLON","created":{"$date":"2017-06-21T13:34:35.000Z"}}
