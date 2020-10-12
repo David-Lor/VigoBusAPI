@@ -62,6 +62,7 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 
 ## Changelog
 
+- 0.8.0 - add new online data source for buses; dotenv settings refactor
 - 0.7.1 - set Mongo stop name text index language to spanish
 - 0.7.0 - add limit query param to search stops endpoint
 - 0.6.1 - add unit tests; fix clear_duplicated_buses function by simplifying logic
@@ -79,6 +80,7 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 
 ---
 
+- _0.8.0 - añadida nueva fuente de datos online para buses; refactorización de configuraciones .env_
 - _0.7.1 - establecer idioma spanish en text index de paradas guardadas en Mongo_
 - _0.7.0 - query param para limitar resultados en endpoint de buscar paradas por nombre_
 - _0.6.1 - tests unitarios; arreglada funcinón clear_duplicated_buses simplificando lógica_
@@ -99,16 +101,18 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 - Improve Swagger/OpenAPI documentation
 - Add static route information endpoints
 - Add Near Stops endpoint
-- Add tests
+- Add more tests
 - Add detailed install & configuration instructions
+- Use new data source to get Stop data
 
 ---
 
 - _Mejorar la documentación de Swagger/OpenAPI_
 - _Añadir endpoint para consulta de rutas estáticas_
 - _Añadir endpoint para consulta de paradas cercanas a ubicación_
-- _Añadir tests_
+- _Añadir más tests_
 - _Añadir instrucciones detalladas de instalación y configuración_
+- _Usar la nueva fuente de datos para obtener datos de paradas_
 
 ## Disclaimer
 
