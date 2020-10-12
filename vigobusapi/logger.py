@@ -9,7 +9,7 @@ import sys
 from loguru import logger
 
 # # Project # #
-from vigobusapi.settings_handler import settings
+from vigobusapi.settings import settings
 
 __all__ = ("logger",)
 

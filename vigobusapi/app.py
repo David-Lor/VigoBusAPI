@@ -12,7 +12,7 @@ from fastapi import FastAPI, Response
 # # Package # #
 from vigobusapi.entities import Stop, Stops, BusesResponse
 from vigobusapi.request_handler import request_handler
-from vigobusapi.settings_handler import settings
+from vigobusapi.settings import settings
 from vigobusapi.vigobus_getters import get_stop, get_buses, search_stops
 from vigobusapi.logger import logger
 

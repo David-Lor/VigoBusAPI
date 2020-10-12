@@ -12,7 +12,7 @@ from fastapi import Request, Response
 
 # # Project # #
 from vigobusapi.error_handler import handle_exception
-from vigobusapi.settings_handler import settings
+from vigobusapi.settings import settings
 from vigobusapi.logger import logger
 
 

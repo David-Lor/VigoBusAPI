@@ -30,6 +30,3 @@ jobs:
         run: python -m pip install -r requirements-test.txt
       - name: Test
         run: pytest -sv .
-        env:
-          # TODO change when implementing systemintegration tests against real data source
-          html_remote_api: http://null.null

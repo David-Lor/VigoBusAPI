@@ -9,7 +9,7 @@ from typing import Optional
 from cachetools import TTLCache
 
 # # Project # #
-from vigobusapi.settings_handler import settings
+from vigobusapi.settings import settings
 from vigobusapi.exceptions import StopNotExist
 from vigobusapi.entities import Stop, StopOrNotExist
 from vigobusapi.logger import logger
