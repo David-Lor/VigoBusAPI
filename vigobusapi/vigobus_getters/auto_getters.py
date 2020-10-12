@@ -5,10 +5,10 @@ depending on the availability.
 
 # # Native # #
 import inspect
-from typing import Optional, Callable
+from typing import *
 
 # # Project # #
-from vigobusapi.vigobus_getters import html, cache, mongo
+from vigobusapi.vigobus_getters import http, html, cache, mongo
 from vigobusapi.vigobus_getters.helpers import *
 from vigobusapi.entities import *
 from vigobusapi.exceptions import *
@@ -29,6 +29,7 @@ Next functions are external data sources.
 
 BUS_GETTERS = (
     cache.get_buses,
+    http.get_buses,
     html.get_buses
 )
 """List of Bus Getter functions.
@@ -102,29 +103,33 @@ async def get_buses(stop_id: int, get_all_buses: bool) -> BusesResponse:
         raise cached_stop
 
     for bus_getter in BUS_GETTERS:
-        try:
-            if inspect.iscoroutinefunction(bus_getter):
-                buses_result: Optional[BusesResponse] = await bus_getter(stop_id, get_all_buses)
+        getter_name = get_package(bus_getter)
+
+        with logger.contextualize(buses_getter_name=getter_name):
+            try:
+                if inspect.iscoroutinefunction(bus_getter):
+                    buses_result: Optional[BusesResponse] = await bus_getter(stop_id, get_all_buses)
+                else:
+                    buses_result: Optional[BusesResponse] = bus_getter(stop_id, get_all_buses)
+
+            except StopNotExist as ex:
+                last_exception = ex
+                break
+
+            except Exception as ex:
+                logger.opt(exception=True).warning("Error on Buses getter")
+                last_exception = ex
+
             else:
-                buses_result: Optional[BusesResponse] = bus_getter(stop_id, get_all_buses)
+                if buses_result is not None:
+                    if BUS_GETTERS.index(bus_getter) > 0:
+                        # Save the Buses in cache if bus list not found by the cache itself
+                        cache.save_buses(stop_id, get_all_buses, buses_result)
 
-        except StopNotExist as ex:
-            last_exception = ex
-            break
+                    # Add the source to the returned data
+                    buses_result.source = getter_name
 
-        except Exception as ex:
-            last_exception = ex
-
-        else:
-            if buses_result is not None:
-                if BUS_GETTERS.index(bus_getter) > 0:
-                    # Save the Buses in cache if bus list not found by the cache itself
-                    cache.save_buses(stop_id, get_all_buses, buses_result)
-
-                # Add the source to the returned data
-                buses_result.source = get_package(bus_getter)
-
-                return buses_result
+                    return buses_result
 
     # If Buses not returned, raise the Last Exception
     raise last_exception

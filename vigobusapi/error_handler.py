@@ -4,12 +4,11 @@ Handle exceptions occurred on endpoints
 
 # # Native # #
 import asyncio
-import traceback
 
 # # Installed # #
 from fastapi import status as statuscode
 from fastapi.responses import JSONResponse
-from requests_async import RequestException, Timeout, ConnectTimeout
+from requests_async import RequestException, Timeout
 
 # # Package # #
 from vigobusapi.exceptions import *

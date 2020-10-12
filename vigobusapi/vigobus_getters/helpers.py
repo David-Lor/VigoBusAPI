@@ -7,9 +7,9 @@ import inspect
 import datetime
 
 # # Project # #
-from vigobusapi.entities import Stop
+from vigobusapi.entities import Stop, Buses
 
-__all__ = ("get_package", "add_stop_created_timestamp")
+__all__ = ("get_package", "add_stop_created_timestamp", "sort_buses")
 
 
 def get_package(function) -> str:
@@ -28,3 +28,8 @@ def add_stop_created_timestamp(stop: Stop) -> Stop:
     local_dt = utc_dt.astimezone()  # local time
     stop.created = local_dt
     return stop
+
+
+def sort_buses(buses: Buses):
+    """Sort an array of Buses by time and route. The array is sorted in-place (nothing is returned)"""
+    buses.sort(key=lambda bus: (bus.time, bus.route))

@@ -11,7 +11,7 @@ from pymongo import TEXT
 from pymongo.collection import Collection
 
 # # Project # #
-from vigobusapi.settings_handler import settings
+from vigobusapi.settings import settings
 
 __index_created = False
 

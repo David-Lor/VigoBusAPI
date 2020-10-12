@@ -1,4 +1,4 @@
-"""HTML
+"""HTML DATA SOURCE
 Async functions to fetch data from the HTML external data source and parse them to return the final objects.
 """
 
@@ -13,7 +13,8 @@ from requests_async import RequestException
 from vigobusapi.vigobus_getters.html.html_request import request_html
 from vigobusapi.vigobus_getters.html.html_parser import *
 from vigobusapi.vigobus_getters.exceptions import ParsingExceptions
-from vigobusapi.settings_handler import settings
+from vigobusapi.vigobus_getters.helpers import sort_buses
+from vigobusapi.settings import settings
 from vigobusapi.entities import Stop, BusesResponse
 from vigobusapi.logger import logger
 
@@ -32,14 +33,15 @@ async def get_stop(stop_id: int) -> Stop:
 
 
 async def get_buses(stop_id: int, get_all_buses: bool = False) -> BusesResponse:
-    """Async function to get the buses incoming on a Stop from the HTML data source.
+    """Async function to get the buses incoming to a Stop from the HTML data source.
     Return the List of Buses AND True if more bus pages available, False if the current bus list was the only page.
     :param stop_id: Stop ID
     :param get_all_buses: if True, get all Buses through all the HTML pages available
     :raises: requests_async.RequestTimeout | requests_async.RequestException |
              exceptions.StopNotExist | exceptions.exceptions.ParseError
     """
-    logger.debug("Searching buses on first page of external HTML data source")
+    logger.debug("Searching buses on first page of external HTML data source...")
+
     html_source = await request_html(stop_id)
 
     buses = parse_buses(html_source)
@@ -98,9 +100,10 @@ async def get_buses(stop_id: int, get_all_buses: bool = False) -> BusesResponse:
             more_buses_available = False
 
     clear_duplicated_buses(buses)
+    sort_buses(buses)
 
     response = BusesResponse(
-        buses=sorted(buses, key=lambda bus: (bus.time, bus.route)),
+        buses=buses,
         more_buses_available=more_buses_available
     )
 
