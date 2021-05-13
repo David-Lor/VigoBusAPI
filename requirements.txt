@@ -4,7 +4,7 @@ requests-async==0.6.2  # HTTP external data sources
 beautifulsoup4==4.9.0  # HTML parser for HTTP external data sources
 roman==3.2  # Check for roman numbers in string chunks
 python-dotenv==0.13.0  # dotenv setting files
-pydantic==1.5  # Settings Handler & dataclasses
+pydantic==1.6.2  # Settings Handler & dataclasses
 cachetools==4.1.0  # TTLCache
 pymongo==3.10.1  # MongoDB client
 motor==2.1.0  # MongoDB Async client
