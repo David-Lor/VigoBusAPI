@@ -1,4 +1,4 @@
-fastapi==0.54.1  # API framework
+fastapi==0.65.2  # API framework
 uvicorn==0.11.7  # API deployment tool
 requests-async==0.6.2  # HTTP external data sources
 beautifulsoup4==4.9.0  # HTML parser for HTTP external data sources
