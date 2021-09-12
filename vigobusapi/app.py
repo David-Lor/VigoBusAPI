@@ -60,6 +60,7 @@ async def endpoint_get_stop(stop_id: int):
 
 
 @app.get("/buses/{stop_id}", response_model=BusesResponse)
+@app.get("/stop/{stop_id}/buses", response_model=BusesResponse)
 async def endpoint_get_buses(stop_id: int, get_all_buses: bool = False):
     """Endpoint to get a list of Buses coming to a Stop giving the Stop ID.
     By default the shortest available list of buses is returned, unless 'get_all_buses' param is True
