@@ -1,11 +1,11 @@
-fastapi==0.54.1  # API framework
-uvicorn==0.11.7  # API deployment tool
+fastapi==0.68.1  # API framework
+uvicorn==0.15.0  # API deployment tool
 requests-async==0.6.2  # HTTP external data sources
-beautifulsoup4==4.9.0  # HTML parser for HTTP external data sources
-roman==3.2  # Check for roman numbers in string chunks
-python-dotenv==0.13.0  # dotenv setting files
-pydantic==1.5  # Settings Handler & dataclasses
-cachetools==4.1.0  # TTLCache
+beautifulsoup4==4.10.0  # HTML parser for HTTP external data sources
+roman==3.3  # Check for roman numbers in string chunks
+python-dotenv==0.19.0  # dotenv setting files
+pydantic==1.8.2  # Settings Handler & dataclasses
+cachetools==4.2.2  # TTLCache
 pymongo==3.10.1  # MongoDB client
 motor==2.1.0  # MongoDB Async client
-loguru==0.4.1  # Logging
+loguru==0.5.3  # Logging
