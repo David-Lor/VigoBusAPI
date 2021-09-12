@@ -4,6 +4,7 @@ depending on the availability.
 """
 
 # # Native # #
+import asyncio
 import inspect
 from typing import *
 
@@ -14,7 +15,7 @@ from vigobusapi.entities import *
 from vigobusapi.exceptions import *
 from vigobusapi.logger import logger
 
-__all__ = ("get_stop", "get_buses")
+__all__ = ("get_stop", "get_stop_or_none", "get_stops", "get_buses")
 
 STOP_GETTERS = (
     cache.get_stop,
@@ -86,6 +87,22 @@ async def get_stop(stop_id: int) -> Stop:
 
     # If Stop not returned, raise the Last Exception
     raise last_exception
+
+
+async def get_stop_or_none(stop_id: int) -> OptionalStop:
+    """Like get_stop() but ignoring StopNotExist exceptions, in which case returns None."""
+    try:
+        return await get_stop(stop_id)
+    except StopNotExist:
+        return None
+
+
+async def get_stops(stops_ids: Iterable[int]) -> List[Stop]:
+    """Async function to get information of multiple stops at the same time, calling to get_stop() with asyncio.gather.
+    Non existing stops are ignored.
+    """
+    results = await asyncio.gather(*[get_stop_or_none(stop_id) for stop_id in stops_ids])
+    return [r for r in results if r is not None]  # noqa
 
 
 async def get_buses(stop_id: int, get_all_buses: bool) -> BusesResponse:
