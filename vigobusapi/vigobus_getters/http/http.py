@@ -3,9 +3,8 @@ Async functions to fetch data from the HTTP external data source and parse them 
 """
 
 # # Project # #
-from vigobusapi.support_services import http_request
+from vigobusapi.services import http_request
 from vigobusapi.entities import BusesResponse
-from vigobusapi.settings import settings
 from vigobusapi.logger import logger
 
 # # Package # #

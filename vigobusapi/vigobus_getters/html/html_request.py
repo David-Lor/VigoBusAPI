@@ -10,8 +10,7 @@ import copy
 from .html_const import *
 
 # # Project # #
-from vigobusapi.support_services import http_request
-from vigobusapi.settings import settings
+from vigobusapi.services import http_request
 
 __all__ = ("request_html",)
 
