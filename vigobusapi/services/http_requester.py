@@ -35,12 +35,13 @@ async def http_request(
     :param body: request body, usually a dict or string (default=None)
     :param headers: request headers as dict (default=None)
     :param timeout: timeout for each request retry in seconds (default=from settings)
-    :param retries: how many times to retry the request if it fails (default=from settings)
+    :param retries: how many times to retry the request if it fails (at least 1) (default=from settings)
     :param raise_for_status: if True, raise HTTPError if response is not successful (default=True)
-    :param not_retry_400_errors: if True, do not retry requests failed with a ~400 status code (default=True)
+    :param not_retry_400_errors: if True, do not retry requests failed with a 4xx status code (default=True)
     :return: the Response object
     :raises: requests_async.RequestTimeout | requests_async.RequestException
     """
+    # TODO refactor "retries" arg, it is actually working as "tries" (requires at least 1)
     last_error = None
     last_status_code = None
 
@@ -70,10 +71,17 @@ async def http_request(
 
                 response_time = round(time.time() - start_time, 4)
                 last_status_code = response.status_code
+
+                # Log response
+                response_body = response.text
+                response_body_size = len(response.content)
+                if response_body_size > 500000 or "\\x00\\" in response_body:  # 500kB
+                    response_body = "binary or too large"
                 logger.bind(
                     response_elapsed_time=response_time,
                     response_status_code=last_status_code,
-                    response_body=response.text
+                    response_body=response_body,
+                    response_body_size=response_body_size
                 ).debug("Response received")
 
                 if raise_for_status:
