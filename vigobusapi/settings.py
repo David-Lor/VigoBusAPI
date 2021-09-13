@@ -2,15 +2,26 @@
 Declaration of the Settings class and instance that can be used to get any setting required
 """
 
-# # Installed # #
-from pydantic import BaseSettings
+# # Native # #
+import os
+from typing import Optional
 
-__all__ = ("settings",)
+# # Installed # #
+import pydantic
+
+__all__ = ("settings", "google_maps_settings")
 
 # TODO Split Settings by sections/groups in multiple classes
 
+ENV_FILE = os.getenv("ENV_FILE", ".env")
 
-class Settings(BaseSettings):
+
+class _BaseSettings(pydantic.BaseSettings):
+    class Config:
+        env_file = ENV_FILE
+
+
+class Settings(_BaseSettings):
     endpoint_timeout: float = 30
     http_timeout: float = 5
     http_retries: int = 2
@@ -29,8 +40,17 @@ class Settings(BaseSettings):
     api_log_level = "info"
     log_level = "info"
 
-    class Config:
-        env_file = ".env"
+
+class GoogleMapsSettings(_BaseSettings):
+    api_key: Optional[str] = None
+
+    @property
+    def enabled(self):
+        return bool(self.api_key)
+
+    class Config(_BaseSettings.Config):
+        env_prefix = "GOOGLE_MAPS_"
 
 
 settings = Settings()
+google_maps_settings = GoogleMapsSettings()

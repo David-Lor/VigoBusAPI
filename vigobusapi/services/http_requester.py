@@ -13,13 +13,15 @@ from requests_async import request, Response, RequestException
 from vigobusapi.settings import settings
 from vigobusapi.logger import logger
 
-__all__ = ("http_request",)
+__all__ = ("http_request", "ListOfTuples")
+
+ListOfTuples = List[Tuple[str, str]]
 
 
 async def http_request(
         url: str,
         method: str = "GET",
-        params: Optional[dict] = None,
+        params: Optional[Union[dict, ListOfTuples]] = None,
         body: Optional[Union[dict, str]] = None,
         headers: Optional[dict] = None,
         timeout: float = settings.http_timeout,
@@ -31,7 +33,7 @@ async def http_request(
 
     :param url: URL to request
     :param method: HTTP method (default=GET)
-    :param params: URL query params as dict (default=None)
+    :param params: URL query params as dict or list of tuples (default=None)
     :param body: request body, usually a dict or string (default=None)
     :param headers: request headers as dict (default=None)
     :param timeout: timeout for each request retry in seconds (default=from settings)
