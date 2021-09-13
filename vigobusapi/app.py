@@ -16,7 +16,7 @@ from vigobusapi.entities import Stop, Stops, BusesResponse
 from vigobusapi.request_handler import request_handler
 from vigobusapi.settings import settings, google_maps_settings
 from vigobusapi.vigobus_getters import get_stop, get_stops, get_buses, search_stops
-from vigobusapi.services.google_maps import GoogleMapRequest, get_map
+from vigobusapi.services.google_maps import GoogleMapRequest, GoogleStreetviewRequest, get_map, get_photo
 from vigobusapi.services import MongoDB
 from vigobusapi.logger import logger
 
@@ -96,22 +96,41 @@ async def endpoint_get_stop_map(
         map_type: GoogleMapRequest.MapTypes = google_maps_settings.stop_map_default_type
 ):
     """Get a picture of a map with the stop location marked on it."""
-    with logger.contextualize(**locals()):
-        stop = await get_stop(stop_id)
-        if (stop.lat, stop.lon) == (None, None):
-            raise HTTPException(status_code=409, detail="The stop does not have information about the location")
+    stop = await get_stop(stop_id)
+    if (stop.lat, stop.lon) == (None, None):
+        raise HTTPException(status_code=409, detail="The stop does not have information about the location")
 
-        map_request = GoogleMapRequest(
-            location_x=stop.lat,
-            location_y=stop.lon,
-            size_x=size_x,
-            size_y=size_y,
-            zoom=zoom,
-            map_type=map_type,
-            tags=[GoogleMapRequest.Tag(location_x=stop.lat, location_y=stop.lon)]
-        )
-        map_data = await get_map(map_request)
-        return StreamingResponse(io.BytesIO(map_data), media_type="image/png")
+    map_request = GoogleMapRequest(
+        location_x=stop.lat,
+        location_y=stop.lon,
+        size_x=size_x,
+        size_y=size_y,
+        zoom=zoom,
+        map_type=map_type,
+        tags=[GoogleMapRequest.Tag(location_x=stop.lat, location_y=stop.lon)]
+    )
+    map_data = await get_map(map_request)
+    return StreamingResponse(io.BytesIO(map_data), media_type="image/png")
+
+
+@app.get("/stop/{stop_id}/photo")
+async def endpoint_get_stop_photo(
+        stop_id: int,
+        size_x: int = google_maps_settings.stop_photo_default_size_x,
+        size_y: int = google_maps_settings.stop_photo_default_size_y,
+):
+    stop = await get_stop(stop_id)
+    if (stop.lat, stop.lon) == (None, None):
+        raise HTTPException(status_code=409, detail="The stop does not have information about the location")
+
+    photo_request = GoogleStreetviewRequest(
+        location_x=stop.lat,
+        location_y=stop.lon,
+        size_x=size_x,
+        size_y=size_y
+    )
+    photo_data = await get_photo(photo_request)
+    return StreamingResponse(io.BytesIO(photo_data), media_type="image/png")
 
 
 def run():

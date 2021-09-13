@@ -47,6 +47,8 @@ class GoogleMapsSettings(_BaseSettings):
     stop_map_default_size_y: int = 720
     stop_map_default_zoom: int = 17
     stop_map_default_type: str = "roadmap"  # TODO use enum (after refactoring to avoid circular dependency issue)
+    stop_photo_default_size_x: int = 2000
+    stop_photo_default_size_y: int = 2000
     language: str = "es"
 
     @property

@@ -15,11 +15,12 @@ from vigobusapi.utils import ChecksumableClass, new_hash_values, update_hash_val
 from vigobusapi.logger import logger
 from .http_requester import http_request, ListOfTuples
 
-__all__ = ("GoogleMapRequest", "get_map")
+__all__ = ("GoogleMapRequest", "GoogleStreetviewRequest", "get_map", "get_photo")
 
 # TODO May refactor in package with different modules (at least split classes and logic)
 
 GOOGLE_MAPS_STATIC_API_URL = "https://maps.googleapis.com/maps/api/staticmap"
+GOOGLE_STREETVIEW_STATIC_API_URL = "https://maps.googleapis.com/maps/api/streetview"
 
 
 class _GoogleMapsBaseRequest(BaseModel, ChecksumableClass):
@@ -112,12 +113,17 @@ class GoogleMapRequest(_GoogleMapsBaseRequest):
     map_type: MapTypes
 
 
-async def _request(url: str, params: Union[dict, ListOfTuples]):
+class GoogleStreetviewRequest(_GoogleMapsBaseRequest):
+    pass
+
+
+async def _request(url: str, params: Union[dict, ListOfTuples], expect_http_error: bool = False):
     """HTTP requester for Google Maps API calls, automatically including the configured API key.
     Raises exception if the API Key is not configured.
 
     :param url: URL for the Google API, WITHOUT query parameters
     :param params: query parameters
+    :param expect_http_error: if True, raise_for_status=False and not_retry_400_errors=True
     """
     if not settings.enabled:
         raise Exception("Google Maps API Key not set in settings")
@@ -131,7 +137,9 @@ async def _request(url: str, params: Union[dict, ListOfTuples]):
         url=url,
         method="GET",
         params=params,
-        retries=1
+        retries=1,
+        raise_for_status=not expect_http_error,
+        not_retry_400_errors=expect_http_error
     )
 
 
@@ -164,3 +172,29 @@ async def get_map(request: GoogleMapRequest) -> bytes:
             params.append(("markers", tag_param))
 
     return (await _request(url=GOOGLE_MAPS_STATIC_API_URL, params=params)).content
+
+
+async def get_photo(request: GoogleStreetviewRequest) -> Optional[bytes]:
+    """Get a static StreetView picture from the Google StreetView Static API. Return the acquired PNG picture as bytes.
+    If the requested location does not have an available picture, returns None.
+
+    References:
+        https://developers.google.com/maps/documentation/streetview/overview
+    """
+    logger.bind(streetview_request=request.dict()).debug("Requesting Google Static StreetView picture...")
+    # TODO cache loaded pictures
+    # TODO Support specific parameters for tuning camera, if required
+    params = [
+        ("location", request.location_str),
+        ("size", request.size_str),
+        ("return_error_code", "true"),
+        ("source", "outdoor")
+    ]
+
+    response = await _request(GOOGLE_STREETVIEW_STATIC_API_URL, params=params, expect_http_error=True)
+    if response.status_code == 404:
+        logger.debug("No StreetView picture available for the request")
+        return None
+
+    response.raise_for_status()
+    return response.content
