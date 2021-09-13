@@ -3,6 +3,7 @@ Functions for getting static Maps and Pictures, using Google Maps and Streetview
 """
 
 # # Native # #
+from enum import Enum
 from typing import *
 
 # # Installed # #
@@ -11,6 +12,7 @@ from pydantic import BaseModel
 # # Project # #
 from vigobusapi.settings import google_maps_settings as settings
 from vigobusapi.utils import ChecksumableClass, new_hash_values, update_hash_values
+from vigobusapi.logger import logger
 from .http_requester import http_request, ListOfTuples
 
 __all__ = ("GoogleMapRequest", "get_map")
@@ -51,7 +53,7 @@ class GoogleMapRequest(_GoogleMapsBaseRequest):
     # Embed classes #
 
     class Tag(BaseModel, ChecksumableClass):
-        label: str  # single uppercase char (A~Z, 0~9)
+        label: Optional[str]  # single uppercase char (A~Z, 0~9)
         location_x: float
         location_y: float
 
@@ -63,10 +65,12 @@ class GoogleMapRequest(_GoogleMapsBaseRequest):
         def checksum_hash(self):
             return new_hash_values(
                 self.label,
+                self.location_x,
+                self.location_y,
                 algorithm="md5"
             )
 
-    class MapTypes:
+    class MapTypes(str, Enum):
         """Available map types.
 
         References:
@@ -95,7 +99,7 @@ class GoogleMapRequest(_GoogleMapsBaseRequest):
 
         return update_hash_values(
             self.zoom,
-            self.map_type,
+            self.map_type.value,
             sorted_tags_checksums,
             _hash=_hash
         )
@@ -105,7 +109,7 @@ class GoogleMapRequest(_GoogleMapsBaseRequest):
     tags: Optional[List[Tag]] = None
     zoom: int  # TODO may be used by Streetview as well (refactor if so)
     """https://developers.google.com/maps/documentation/maps-static/start#Zoomlevels"""
-    map_type: str = MapTypes.roadmap
+    map_type: MapTypes
 
 
 async def _request(url: str, params: Union[dict, ListOfTuples]):
@@ -132,24 +136,29 @@ async def _request(url: str, params: Union[dict, ListOfTuples]):
 
 
 async def get_map(request: GoogleMapRequest) -> bytes:
-    """Get a static Map picture from the Google Maps Static API. Return the returned image as bytes.
+    """Get a static Map picture from the Google Maps Static API. Return the acquired picture as bytes.
 
     References:
         https://developers.google.com/maps/documentation/maps-static/overview
         https://developers.google.com/maps/documentation/maps-static/start
     """
+    logger.bind(map_request=request.dict()).debug("Requesting Google Static Map picture...")
     # TODO cache loaded pictures
     params = [
         ("center", request.location_str),
         ("size", request.size_str),
         ("zoom", str(request.zoom)),
-        ("maptype", request.map_type)
+        ("maptype", request.map_type.value)
     ]
 
     if request.tags:
         for tag in request.tags:
-            tag_param_values = ["label:" + tag.label, tag.location_str]  # Location always at the end
-            tag_param_value = "|".join(tag_param_values)
-            params.append(("markers", tag_param_value))
+            tag_param_values = [tag.location_str]  # Location always at the end
+
+            if tag.label:
+                tag_param_values.insert(0, "label:" + tag.label)
+
+            tag_param = "|".join(tag_param_values)
+            params.append(("markers", tag_param))
 
     return (await _request(url=GOOGLE_MAPS_STATIC_API_URL, params=params)).content
