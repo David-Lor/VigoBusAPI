@@ -136,7 +136,7 @@ async def _request(url: str, params: Union[dict, ListOfTuples]):
 
 
 async def get_map(request: GoogleMapRequest) -> bytes:
-    """Get a static Map picture from the Google Maps Static API. Return the acquired picture as bytes.
+    """Get a static Map picture from the Google Maps Static API. Return the acquired PNG picture as bytes.
 
     References:
         https://developers.google.com/maps/documentation/maps-static/overview
@@ -148,7 +148,9 @@ async def get_map(request: GoogleMapRequest) -> bytes:
         ("center", request.location_str),
         ("size", request.size_str),
         ("zoom", str(request.zoom)),
-        ("maptype", request.map_type.value)
+        ("maptype", request.map_type.value),
+        ("language", settings.language),
+        ("format", "png8"),
     ]
 
     if request.tags:
