@@ -3,17 +3,17 @@ Module with all the available endpoints and the FastAPI initialization.
 """
 
 # # Native # #
-from typing import Optional
+from typing import Optional, Set
 
 # # Installed # #
 import uvicorn
-from fastapi import FastAPI, Response
+from fastapi import FastAPI, Response, Query, HTTPException
 
 # # Project # #
 from vigobusapi.entities import Stop, Stops, BusesResponse
 from vigobusapi.request_handler import request_handler
 from vigobusapi.settings import settings
-from vigobusapi.vigobus_getters import get_stop, get_buses, search_stops
+from vigobusapi.vigobus_getters import get_stop, get_stops, get_buses, search_stops
 from vigobusapi.services import MongoDB
 from vigobusapi.logger import logger
 
@@ -42,11 +42,25 @@ async def endpoint_status():
 
 
 @app.get("/stops", response_model=Stops)
-async def endpoint_get_stops(stop_name: str, limit: Optional[int] = None):
-    """Endpoint to search stops by a given name
+async def endpoint_get_stops(
+        stop_name: Optional[str] = Query(None),
+        limit: Optional[int] = Query(None),
+        stops_ids: Optional[Set[int]] = Query(None, alias="stop_id")
+):
+    """Endpoint to search/list stops by different filters. Only one filter can be used.
+    Returns 400 if no filters given.
+    The filters available are:
+
+    - stop_name: search by a single string in stop names. "limit" can be used for limiting results size.
+    - stop_id: repeatable param for getting multiple stops by id on a single request. Not found errors are ignored.
     """
     with logger.contextualize(**locals()):
-        stops = await search_stops(stop_name=stop_name, limit=limit)
+        if stop_name is not None:
+            stops = await search_stops(stop_name=stop_name, limit=limit)
+        elif stops_ids:
+            stops = await get_stops(stops_ids)
+        else:
+            raise HTTPException(status_code=400, detail="No filters given")
         return [stop.dict() for stop in stops]
 
 
@@ -60,6 +74,7 @@ async def endpoint_get_stop(stop_id: int):
 
 
 @app.get("/buses/{stop_id}", response_model=BusesResponse)
+@app.get("/stop/{stop_id}/buses", response_model=BusesResponse)
 async def endpoint_get_buses(stop_id: int, get_all_buses: bool = False):
     """Endpoint to get a list of Buses coming to a Stop giving the Stop ID.
     By default the shortest available list of buses is returned, unless 'get_all_buses' param is True
