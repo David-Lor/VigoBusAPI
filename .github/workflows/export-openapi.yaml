@@ -19,6 +19,8 @@ jobs:
         run: "python tools/export-openapi.py docs/openapi.json"
       - name: Preview exported schema
         run: "cat ./docs/openapi.json"
+      - name: Preview git status
+        run: apt-get -yq update && apt-get -yq install git && git status
       - name: Commit & Push exported schema
         # https://github.com/marketplace/actions/add-commit
         uses: EndBug/add-and-commit@v7
