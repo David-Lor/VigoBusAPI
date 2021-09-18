@@ -41,7 +41,7 @@ def save_to_file(filename: str, content: str):
     """Save the given content (str) into a filename with the given filename.
     Contents on existing file will be replaced."""
     with open(filename, "w") as schema_file:
-        schema_file.write(schema)
+        schema_file.write(content)
 
 
 def main():
