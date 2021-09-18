@@ -75,10 +75,12 @@ async def http_request(
                 last_status_code = response.status_code
 
                 # Log response
-                response_body = response.text
-                response_body_size = len(response.content)
-                if response_body_size > 500000 or "\\x00\\" in response_body:  # 500kB
+                response_body = response.content
+                response_body_size = len(response_body)
+                if response_body_size > 500000 or b"\x00" in response_body:  # 500kB
                     response_body = "binary or too large"
+                else:
+                    response_body = response.text
                 logger.bind(
                     response_elapsed_time=response_time,
                     response_status_code=last_status_code,

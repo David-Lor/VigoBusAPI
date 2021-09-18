@@ -3,6 +3,7 @@ Functions for getting static Maps and Pictures, using Google Maps and Streetview
 """
 
 # # Native # #
+import string
 from enum import Enum
 from typing import *
 
@@ -30,7 +31,9 @@ class _GoogleMapsBaseRequest(BaseModel, ChecksumableClass):
     size_y: int
 
     @property
-    def location_str(self):
+    def location_str(self) -> Optional[str]:
+        if self.location_x is None or self.location_y is None:
+            return None
         return f"{self.location_x},{self.location_y}"
 
     @property
@@ -54,9 +57,15 @@ class GoogleMapRequest(_GoogleMapsBaseRequest):
     # Embed classes #
 
     class Tag(BaseModel, ChecksumableClass):
-        label: Optional[str]  # single uppercase char (A~Z, 0~9)
+        __ALLOWED_LABELS = [*[str(i) for i in range(1, 10)], *[c for c in string.ascii_uppercase]]
+
+        label: Optional[str] = None  # TODO constrain values accepted (avoid enum?)
         location_x: float
         location_y: float
+
+        @classmethod
+        def get_allowed_labels(cls):
+            return cls.__ALLOWED_LABELS
 
         @property
         def location_str(self):
@@ -107,8 +116,10 @@ class GoogleMapRequest(_GoogleMapsBaseRequest):
 
     # Class Attributes #
 
+    location_x: Optional[float] = None
+    location_y: Optional[float] = None
     tags: Optional[List[Tag]] = None
-    zoom: int  # TODO may be used by Streetview as well (refactor if so)
+    zoom: int
     """https://developers.google.com/maps/documentation/maps-static/start#Zoomlevels"""
     map_type: MapTypes
 
@@ -153,13 +164,16 @@ async def get_map(request: GoogleMapRequest) -> bytes:
     logger.bind(map_request=request.dict()).debug("Requesting Google Static Map picture...")
     # TODO cache loaded pictures
     params = [
-        ("center", request.location_str),
         ("size", request.size_str),
-        ("zoom", str(request.zoom)),
         ("maptype", request.map_type.value),
         ("language", settings.language),
         ("format", "png8"),
     ]
+
+    location_str = request.location_str
+    if location_str:
+        params.append(("center", location_str))
+        params.append(("zoom", str(request.zoom)))
 
     if request.tags:
         for tag in request.tags:

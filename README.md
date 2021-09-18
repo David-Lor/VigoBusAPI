@@ -95,6 +95,7 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 - Add Near Stops endpoint
 - Add endpoint for static maps and StreetView acquisition
 - Add endpoints for static buses info
+- On multi-stop map generation, return markers showing stop IDs
 - Add integration tests
 - Add detailed install & configuration instructions
 - Improve endpoint and services/controllers in-code organization
@@ -106,6 +107,7 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 - _Añadir endpoint para consulta de paradas cercanas a ubicación_
 - _Añadir endpoint para obtención de mapas estáticos y StreetView_
 - _Añadir endpoints para consulta de información estática de buses_
+- _En generación de mapas de varias paradas, devolver marcadores mostrando IDs de parada_
 - _Añadir tests de integración_
 - _Añadir instrucciones detalladas de instalación y configuración_
 - _Mejorar organización en código de endpoints y servicios/controladores_

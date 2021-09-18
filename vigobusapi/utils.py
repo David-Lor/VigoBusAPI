@@ -5,8 +5,15 @@ Misc functions
 # # Native # #
 import abc
 import hashlib
+import json
+import base64 as _base64
+from typing import List, Dict, Union, Any
 
-__all__ = ("ChecksumableClass", "new_hash_values", "update_hash_values")
+# # Installed # #
+import pydantic
+from pydantic.json import pydantic_encoder
+
+__all__ = ("ChecksumableClass", "new_hash_values", "update_hash_values", "base64_encode", "json_encode_object")
 
 
 class ChecksumableClass(abc.ABC):
@@ -42,3 +49,21 @@ def new_hash_values(*args, algorithm: str):
     Returns the hash object (the hash/checksum value can be acquired by using str(output))."""
     _hash = hashlib.new(algorithm)
     return update_hash_values(*args, _hash=_hash)
+
+
+def base64_encode(data: str) -> str:
+    """Encode the given string as base64"""
+    return _base64.urlsafe_b64encode(data.encode()).decode()
+
+
+def json_encode_object(
+        obj: Union[pydantic.BaseModel, List[pydantic.BaseModel], Dict[Any, pydantic.BaseModel]],
+        base64: bool = False
+) -> str:
+    """Given a Pydantic object, a List of Pydantic objects, or a Dict with Pydantic objects, convert to JSON string.
+    If base64=True, return the JSON result base64-encoded.
+    """
+    encoded = json.dumps(obj, default=pydantic_encoder)
+    if base64:
+        return base64_encode(encoded)
+    return encoded
