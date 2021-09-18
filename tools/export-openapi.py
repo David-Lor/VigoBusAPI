@@ -46,7 +46,7 @@ def save_to_file(filename: str, content: str):
 def main():
     filename = get_filename_from_args()
     schema = get_schema()
-    schema_json = schema_to_json()
+    schema_json = schema_to_json(schema)
     save_to_file(filename=filename, content=schema_json)
 
 
