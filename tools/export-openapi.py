@@ -7,8 +7,15 @@ $ python tools/export-openapi.py docs/openapi.json
 This will export the schema on a file inside docs/openapi.json
 """
 
+import os
+import sys
 import json
-from vigobusapi import app
+
+try:
+    from vigobusapi import app
+except ModuleNotFoundError:
+    sys.path.append(os.getcwd())
+    from vigobusapi import app
 
 
 def get_filename_from_args() -> str:
