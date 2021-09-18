@@ -17,6 +17,8 @@ jobs:
         run: "pip install -r requirements.txt"
       - name: Export schema to JSON file
         run: "python tools/export-openapi.py docs/openapi.json"
+      - name: Preview exported schema
+        run: "cat ./docs/openapi.json"
       - name: Commit & Push exported schema
         # https://github.com/marketplace/actions/add-commit
         uses: EndBug/add-and-commit@v7
