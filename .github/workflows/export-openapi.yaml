@@ -20,7 +20,8 @@ jobs:
       - name: Commit & Push exported schema
         # https://github.com/marketplace/actions/add-commit
         uses: EndBug/add-and-commit@v7
-        add: "docs/openapi.json"
-        message: "Update OpenAPI"
-        pull_strategy: "NO-PULL"
-        push: true
+        with:
+          add: "docs/openapi.json"
+          message: "Update OpenAPI"
+          pull_strategy: "NO-PULL"
+          push: true
