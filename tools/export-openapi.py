@@ -31,7 +31,7 @@ def filename_is_yaml(filename: str) -> bool:
     return filename.endswith(".yaml") or filename.endswith(".yml")
 
 
-def get_filenames_from_args() -> List[str]:
+def get_files_names_from_args() -> List[str]:
     """Retrieve the output filename/s from called args. They must be files with .json, .yaml or .yml extension.
     Raise exception if no valid files found/given."""
     valid_files_names = list()
@@ -71,7 +71,7 @@ def save_to_file(filename: str, content: str):
 
 
 def main():
-    files_names = get_filename_from_args()
+    files_names = get_files_names_from_args()
     schema = get_schema()
 
     for filename in files_names:
