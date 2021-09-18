@@ -1,5 +1,8 @@
 # Python VigoBusAPI
 
+[![OpenAPI docs (stable)](https://img.shields.io/badge/OpenAPI%20docs-stable-green?logo=swagger&style=plastic)](https://editor.swagger.io/?url=https://raw.githubusercontent.com/David-Lor/VigoBusAPI/master/docs/openapi.yaml)
+[![OpenAPI docs (develop)](https://img.shields.io/badge/OpenAPI%20docs-develop-blue?logo=swagger&style=plastic)](https://editor.swagger.io/?url=https://raw.githubusercontent.com/David-Lor/VigoBusAPI/develop/docs/openapi.yaml)
+
 Intermediate Python + FastAPI API that provide Stop and Bus information provided by the public transport system of the city of Vigo (Galicia/Spain).
 
 The goal of this API is to keep the different data sources and APIs available on one single API with better endpoints structure and more clear data output format (as JSON).
