@@ -4,7 +4,6 @@ Module with all the available endpoints and the FastAPI initialization.
 
 # # Native # #
 import io
-import json
 from typing import Optional, Set
 
 # # Installed # #
@@ -130,21 +129,11 @@ async def endpoint_get_stops_map(
         stops_ids: Set[int] = Query(None, alias="stop_id", min_items=1, max_items=35),
         map_params: MapQueryParams = Depends(),
 ):
-    """Get a picture of a map with the locations of the given stops marked on it.
-    The marks are labelled in the same order as the given stops ids.
-
-    A header "X-Stops-Tags" is returned, being a JSON associating the Stops IDs with the tag label on the map,
-    with the format: {"<stop id>" : "<tag label>"}
-    """
+    """Get a picture of a map with the locations of the given stops marked on it."""
     stops = await get_stops(stops_ids)
 
-    stops_tags = list()
-    stops_tags_relation = dict()
-    for i, stop in enumerate(stops):
-        tag_label = GoogleMapRequest.Tag.get_allowed_labels()[i]
-        tag = GoogleMapRequest.Tag(label=tag_label, location_x=stop.lat, location_y=stop.lon)
-        stops_tags.append(tag)
-        stops_tags_relation[stop.stop_id] = tag_label
+    # noinspection PyTypeChecker
+    stops_tags = [GoogleMapRequest.Tag(label=stop.stop_id, location_x=stop.lat, location_y=stop.lon) for stop in stops]
 
     map_request = GoogleMapRequest(
         size_x=map_params.size_x,
@@ -157,8 +146,7 @@ async def endpoint_get_stops_map(
 
     return StreamingResponse(
         content=io.BytesIO(map_data),
-        media_type="image/png",
-        headers={"X-Stops-Tags": json.dumps(stops_tags_relation)}
+        media_type="image/png"
     )
 
 

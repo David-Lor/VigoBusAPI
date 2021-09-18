@@ -8,6 +8,7 @@ from enum import Enum
 from typing import *
 
 # # Installed # #
+import pydantic
 from pydantic import BaseModel
 
 # # Project # #
@@ -22,6 +23,12 @@ __all__ = ("GoogleMapRequest", "GoogleStreetviewRequest", "get_map", "get_photo"
 
 GOOGLE_MAPS_STATIC_API_URL = "https://maps.googleapis.com/maps/api/staticmap"
 GOOGLE_STREETVIEW_STATIC_API_URL = "https://maps.googleapis.com/maps/api/streetview"
+
+
+def get_labelled_icon_url(label: str) -> str:
+    """Get an URL pointing to a picture of a map marker, with a custom label on top of it"""
+    # TODO self-hosted generation, and/or cache of generated labels
+    return f"https://cdn.mapmarker.io/api/v1/font-awesome/v5/pin?text={label}&size=40&background=D94B43&color=000000&hoffset=-1"
 
 
 class _GoogleMapsBaseRequest(BaseModel, ChecksumableClass):
@@ -60,12 +67,22 @@ class GoogleMapRequest(_GoogleMapsBaseRequest):
         __ALLOWED_LABELS = [*[str(i) for i in range(1, 10)], *[c for c in string.ascii_uppercase]]
 
         label: Optional[str] = None  # TODO constrain values accepted (avoid enum?)
+        icon_url: Optional[str] = None
         location_x: float
         location_y: float
 
         @classmethod
         def get_allowed_labels(cls):
             return cls.__ALLOWED_LABELS
+
+        @pydantic.root_validator(pre=True)
+        def label_to_icon(cls, kwargs: dict):
+            """If label is not an "allowed label", generate an icon for it and set it as "icon_url"."""
+            label = kwargs.get("label")
+            if label not in cls.__ALLOWED_LABELS:
+                kwargs["label"] = None
+                kwargs["icon_url"] = get_labelled_icon_url(label)
+            return kwargs
 
         @property
         def location_str(self):
@@ -154,15 +171,23 @@ async def _request(url: str, params: Union[dict, ListOfTuples], expect_http_erro
     )
 
 
-async def get_map(request: GoogleMapRequest) -> bytes:
-    """Get a static Map picture from the Google Maps Static API. Return the acquired PNG picture as bytes.
+def _get_map_tags_params(request_tags: List[GoogleMapRequest.Tag]) -> ListOfTuples:
+    params = list()
+    for tag in request_tags:
+        tag_param_values = [tag.location_str]  # Location always at the end
 
-    References:
-        https://developers.google.com/maps/documentation/maps-static/overview
-        https://developers.google.com/maps/documentation/maps-static/start
-    """
-    logger.bind(map_request=request.dict()).debug("Requesting Google Static Map picture...")
-    # TODO cache loaded pictures
+        if tag.label:
+            tag_param_values.insert(0, "label:" + tag.label)
+        if tag.icon_url:
+            tag_param_values.insert(0, "icon:" + tag.icon_url)
+
+        tag_param = "|".join(tag_param_values)
+        params.append(("markers", tag_param))
+
+    return params
+
+
+def _get_map_params(request: GoogleMapRequest) -> ListOfTuples:
     params = [
         ("size", request.size_str),
         ("maptype", request.map_type.value),
@@ -176,15 +201,22 @@ async def get_map(request: GoogleMapRequest) -> bytes:
         params.append(("zoom", str(request.zoom)))
 
     if request.tags:
-        for tag in request.tags:
-            tag_param_values = [tag.location_str]  # Location always at the end
+        params.extend(_get_map_tags_params(request.tags))
 
-            if tag.label:
-                tag_param_values.insert(0, "label:" + tag.label)
+    return params
 
-            tag_param = "|".join(tag_param_values)
-            params.append(("markers", tag_param))
 
+async def get_map(request: GoogleMapRequest) -> bytes:
+    """Get a static Map picture from the Google Maps Static API. Return the acquired PNG picture as bytes.
+
+    References:
+        https://developers.google.com/maps/documentation/maps-static/overview
+        https://developers.google.com/maps/documentation/maps-static/start
+    """
+    logger.bind(map_request=request.dict()).debug("Requesting Google Static Map picture...")
+    # TODO cache loaded pictures
+
+    params = _get_map_params(request)
     return (await _request(url=GOOGLE_MAPS_STATIC_API_URL, params=params)).content
 
 
