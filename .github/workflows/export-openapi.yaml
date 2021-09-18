@@ -18,14 +18,14 @@ jobs:
           python-version: "3.8"
           architecture: "x64"
       - name: Setup requirements
-        run: "pip install -r requirements.txt"
-      - name: Export schema to JSON file
-        run: "python tools/export-openapi.py docs/openapi.json"
-      - name: Commit & Push exported schema
+        run: "pip install -r requirements.txt && pip install pyyaml==5.4.1"
+      - name: Export schema to JSON and YAML files
+        run: "python tools/export-openapi.py docs/openapi.json docs/openapi.yaml"
+      - name: Commit & Push exported schemas
         # https://github.com/marketplace/actions/add-commit
         uses: EndBug/add-and-commit@v7
         with:
-          add: "docs/openapi.json"
+          add: "docs/openapi.*"
           message: "Update OpenAPI"
           pull_strategy: "NO-PULL"
           push: true
