@@ -24,6 +24,7 @@ def get_filename_from_args() -> str:
     file_path = sys.argv[-1]
     if not file_path.endswith(".json"):
         raise ValueError("Output file not given or not a .json file")
+    return file_path
 
 
 def get_schema() -> dict:
