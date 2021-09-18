@@ -21,7 +21,7 @@ jobs:
         # https://github.com/marketplace/actions/add-commit
         uses: EndBug/add-and-commit@v7
         with:
-          add: "./docs/openapi.json"
+          add: "."
           message: "Update OpenAPI"
           pull_strategy: "NO-PULL"
           push: true
