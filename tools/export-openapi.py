@@ -33,7 +33,7 @@ def get_schema() -> dict:
 
 def schema_to_json(schema: dict, indent: int = 2) -> str:
     """Convert the given JSON schema (dict) into a JSON string."""
-    return json.loads(schema, indent=indent)
+    return json.dumps(schema, indent=indent)
 
 
 def save_to_file(filename: str, content: str):
