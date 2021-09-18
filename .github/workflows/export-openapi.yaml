@@ -1,0 +1,31 @@
+name: Export OpenAPI schema
+on:
+  - push
+  - workflow_dispatch
+
+jobs:
+  export_openapi:
+    name: Export OpenAPI schema & commit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Setup Python
+        uses: actions/setup-python@master
+        with:
+          python-version: "3.8"
+          architecture: "x64"
+      - name: Setup requirements
+        run: "pip install -r requirements.txt"
+      - name: Export schema to JSON file
+        run: "python tools/export-openapi.py docs/openapi.json"
+      - name: Commit & Push exported schema
+        # https://github.com/marketplace/actions/add-commit
+        uses: EndBug/add-and-commit@v7
+        with:
+          add: "docs/openapi.json"
+          message: "Update OpenAPI"
+          pull_strategy: "NO-PULL"
+          push: true

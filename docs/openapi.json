@@ -1,0 +1,365 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "VigoBusAPI",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/status": {
+      "get": {
+        "summary": "Endpoint Status",
+        "operationId": "endpoint_status_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stops": {
+      "get": {
+        "summary": "Endpoint Get Stops",
+        "description": "Endpoint to search/list stops by different filters. Only one filter can be used.\nReturns 400 if no filters given.\nThe filters available are:\n\n- stop_name: search by a single string in stop names. \"limit\" can be used for limiting results size.\n- stop_id: repeatable param for getting multiple stops by id on a single request. Not found errors are ignored.",
+        "operationId": "endpoint_get_stops_stops_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Stop Name",
+              "type": "string"
+            },
+            "name": "stop_name",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Limit",
+              "type": "integer"
+            },
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Stop Id",
+              "uniqueItems": true,
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            "name": "stop_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Endpoint Get Stops Stops Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Stop"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stop/{stop_id}": {
+      "get": {
+        "summary": "Endpoint Get Stop",
+        "description": "Endpoint to get information of a Stop giving the Stop ID\n    ",
+        "operationId": "endpoint_get_stop_stop__stop_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Stop Id",
+              "type": "integer"
+            },
+            "name": "stop_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Stop"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stop/{stop_id}/buses": {
+      "get": {
+        "summary": "Endpoint Get Buses",
+        "description": "Endpoint to get a list of Buses coming to a Stop giving the Stop ID.\nBy default the shortest available list of buses is returned, unless 'get_all_buses' param is True",
+        "operationId": "endpoint_get_buses_stop__stop_id__buses_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Stop Id",
+              "type": "integer"
+            },
+            "name": "stop_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Get All Buses",
+              "type": "boolean",
+              "default": false
+            },
+            "name": "get_all_buses",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusesResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/buses/{stop_id}": {
+      "get": {
+        "summary": "Endpoint Get Buses",
+        "description": "Endpoint to get a list of Buses coming to a Stop giving the Stop ID.\nBy default the shortest available list of buses is returned, unless 'get_all_buses' param is True",
+        "operationId": "endpoint_get_buses_buses__stop_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Stop Id",
+              "type": "integer"
+            },
+            "name": "stop_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Get All Buses",
+              "type": "boolean",
+              "default": false
+            },
+            "name": "get_all_buses",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusesResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Bus": {
+        "title": "Bus",
+        "required": [
+          "line",
+          "route",
+          "time"
+        ],
+        "type": "object",
+        "properties": {
+          "line": {
+            "title": "Line",
+            "type": "string"
+          },
+          "route": {
+            "title": "Route",
+            "type": "string"
+          },
+          "time": {
+            "title": "Time",
+            "type": "integer"
+          },
+          "bus_id": {
+            "title": "Bus Id",
+            "type": "string"
+          }
+        }
+      },
+      "BusesResponse": {
+        "title": "BusesResponse",
+        "required": [
+          "buses",
+          "more_buses_available"
+        ],
+        "type": "object",
+        "properties": {
+          "buses": {
+            "title": "Buses",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Bus"
+            }
+          },
+          "more_buses_available": {
+            "title": "More Buses Available",
+            "type": "boolean"
+          },
+          "source": {
+            "title": "Source",
+            "type": "string"
+          }
+        }
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "Stop": {
+        "title": "Stop",
+        "required": [
+          "stop_id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "stop_id": {
+            "title": "Stop Id",
+            "type": "integer"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "lat": {
+            "title": "Lat",
+            "type": "number"
+          },
+          "lon": {
+            "title": "Lon",
+            "type": "number"
+          },
+          "original_name": {
+            "title": "Original Name",
+            "type": "string"
+          },
+          "source": {
+            "title": "Source",
+            "type": "string"
+          },
+          "created": {
+            "title": "Created",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
