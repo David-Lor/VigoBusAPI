@@ -77,6 +77,10 @@ class Stop(BaseModel):
         d.pop("source")
         return d
 
+    @property
+    def has_location(self):
+        return self.lat is not None and self.lon is not None
+
 
 OptionalStop = Optional[Stop]
 StopOrNotExist = Union[Stop, StopNotExist]
