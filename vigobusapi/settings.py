@@ -8,6 +8,7 @@ from typing import Optional
 
 # # Installed # #
 import pydantic
+import pytimeparse
 
 __all__ = ("settings", "google_maps_settings")
 
@@ -34,11 +35,25 @@ class Settings(_BaseSettings):
     mongo_uri = "mongodb://localhost:27017"
     mongo_stops_db = "vigobusapi"
     mongo_stops_collection = "stops"
+    mongo_cache_maps_collection = "cache_maps"
+    mongo_cache_maps_ttl: int = "60 days"
     api_host = "0.0.0.0"
     api_port: int = 5000
     api_name = "VigoBusAPI"
     api_log_level = "info"
     log_level = "info"
+
+    @pydantic.validator("mongo_cache_maps_ttl", pre=True)
+    def _parse_duration(cls, v):
+        """If the field is a non-digit string, parse a time length into seconds.
+        The value must be defined with the values accepted by the parsing library:
+        https://pypi.org/project/pytimeparse/"""
+        if isinstance(v, str) and not v.isdigit():
+            parsed_v = pytimeparse.parse(v)
+            if parsed_v is None:
+                raise ValueError(f"Invalid duration string \"{v}\"")
+            return parsed_v
+        return v
 
 
 class GoogleMapsSettings(_BaseSettings):

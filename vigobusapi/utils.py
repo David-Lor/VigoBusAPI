@@ -6,6 +6,7 @@ Misc functions
 import abc
 import hashlib
 import json
+import datetime
 import base64 as _base64
 from typing import List, Dict, Union, Any
 
@@ -13,7 +14,10 @@ from typing import List, Dict, Union, Any
 import pydantic
 from pydantic.json import pydantic_encoder
 
-__all__ = ("ChecksumableClass", "new_hash_values", "update_hash_values", "base64_encode", "json_encode_object")
+__all__ = (
+    "ChecksumableClass", "new_hash_values", "update_hash_values", "base64_encode", "json_encode_object",
+    "get_datetime"
+)
 
 
 class ChecksumableClass(abc.ABC):
@@ -67,3 +71,8 @@ def json_encode_object(
     if base64:
         return base64_encode(encoded)
     return encoded
+
+
+def get_datetime():
+    """Get current datetime as a datetime object, in UTC timezone."""
+    return datetime.datetime.now(tz=datetime.timezone.utc)

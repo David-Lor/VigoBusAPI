@@ -13,7 +13,7 @@ import pydantic
 # # Package # #
 from vigobusapi.exceptions import StopNotExist
 
-__all__ = ("Stop", "Stops", "OptionalStop", "StopOrNotExist", "Bus", "Buses", "BusesResponse")
+__all__ = ("BaseMongoModel", "Stop", "Stops", "OptionalStop", "StopOrNotExist", "Bus", "Buses", "BusesResponse")
 
 
 class BaseModel(pydantic.BaseModel):
@@ -22,6 +22,28 @@ class BaseModel(pydantic.BaseModel):
         #     kwargs["skip_defaults"] = True
         d = super().dict(*args, **kwargs)
         return {k: v for k, v in d.items() if (not skip_none or v is not None)}
+
+
+class BaseMongoModel(pydantic.BaseModel):
+    # TODO Use in Stop models
+    class Config(pydantic.BaseModel.Config):
+        id_field: Optional[str] = None
+
+    def to_mongo(self, **kwargs) -> dict:
+        d = self.dict(**kwargs)
+        if self.Config.id_field is None:
+            return d
+
+        d["_id"] = d.pop(self.Config.id_field)
+        return d
+
+    @classmethod
+    def from_mongo(cls, d: dict):
+        if cls.Config.id_field is not None:
+            d[cls.Config.id_field] = d.pop("_id")
+
+        # noinspection PyArgumentList
+        return cls(**d)
 
 
 class Bus(BaseModel):

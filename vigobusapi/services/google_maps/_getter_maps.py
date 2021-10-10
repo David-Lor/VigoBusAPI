@@ -3,6 +3,7 @@ Functions for acquiring a picture of a Map
 """
 
 # # Native # #
+import asyncio
 from typing import *
 
 # # Project # #
@@ -10,6 +11,7 @@ from vigobusapi.settings import google_maps_settings as settings
 from vigobusapi.logger import logger
 from ._requester import google_maps_request, ListOfTuples
 from ._entities import GoogleMapRequest
+from ._cache import save_cached_metadata
 
 __all__ = ("get_map",)
 
@@ -51,6 +53,7 @@ def _get_map_params(request: GoogleMapRequest) -> ListOfTuples:
 
 async def get_map(request: GoogleMapRequest) -> bytes:
     """Get a static Map picture from the Google Maps Static API. Return the acquired PNG picture as bytes.
+    The fetched picture is persisted on cache, running a fire & forget background task.
 
     References:
         https://developers.google.com/maps/documentation/maps-static/overview
@@ -60,4 +63,6 @@ async def get_map(request: GoogleMapRequest) -> bytes:
     # TODO cache loaded pictures
 
     params = _get_map_params(request)
-    return (await google_maps_request(url=GOOGLE_MAPS_STATIC_API_URL, params=params)).content
+    image = (await google_maps_request(url=GOOGLE_MAPS_STATIC_API_URL, params=params)).content
+    asyncio.create_task(save_cached_metadata(request=request, image=image))
+    return image

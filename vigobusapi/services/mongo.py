@@ -2,7 +2,11 @@
 MongoDB client class
 """
 
+# # Native # #
+import asyncio
+
 # # Installed # #
+import pymongo.database
 from motor import motor_asyncio
 from pymongo import TEXT
 
@@ -36,11 +40,14 @@ class MongoDB:
             raise Exception("Mongo client not initialized")
         return self._client
 
-    def get_database(self):
+    def get_database(self) -> pymongo.database.Database:
         return self.client[settings.mongo_stops_db]
 
-    def get_stops_collection(self):
+    def get_stops_collection(self) -> pymongo.database.Collection:
         return self.get_database()[settings.mongo_stops_collection]
+
+    def get_cache_maps_collection(self) -> pymongo.database.Collection:
+        return self.get_database()[settings.mongo_cache_maps_collection]
 
     @classmethod
     async def initialize(cls):
@@ -57,12 +64,24 @@ class MongoDB:
         cls._mongodb_instance = mongo
         mongo._client = motor_asyncio.AsyncIOMotorClient(settings.mongo_uri)
 
-        # Create a Text Index on stop name, for search
-        # https://docs.mongodb.com/manual/core/index-text/#create-text-index
-        await mongo.get_stops_collection().create_index(
-            [("name", TEXT)],
-            background=True,
-            default_language="spanish"
+        logger.debug("Setting up MongoDB indexes...")
+        await asyncio.gather(
+            # Create a Text Index on stop name, for search
+            # https://docs.mongodb.com/manual/core/index-text/#create-text-index
+            mongo.get_stops_collection().create_index(
+                [("name", TEXT)],
+                background=True,
+                default_language="spanish"
+            ),
+
+            # Create TTL Index on cache collections
+            # https://docs.mongodb.com/manual/core/index-ttl/
+            mongo.get_cache_maps_collection().create_index(
+                "saved",
+                name="ttl",
+                expireAfterSeconds=settings.mongo_cache_maps_ttl,
+                background=True
+            ),
         )
 
         logger.info("MongoDB initialized!")

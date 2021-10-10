@@ -3,12 +3,14 @@ Functions for acquiring a photo of a location
 """
 
 # # Native # #
+import asyncio
 from typing import *
 
 # # Project # #
 from vigobusapi.logger import logger
 from ._entities import GoogleStreetviewRequest
 from ._requester import google_maps_request, ListOfTuples
+from ._cache import save_cached_metadata
 
 __all__ = ("get_photo",)
 
@@ -29,6 +31,7 @@ def _get_photo_params(request: GoogleStreetviewRequest) -> ListOfTuples:
 async def get_photo(request: GoogleStreetviewRequest) -> Optional[bytes]:
     """Get a static StreetView picture from the Google StreetView Static API. Return the acquired PNG picture as bytes.
     If the requested location does not have an available picture, returns None.
+    The fetched picture is persisted on cache, running a fire & forget background task.
 
     References:
         https://developers.google.com/maps/documentation/streetview/overview
@@ -44,4 +47,6 @@ async def get_photo(request: GoogleStreetviewRequest) -> Optional[bytes]:
         return None
 
     response.raise_for_status()
-    return response.content
+    image = response.content
+    asyncio.create_task(save_cached_metadata(request=request, image=image))
+    return image
