@@ -4,34 +4,36 @@
 # # Native # #
 import io
 import json
+from dataclasses import dataclass
 from typing import Set
 
 # # Installed # #
-from fastapi import APIRouter, Query, Depends, HTTPException
+from fastapi import APIRouter, Query, Depends, HTTPException, Response
 from starlette.responses import StreamingResponse
 
 # # Project # #
 from vigobusapi.settings import google_maps_settings
 from vigobusapi.vigobus_getters import get_stop, get_stops
-from vigobusapi.services.google_maps import GoogleMapRequest, GoogleStreetviewRequest, get_map, get_photo
+from vigobusapi.services.google_maps import (GoogleMapRequest, GoogleStreetviewRequest,
+                                             get_map, get_photo, update_cached_metadata)
 
 __all__ = ("router",)
 
 router = APIRouter()
 
 
+@dataclass
 class MapQueryParams:
-    def __init__(
-            self,
-            size_x: int = google_maps_settings.stop_map_default_size_x,
-            size_y: int = google_maps_settings.stop_map_default_size_y,
-            zoom: int = google_maps_settings.stop_map_default_zoom,
-            map_type: GoogleMapRequest.MapTypes = google_maps_settings.stop_map_default_type
-    ):
-        self.size_x = size_x
-        self.size_y = size_y
-        self.zoom = zoom
-        self.map_type = map_type
+    size_x: int = google_maps_settings.stop_map_default_size_x,
+    size_y: int = google_maps_settings.stop_map_default_size_y,
+    zoom: int = google_maps_settings.stop_map_default_zoom,
+    map_type: GoogleMapRequest.MapTypes = google_maps_settings.stop_map_default_type
+
+
+@dataclass
+class MapCacheSetParams:
+    id: str
+    telegram_file_id: str
 
 
 @router.get("/stop/{stop_id}/map")
@@ -122,3 +124,12 @@ async def endpoint_get_stop_photo(
     if not photo_data:
         raise HTTPException(status_code=404, detail="No StreetView photo available for the stop location")
     return StreamingResponse(io.BytesIO(photo_data), media_type="image/png")
+
+
+@router.put("/cache/maps", status_code=204)
+async def update_maps_cache(cache_params: MapCacheSetParams = Depends()):
+    """Update fields from a cached map or photo. Can be used for setting the Telegram File ID of a persisted photo."""
+    updated = await update_cached_metadata(cache_id=cache_params.id, telegram_file_id=cache_params.telegram_file_id)
+    if not updated:
+        raise HTTPException(status_code=404, detail=f"No cache found with id {cache_params.id}")
+    return Response(status_code=204)

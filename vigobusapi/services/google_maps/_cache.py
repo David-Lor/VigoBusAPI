@@ -17,7 +17,7 @@ from vigobusapi.utils import get_datetime, new_hash_values, ChecksumableClass, w
 from vigobusapi.logger import logger
 from ._entities import *
 
-__all__ = ("get_cached_metadata", "save_cached_metadata",
+__all__ = ("get_cached_metadata", "save_cached_metadata", "update_cached_metadata",
            "MapRequestModels", "MapVendors", "MapTypes", "CachedMap")
 
 MapRequestModels = Union[GoogleMapRequest, GoogleStreetviewRequest]
@@ -109,6 +109,31 @@ async def get_cached_metadata(request: MapRequestModels, fetch_image: bool) -> O
         logger.bind(cached_metadata_document=without(document, "image"))\
             .debug("Read map cached metadata document from Mongo")
         return parsed_metadata
+
+
+async def update_cached_metadata(cache_id: str, telegram_file_id: str) -> bool:
+    """Update certain fields from a cached map metadata document. Currently only supports updating the Telegram File ID.
+    The identifier used is the document id. Returns True/False depending on if the document was found."""
+    with logger.contextualize(cache_id=cache_id):
+        query_filter = dict(_id=cache_id)
+        query_update = {
+            "$set": {
+                "telegram_file_id": telegram_file_id
+            }
+        }
+
+        logger.bind(cache_document_update=query_update).debug("Updating map cached metadata...")
+        r: dict = await MongoDB.get_mongo().get_cache_maps_collection().find_one_and_update(
+            filter=query_filter,
+            update=query_update
+        )
+
+        if r is None:
+            logger.debug("No map cache document found for update")
+            return False
+
+        logger.debug("Updated map cache document")
+        return True
 
 
 async def save_cached_metadata(request: MapRequestModels, image: Optional[bytes]):
