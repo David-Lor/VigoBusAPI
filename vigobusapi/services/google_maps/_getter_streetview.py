@@ -10,7 +10,7 @@ from typing import *
 from vigobusapi.logger import logger
 from ._entities import GoogleStreetviewRequest
 from ._requester import google_maps_request, ListOfTuples
-from ._cache import save_cached_metadata
+from ._cache import save_cached_metadata, get_cached_metadata
 
 __all__ = ("get_photo",)
 
@@ -28,7 +28,7 @@ def _get_photo_params(request: GoogleStreetviewRequest) -> ListOfTuples:
     return params
 
 
-async def get_photo(request: GoogleStreetviewRequest) -> Optional[bytes]:
+async def get_photo_from_api(request: GoogleStreetviewRequest) -> Optional[bytes]:
     """Get a static StreetView picture from the Google StreetView Static API. Return the acquired PNG picture as bytes.
     If the requested location does not have an available picture, returns None.
     The fetched picture is persisted on cache, running a fire & forget background task.
@@ -37,7 +37,6 @@ async def get_photo(request: GoogleStreetviewRequest) -> Optional[bytes]:
         https://developers.google.com/maps/documentation/streetview/overview
     """
     logger.bind(streetview_request=request.dict()).debug("Requesting Google Static StreetView picture...")
-    # TODO cache loaded pictures
     # TODO Support specific parameters for tuning camera, if required
 
     params = _get_photo_params(request)
@@ -48,5 +47,24 @@ async def get_photo(request: GoogleStreetviewRequest) -> Optional[bytes]:
 
     response.raise_for_status()
     image = response.content
+    logger.debug("Photo acquired from Google StreetView Static API")
+
     asyncio.create_task(save_cached_metadata(request=request, image=image))
+    return image
+
+
+async def get_photo(request: GoogleStreetviewRequest, read_cache_first: bool = True) -> Optional[bytes]:
+    """Get a static StreetView picture from cache (if read_cache_first=True) or the Google StreetView Static API.
+    Return the acquired PNG picture as bytes.
+    If the requested location does not have an available picture, returns None."""
+    image = None
+
+    if read_cache_first:
+        cached_metadata = await get_cached_metadata(request, fetch_image=True)
+        if cached_metadata:
+            image = cached_metadata.image
+
+    if image is None:
+        image = await get_photo_from_api(request)
+
     return image

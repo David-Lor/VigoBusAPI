@@ -13,7 +13,7 @@ from pymongo.results import UpdateResult
 # # Project # #
 from vigobusapi.services.mongo import MongoDB
 from vigobusapi.entities import BaseMongoModel
-from vigobusapi.utils import get_datetime, new_hash_values, ChecksumableClass
+from vigobusapi.utils import get_datetime, new_hash_values, ChecksumableClass, without
 from vigobusapi.logger import logger
 from ._entities import *
 
@@ -106,7 +106,8 @@ async def get_cached_metadata(request: MapRequestModels, fetch_image: bool) -> O
             return None
 
         parsed_metadata = CachedMap(**document)
-        logger.debug("Read map cached metadata document from Mongo")
+        logger.bind(cached_metadata_document=without(document, "image"))\
+            .debug("Read map cached metadata document from Mongo")
         return parsed_metadata
 
 
