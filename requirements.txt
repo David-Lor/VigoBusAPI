@@ -9,3 +9,4 @@ cachetools==4.2.2  # TTLCache
 pymongo==3.10.1  # MongoDB client
 motor==2.1.0  # MongoDB Async client
 loguru==0.5.3  # Logging
+pytimeparse==1.1.8  # Parse human duration strings into seconds
