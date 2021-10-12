@@ -14,5 +14,5 @@ __all__ = ("setup_routes",)
 
 def setup_routes(app: FastAPI):
     app.include_router(general_router)
-    app.include_router(stops_buses_router)
     app.include_router(maps_router)
+    app.include_router(stops_buses_router)
