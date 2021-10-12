@@ -5,6 +5,7 @@ Cache utils for reading/writing persistence of cached Maps & StreetView pictures
 # # Native # #
 import enum
 import datetime
+import asyncio
 from typing import Union, Optional
 
 # # Installed # #
@@ -56,13 +57,27 @@ class CachedMap(BaseMongoModel, ChecksumableClass):
     saved: datetime.datetime
     """When this document was saved. Used for TTL purposes."""
     image: Optional[bytes]
-    """Image saved as-is."""
+    """Image saved as-is. Optional because metadata can be fetched without the image, but should always be persisted."""
     telegram_file_id: Optional[str]
     """File ID in Telegram, set after sending the picture via Telegram."""
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.id = self.checksum_value
+
+    def metadata_dict(self, **kwargs) -> dict:
+        """Fetch the dict(), without the "image" field."""
+        excludes = kwargs.pop("exclude", set())
+        excludes.add("image")
+        kwargs["exclude"] = excludes
+        return self.dict(**kwargs)
+
+    def metadata_json(self, **kwargs) -> str:
+        """Fetch the json(), without the "image" field."""
+        excludes = kwargs.pop("exclude", set())
+        excludes.add("image")
+        kwargs["exclude"] = excludes
+        return self.json(**kwargs)
 
     @property
     def checksum_hash(self):
@@ -86,7 +101,7 @@ def _get_mongo_filter_from_request(request: MapRequestModels):
 
 async def get_cached_metadata(request: MapRequestModels, fetch_image: bool) -> Optional[CachedMap]:
     request_checksum = request.checksum_value
-    with logger.contextualize(request_checksum=request_checksum):
+    with logger.contextualize(map_request_checksum=request_checksum):
         logger.bind(fetch_image=fetch_image).debug("Searching map cached metadata...")
 
         query_filter = _get_mongo_filter_from_request(request)
@@ -136,7 +151,9 @@ async def update_cached_metadata(cache_id: str, telegram_file_id: str) -> bool:
         return True
 
 
-async def save_cached_metadata(request: MapRequestModels, image: Optional[bytes]):
+async def save_cached_metadata(request: MapRequestModels, image: bytes, background: bool) -> CachedMap:
+    """Save the given request object and image in cache.
+    Return the CachedMap object. If background=True, return instantly and persist in background."""
     metadata = CachedMap(
         key=request.checksum_value,
         vendor=MapVendors.google_maps.value,
@@ -147,16 +164,25 @@ async def save_cached_metadata(request: MapRequestModels, image: Optional[bytes]
     )
 
     with logger.contextualize(map_cache_id=metadata.id):
-        logger.debug("Saving map cache in MongoDB...")
-        r: UpdateResult = await MongoDB.get_mongo().get_cache_maps_collection().replace_one(
-            filter=dict(_id=metadata.id),
-            replacement=metadata.to_mongo(),
-            upsert=True
-        )
+        async def __save():
+            logger.debug("Saving map cache in MongoDB...")
+            r: UpdateResult = await MongoDB.get_mongo().get_cache_maps_collection().replace_one(
+                filter=dict(_id=metadata.id),
+                replacement=metadata.to_mongo(),
+                upsert=True
+            )
 
-        if r.upserted_id:
-            logger.debug("Inserted new map cache document")
-        elif r.modified_count:
-            logger.debug("Replaced existing map cache document")
+            if r.upserted_id:
+                logger.debug("Inserted new map cache document")
+            elif r.modified_count:
+                logger.debug("Replaced existing map cache document")
+            else:
+                logger.error("No modified/inserted documents inserted in MongoDB")
+
+        if background:
+            logger.debug("Map cache will be saved as background task")
+            asyncio.create_task(__save())
         else:
-            logger.error("No modified/inserted documents inserted in MongoDB")
+            await __save()
+
+        return metadata
