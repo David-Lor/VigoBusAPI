@@ -10,7 +10,7 @@ from typing import *
 from vigobusapi.logger import logger
 from ._entities import GoogleStreetviewRequest
 from ._requester import google_maps_request, ListOfTuples
-from ._cache import save_cached_metadata, get_cached_metadata
+from ._cache import save_cached_metadata, get_cached_metadata, CachedMap
 
 __all__ = ("get_photo",)
 
@@ -28,8 +28,9 @@ def _get_photo_params(request: GoogleStreetviewRequest) -> ListOfTuples:
     return params
 
 
-async def get_photo_from_api(request: GoogleStreetviewRequest) -> Optional[bytes]:
-    """Get a static StreetView picture from the Google StreetView Static API. Return the acquired PNG picture as bytes.
+async def get_photo_from_api(request: GoogleStreetviewRequest) -> Tuple[Optional[bytes], Optional[CachedMap]]:
+    """Get a static StreetView picture from the Google StreetView Static API.
+    Return the acquired PNG picture as bytes, and the CachedMap object.
     If the requested location does not have an available picture, returns None.
     The fetched picture is persisted on cache, running a fire & forget background task.
 
@@ -43,28 +44,25 @@ async def get_photo_from_api(request: GoogleStreetviewRequest) -> Optional[bytes
     response = await google_maps_request(GOOGLE_STREETVIEW_STATIC_API_URL, params=params, expect_http_error=True)
     if response.status_code == 404:
         logger.debug("No StreetView picture available for the request")
-        return None
+        return None, None
 
     response.raise_for_status()
     image = response.content
     logger.debug("Photo acquired from Google StreetView Static API")
 
-    asyncio.create_task(save_cached_metadata(request=request, image=image))
-    return image
+    cache_metadata = await save_cached_metadata(request=request, image=image, background=True)
+    return image, cache_metadata
 
 
-async def get_photo(request: GoogleStreetviewRequest, read_cache_first: bool = True) -> Optional[bytes]:
+async def get_photo(
+        request: GoogleStreetviewRequest, read_cache_first: bool = True
+) -> Tuple[Optional[bytes], Optional[CachedMap]]:
     """Get a static StreetView picture from cache (if read_cache_first=True) or the Google StreetView Static API.
-    Return the acquired PNG picture as bytes.
-    If the requested location does not have an available picture, returns None."""
-    image = None
-
+    Return the acquired PNG picture as bytes, and the CachedMap object.
+    If the requested location does not have an available picture, returns (None, None)."""
     if read_cache_first:
         cached_metadata = await get_cached_metadata(request, fetch_image=True)
         if cached_metadata:
-            image = cached_metadata.image
+            return cached_metadata.image, cached_metadata
 
-    if image is None:
-        image = await get_photo_from_api(request)
-
-    return image
+    return await get_photo_from_api(request)
