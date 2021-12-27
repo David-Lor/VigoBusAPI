@@ -74,12 +74,12 @@ class MongoDB:
                 default_language="spanish"
             ),
 
-            # Create TTL Index on cache collections
+            # Create Expiration Index on cache collections (TTL with field indicating concrete expiration time)
             # https://docs.mongodb.com/manual/core/index-ttl/
             mongo.get_cache_maps_collection().create_index(
-                "saved",
-                name="ttl",
-                expireAfterSeconds=settings.mongo_cache_maps_ttl,
+                "expiration",
+                name="expiration",
+                expireAfterSeconds=1,
                 background=True
             ),
         )

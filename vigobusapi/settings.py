@@ -36,7 +36,7 @@ class Settings(_BaseSettings):
     mongo_stops_db = "vigobusapi"
     mongo_stops_collection = "stops"
     mongo_cache_maps_collection = "cache_maps"
-    mongo_cache_maps_ttl: int = "60 days"
+    mongo_cache_maps_ttl: int = "60 days"  # seconds (can give human-readable time length, that will be converted)
     api_host = "0.0.0.0"
     api_port: int = 5000
     api_name = "VigoBusAPI"

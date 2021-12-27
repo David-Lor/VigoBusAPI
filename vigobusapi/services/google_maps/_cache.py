@@ -14,7 +14,8 @@ from pymongo.results import UpdateResult
 # # Project # #
 from vigobusapi.services.mongo import MongoDB
 from vigobusapi.entities import BaseMongoModel
-from vigobusapi.utils import get_datetime, new_hash_values, ChecksumableClass, without
+from vigobusapi.utils import get_datetime, get_datetime_plus_seconds, new_hash_values, ChecksumableClass, without
+from vigobusapi.settings import settings
 from vigobusapi.logger import logger
 from ._entities import *
 
@@ -55,7 +56,9 @@ class CachedMap(BaseMongoModel, ChecksumableClass):
     data: MapRequestModels
     """Original Request object used for fetching the object."""
     saved: datetime.datetime
-    """When this document was saved. Used for TTL purposes."""
+    """When this document was saved."""
+    expiration: datetime.datetime
+    """When the document shall expire."""
     image: Optional[bytes]
     """Image saved as-is. Optional because metadata can be fetched without the image, but should always be persisted."""
     telegram_file_id: Optional[str]
@@ -160,6 +163,7 @@ async def save_cached_metadata(request: MapRequestModels, image: bytes, backgrou
         type=MAP_REQUESTS_TYPES[type(request)],
         data=request,
         saved=get_datetime(),
+        expiration=get_datetime_plus_seconds(settings.mongo_cache_maps_ttl),
         image=image
     )
 

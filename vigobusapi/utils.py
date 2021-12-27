@@ -16,7 +16,7 @@ from pydantic.json import pydantic_encoder
 
 __all__ = (
     "ChecksumableClass", "new_hash_values", "update_hash_values", "base64_encode", "json_encode_object",
-    "get_datetime", "without"
+    "get_datetime", "get_datetime_plus_seconds", "without"
 )
 
 
@@ -76,6 +76,11 @@ def json_encode_object(
 def get_datetime():
     """Get current datetime as a datetime object, in UTC timezone."""
     return datetime.datetime.now(tz=datetime.timezone.utc)
+
+
+def get_datetime_plus_seconds(seconds: int):
+    """Get current datetime as datetime object, in UTC timezone, with the given amount of seconds added."""
+    return get_datetime() + datetime.timedelta(seconds=seconds)
 
 
 def without(d: dict, *exclude: str) -> dict:
