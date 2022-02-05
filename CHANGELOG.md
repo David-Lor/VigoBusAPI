@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.9.0
+
+- fix getting reduced buses list from cache was returning 'no more buses available' flag
+- fix different buses lists being returned when getting reduced vs completed list (HTTP datasource)
+- export OpenAPI schemas (json/yaml) with Github Actions workflow
+- modify search stops endpoint for getting multiple stops by id in single request
+- add alias path to Get Buses endpoint
+- fix correct initialization of single Motor mongodb client
+- upgrade requirements versions
+- _reparado problema al obtener buses desde cache, devolviendo 'no more buses available'_
+- _reparado problema al obtener buses desde fuente de datos HTTP, devolviendo distintos listados según se pidiese un listado parcial o completo_
+- _exportación de esquemas OpenAPI (json/yaml) mediante workflow de Github Actions_
+- _modificado endpoint de buscar paradas para poder buscar varias paradas por id en una única petición_
+- _añadido alias para ruta de endpoint Get Buses_
+- _reparada inicialización del cliente mongodb Motor, iniciando una única instancia_
+- _actualizadas versiones de dependencias_
+
 ## 0.8.0
 
 - add new online data source for buses (HTTP API)
