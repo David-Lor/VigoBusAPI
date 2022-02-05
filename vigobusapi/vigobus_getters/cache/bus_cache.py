@@ -38,8 +38,10 @@ def get_buses(stop_id: int, get_all_buses: bool) -> Optional[BusesResponse]:
         # If NOT All Buses are requested, and a Not All Buses query is not cached, but an All Buses query is cached,
         #  return it, since it is still valid - but limit the results
         buses_result = buses_cache.get((stop_id, True))
-        if buses_result:
+        if buses_result and len(buses_result.buses) > settings.buses_normal_limit:
+            buses_result = buses_result.copy()
             buses_result.buses = buses_result.buses[:settings.buses_normal_limit]
+            buses_result.more_buses_available = True
             logger.debug(f"Buses from a getAllBuses=True request found on local cache, valid for this request")
 
     return buses_result
