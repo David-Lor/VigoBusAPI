@@ -1,0 +1,264 @@
+components:
+  schemas:
+    Bus:
+      properties:
+        bus_id:
+          title: Bus Id
+          type: string
+        line:
+          title: Line
+          type: string
+        route:
+          title: Route
+          type: string
+        time:
+          title: Time
+          type: integer
+      required:
+      - line
+      - route
+      - time
+      title: Bus
+      type: object
+    BusesResponse:
+      properties:
+        buses:
+          items:
+            $ref: '#/components/schemas/Bus'
+          title: Buses
+          type: array
+        more_buses_available:
+          title: More Buses Available
+          type: boolean
+        source:
+          title: Source
+          type: string
+      required:
+      - buses
+      - more_buses_available
+      title: BusesResponse
+      type: object
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          title: Detail
+          type: array
+      title: HTTPValidationError
+      type: object
+    Stop:
+      properties:
+        created:
+          format: date-time
+          title: Created
+          type: string
+        lat:
+          title: Lat
+          type: number
+        lon:
+          title: Lon
+          type: number
+        name:
+          title: Name
+          type: string
+        original_name:
+          title: Original Name
+          type: string
+        source:
+          title: Source
+          type: string
+        stop_id:
+          title: Stop Id
+          type: integer
+      required:
+      - stop_id
+      - name
+      title: Stop
+      type: object
+    ValidationError:
+      properties:
+        loc:
+          items:
+            type: string
+          title: Location
+          type: array
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+      type: object
+info:
+  title: VigoBusAPI
+  version: 0.1.0
+openapi: 3.0.2
+paths:
+  /buses/{stop_id}:
+    get:
+      description: 'Endpoint to get a list of Buses coming to a Stop giving the Stop
+        ID.
+
+        By default the shortest available list of buses is returned, unless ''get_all_buses''
+        param is True'
+      operationId: endpoint_get_buses_buses__stop_id__get
+      parameters:
+      - in: path
+        name: stop_id
+        required: true
+        schema:
+          title: Stop Id
+          type: integer
+      - in: query
+        name: get_all_buses
+        required: false
+        schema:
+          default: false
+          title: Get All Buses
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusesResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Endpoint Get Buses
+  /status:
+    get:
+      operationId: endpoint_status_status_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Endpoint Status
+  /stop/{stop_id}:
+    get:
+      description: "Endpoint to get information of a Stop giving the Stop ID\n    "
+      operationId: endpoint_get_stop_stop__stop_id__get
+      parameters:
+      - in: path
+        name: stop_id
+        required: true
+        schema:
+          title: Stop Id
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stop'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Endpoint Get Stop
+  /stop/{stop_id}/buses:
+    get:
+      description: 'Endpoint to get a list of Buses coming to a Stop giving the Stop
+        ID.
+
+        By default the shortest available list of buses is returned, unless ''get_all_buses''
+        param is True'
+      operationId: endpoint_get_buses_stop__stop_id__buses_get
+      parameters:
+      - in: path
+        name: stop_id
+        required: true
+        schema:
+          title: Stop Id
+          type: integer
+      - in: query
+        name: get_all_buses
+        required: false
+        schema:
+          default: false
+          title: Get All Buses
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusesResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Endpoint Get Buses
+  /stops:
+    get:
+      description: 'Endpoint to search/list stops by different filters. Only one filter
+        can be used.
+
+        Returns 400 if no filters given.
+
+        The filters available are:
+
+
+        - stop_name: search by a single string in stop names. "limit" can be used
+        for limiting results size.
+
+        - stop_id: repeatable param for getting multiple stops by id on a single request.
+        Not found errors are ignored.'
+      operationId: endpoint_get_stops_stops_get
+      parameters:
+      - in: query
+        name: stop_name
+        required: false
+        schema:
+          title: Stop Name
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          title: Limit
+          type: integer
+      - in: query
+        name: stop_id
+        required: false
+        schema:
+          items:
+            type: integer
+          title: Stop Id
+          type: array
+          uniqueItems: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Stop'
+                title: Response Endpoint Get Stops Stops Get
+                type: array
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Endpoint Get Stops

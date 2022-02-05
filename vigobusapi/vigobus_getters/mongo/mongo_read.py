@@ -3,7 +3,6 @@ Functions to async access and read Mongo data
 """
 
 # # Native # #
-import asyncio
 from typing import Optional
 
 # # Installed # #
@@ -11,13 +10,13 @@ from typing import Optional
 from motor.motor_asyncio import AsyncIOMotorCursor
 
 # # Project # #
-from vigobusapi.vigobus_getters.mongo.client import get_collection
+from vigobusapi.services import MongoDB
 from vigobusapi.entities import Stop, Stops, OptionalStop
 from vigobusapi.logger import logger
 
 
 async def read_stop(stop_id: int) -> OptionalStop:
-    document = await get_collection(asyncio.get_event_loop()).find_one({"_id": stop_id})
+    document = await MongoDB.get_mongo().get_stops_collection().find_one({"_id": stop_id})
 
     if document:
         logger.bind(mongo_read_document_data=document).debug("Read document from Mongo")
@@ -28,7 +27,7 @@ async def read_stop(stop_id: int) -> OptionalStop:
 
 async def search_stops(stop_name: str, limit: Optional[int] = None) -> Stops:
     documents = list()
-    cursor: AsyncIOMotorCursor = get_collection(asyncio.get_event_loop()).find({
+    cursor: AsyncIOMotorCursor = MongoDB.get_mongo().get_stops_collection().find({
         "$text": {
             "$search": stop_name
         }

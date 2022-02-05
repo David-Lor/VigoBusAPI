@@ -2,14 +2,11 @@
 Functions to async write Mongo data
 """
 
-# # Native # #
-import asyncio
-
 # # Installed # #
 from pymongo.results import InsertManyResult
 
 # # Project # #
-from vigobusapi.vigobus_getters.mongo.client import get_collection
+from vigobusapi.services import MongoDB
 from vigobusapi.entities import Stop
 from vigobusapi.logger import logger
 
@@ -26,7 +23,7 @@ async def insert_stops(*stops: Stop, catch_errors: bool = False) -> InsertManyRe
 
         with logger.contextualize(mongo_insert_data=insert_data):
             logger.debug("Inserting stops in Mongo")
-            result: InsertManyResult = await get_collection(asyncio.get_event_loop()).insert_many(insert_data)
+            result: InsertManyResult = await MongoDB.get_mongo().get_stops_collection().insert_many(insert_data)
 
             logger.bind(mongo_inserted_ids=result.inserted_ids).debug("Inserted stops in Mongo")
             return result
