@@ -20,10 +20,6 @@ def parse_http_response(data: dict, get_all_buses: bool, verify_stop_exists: boo
     more_buses_available = False
 
     for i, bus_raw in enumerate(data["estimaciones"], start=1):
-        if not get_all_buses and i > settings.buses_normal_limit:
-            more_buses_available = True
-            break
-
         line = bus_raw["linea"]
         route = bus_raw["ruta"]
         time = bus_raw["minutos"]
@@ -35,7 +31,12 @@ def parse_http_response(data: dict, get_all_buses: bool, verify_stop_exists: boo
             time=time
         ))
 
+    # TODO Try to save complete buses cache before limiting the response, so it can be reused later without re-request
     sort_buses(buses)
+    if not get_all_buses and len(buses) > settings.buses_normal_limit:
+        buses = buses[:settings.buses_normal_limit]
+        more_buses_available = True
+
     return BusesResponse(
         buses=buses,
         more_buses_available=more_buses_available
