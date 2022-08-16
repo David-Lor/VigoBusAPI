@@ -58,6 +58,10 @@ class BaseDatasource(pydantic.BaseModel):
                     if i + 1 >= self.http_retries:
                         raise ex
 
+    @property
+    def _class_name(self):
+        return self.__class__.__name__
+
 
 class Datasources:
     # TODO Docstring
