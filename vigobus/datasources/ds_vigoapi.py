@@ -58,6 +58,23 @@ class DatasourceVigoApi(BaseDatasource):
 
     async def get_stop(self, stop_id: int) -> Optional[Stop]:
         response = await self._request_get_stop_buses(stop_id=stop_id)
+        return self._parse_response_stop(response)
+
+    async def _request_get_stop_buses(self, stop_id: int) -> VigoAPIStopBusesResponse:
+        params = {
+            "id": stop_id,
+            "ttl": 5,
+            "tipo": "TRANSPORTE-ESTIMACION-PARADA",
+        }
+
+        r = await self._request_http(
+            url=self._endpoint,
+            params=params,
+            raise_status=True,
+        )
+        return self.VigoAPIStopBusesResponse.parse_obj(r.json())
+
+    def _parse_response_stop(self, response: VigoAPIStopBusesResponse) -> Optional[Stop]:
         response_stop = response.stop
         if not response_stop:
             return None
@@ -78,20 +95,6 @@ class DatasourceVigoApi(BaseDatasource):
                 ),
             ),
         )
-
-    async def _request_get_stop_buses(self, stop_id: int) -> VigoAPIStopBusesResponse:
-        params = {
-            "id": stop_id,
-            "ttl": 5,
-            "tipo": "TRANSPORTE-ESTIMACION-PARADA",
-        }
-
-        r = await self._request_http(
-            url=self._endpoint,
-            params=params,
-            raise_status=True,
-        )
-        return self.VigoAPIStopBusesResponse.parse_obj(r.json())
 
     def _parse_response_buses(self, response: VigoAPIStopBusesResponse) -> List[Bus]:
         now = Utils.datetime_now()
