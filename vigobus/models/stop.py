@@ -1,17 +1,13 @@
-import datetime
 from typing import Optional
 
-from .base import BaseModel, NEString, PosInt, Position
+from .base import BaseModel, NEString, PosInt, Position, SourceMetadata
+
+__all__ = ("StopMetadata", "Stop")
 
 
 class StopMetadata(BaseModel):
-
-    class Source(BaseModel):
-        datasource: NEString
-        when: datetime.datetime
-
-    name_original: NEString
-    source: Optional[Source] = None
+    original_name: NEString
+    source: Optional[SourceMetadata] = None
 
 
 class Stop(BaseModel):

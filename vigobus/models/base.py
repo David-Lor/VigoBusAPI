@@ -1,3 +1,5 @@
+import datetime
+
 import pydantic
 
 
@@ -20,3 +22,8 @@ class BaseModel(pydantic.BaseModel):
 class Position(pydantic.BaseModel):
     lat: float
     lon: float
+
+
+class SourceMetadata(BaseModel):
+    datasource: NEString
+    when: datetime.datetime
