@@ -16,6 +16,7 @@ class Bus(BaseModel):
     route: NEString
     time_minutes: NonNegInt
     distance_meters: Optional[NonNegFloat]
+    metadata: BusMetadata
 
 
 class BusesResponse(BaseModel):

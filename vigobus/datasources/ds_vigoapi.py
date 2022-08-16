@@ -4,7 +4,7 @@ import pydantic
 
 from .base import BaseDatasource, Datasources
 from ..exceptions import StopNotExistException
-from ..models import BusesResponse, Bus, Stop, StopMetadata
+from ..models import BusesResponse, Bus, Stop, StopMetadata, BusMetadata
 from ..models.base import NonNegInt, PosInt, Position, SourceMetadata
 from ..utils import Utils
 
@@ -93,9 +93,10 @@ class DatasourceVigoApi(BaseDatasource):
         )
         return self.VigoAPIStopBusesResponse.parse_obj(r.json())
 
-    @staticmethod
-    def _parse_response_buses(response: VigoAPIStopBusesResponse) -> List[Bus]:
+    def _parse_response_buses(self, response: VigoAPIStopBusesResponse) -> List[Bus]:
+        now = Utils.datetime_now()
         buses_result = list()
+
         for bus_received in response.estimaciones:
             # noinspection PyTypeChecker
             buses_result.append(Bus(
@@ -103,6 +104,14 @@ class DatasourceVigoApi(BaseDatasource):
                 route=bus_received.ruta,
                 time_minutes=bus_received.minutos,
                 distance_meters=bus_received.metros,
+                metadata=BusMetadata(
+                    original_line=bus_received.linea,
+                    original_route=bus_received.ruta,
+                    source=SourceMetadata(
+                        datasource=self._class_name,
+                        when=now,
+                    ),
+                ),
             ))
 
         # TODO Sort by distance, if available - method externally defined (in BusesResponse obj?)
