@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-from .base import BaseModel, NEString, PosInt, SourceMetadata
+from .base import BaseModel, NEString, SourceMetadata, NonNegInt, NonNegFloat
 
 __all__ = ("Bus", "BusMetadata", "BusesResponse")
 
@@ -14,8 +14,8 @@ class BusMetadata(BaseModel):
 class Bus(BaseModel):
     line: NEString
     route: NEString
-    time_minutes: PosInt
-    distance_meters: Optional[float]
+    time_minutes: NonNegInt
+    distance_meters: Optional[NonNegFloat]
 
 
 class BusesResponse(BaseModel):

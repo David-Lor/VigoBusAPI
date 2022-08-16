@@ -5,7 +5,7 @@ from typing import Optional, Type, Dict, List
 
 from ..models import BusesResponse, Stop
 from ..exceptions import DatasourceMethodUnavailableException
-from ..models.base import PosInt, NonNegFloat
+from ..models.base import PosInt, NonNegFloat, NonNegInt
 
 __all__ = ("BaseDatasource", "Datasources")
 
@@ -16,6 +16,7 @@ class BaseDatasource(pydantic.BaseModel):
     http_retries: PosInt = 3
     http_retries_delay_seconds: NonNegFloat = 1
     http_request_timeout_seconds: NonNegFloat = 5
+    buses_per_page: Optional[NonNegInt] = None
 
     async def get_stop(self, stop_id: int) -> Optional[Stop]:
         """Search for a Stop by id.
