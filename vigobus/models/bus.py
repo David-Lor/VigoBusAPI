@@ -1,3 +1,5 @@
+import pydantic
+
 from typing import Optional, List
 
 from .base import BaseModel, NEString, SourceMetadata, NonNegInt, NonNegFloat
@@ -22,3 +24,15 @@ class Bus(BaseModel):
 class BusesResponse(BaseModel):
     buses: List[Bus]
     more_buses_available: bool
+
+    @pydantic.validator("buses")
+    def _sort_buses(cls, buses: List[Bus]):
+        buses.sort(
+            key=lambda bus: (
+                bus.time_minutes,
+                bus.distance_meters or 1000000,
+                bus.line,
+                bus.route,
+            ),
+        )
+        return buses

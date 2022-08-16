@@ -95,11 +95,10 @@ class DatasourceVigoApi(BaseDatasource):
 
     def _parse_response_buses(self, response: VigoAPIStopBusesResponse) -> List[Bus]:
         now = Utils.datetime_now()
-        buses_result = list()
 
-        for bus_received in response.estimaciones:
-            # noinspection PyTypeChecker
-            buses_result.append(Bus(
+        # noinspection PyTypeChecker
+        return [
+            Bus(
                 line=bus_received.linea,
                 route=bus_received.ruta,
                 time_minutes=bus_received.minutos,
@@ -112,8 +111,6 @@ class DatasourceVigoApi(BaseDatasource):
                         when=now,
                     ),
                 ),
-            ))
-
-        # TODO Sort by distance, if available - method externally defined (in BusesResponse obj?)
-        buses_result.sort(key=lambda bus: bus.time_minutes)
-        return buses_result
+            )
+            for bus_received in response.estimaciones
+        ]
