@@ -48,8 +48,8 @@ class DatasourceVigoApi(BaseDatasource):
         buses = self._parse_response_buses(response)
         more_buses_available = False
         if not get_all_buses and self.buses_per_page:
+            more_buses_available = len(buses) > self.buses_per_page
             buses = buses[:self.buses_per_page]
-            more_buses_available = True
 
         return BusesResponse(
             buses=buses,
