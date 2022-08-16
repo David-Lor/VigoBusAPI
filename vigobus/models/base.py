@@ -24,7 +24,8 @@ class NonNegFloat(pydantic.ConstrainedFloat):
 
 
 class BaseModel(pydantic.BaseModel):
-    pass
+    class Config:
+        validate_assignment = True
 
 
 class Position(pydantic.BaseModel):
