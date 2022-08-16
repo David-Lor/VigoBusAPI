@@ -8,7 +8,8 @@ def teardown_function():
     Datasources.reset()
 
 
-def test_datasources_decorator():
+@pytest.mark.asyncio
+async def test_datasources_decorator():
     """Declare 3 BaseDatasource based classes:
     - DSMiddle with no defined priority (100 by default)
     - DSLow with a priority of 1
@@ -39,6 +40,6 @@ def test_datasources_decorator():
     for datasource in datasources:
         datasource = datasource()
         with pytest.raises(DatasourceMethodUnavailableException):
-            datasource.get_stop(1)
+            await datasource.get_stop(1)
         with pytest.raises(DatasourceMethodUnavailableException):
-            datasource.get_buses(1)
+            await datasource.get_buses(1)

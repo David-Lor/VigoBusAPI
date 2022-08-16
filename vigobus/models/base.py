@@ -15,6 +15,10 @@ class PosInt(pydantic.ConstrainedInt):
     gt = 0
 
 
+class NonNegFloat(pydantic.ConstrainedFloat):
+    gt = 0
+
+
 class BaseModel(pydantic.BaseModel):
     pass
 
