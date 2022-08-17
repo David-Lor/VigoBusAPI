@@ -5,6 +5,7 @@ import pytest
 
 class TestMarks:
     real = pytest.mark.real
+    heavy = pytest.mark.heavy
     asyncio = pytest.mark.asyncio
 
 

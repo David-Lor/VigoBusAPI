@@ -77,6 +77,47 @@ async def test_vigobus_getstop_real():
     vigobus = Vigobus()
 
     with freezegun.freeze_time(stop_generation_datetime):
-        stop = await vigobus.get_stop(stop_id)
+        stop_result = await vigobus.get_stop(stop_id)
 
-    assert stop == stop_expected
+    assert stop_result == stop_expected
+
+
+@TestMarks.real
+@TestMarks.asyncio
+async def test_vigobus_getallstops_real():
+    stops_generation_datetime = Datetimes[0]
+    # noinspection PyTypeChecker
+    stops_expected_first = Stop(
+        id=6930,
+        name="Praza de América 1",
+        position=Position(lat=42.220997313, lon=-8.732835177),
+        metadata=StopMetadata(
+            original_name="Praza de América  1",
+            source=SourceMetadata(
+                datasource="DatasourceVigoOpenData",
+                when=stops_generation_datetime,
+            )
+        )
+    )
+
+    vigobus = Vigobus()
+
+    with freezegun.freeze_time(stops_generation_datetime):
+        stops_result = await vigobus.get_all_stops()
+
+    assert len(stops_result) > 1100
+    assert stops_result[0] == stops_expected_first
+
+
+@TestMarks.real
+@TestMarks.heavy
+@TestMarks.asyncio
+async def test_vigobus_getallstops_real_compare_getstop():
+    vigobus = Vigobus()
+    stops = await vigobus.get_all_stops()
+    stop_dict_exclude_fields = {"metadata"}
+
+    for stop_getallstops in stops:
+        stop_getonestop = await vigobus.get_stop(stop_getallstops.id)
+        assert stop_getonestop.dict(exclude=stop_dict_exclude_fields) == \
+               stop_getallstops.dict(exclude=stop_dict_exclude_fields)

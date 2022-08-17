@@ -6,7 +6,7 @@ from .base import BaseDatasource, Datasources
 from .fixers import Fixers
 from ..exceptions import StopNotExistException
 from ..models import BusesResponse, Bus, Stop, StopMetadata, BusMetadata
-from ..models.base import NonNegInt, PosInt, Position, SourceMetadata
+from ..models.base import NonNegInt, PosInt, Position, SourceMetadata, NEString
 from ..utils import Utils
 
 
@@ -18,13 +18,13 @@ class DatasourceVigoApi(BaseDatasource):
 
         class InnerStop(pydantic.BaseModel):
             stop_vitrasa: PosInt
-            nombre: str
+            nombre: NEString
             latitud: float
             longitud: float
 
         class InnerBus(pydantic.BaseModel):
-            linea: str
-            ruta: str
+            linea: NEString
+            ruta: NEString
             minutos: NonNegInt
             metros: NonNegInt
 

@@ -21,6 +21,24 @@ class Vigobus(BaseDatasource):
         super().__init__(**data)
         self._initialize_datasources()
 
+    # TODO combine common datasource-try-except iteration logic.
+
+    # TODO last_ex should no raise DatasourceMethodUnavailableException when previous error/s were different.
+
+    async def get_all_stops(self) -> List[Stop]:
+        last_ex = None
+        for datasource in self._datasources:
+            try:
+                result = await datasource.get_all_stops()
+                return result
+
+            except Exception as ex:
+                last_ex = ex
+                if isinstance(ex, DatasourceMethodUnavailableException):
+                    continue
+
+        raise last_ex
+
     async def get_stop(self, stop_id: int) -> Optional[Stop]:
         last_ex = None
         for datasource in self._datasources:

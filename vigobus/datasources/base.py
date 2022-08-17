@@ -21,6 +21,13 @@ class BaseDatasource(pydantic.BaseModel):
     http_request_timeout_seconds: NonNegFloat = 5
     buses_per_page: Optional[NonNegInt] = None
 
+    async def get_all_stops(self) -> List[Stop]:
+        """Get all the available stops.
+
+        :return: List of Stop objects.
+        """
+        raise DatasourceMethodUnavailableException
+
     async def get_stop(self, stop_id: int) -> Optional[Stop]:
         """Search for a Stop by id.
         The datasource should either return the data of the Stop, or be sure that the Stop does not exist in reality.
