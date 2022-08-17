@@ -3,20 +3,15 @@ on:
   - push
 
 jobs:
-  test:
-    name: Test on Python ${{ matrix.python-version }} @ ubuntu-latest
+  TestLib:
+    name: Test Library @ Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version:
-          - "3.6"
           - "3.7"
           - "3.8"
-    services:
-      mongodb:
-        image: mongo:latest
-        ports:
-          - 27017:27017
+          - "3.9"
     steps:
       - uses: actions/checkout@master
       - name: Setup Python
@@ -25,8 +20,15 @@ jobs:
           python-version: ${{ matrix.python-version }}
           architecture: x64
       - name: Install requirements
-        run: python -m pip install -r requirements.txt
+        run: python -m pip install -r vigobus/requirements.txt
       - name: Install test requirements
-        run: python -m pip install -r requirements-test.txt
-      - name: Test
-        run: pytest -sv .
+        run: python -m pip install -r vigobus/requirements.test.txt
+
+      - name: Test (unit)
+        working-directory: vigobus
+        run: pytest -sv . -m "not real"
+
+      - name: Test (real)
+        if: ${{ matrix.python-version == '3.9' }}
+        working-directory: vigobus
+        run: pytest -sv . -m "real and not heavy"
