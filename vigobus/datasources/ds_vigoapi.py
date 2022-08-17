@@ -3,6 +3,7 @@ from typing import Optional, List
 import pydantic
 
 from .base import BaseDatasource, Datasources
+from .fixers import Fixers
 from ..exceptions import StopNotExistException
 from ..models import BusesResponse, Bus, Stop, StopMetadata, BusMetadata
 from ..models.base import NonNegInt, PosInt, Position, SourceMetadata
@@ -79,18 +80,21 @@ class DatasourceVigoApi(BaseDatasource):
         if not response_stop:
             return None
 
+        name_original = response_stop.nombre
+        name = Fixers.stop_name(name_original)
+
         # noinspection PyTypeChecker
         return Stop(
             id=response_stop.stop_vitrasa,
-            name=response_stop.nombre,
+            name=name,
             position=Position(
                 lat=response_stop.latitud,
                 lon=response_stop.longitud,
             ),
             metadata=StopMetadata(
-                original_name=response_stop.nombre,
+                original_name=name_original,
                 source=SourceMetadata(
-                    datasource=self._class_name,
+                    datasource=self.datasource_name,
                     when=Utils.datetime_now(),
                 ),
             ),
@@ -99,21 +103,26 @@ class DatasourceVigoApi(BaseDatasource):
     def _parse_response_buses(self, response: VigoAPIStopBusesResponse) -> List[Bus]:
         now = Utils.datetime_now()
 
-        # noinspection PyTypeChecker
-        return [
-            Bus(
-                line=bus_received.linea,
-                route=bus_received.ruta,
+        result: List[Bus] = list()
+        for bus_received in response.buses:
+            line_original = bus_received.linea
+            route_original = bus_received.ruta
+            line, route = Fixers.bus_line_route(line_original, route_original)
+
+            # noinspection PyTypeChecker
+            result.append(Bus(
+                line=line,
+                route=route,
                 time_minutes=bus_received.minutos,
                 distance_meters=bus_received.metros,
                 metadata=BusMetadata(
-                    original_line=bus_received.linea,
-                    original_route=bus_received.ruta,
+                    original_line=line_original,
+                    original_route=route_original,
                     source=SourceMetadata(
-                        datasource=self._class_name,
+                        datasource=self.datasource_name,
                         when=now,
                     ),
                 ),
-            )
-            for bus_received in response.estimaciones
-        ]
+            ))
+
+        return result

@@ -1,3 +1,6 @@
+import pkgutil
+import importlib
+
 import httpx
 import pydantic
 
@@ -59,12 +62,14 @@ class BaseDatasource(pydantic.BaseModel):
                         raise ex
 
     @property
-    def _class_name(self):
+    def datasource_name(self):
         return self.__class__.__name__
 
 
 class Datasources:
-    # TODO Docstring
+    """Internal local storage of the available BaseDatasource based classes. This class is used as a singleton.
+    Each Datasource class must use the Datasources.register() decorator, so it can be used.
+    """
 
     _datasources: Dict[Type[BaseDatasource], int] = dict()
     _datasources_sorted: List[Type[BaseDatasource]] = list()
@@ -98,7 +103,28 @@ class Datasources:
         """Get the BaseDatasource based classes registered on the Datasources local storage, sorted by priority,
         with the higher priority Datasources first.
         """
+        if not cls._datasources:
+            cls.process_datasources()
         return cls._datasources_sorted
+
+    @classmethod
+    def process_datasources(cls):
+        """Process all the datasources declared in the current package.
+
+        Internally, this method locally imports each detected datasource module (any .py file that starts by "ds_"),
+        which inheritly will force them to call the get_datasources() decorated method, being registered on this class.
+        """
+        # noinspection PyUnresolvedReferences
+        import vigobus.datasources as pkg
+
+        modules = [
+            name
+            for _, name, _
+            in pkgutil.iter_modules([pkg.__path__[0]])
+            if name.startswith("ds_")
+        ]
+        for module in modules:
+            importlib.import_module(f".{module}", pkg.__name__)
 
     @classmethod
     def reset(cls):
