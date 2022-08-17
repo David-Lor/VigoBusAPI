@@ -1,7 +1,9 @@
-import pytest
+import freezegun
 
+from . import Stop, Position, StopMetadata, SourceMetadata
 from .main import Vigobus
 from .datasources.base import BaseDatasource, Datasources
+from .test_commons import TestMarks, Datetimes
 
 
 def teardown_function():
@@ -9,7 +11,7 @@ def teardown_function():
 
 
 # noinspection PyUnusedLocal
-@pytest.mark.asyncio
+@TestMarks.asyncio
 async def test_vigobus_getstop_retry_datasources():
     """Test the Vigobus.get_stop() method, having 4 Datasources defined, with the following order by priority:
 
@@ -51,3 +53,30 @@ async def test_vigobus_getstop_retry_datasources():
 
     assert response == expected_response
     assert called_datasources == ["DS3"]
+
+
+@TestMarks.real
+@TestMarks.asyncio
+async def test_vigobus_getstop_real():
+    stop_id = 5800
+    stop_generation_datetime = Datetimes[0]
+    # noinspection PyTypeChecker
+    stop_expected = Stop(
+        id=stop_id,
+        name="Rúa de Jenaro de la Fuente 29",
+        position=Position(lat=42.232202275, lon=-8.703792246),
+        metadata=StopMetadata(
+            original_name="Rúa de Jenaro de la Fuente  29",
+            source=SourceMetadata(
+                datasource="DatasourceVigoApi",
+                when=stop_generation_datetime,
+            ),
+        ),
+    )
+
+    vigobus = Vigobus()
+
+    with freezegun.freeze_time(stop_generation_datetime):
+        stop = await vigobus.get_stop(stop_id)
+
+    assert stop == stop_expected
