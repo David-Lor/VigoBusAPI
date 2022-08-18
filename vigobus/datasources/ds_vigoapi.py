@@ -10,7 +10,7 @@ from ..models.base import NonNegInt, PosInt, Position, SourceMetadata, NEString
 from ..utils import Utils
 
 
-@Datasources.register(priority=1000)
+@Datasources.register(priority=200)
 class DatasourceVigoApi(BaseDatasource):
     _endpoint = "https://datos.vigo.org/vci_api_app/api2.jsp"
 

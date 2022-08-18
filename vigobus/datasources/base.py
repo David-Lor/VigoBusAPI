@@ -78,18 +78,20 @@ class Datasources:
     Each Datasource class must use the Datasources.register() decorator, so it can be used.
     """
 
+    DEFAULT_PRIORITY = 150
+
     _datasources: Dict[Type[BaseDatasource], int] = dict()
     _datasources_sorted: List[Type[BaseDatasource]] = list()
 
     @classmethod
-    def register(cls, datasource_class: Type[BaseDatasource] = None, priority: int = 100):
+    def register(cls, datasource_class: Type[BaseDatasource] = None, priority: int = DEFAULT_PRIORITY):
         """Decorator used to register a BaseDatasource based class (from now on "Datasources")
         on the Datasources local storage, accessed as singleton.
 
         :param datasource_class: the BaseDatasource based class (not an instance of the class, but the class itself).
             This should be used as decorator, rather than called directly.
         :param priority: priority of the Datasource, as int. Used to sort which Datasources will be used.
-            Datasources with higher numbers are returned first. Default priority value is 100.
+            Datasources with lower numbers are returned first. Default priority value is 150.
         """
         if not datasource_class:
             def wrapper(_datasource_class: Type[BaseDatasource]):
@@ -102,13 +104,13 @@ class Datasources:
 
         cls._datasources[datasource_class] = priority
         cls._datasources_sorted.append(datasource_class)
-        cls._datasources_sorted.sort(reverse=True, key=lambda _datasource_class: cls._datasources[_datasource_class])
+        cls._datasources_sorted.sort(key=lambda _datasource_class: cls._datasources[_datasource_class])
         return datasource_class
 
     @classmethod
     def get_datasources(cls) -> List[Type[BaseDatasource]]:
         """Get the BaseDatasource based classes registered on the Datasources local storage, sorted by priority,
-        with the higher priority Datasources first.
+        with the higher priority (lower `priority` value) Datasources first.
         """
         if not cls._datasources:
             cls.process_datasources()

@@ -9,7 +9,7 @@ from ..models.base import BaseModel, PosInt, NEString, Position, SourceMetadata
 from ..utils import Utils
 
 
-@Datasources.register(priority=1001)
+@Datasources.register(priority=100)
 class DatasourceVigoOpenData(BaseDatasource):
 
     class StopCsvLine(BaseModel):

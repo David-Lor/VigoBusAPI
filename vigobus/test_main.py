@@ -7,8 +7,11 @@ from .datasources.base import BaseDatasource, Datasources
 from .test_commons import TestMarks, Datetimes
 
 
+def setup_function():
+    Datasources.reset()
+
+
 def teardown_function():
-    # TODO tests failing when running ALL (mixed unit+real)
     Datasources.reset()
 
 
@@ -29,22 +32,22 @@ async def test_vigobus_getstop_retry_datasources():
     expected_response = "Response"
     called_datasources = list()
 
-    @Datasources.register(priority=4000000)
+    @Datasources.register(priority=1)
     class DS1(BaseDatasource):
         async def get_stop(self, stop_id: int):
             raise Exception("Exception from DS1.get_stop()")
 
-    @Datasources.register(priority=3000000)
+    @Datasources.register(priority=2)
     class DS2(BaseDatasource):
         pass
 
-    @Datasources.register(priority=2000000)
+    @Datasources.register(priority=3)
     class DS3(BaseDatasource):
         async def get_stop(self, stop_id: int):
             called_datasources.append(self.datasource_name)
             return expected_response
 
-    @Datasources.register(priority=1000000)
+    @Datasources.register(priority=4)
     class DS4(BaseDatasource):
         async def get_stop(self, stop_id: int):
             called_datasources.append(self.datasource_name)

@@ -11,9 +11,9 @@ def teardown_function():
 @pytest.mark.asyncio
 async def test_datasources_decorator():
     """Declare 3 BaseDatasource based classes:
-    - DSMiddle with no defined priority (100 by default)
-    - DSLow with a priority of 1
-    - DSHigh with a priority of 1000
+    - DSMiddle with no defined priority (150 by default)
+    - DSLow with a priority of 1000
+    - DSHigh with a priority of 1
 
     Call the Datasources.get_datasources() method. Should return the declared Datasources, sorted by priority,
     from higher to lower.
@@ -25,11 +25,11 @@ async def test_datasources_decorator():
     class DSMiddle(BaseDatasource):
         pass
 
-    @Datasources.register(priority=1)
+    @Datasources.register(priority=1000)
     class DSLow(BaseDatasource):
         pass
 
-    @Datasources.register(priority=1000)
+    @Datasources.register(priority=1)
     class DSHigh(BaseDatasource):
         pass
 
