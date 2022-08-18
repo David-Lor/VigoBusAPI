@@ -26,7 +26,7 @@ class DatasourceVigoApi(BaseDatasource):
             linea: NEString
             ruta: NEString
             minutos: NonNegInt
-            metros: NonNegInt
+            metros: Optional[int]  # if not available, should return as -1
 
         parada: List[InnerStop]  # Array of objects, always with 1 element, or empty if stop not exist.
         estimaciones: List[InnerBus]  # Array of objects, may be empty if no buses currently available.
@@ -62,6 +62,7 @@ class DatasourceVigoApi(BaseDatasource):
         return self._parse_response_stop(response)
 
     async def _request_get_stop_buses(self, stop_id: int) -> VigoAPIStopBusesResponse:
+        # TODO parameterize which fields to parse
         params = {
             "id": stop_id,
             "ttl": 5,
@@ -108,9 +109,11 @@ class DatasourceVigoApi(BaseDatasource):
             line_original = bus_received.linea
             route_original = bus_received.ruta
             line, route = Fixers.bus_line_route(line_original, route_original)
+            if bus_received.metros is not None and bus_received.metros < 0:
+                bus_received.metros = None
 
             # noinspection PyTypeChecker
-            result.append(Bus(
+            bus_parsed = Bus(
                 line=line,
                 route=route,
                 time_minutes=bus_received.minutos,
@@ -123,6 +126,7 @@ class DatasourceVigoApi(BaseDatasource):
                         when=now,
                     ),
                 ),
-            ))
+            )
+            result.append(bus_parsed)
 
         return result
