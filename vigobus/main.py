@@ -3,6 +3,7 @@ from typing import Optional, List
 from .datasources.base import BaseDatasource, Datasources
 from .exceptions import DatasourceMethodUnavailableException, StopNotExistException
 from .models import Stop, BusesResponse
+from .utils import ErrorRetrier
 
 __all__ = ("Vigobus",)
 
@@ -21,53 +22,30 @@ class Vigobus(BaseDatasource):
         super().__init__(**data)
         self._initialize_datasources()
 
-    # TODO combine common datasource-try-except iteration logic.
-
-    # TODO last_ex should no raise DatasourceMethodUnavailableException when previous error/s were different.
-
     async def get_all_stops(self) -> List[Stop]:
-        last_ex = None
+        retrier = self._get_error_retrier()
         for datasource in self._datasources:
-            try:
-                result = await datasource.get_all_stops()
-                return result
-
-            except Exception as ex:
-                last_ex = ex
-                if isinstance(ex, DatasourceMethodUnavailableException):
-                    continue
-
-        raise last_ex
+            with retrier.wrap():
+                return await datasource.get_all_stops()
+        retrier.raise_last_exception()
 
     async def get_stop(self, stop_id: int) -> Optional[Stop]:
-        last_ex = None
+        retrier = self._get_error_retrier()
         for datasource in self._datasources:
-            try:
-                result = await datasource.get_stop(stop_id)
-                return result
-
-            except Exception as ex:
-                last_ex = ex
-                if isinstance(ex, DatasourceMethodUnavailableException):
-                    continue
-
-        raise last_ex
+            with retrier.wrap():
+                return await datasource.get_stop(stop_id)
+        retrier.raise_last_exception()
 
     async def get_buses(self, stop_id: int, get_all_buses: bool = True) -> BusesResponse:
-        last_ex = None
+        retrier = self._get_error_retrier()
         for datasource in self._datasources:
-            try:
-                result = await datasource.get_buses(stop_id, get_all_buses)
-                return result
-
-            except Exception as ex:
-                last_ex = ex
-                if isinstance(ex, DatasourceMethodUnavailableException):
-                    continue
-                if isinstance(ex, StopNotExistException):
+            with retrier.wrap():
+                try:
+                    return await datasource.get_buses(stop_id, get_all_buses)
+                except StopNotExistException as ex:
+                    retrier.add_exception(ex)
                     break
-
-        raise last_ex
+        retrier.raise_last_exception()
 
     def _initialize_datasources(self):
         """Instance each available Datasource class, with the same attributes as the current class instance.
@@ -75,3 +53,7 @@ class Vigobus(BaseDatasource):
         data = self.dict()
         for datasource_cls in Datasources.get_datasources():
             self._datasources.append(datasource_cls(**data))
+
+    @staticmethod
+    def _get_error_retrier():
+        return ErrorRetrier(DatasourceMethodUnavailableException)

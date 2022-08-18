@@ -1,3 +1,4 @@
+import pytest
 import freezegun
 
 from . import Stop, Position, StopMetadata, SourceMetadata
@@ -7,6 +8,7 @@ from .test_commons import TestMarks, Datetimes
 
 
 def teardown_function():
+    # TODO tests failing when running ALL (mixed unit+real)
     Datasources.reset()
 
 
@@ -55,6 +57,34 @@ async def test_vigobus_getstop_retry_datasources():
     assert called_datasources == ["DS3"]
 
 
+# noinspection PyUnusedLocal
+@TestMarks.asyncio
+async def test_vigobus_getallstops_retry_datasources_errors_and_notimplemented():
+    """Test the Vigobus.get_all_stops() method, having 4 Datasources defined, with the following order by priority:
+
+    - DS1: returns an exception on the method
+    - DS2: has not implemented the method
+
+    The Vigobus.get_all_stops() method should raise the exception from the DS1.
+    """
+
+    class CustomException(Exception):
+        pass
+
+    @Datasources.register(priority=4000000)
+    class DS1(BaseDatasource):
+        async def get_all_stops(self):
+            raise CustomException("Exception from DS1.get_stop()")
+
+    @Datasources.register(priority=3000000)
+    class DS2(BaseDatasource):
+        pass
+
+    vigobus = Vigobus()
+    with pytest.raises(CustomException):
+        await vigobus.get_all_stops()
+
+
 @TestMarks.real
 @TestMarks.asyncio
 async def test_vigobus_getstop_real():
@@ -80,6 +110,18 @@ async def test_vigobus_getstop_real():
         stop_result = await vigobus.get_stop(stop_id)
 
     assert stop_result == stop_expected
+
+
+@TestMarks.real
+@TestMarks.asyncio
+async def test_vigobus_getstop_nonexisting_real():
+    vigobus = Vigobus()
+
+    stop_result = await vigobus.get_stop(1)
+    # stop_id = 1 on DatasourceVigoApi returns a non-existing stop,
+    # but with weird estimations (buses with distance_meters=-1)
+
+    assert stop_result is None
 
 
 @TestMarks.real
