@@ -102,6 +102,7 @@ class Datasources:
                 return _datasource_class
             return wrapper
 
+        print("Register", datasource_class, priority)
         cls._datasources[datasource_class] = priority
         cls._datasources_sorted.append(datasource_class)
         cls._datasources_sorted.sort(key=lambda _datasource_class: cls._datasources[_datasource_class])
