@@ -5,7 +5,7 @@ import httpx
 
 from .base import BaseDatasource
 from .fixers import Fixers
-from .. import Stop, BusesResponse, StopMetadata, SourceMetadata
+from ..models import Stop, BusesResponse, StopMetadata, SourceMetadata
 from ..utils import Utils
 
 
