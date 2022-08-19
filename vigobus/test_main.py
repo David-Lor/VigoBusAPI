@@ -1,12 +1,11 @@
+import asyncio
+
 import freezegun
 import pytest
 
 from . import Stop, Position, StopMetadata, SourceMetadata, Vigobus
 from .datasources.base import BaseDatasource
 from .conftest import TestMarks, Datetimes
-
-
-# noinspection PyUnusedLocal
 from .datasources.ds_qrhtml import DatasourceQrHtml
 from .datasources.ds_vigoapi import DatasourceVigoApi
 
@@ -176,11 +175,17 @@ async def test_vigobus_getallstops_real():
 @TestMarks.heavy
 @TestMarks.asyncio
 async def test_vigobus_getallstops_real_compare_getstop():
+    concurrency = 3
+
+    semaphore = asyncio.Semaphore(concurrency)
     vigobus = Vigobus()
     stops = await vigobus.get_all_stops()
     stop_dict_exclude_fields = {"metadata"}
 
-    for stop_getallstops in stops:
-        stop_getonestop = await vigobus.get_stop(stop_getallstops.id)
-        assert stop_getonestop.dict(exclude=stop_dict_exclude_fields) == \
-               stop_getallstops.dict(exclude=stop_dict_exclude_fields)
+    async def _get_stop_assert(stop_getallstops: Stop):
+        async with semaphore:
+            stop_getonestop = await vigobus.get_stop(stop_getallstops.id)
+            assert stop_getonestop.dict(exclude=stop_dict_exclude_fields) == \
+                   stop_getallstops.dict(exclude=stop_dict_exclude_fields)
+
+    await asyncio.gather(*[_get_stop_assert(stop) for stop in stops])
