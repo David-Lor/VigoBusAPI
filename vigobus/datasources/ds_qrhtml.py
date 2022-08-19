@@ -20,10 +20,11 @@ class DatasourceQrHtml(BaseDatasource):
         'upgrade-insecure-requests': '1',
         'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:67.0) Gecko/20100101 Firefox/67.0'
     }
+    BS4_PARSER = "lxml"
 
     async def get_stop(self, stop_id: int) -> Optional[Stop]:
         r = await self._request(stop_id)
-        soup = bs4.BeautifulSoup(r.text, "html.parser")
+        soup = bs4.BeautifulSoup(r.text, self.BS4_PARSER)
         return self._parse_response_stop(soup)
 
     async def get_buses(self, stop_id: int, get_all_buses: bool = True) -> BusesResponse:
