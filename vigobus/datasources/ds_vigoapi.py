@@ -2,7 +2,7 @@ from typing import Optional, List
 
 import pydantic
 
-from .base import BaseDatasource, Datasources
+from .base import BaseDatasource
 from .fixers import Fixers
 from ..exceptions import StopNotExistException
 from ..models import BusesResponse, Bus, Stop, StopMetadata, BusMetadata
@@ -10,7 +10,6 @@ from ..models.base import NonNegInt, PosInt, Position, SourceMetadata, NEString
 from ..utils import Utils
 
 
-@Datasources.register(priority=200)
 class DatasourceVigoApi(BaseDatasource):
     _endpoint = "https://datos.vigo.org/vci_api_app/api2.jsp"
 

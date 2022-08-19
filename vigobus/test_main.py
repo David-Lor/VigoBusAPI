@@ -1,14 +1,13 @@
-import pytest
 import freezegun
 
-from . import Stop, Position, StopMetadata, SourceMetadata
-from .datasources.base import BaseDatasource, Datasources
+from . import Stop, Position, StopMetadata, SourceMetadata, Vigobus
+from .datasources.base import BaseDatasource
 from .conftest import TestMarks, Datetimes
 
 
 # noinspection PyUnusedLocal
 @TestMarks.asyncio
-async def test_vigobus_getstop_retry_datasources(vigobus_unit):
+async def test_vigobus_getstop_retry_datasources():
     """Test the Vigobus.get_stop() method, having 4 Datasources defined, with the following order by priority:
 
     - DS1: returns an exception on the method
@@ -23,65 +22,35 @@ async def test_vigobus_getstop_retry_datasources(vigobus_unit):
     expected_response = "Response"
     called_datasources = list()
 
-    @Datasources.register(priority=1)
     class DS1(BaseDatasource):
         async def get_stop(self, stop_id: int):
             raise Exception("Exception from DS1.get_stop()")
 
-    @Datasources.register(priority=2)
     class DS2(BaseDatasource):
         pass
 
-    @Datasources.register(priority=3)
     class DS3(BaseDatasource):
         async def get_stop(self, stop_id: int):
             called_datasources.append(self.datasource_name)
             return expected_response
 
-    @Datasources.register(priority=4)
     class DS4(BaseDatasource):
         async def get_stop(self, stop_id: int):
             called_datasources.append(self.datasource_name)
             return None
 
-    vigobus_unit.reload()
-    response = await vigobus_unit.get_stop(1)
+    vigobus = Vigobus(
+        datasources_getstop=[DS1, DS2, DS3, DS4],
+    )
+    response = await vigobus.get_stop(1)
 
     assert response == expected_response
     assert called_datasources == ["DS3"]
 
 
-# noinspection PyUnusedLocal
-@TestMarks.asyncio
-async def test_vigobus_getallstops_retry_datasources_errors_and_notimplemented(vigobus_unit):
-    """Test the Vigobus.get_all_stops() method, having 4 Datasources defined, with the following order by priority:
-
-    - DS1: returns an exception on the method
-    - DS2: has not implemented the method
-
-    The Vigobus.get_all_stops() method should raise the exception from the DS1.
-    """
-
-    class CustomException(Exception):
-        pass
-
-    @Datasources.register(priority=4000000)
-    class DS1(BaseDatasource):
-        async def get_all_stops(self):
-            raise CustomException("Exception from DS1.get_stop()")
-
-    @Datasources.register(priority=3000000)
-    class DS2(BaseDatasource):
-        pass
-
-    vigobus_unit.reload()
-    with pytest.raises(CustomException):
-        await vigobus_unit.get_all_stops()
-
-
 @TestMarks.real
 @TestMarks.asyncio
-async def test_vigobus_getstop_real(vigobus_real):
+async def test_vigobus_getstop_real():
     stop_id = 5800
     stop_generation_datetime = Datetimes[0]
     # noinspection PyTypeChecker
@@ -98,16 +67,18 @@ async def test_vigobus_getstop_real(vigobus_real):
         ),
     )
 
+    vigobus = Vigobus()
     with freezegun.freeze_time(stop_generation_datetime):
-        stop_result = await vigobus_real.get_stop(stop_id)
+        stop_result = await vigobus.get_stop(stop_id)
 
     assert stop_result == stop_expected
 
 
 @TestMarks.real
 @TestMarks.asyncio
-async def test_vigobus_getstop_nonexisting_real(vigobus_real):
-    stop_result = await vigobus_real.get_stop(1)
+async def test_vigobus_getstop_nonexisting_real():
+    vigobus = Vigobus()
+    stop_result = await vigobus.get_stop(1)
     # stop_id = 1 on DatasourceVigoApi returns a non-existing stop,
     # but with weird estimations (buses with distance_meters=-1)
 
@@ -116,7 +87,7 @@ async def test_vigobus_getstop_nonexisting_real(vigobus_real):
 
 @TestMarks.real
 @TestMarks.asyncio
-async def test_vigobus_getallstops_real(vigobus_real):
+async def test_vigobus_getallstops_real():
     stops_generation_datetime = Datetimes[0]
     # noinspection PyTypeChecker
     stops_expected_first = Stop(
@@ -132,8 +103,9 @@ async def test_vigobus_getallstops_real(vigobus_real):
         )
     )
 
+    vigobus = Vigobus()
     with freezegun.freeze_time(stops_generation_datetime):
-        stops_result = await vigobus_real.get_all_stops()
+        stops_result = await vigobus.get_all_stops()
 
     assert len(stops_result) > 1100
     assert stops_result[0] == stops_expected_first
@@ -142,11 +114,12 @@ async def test_vigobus_getallstops_real(vigobus_real):
 @TestMarks.real
 @TestMarks.heavy
 @TestMarks.asyncio
-async def test_vigobus_getallstops_real_compare_getstop(vigobus_real):
-    stops = await vigobus_real.get_all_stops()
+async def test_vigobus_getallstops_real_compare_getstop():
+    vigobus = Vigobus()
+    stops = await vigobus.get_all_stops()
     stop_dict_exclude_fields = {"metadata"}
 
     for stop_getallstops in stops:
-        stop_getonestop = await vigobus_real.get_stop(stop_getallstops.id)
+        stop_getonestop = await vigobus.get_stop(stop_getallstops.id)
         assert stop_getonestop.dict(exclude=stop_dict_exclude_fields) == \
                stop_getallstops.dict(exclude=stop_dict_exclude_fields)

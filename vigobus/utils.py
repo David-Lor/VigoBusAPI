@@ -4,6 +4,7 @@ from typing import Optional, Type
 
 __all__ = ("Utils", "ErrorRetrier")
 
+
 class Utils:
     @staticmethod
     def datetime_now() -> datetime.datetime:
@@ -12,6 +13,10 @@ class Utils:
     @staticmethod
     def unixtimestampseconds_to_datetime(ts: int) -> datetime.datetime:
         return datetime.datetime.fromtimestamp(ts, datetime.timezone.utc)
+
+    @staticmethod
+    def flatten(iterable, return_as=list):
+        return return_as(item for sublist in iterable for item in sublist)
 
 
 class ErrorRetrier:

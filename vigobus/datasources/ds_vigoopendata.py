@@ -2,14 +2,13 @@ import io
 import csv
 from typing import List
 
-from .base import BaseDatasource, Datasources
+from .base import BaseDatasource
 from .fixers import Fixers
-from .. import Stop, StopMetadata
+from ..models.stop import Stop, StopMetadata
 from ..models.base import BaseModel, PosInt, NEString, Position, SourceMetadata
 from ..utils import Utils
 
 
-@Datasources.register(priority=100)
 class DatasourceVigoOpenData(BaseDatasource):
 
     class StopCsvLine(BaseModel):
