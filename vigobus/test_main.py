@@ -147,6 +147,18 @@ async def test_vigobus_getstop_nonexisting_real(datasource):
 
 @TestMarks.real
 @TestMarks.asyncio
+@pytest.mark.parametrize("datasource", [
+    DatasourceVigoApi,
+    DatasourceQrHtml,
+])
+async def test_vigobus_getbuses_real(datasource):
+    vigobus = Vigobus(datasources_getbuses=[datasource])
+    buses_result = await vigobus.get_buses(6860)
+    assert isinstance(buses_result.buses, list)
+
+
+@TestMarks.real
+@TestMarks.asyncio
 async def test_vigobus_getallstops_real():
     stops_generation_datetime = Datetimes[0]
     # noinspection PyTypeChecker

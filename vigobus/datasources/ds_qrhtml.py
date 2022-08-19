@@ -1,10 +1,11 @@
-from typing import Optional
+from typing import Optional, List
 
 import bs4
 import httpx
 
 from .base import BaseDatasource
 from .fixers import Fixers
+from ..models import Bus, BusMetadata
 from ..models import Stop, BusesResponse, StopMetadata, SourceMetadata
 from ..utils import Utils
 
@@ -28,7 +29,13 @@ class DatasourceQrHtml(BaseDatasource):
         return self._parse_response_stop(soup)
 
     async def get_buses(self, stop_id: int, get_all_buses: bool = True) -> BusesResponse:
-        pass
+        r = await self._request(stop_id)
+        soup = bs4.BeautifulSoup(r.text, self.BS4_PARSER)
+        buses = self._parse_response_buses(soup)
+        return BusesResponse(
+            buses=buses,
+            more_buses_available=False,
+        )
 
     async def _request(self, stop_id: int) -> httpx.Response:
         params = {"parada": stop_id}
@@ -67,5 +74,41 @@ class DatasourceQrHtml(BaseDatasource):
             ),
         )
 
-    def _parse_response_buses(self, soup: bs4.BeautifulSoup) -> BusesResponse:
-        pass
+    def _parse_response_buses(self, soup: bs4.BeautifulSoup) -> List[Bus]:
+        buses: List[Bus] = list()
+        buses_table = soup.find("table", id="GridView1")
+        if not buses_table:
+            return buses
+
+        now = Utils.datetime_now()
+        buses_rows_styles = (
+            "color:#333333;background-color:#F7F6F3;",
+            "color:#284775;background-color:White;"
+        )
+        buses_rows = (buses_table.find_all("tr", attrs={"style": style}) for style in buses_rows_styles)
+        buses_rows = Utils.flatten(buses_rows, return_as=tuple)
+
+        for row in buses_rows:
+            column_line, column_route, column_minutes = row.find_all("td")
+            bus_line_original = column_line.text
+            bus_route_original = column_route.text
+            bus_line, bus_route = Fixers.bus_line_route(bus_line_original, bus_route_original)
+
+            # noinspection PyTypeChecker
+            bus = Bus(
+                line=bus_line,
+                route=bus_route,
+                time_minutes=column_minutes.text,
+                distance_meters=None,
+                metadata=BusMetadata(
+                    original_line=bus_line_original,
+                    original_route=bus_route_original,
+                    source=SourceMetadata(
+                        datasource=self.datasource_name,
+                        when=now,
+                    ),
+                ),
+            )
+            buses.append(bus)
+
+        return buses

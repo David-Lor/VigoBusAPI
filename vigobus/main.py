@@ -26,8 +26,8 @@ class Vigobus(BaseDatasource):
     # (if a Datasource fails, the next one is queried).
 
     datasources_getallstops: List[Type[BaseDatasource]] = [DatasourceVigoOpenData]
-    datasources_getstop: List[Type[BaseDatasource]] = [DatasourceVigoApi, DatasourceQrHtml]
-    datasources_getbuses: List[Type[BaseDatasource]] = [DatasourceVigoApi]
+    datasources_getstop: List[Type[BaseDatasource]] = [DatasourceQrHtml, DatasourceVigoApi]
+    datasources_getbuses: List[Type[BaseDatasource]] = [DatasourceVigoApi, DatasourceQrHtml]
 
     _datasources: Dict[Type[BaseDatasource], BaseDatasource] = pydantic.PrivateAttr(default_factory=dict)
     """All the Datasources classes from datasources_* lists are instanced when Vigobus() is instanced,
