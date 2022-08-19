@@ -3,6 +3,7 @@ from typing import Optional, List, Dict, Type, Any
 import pydantic
 
 from .datasources.base import BaseDatasource
+from .datasources.ds_qrhtml import DatasourceQrHtml
 from .datasources.ds_vigoapi import DatasourceVigoApi
 from .datasources.ds_vigoopendata import DatasourceVigoOpenData
 from .exceptions import DatasourceMethodUnavailableException, StopNotExistException
@@ -25,7 +26,7 @@ class Vigobus(BaseDatasource):
     # (if a Datasource fails, the next one is queried).
 
     datasources_getallstops: List[Type[BaseDatasource]] = [DatasourceVigoOpenData]
-    datasources_getstop: List[Type[BaseDatasource]] = [DatasourceVigoApi]
+    datasources_getstop: List[Type[BaseDatasource]] = [DatasourceVigoApi, DatasourceQrHtml]
     datasources_getbuses: List[Type[BaseDatasource]] = [DatasourceVigoApi]
 
     _datasources: Dict[Type[BaseDatasource], BaseDatasource] = pydantic.PrivateAttr(default_factory=dict)

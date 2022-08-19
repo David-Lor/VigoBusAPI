@@ -1,4 +1,5 @@
 import freezegun
+import pytest
 
 from . import Stop, Position, StopMetadata, SourceMetadata, Vigobus
 from .datasources.base import BaseDatasource
@@ -6,6 +7,40 @@ from .conftest import TestMarks, Datetimes
 
 
 # noinspection PyUnusedLocal
+from .datasources.ds_qrhtml import DatasourceQrHtml
+from .datasources.ds_vigoapi import DatasourceVigoApi
+
+
+def test_vigobus_iter_datasources():
+    """Test the Vigobus._iter_datasources() method, having 4 Datasources defined.
+
+    Run the method many times. Should always return instances of the Datasources classes requested, in the same order.
+    The _iter_datasources_cache should be cleared, so the full logic is tested in each loop run.
+    """
+
+    repeat_times = 1000
+
+    class DS1(BaseDatasource):
+        pass
+
+    class DS2(BaseDatasource):
+        pass
+
+    class DS3(BaseDatasource):
+        pass
+
+    class DS4(BaseDatasource):
+        pass
+
+    datasources = [DS1, DS2, DS3, DS4]
+    vigobus = Vigobus(datasources_getstop=datasources)
+    for _ in range(repeat_times):
+        vigobus._iter_datasources_cache.clear()
+        result = vigobus._iter_datasources(datasources)
+        result_classes = [inst.__class__ for inst in result]
+        assert result_classes == datasources
+
+
 @TestMarks.asyncio
 async def test_vigobus_getstop_retry_datasources():
     """Test the Vigobus.get_stop() method, having 4 Datasources defined, with the following order by priority:
@@ -50,34 +85,60 @@ async def test_vigobus_getstop_retry_datasources():
 
 @TestMarks.real
 @TestMarks.asyncio
-async def test_vigobus_getstop_real():
+@pytest.mark.parametrize("datasource", [
+    DatasourceVigoApi,
+    DatasourceQrHtml,
+])
+async def test_vigobus_getstop_real(datasource):
     stop_id = 5800
+    expected_stop_names_by_datasource = {
+        # TODO Remove after replacing double spaces before number by comma+space on Fixers
+        DatasourceVigoApi: "Rúa de Jenaro de la Fuente 29",
+        DatasourceQrHtml: "Rúa de Jenaro de la Fuente, 29",
+    }
+    expected_stop_names_original_by_datasource = {
+        DatasourceVigoApi: "Rúa de Jenaro de la Fuente  29",
+        DatasourceQrHtml: "Rúa de Jenaro de la Fuente, 29",
+    }
+    expected_position_by_datasource = {
+        DatasourceVigoApi: Position(lat=42.232202275, lon=-8.703792246),
+        DatasourceQrHtml: None,
+    }
+    expected_datasource_name_by_datasource = {
+        DatasourceVigoApi: "DatasourceVigoApi",
+        DatasourceQrHtml: "DatasourceQrHtml",
+    }
+
     stop_generation_datetime = Datetimes[0]
     # noinspection PyTypeChecker
     stop_expected = Stop(
         id=stop_id,
-        name="Rúa de Jenaro de la Fuente 29",
-        position=Position(lat=42.232202275, lon=-8.703792246),
+        name=expected_stop_names_by_datasource[datasource],
+        position=expected_position_by_datasource[datasource],
         metadata=StopMetadata(
-            original_name="Rúa de Jenaro de la Fuente  29",
+            original_name=expected_stop_names_original_by_datasource[datasource],
             source=SourceMetadata(
-                datasource="DatasourceVigoApi",
+                datasource=expected_datasource_name_by_datasource[datasource],
                 when=stop_generation_datetime,
             ),
         ),
     )
 
-    vigobus = Vigobus()
+    vigobus = Vigobus(datasources_getstop=[datasource])
     with freezegun.freeze_time(stop_generation_datetime):
         stop_result = await vigobus.get_stop(stop_id)
 
-    assert stop_result == stop_expected
+    assert stop_result.json() == stop_expected.json()
 
 
 @TestMarks.real
 @TestMarks.asyncio
-async def test_vigobus_getstop_nonexisting_real():
-    vigobus = Vigobus()
+@pytest.mark.parametrize("datasource", [
+    DatasourceVigoApi,
+    DatasourceQrHtml,
+])
+async def test_vigobus_getstop_nonexisting_real(datasource):
+    vigobus = Vigobus(datasources_getstop=[datasource])
     stop_result = await vigobus.get_stop(1)
     # stop_id = 1 on DatasourceVigoApi returns a non-existing stop,
     # but with weird estimations (buses with distance_meters=-1)
