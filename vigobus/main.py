@@ -79,7 +79,7 @@ class Vigobus(BaseDatasource):
         try:
             return self._iter_datasources_cache[cache_key]
         except KeyError:
-            result = [instance for cls, instance in self._datasources.items() if cls in datasources_classes]
+            result = [self._datasources[cls] for cls in datasources_classes]
             self._iter_datasources_cache[cache_key] = result
             return result
 
