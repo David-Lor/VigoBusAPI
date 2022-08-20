@@ -1,8 +1,9 @@
 import fastapi
 
 import vigobus.models
+import vigobus.exceptions
 from ..routes import Routes, Tags
-
+from ...controller import VigobusController
 
 router = fastapi.APIRouter(
     prefix="/v1"
@@ -16,5 +17,9 @@ Routes.register(router, tags=[Tags.V1.v1, Tags.V1.buses])
     description="Get real-time Buses that will arrive to a Stop, with their remaining time and distance.",
     response_model=vigobus.models.BusesResponse,
 )
-def get_stop_buses(stop_id: int, all_buses: bool = False) -> vigobus.models.BusesResponse:
-    pass
+async def get_stop_buses(stop_id: int, request: fastapi.Request, all_buses: bool = False) -> vigobus.models.BusesResponse:
+    controller = VigobusController.get_from_request(request)
+    try:
+        return await controller.get_stop_buses(stop_id, all_buses)
+    except vigobus.exceptions.StopNotExistException:
+        raise fastapi.HTTPException(status_code=404, detail="Stop not exists")

@@ -1,16 +1,19 @@
 import fastapi
 import uvicorn
 
+from .controller import VigobusController
 from .routes import Routes
 from .settings import Settings
 
 __all__ = ("VigoBusAPI",)
 
 
-class VigoBusAPI:
+class VigoBusAPI(fastapi.FastAPI):
     def __init__(self):
         self._settings = Settings.initialize()
-        self._app = fastapi.FastAPI(
+        self._controller = VigobusController(self._settings)
+
+        super().__init__(
             title=self._settings.server.api.title,
             description=self._settings.server.api.description,
         )
@@ -22,13 +25,17 @@ class VigoBusAPI:
             raise Exception("No registered API routes")
 
         for router in routes:
-            self._app.include_router(router)
+            self.include_router(router)
 
-        self._app.openapi_tags = Routes.tags
+        self.openapi_tags = Routes.tags
 
     def run(self):
         uvicorn.run(
-            app=self._app,
+            app=self,
             host=self._settings.server.host,
             port=self._settings.server.port,
         )
+
+    @property
+    def controller(self):
+        return self._controller
