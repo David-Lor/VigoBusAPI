@@ -1,0 +1,8 @@
+.gitattributes
+.idea
+.vscode
+*postman*.json
+back_tools/
+.env
+__pycache__
+WORKBOOK.md

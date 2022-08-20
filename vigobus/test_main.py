@@ -127,7 +127,7 @@ async def test_vigobus_getstop_real(datasource):
     with freezegun.freeze_time(stop_generation_datetime):
         stop_result = await vigobus.get_stop(stop_id)
 
-    assert stop_result.json() == stop_expected.json()
+    assert stop_result == stop_expected
 
 
 @TestMarks.real
