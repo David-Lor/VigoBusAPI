@@ -1,7 +1,7 @@
 import fastapi
 import uvicorn
 
-from .routes import routes
+from .routes import Routes
 from .settings import Settings
 
 __all__ = ("VigoBusAPI",)
@@ -17,6 +17,10 @@ class VigoBusAPI:
         self._register_routes()
 
     def _register_routes(self):
+        routes = Routes.process_routes()
+        if not routes:
+            raise Exception("No registered API routes")
+
         for router in routes:
             self._app.include_router(router)
 
