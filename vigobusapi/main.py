@@ -1,7 +1,7 @@
 import fastapi
 import uvicorn
 
-from .controller import VigobusController
+from vigobusapi.services.controller import VigobusController
 from .routes import Routes
 from .settings import Settings
 

@@ -1,7 +1,7 @@
 import fastapi
 
 from vigobus import Vigobus
-from .settings import Settings
+from vigobusapi.settings import Settings
 
 
 class VigobusController:

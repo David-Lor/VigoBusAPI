@@ -2,7 +2,7 @@ import fastapi
 
 import vigobus.models
 from ..routes import Routes, Tags
-from ...controller import VigobusController
+from vigobusapi.services.controller import VigobusController
 
 router = fastapi.APIRouter(
     prefix="/v1"
