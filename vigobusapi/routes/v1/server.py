@@ -1,12 +1,12 @@
 import fastapi
 
-from ..routes import Routes
+from ..routes import Routes, Tags
 
 
 router = fastapi.APIRouter(
     prefix="/v1/server"
 )
-Routes.register(router)
+Routes.register(router, tags=[Tags.V1.server])
 
 
 @router.get("/status")

@@ -24,6 +24,8 @@ class VigoBusAPI:
         for router in routes:
             self._app.include_router(router)
 
+        self._app.openapi_tags = Routes.tags
+
     def run(self):
         uvicorn.run(
             app=self._app,

@@ -1,26 +1,48 @@
-from typing import List
+from typing import List, Dict, Optional
 
 import fastapi
+import pydantic
 
-__all__ = ("Routes",)
+__all__ = ("Routes", "Tag", "Tags")
 
-from vigobusapi.utils import Utils
+from ..utils import Utils
+from vigobus.models.base import NEString
+
+
+class Tag(pydantic.BaseModel):
+    name: NEString
+    description: str = ""
+
+
+class Tags:
+
+    # noinspection PyTypeChecker
+    class V1:
+        server = Tag(
+            name="server",
+            description="Endpoints related with the API server.",
+        )
 
 
 class Routes:
     routes: List[fastapi.APIRouter] = list()
+    _tags_kv: Dict[str, dict] = dict()
+    tags: List[dict] = list()
 
     @classmethod
-    def register(cls, router: fastapi.APIRouter = None):
-        # if not router:
-        #     def wrapper(_router: fastapi.APIRouter):
-        #         cls.register(_router)
-        #         return _router
-        #     return wrapper
-
-        print("Register router", router)
+    def register(cls, router: fastapi.APIRouter = None, tags: Optional[List[Tag]] = None):
+        if tags:
+            cls.register_tags(tags)
+            router.tags = [tag.name for tag in tags]
         cls.routes.append(router)
+
         return router
+
+    @classmethod
+    def register_tags(cls, tags: List[Tag]):
+        for tag in tags:
+            cls._tags_kv[tag.name] = tag.dict()
+        cls.tags = list(cls._tags_kv.values())
 
     @classmethod
     def process_routes(cls):
