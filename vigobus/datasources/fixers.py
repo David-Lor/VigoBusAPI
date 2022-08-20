@@ -12,9 +12,16 @@ class Fixers:
                 "a", "de", "en", "por", "sin", "so", "do", "da", "dos", "das", "no", "na", "nos", "nas", "sen",
                 "o", "a", "ó", "á", "lo", "la", "los", "las", "os", "as", "y", "e", "del", "i",
             }
+
+            ignore = {
+                "XII",
+            }
+            """Words to ignore for fixing (case sensible)."""
+
             replacements = {
                 "(CUVI)": "(Universidade)",
             }
+            """Words replacements (key: word to find; value: word to replace with)"""
 
         class Buses:
             line_letters = ('"A"', '"B"', '"C"', 'A   ', 'B   ', 'C   ', 'A ', 'B ', 'C ')
@@ -50,12 +57,13 @@ class Fixers:
 
         # Capitalize each word on the name (if the word is at least 3 characters long);
         # Set prepositions to lowercase;
-        # Fix chars
-        # name_words = fix_chars(name).split()  # TODO Try to fix encoding other way (if required)
         name_words = name.split()
         for index, word in enumerate(name_words):
             # noinspection PyBroadException
             try:
+                if word in cls.Const.Stops.ignore:
+                    continue
+
                 word = word.strip().lower()
                 if word not in cls.Const.Stops.prepositions:
                     if word.startswith("("):

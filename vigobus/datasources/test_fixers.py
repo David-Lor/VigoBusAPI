@@ -33,6 +33,7 @@ def test_fix_bus_line_route(line, route, expected_line, expected_route):
     ("Telecomunicacións (CUVI)", "Telecomunicacións (Universidade)"),
     ("Telecomunicacións (CUVI) B", "Telecomunicacións (Universidade) B"),
     ("Estrada de Camposancos (cruce Camiño da Estea)", "Estrada de Camposancos (Cruce Camiño da Estea)"),
+    ("Paseo de Alfonso XII (Mirador)", True),
 ])
 def test_fix_stop_name(name, expected_name):
     if expected_name is True:
