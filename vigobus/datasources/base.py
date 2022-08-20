@@ -16,7 +16,11 @@ class BaseDatasource(pydantic.BaseModel):
     http_retries: PosInt = 3
     http_retries_delay_seconds: NonNegFloat = 1
     http_request_timeout_seconds: NonNegFloat = 5
-    buses_per_page: Optional[NonNegInt] = None
+
+    getbuses_notallbuses_limit: Optional[NonNegInt] = None
+    """For the `get_buses` method, if get_all_buses=False and the datasource returns all the buses available,
+    shorten the results to this amount, if not None.
+    """
 
     async def get_all_stops(self) -> List[Stop]:
         """Get all the available stops.
