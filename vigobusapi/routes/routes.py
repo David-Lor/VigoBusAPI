@@ -26,6 +26,15 @@ class Tags:
             name="server",
             description="Endpoints related with the API server.",
         )
+        stops = Tag(
+            name="stops",
+            description="Stop entities represent data for physical stops where buses pass by."
+        )
+        buses = Tag(
+            name="buses",
+            description="Bus entities represent buses passing through stops, with a concrete journey "
+                        "identified by line/route."
+        )
 
 
 class Routes:
