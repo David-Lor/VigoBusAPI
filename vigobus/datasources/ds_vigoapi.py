@@ -27,6 +27,12 @@ class DatasourceVigoApi(BaseDatasource):
             minutos: NonNegInt
             metros: Optional[int]  # if not available, should return as -1
 
+            @pydantic.validator("metros", pre=False)
+            def _metros_valid(cls, v):
+                if v < 0:
+                    v = None
+                return v
+
         parada: List[InnerStop]  # Array of objects, always with 1 element, or empty if stop not exist.
         estimaciones: List[InnerBus]  # Array of objects, may be empty if no buses currently available.
 
@@ -108,8 +114,6 @@ class DatasourceVigoApi(BaseDatasource):
             line_original = bus_received.linea
             route_original = bus_received.ruta
             line, route = Fixers.bus_line_route(line_original, route_original)
-            if bus_received.metros is not None and bus_received.metros < 0:
-                bus_received.metros = None
 
             # noinspection PyTypeChecker
             bus_parsed = Bus(
