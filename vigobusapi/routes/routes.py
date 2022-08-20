@@ -18,6 +18,10 @@ class Tags:
 
     # noinspection PyTypeChecker
     class V1:
+        v1 = Tag(
+            name="v1",
+            description="API version v1",
+        )
         server = Tag(
             name="server",
             description="Endpoints related with the API server.",
