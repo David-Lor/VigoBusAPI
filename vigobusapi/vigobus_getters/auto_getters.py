@@ -20,6 +20,7 @@ __all__ = ("get_stop", "get_stop_or_none", "get_stops", "get_buses")
 STOP_GETTERS = (
     cache.get_stop,
     mongo.get_stop,
+    http.get_stop,
     html.get_stop
 )
 """List of Stop Getter functions. 

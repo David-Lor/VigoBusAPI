@@ -12,11 +12,12 @@ jobs:
           - "3.6"
           - "3.7"
           - "3.8"
-    services:
-      mongodb:
-        image: mongo:latest
-        ports:
-          - 27017:27017
+          - "3.9"
+#    services:
+#      mongodb:
+#        image: mongo:latest
+#        ports:
+#          - 27017:27017
     steps:
       - uses: actions/checkout@master
       - name: Setup Python

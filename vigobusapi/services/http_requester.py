@@ -13,13 +13,15 @@ from requests_async import request, Response, RequestException
 from vigobusapi.settings import settings
 from vigobusapi.logger import logger
 
-__all__ = ("http_request",)
+__all__ = ("http_request", "ListOfTuples")
+
+ListOfTuples = List[Tuple[str, str]]
 
 
 async def http_request(
         url: str,
         method: str = "GET",
-        params: Optional[dict] = None,
+        params: Optional[Union[dict, ListOfTuples]] = None,
         body: Optional[Union[dict, str]] = None,
         headers: Optional[dict] = None,
         timeout: float = settings.http_timeout,
@@ -31,16 +33,17 @@ async def http_request(
 
     :param url: URL to request
     :param method: HTTP method (default=GET)
-    :param params: URL query params as dict (default=None)
+    :param params: URL query params as dict or list of tuples (default=None)
     :param body: request body, usually a dict or string (default=None)
     :param headers: request headers as dict (default=None)
     :param timeout: timeout for each request retry in seconds (default=from settings)
-    :param retries: how many times to retry the request if it fails (default=from settings)
+    :param retries: how many times to retry the request if it fails (at least 1) (default=from settings)
     :param raise_for_status: if True, raise HTTPError if response is not successful (default=True)
-    :param not_retry_400_errors: if True, do not retry requests failed with a ~400 status code (default=True)
+    :param not_retry_400_errors: if True, do not retry requests failed with a 4xx status code (default=True)
     :return: the Response object
     :raises: requests_async.RequestTimeout | requests_async.RequestException
     """
+    # TODO refactor "retries" arg, it is actually working as "tries" (requires at least 1)
     last_error = None
     last_status_code = None
 
@@ -70,10 +73,19 @@ async def http_request(
 
                 response_time = round(time.time() - start_time, 4)
                 last_status_code = response.status_code
+
+                # Log response
+                response_body = response.content
+                response_body_size = len(response_body)
+                if response_body_size > 500000 or b"\x00" in response_body:  # 500kB
+                    response_body = "binary or too large"
+                else:
+                    response_body = response.text
                 logger.bind(
                     response_elapsed_time=response_time,
                     response_status_code=last_status_code,
-                    response_body=response.text
+                    response_body=response_body,
+                    response_body_size=response_body_size
                 ).debug("Response received")
 
                 if raise_for_status:

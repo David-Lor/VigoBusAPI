@@ -66,6 +66,7 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 - Add endpoints for static buses info
 - Add integration tests
 - Add detailed install & configuration instructions
+- Improve endpoint and services/controllers in-code organization
 
 ---
 
@@ -76,6 +77,7 @@ _La API puede devolver información de Paradas y listados en tiempo real de los 
 - _Añadir endpoints para consulta de información estática de buses_
 - _Añadir tests de integración_
 - _Añadir instrucciones detalladas de instalación y configuración_
+- _Mejorar organización en código de endpoints y servicios/controladores_
 
 ## Disclaimer
 
