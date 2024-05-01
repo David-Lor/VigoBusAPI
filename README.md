@@ -1,23 +1,13 @@
 # Python VigoBusAPI
 
-[![OpenAPI docs (stable)](https://img.shields.io/badge/OpenAPI%20docs-stable-green?logo=swagger&style=plastic)](https://editor.swagger.io/?url=https://raw.githubusercontent.com/David-Lor/VigoBusAPI/master/docs/openapi.yaml)
-[![OpenAPI docs (develop)](https://img.shields.io/badge/OpenAPI%20docs-develop-blue?logo=swagger&style=plastic)](https://editor.swagger.io/?url=https://raw.githubusercontent.com/David-Lor/VigoBusAPI/develop/docs/openapi.yaml)
-
-REST API that provides Stop and Bus information provided by the public transport system of the city of [Vigo](https://en.wikipedia.org/wiki/Vigo) (Galicia/Spain). Built with Python + [FastAPI](https://github.com/tiangolo/fastapi).
-
-The goal of this API is to gather the different available data sources on one single API,
-with better endpoints structure and more clear data output format (as JSON).
+Python library that provides Stop and Bus information provided by the public transport system of the city of [Vigo](https://en.wikipedia.org/wiki/Vigo) (Galicia/Spain).
+The goal of this API is to gather the different available data sources on a single interface, that can be used from any arbitrary Python project.
 
 ## Features
 
+(TODO)
+
 ## Structure
-
-### Project structure
-
-The VigoBusAPI project is divided in two parts:
-
-- the vigobus library is a Python library that provides all the logic for fetching, parsing and formatting all the data supported
-- the vigobusapi app is the REST API that, using the vigobus library, provides endpoints for accessing all the data supported
 
 ### Static stops
 
