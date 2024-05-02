@@ -1,6 +1,6 @@
 import io
 import csv
-from typing import List
+from typing import Iterable
 
 from .base import BaseDatasource
 from .fixers import Fixers
@@ -10,6 +10,7 @@ from ..utils import Utils
 
 
 class DatasourceVigoOpenData(BaseDatasource):
+    _paradas_endpoint = "https://datos.vigo.org/data/transporte/paradas.csv"
 
     class StopCsvLine(BaseModel):
         id: PosInt
@@ -17,19 +18,26 @@ class DatasourceVigoOpenData(BaseDatasource):
         lat: float
         lon: float
 
-    async def get_all_stops(self) -> List[Stop]:
+    async def get_all_stops(self) -> Iterable[Stop]:
         r = await self._request_http(
-            url="https://datos.vigo.org/data/transporte/paradas.csv",
+            url=self._paradas_endpoint,
         )
         return self._parse_stops_dump_csv(r.text)
 
-    def _parse_stops_dump_csv(self, data: str) -> List[Stop]:
+    async def get_all_stops_etag(self) -> str:
+        r = await self._request_http(
+            url=self._paradas_endpoint,
+            method="HEAD"
+        )
+        return r.headers["ETag"]
+
+    def _parse_stops_dump_csv(self, data: str):
+        # TODO Read in Stream mode
         source_metadata = SourceMetadata(
             datasource=self.datasource_name,
             when=Utils.datetime_now(),
         )
         reader = csv.DictReader(io.StringIO(data))
-        results: List[Stop] = list()
 
         for row in reader:
             stop_original = self.StopCsvLine.parse_obj(row)
@@ -37,7 +45,7 @@ class DatasourceVigoOpenData(BaseDatasource):
             name = Fixers.stop_name(name_original)
 
             # noinspection PyTypeChecker
-            results.append(Stop(
+            yield Stop(
                 id=stop_original.id,
                 name=name,
                 position=Position(lat=stop_original.lat, lon=stop_original.lon),
@@ -45,6 +53,4 @@ class DatasourceVigoOpenData(BaseDatasource):
                     original_name=name_original,
                     source=source_metadata,
                 ),
-            ))
-
-        return results
+            )

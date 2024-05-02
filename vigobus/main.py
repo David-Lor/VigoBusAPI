@@ -1,4 +1,4 @@
-from typing import Optional, List, Dict, Type, Any
+from typing import Optional, List, Dict, Iterable, Type, Any
 
 import pydantic
 
@@ -26,6 +26,7 @@ class Vigobus(BaseDatasource):
     # (if a Datasource fails, the next one is queried).
 
     datasources_getallstops: List[Type[BaseDatasource]] = [DatasourceVigoOpenData]
+    datasources_getallstopsetag: List[Type[BaseDatasource]] = [DatasourceVigoOpenData]
     datasources_getstop: List[Type[BaseDatasource]] = [DatasourceVigoApi, DatasourceQrHtml]
     datasources_getbuses: List[Type[BaseDatasource]] = [DatasourceVigoApi, DatasourceQrHtml]
 
@@ -40,11 +41,18 @@ class Vigobus(BaseDatasource):
         super().__init__(**data)
         self._initialize_datasources()
 
-    async def get_all_stops(self) -> List[Stop]:
+    async def get_all_stops(self) -> Iterable[Stop]:
         retrier = self._get_error_retrier()
         for datasource in self._iter_datasources(self.datasources_getallstops):
             with retrier.wrap():
                 return await datasource.get_all_stops()
+        retrier.raise_last_exception()
+
+    async def get_all_stops_etag(self) -> str:
+        retrier = self._get_error_retrier()
+        for datasource in self._iter_datasources(self.datasources_getallstops):
+            with retrier.wrap():
+                return await datasource.get_all_stops_etag()
         retrier.raise_last_exception()
 
     async def get_stop(self, stop_id: int) -> Optional[Stop]:
