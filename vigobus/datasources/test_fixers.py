@@ -17,17 +17,19 @@ def test_fix_bus_line_route(line, route, expected_line, expected_route):
 @pytest.mark.parametrize("name, expected_name", [
     # TODO Update after implementing "Replace double spaces present before a number at the end, with a comma+space"
     # If expected_name=True, expect it to be equal to name
-    ("Rúa de Jenaro de la Fuente  29", "Rúa de Jenaro de la Fuente 29"),
-    ("Estrada de Moledo  6", "Estrada de Moledo 6"),
+    ("Rúa de Jenaro de la Fuente  29", "Rúa de Jenaro de la Fuente, 29"),
+    ("Estrada de Moledo  6", "Estrada de Moledo, 6"),
     ("Estrada de Moledo, 6", True),
-    ("Rúa de Tomás Paredes  4", "Rúa de Tomás Paredes 4"),
+    ("Estrada de  Moledo  6", "Estrada de Moledo, 6"),
+    ("Estrada de Moledo 6", True),
+    ("Rúa de Tomás Paredes  4", "Rúa de Tomás Paredes, 4"),
     ("Rúa da Pedra Seixa (Colexio)", True),
     ("Rúa de Pi i Margall (fronte 5)", "Rúa de Pi i Margall (Fronte 5)"),
     ("Subida á Madroa (fronte Campo Fútbol)", "Subida á Madroa (Fronte Campo Fútbol)"),
     ("Rúa de Manuel Álvarez (fronte cruce Camiño Sulevada)", "Rúa de Manuel Álvarez (Fronte Cruce Camiño Sulevada)"),
     ("Estrada de Fragoselo (cruce Camiño Río da Barxa)", "Estrada de Fragoselo (Cruce Camiño Río da Barxa)"),
     ("Rúa Castañal (cruce Camiño das Presas)", "Rúa Castañal (Cruce Camiño das Presas)"),
-    ("Rúa das Teixugueiras  19-Portal 5", "Rúa das Teixugueiras 19, Portal 5"),
+    ("Rúa das Teixugueiras  19-Portal 5", "Rúa das Teixugueiras, 19, Portal 5"),
     ("Rúa de Santo Amaro (Praza de España)", True),
     ("Rúa do Gaiteiro de Ricardo Portela (fronte Pavillón)", "Rúa do Gaiteiro de Ricardo Portela (Fronte Pavillón)"),
     ("Telecomunicacións (CUVI)", "Telecomunicacións (Universidade)"),

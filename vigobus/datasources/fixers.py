@@ -32,8 +32,11 @@ class Fixers:
     @classmethod
     def stop_name(cls, original_name: str) -> str:
 
+        # Replace double spaces between a number, with a comma
+        name = re.sub(r'\s{2}(\d)', r', \1', original_name)
+
         # Remove double spaces
-        name = re.sub(' +', ' ', original_name)
+        name = re.sub(' +', ' ', name)
 
         # Replace - with commas
         name = name.replace("-", ",")
