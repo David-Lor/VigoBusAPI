@@ -27,7 +27,15 @@ class BaseDatasource(pydantic.BaseModel):
 
         :return: List of Stop objects.
         """
-        raise DatasourceMethodUnavailableException
+        raise self._get_unavailable_exception()
+
+    async def get_all_stops_etag(self) -> str:
+        """Get the cache key for the get_all_stops method. This can be used for determining whether the get_all_stops
+        dump has changed in the datasource.
+
+        :return: an arbitrary identifier as string.
+        """
+        raise self._get_unavailable_exception()
 
     async def get_stop(self, stop_id: int) -> Optional[Stop]:
         """Search for a Stop by id.
@@ -36,7 +44,7 @@ class BaseDatasource(pydantic.BaseModel):
         :param stop_id: id of the Stop to get.
         :return: Stop object if stop found; None if the stop does not exist.
         """
-        raise DatasourceMethodUnavailableException
+        raise self._get_unavailable_exception()
 
     async def get_buses(self, stop_id: int, get_all_buses: bool = True) -> BusesResponse:
         """Get the buses arriving to the given Stop, with their remaining time estimations, by Stop id.
@@ -48,7 +56,7 @@ class BaseDatasource(pydantic.BaseModel):
         :raises StopNotExistException: when the Stop requested does not exist.
         :raises DatasourceMethodUnavailableException: when the method is not implemented for the datasource.
         """
-        raise DatasourceMethodUnavailableException
+        raise self._get_unavailable_exception()
 
     async def _request_http(self, url: str, raise_status: bool = True, **kwargs) -> httpx.Response:
         """Simple HTTP requester, supporting retries."""
@@ -71,4 +79,12 @@ class BaseDatasource(pydantic.BaseModel):
 
     @property
     def datasource_name(self):
-        return self.__class__.__name__
+        return self.get_datasource_name()
+
+    @classmethod
+    def get_datasource_name(cls):
+        return cls.__name__
+
+    @classmethod
+    def _get_unavailable_exception(cls):
+        return DatasourceMethodUnavailableException(getter_name=cls.get_datasource_name())

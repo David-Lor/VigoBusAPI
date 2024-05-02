@@ -6,7 +6,8 @@ class BaseVigobusException(Exception):
 
 
 class DatasourceMethodUnavailableException(BaseVigobusException):
-    pass
+    def __init__(self, getter_name: str):
+        self.getter_name = getter_name
 
 
 class StopNotExistException(BaseVigobusException):
