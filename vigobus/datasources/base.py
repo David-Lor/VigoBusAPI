@@ -1,7 +1,7 @@
 import httpx
 import pydantic
 
-from typing import Optional, Iterable
+from typing import Optional, List
 
 from ..models import BusesResponse, Stop
 from ..exceptions import DatasourceMethodUnavailableException
@@ -22,10 +22,10 @@ class BaseDatasource(pydantic.BaseModel):
     shorten the results to this amount, if not None.
     """
 
-    async def get_all_stops(self) -> Iterable[Stop]:
+    async def get_all_stops(self) -> List[Stop]:
         """Get all the available stops, typically as a static dump.
 
-        :return: Iterable of Stop objects (List or Generator).
+        :return: AsyncIterable of Stop objects
         """
         raise self._get_unavailable_exception()
 

@@ -1,6 +1,6 @@
 import io
 import csv
-from typing import Iterable
+from typing import List
 
 from .base import BaseDatasource
 from .fixers import Fixers
@@ -18,11 +18,11 @@ class DatasourceVigoOpenData(BaseDatasource):
         lat: float
         lon: float
 
-    async def get_all_stops(self) -> Iterable[Stop]:
+    async def get_all_stops(self) -> List[Stop]:
         r = await self._request_http(
             url=self._paradas_endpoint,
         )
-        return self._parse_stops_dump_csv(r.text)
+        return list(self._parse_stops_dump_csv(r.text))
 
     async def get_all_stops_etag(self) -> str:
         r = await self._request_http(
@@ -32,7 +32,6 @@ class DatasourceVigoOpenData(BaseDatasource):
         return r.headers["ETag"]
 
     def _parse_stops_dump_csv(self, data: str):
-        # TODO Read in Stream mode
         source_metadata = SourceMetadata(
             datasource=self.datasource_name,
             when=Utils.datetime_now(),
