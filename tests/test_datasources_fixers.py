@@ -1,6 +1,6 @@
 import pytest
 
-from .fixers import Fixers
+from vigobus.datasources.fixers import Fixers
 
 
 @pytest.mark.parametrize("line, route, expected_line, expected_route", [

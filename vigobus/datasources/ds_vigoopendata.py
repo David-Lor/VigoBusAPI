@@ -2,11 +2,11 @@ import io
 import csv
 from typing import List
 
-from .base import BaseDatasource
-from .fixers import Fixers
-from ..models.stop import Stop, StopMetadata
-from ..models.base import BaseModel, PosInt, NEString, Position, SourceMetadata
-from ..utils import Utils
+from vigobus.datasources.base import BaseDatasource
+from vigobus.datasources.fixers import Fixers
+from vigobus.models.stop import Stop, StopMetadata
+from vigobus.models.base import BaseModel, PosInt, NEString, Position, SourceMetadata
+from vigobus.utils import Utils
 
 
 class DatasourceVigoOpenData(BaseDatasource):

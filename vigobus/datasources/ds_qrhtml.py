@@ -3,11 +3,11 @@ from typing import Optional, List
 import bs4
 import httpx
 
-from .base import BaseDatasource
-from .fixers import Fixers
-from ..models import Bus, BusMetadata
-from ..models import Stop, BusesResponse, StopMetadata, SourceMetadata
-from ..utils import Utils
+from vigobus.datasources.base import BaseDatasource
+from vigobus.datasources.fixers import Fixers
+from vigobus.models import Bus, BusMetadata
+from vigobus.models import Stop, BusesResponse, StopMetadata, SourceMetadata
+from vigobus.utils import Utils
 
 
 class DatasourceQrHtml(BaseDatasource):

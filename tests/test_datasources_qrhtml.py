@@ -5,9 +5,9 @@ import httpx
 import pydantic
 import pytest
 
-from .ds_qrhtml import DatasourceQrHtml
-from .. import Stop, StopMetadata, SourceMetadata
-from ..conftest import TestMarks, Datetimes
+from vigobus.datasources.ds_qrhtml import DatasourceQrHtml
+from vigobus import Stop, StopMetadata, SourceMetadata
+from tests.conftest import TestMarks, Datetimes
 
 
 class MockDatasourceQrHtml(DatasourceQrHtml):

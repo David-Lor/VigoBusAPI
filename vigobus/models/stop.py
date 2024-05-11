@@ -1,6 +1,6 @@
 from typing import Optional
 
-from .base import BaseModel, NEString, PosInt, Position, SourceMetadata
+from vigobus.models.base import BaseModel, NEString, PosInt, Position, SourceMetadata
 
 __all__ = ("StopMetadata", "Stop")
 

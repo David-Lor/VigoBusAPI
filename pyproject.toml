@@ -12,8 +12,8 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["vigobus"]
-exclude = ["back_tools"]
+include = ["vigobus*"]
+exclude = ["back_tools", "docs", "tests", "tools"]
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["vigobus/requirements.txt"]}

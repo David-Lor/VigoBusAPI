@@ -2,13 +2,13 @@ from typing import Optional, List, Dict, Iterable, Type, Any
 
 import pydantic
 
-from .datasources.base import BaseDatasource
-from .datasources.ds_qrhtml import DatasourceQrHtml
-from .datasources.ds_vigoapi import DatasourceVigoApi
-from .datasources.ds_vigoopendata import DatasourceVigoOpenData
-from .exceptions import DatasourceMethodUnavailableException, StopNotExistException
-from .models import Stop, BusesResponse
-from .utils import Utils, ErrorRetrier
+from vigobus.datasources.base import BaseDatasource
+from vigobus.datasources.ds_qrhtml import DatasourceQrHtml
+from vigobus.datasources.ds_vigoapi import DatasourceVigoApi
+from vigobus.datasources.ds_vigoopendata import DatasourceVigoOpenData
+from vigobus.exceptions import DatasourceMethodUnavailableException, StopNotExistException
+from vigobus.models import Stop, BusesResponse
+from vigobus.utils import Utils, ErrorRetrier
 
 __all__ = ("Vigobus",)
 

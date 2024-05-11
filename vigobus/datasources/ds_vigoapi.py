@@ -2,12 +2,12 @@ from typing import Optional, List
 
 import pydantic
 
-from .base import BaseDatasource
-from .fixers import Fixers
-from ..exceptions import StopNotExistException
-from ..models import BusesResponse, Bus, Stop, StopMetadata, BusMetadata
-from ..models.base import NonNegInt, PosInt, Position, SourceMetadata, NEString
-from ..utils import Utils
+from vigobus.datasources.base import BaseDatasource
+from vigobus.datasources.fixers import Fixers
+from vigobus.exceptions import StopNotExistException
+from vigobus.models import BusesResponse, Bus, Stop, StopMetadata, BusMetadata
+from vigobus.models.base import NonNegInt, PosInt, Position, SourceMetadata, NEString
+from vigobus.utils import Utils
 
 
 class DatasourceVigoApi(BaseDatasource):

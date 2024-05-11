@@ -3,11 +3,11 @@ import asyncio
 import freezegun
 import pytest
 
-from . import Stop, Position, StopMetadata, SourceMetadata, Vigobus
-from .datasources.base import BaseDatasource
-from .conftest import TestMarks, Datetimes
-from .datasources.ds_qrhtml import DatasourceQrHtml
-from .datasources.ds_vigoapi import DatasourceVigoApi
+from vigobus import Stop, Position, StopMetadata, SourceMetadata, Vigobus
+from vigobus.datasources.base import BaseDatasource
+from tests.conftest import TestMarks, Datetimes
+from vigobus.datasources.ds_qrhtml import DatasourceQrHtml
+from vigobus.datasources.ds_vigoapi import DatasourceVigoApi
 
 
 def test_vigobus_iter_datasources():

@@ -3,9 +3,9 @@ import pydantic
 
 from typing import Optional, List
 
-from ..models import BusesResponse, Stop
-from ..exceptions import DatasourceMethodUnavailableException
-from ..models.base import PosInt, NonNegFloat, NonNegInt
+from vigobus.models import BusesResponse, Stop
+from vigobus.exceptions import DatasourceMethodUnavailableException
+from vigobus.models.base import PosInt, NonNegFloat, NonNegInt
 
 __all__ = ("BaseDatasource",)
 

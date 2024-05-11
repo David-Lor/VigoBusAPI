@@ -2,7 +2,7 @@ import pydantic
 
 from typing import Optional, List
 
-from .base import BaseModel, NEString, SourceMetadata, NonNegInt, NonNegFloat
+from vigobus.models.base import BaseModel, NEString, SourceMetadata, NonNegInt, NonNegFloat
 
 __all__ = ("Bus", "BusMetadata", "BusesResponse")
 
