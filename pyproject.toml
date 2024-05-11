@@ -1,0 +1,19 @@
+[project]
+name = "vigobus"
+version = "1.0.1"
+description = "Python library that provides Stop and Bus information provided by the public transport system of the city of Vigo."
+requires-python = ">=3.9,<4.0"
+license = {file = "LICENSE.md"}
+dynamic = ["dependencies"]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["vigobus"]
+exclude = ["back_tools"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["vigobus/requirements.txt"]}
