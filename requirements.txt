@@ -1,6 +1,5 @@
 fastapi==0.68.1  # API framework
 uvicorn==0.15.0  # API deployment tool
-requests-async==0.6.2  # HTTP external data sources
 beautifulsoup4==4.10.0  # HTML parser for HTTP external data sources
 roman==3.3  # Check for roman numbers in string chunks
 python-dotenv==0.19.0  # dotenv setting files
