@@ -1,6 +1,8 @@
 import zipfile
 import pathlib
 import datetime
+from typing import Any, Generator
+from zipfile import ZipFile
 
 import pytest
 
@@ -18,7 +20,7 @@ Datetimes = [
 
 
 @pytest.fixture()
-def testdata() -> zipfile.ZipFile:
+def testdata() -> Generator[ZipFile, Any, None]:
     this_path = pathlib.Path(__file__).parent.resolve()
     zip_path = this_path / "tests_data" / "testdata.zip"
     with zipfile.ZipFile(zip_path, "r") as f:

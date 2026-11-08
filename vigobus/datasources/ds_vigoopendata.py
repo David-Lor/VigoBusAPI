@@ -2,6 +2,8 @@ import io
 import csv
 from typing import List
 
+from pydantic.types import ClassVar
+
 from vigobus.datasources.base import BaseDatasource
 from vigobus.datasources.fixers import Fixers
 from vigobus.models.stop import Stop, StopMetadata
@@ -10,7 +12,7 @@ from vigobus.utils import Utils
 
 
 class DatasourceVigoOpenData(BaseDatasource):
-    _paradas_endpoint = "https://datos.vigo.org/data/transporte/paradas.csv"
+    _paradas_endpoint: ClassVar = "https://datos.vigo.org/data/transporte/paradas.csv"
 
     class StopCsvLine(BaseModel):
         id: PosInt

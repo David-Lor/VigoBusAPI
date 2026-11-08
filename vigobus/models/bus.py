@@ -25,7 +25,7 @@ class BusesResponse(BaseModel):
     buses: List[Bus]
     more_buses_available: bool
 
-    @pydantic.validator("buses")
+    @pydantic.field_validator("buses", mode="after")
     def _sort_buses(cls, buses: List[Bus]):
         buses.sort(
             key=lambda bus: (

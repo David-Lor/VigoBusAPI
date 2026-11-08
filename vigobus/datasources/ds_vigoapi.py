@@ -1,6 +1,7 @@
 from typing import Optional, List
 
 import pydantic
+from pydantic.types import ClassVar
 
 from vigobus.datasources.base import BaseDatasource
 from vigobus.datasources.fixers import Fixers
@@ -11,7 +12,8 @@ from vigobus.utils import Utils
 
 
 class DatasourceVigoApi(BaseDatasource):
-    _endpoint = "https://datos.vigo.org/vci_api_app/api2.jsp"
+    _endpoint: ClassVar = "https://datos.vigo.org/vci_api_app/api2.jsp"
+    _response_encoding: ClassVar = "latin-1"
 
     class VigoAPIStopBusesResponse(pydantic.BaseModel):
 
@@ -27,7 +29,7 @@ class DatasourceVigoApi(BaseDatasource):
             minutos: NonNegInt
             metros: Optional[int]  # if not available, should return as -1
 
-            @pydantic.validator("metros", pre=False)
+            @pydantic.field_validator("metros", mode="after")
             def _metros_valid(cls, v):
                 if v < 0:
                     v = None
@@ -67,7 +69,7 @@ class DatasourceVigoApi(BaseDatasource):
         return self._parse_response_stop(response)
 
     async def _request_get_stop_buses(self, stop_id: int) -> VigoAPIStopBusesResponse:
-        # TODO parameterize which fields to parse
+        # TODO parameterize which fields to parse (stop or buses) to avoid unnecessary parsing and improve performance
         params = {
             "id": stop_id,
             "ttl": 5,
@@ -79,7 +81,7 @@ class DatasourceVigoApi(BaseDatasource):
             params=params,
             raise_status=True,
         )
-        return self.VigoAPIStopBusesResponse.parse_obj(r.json())
+        return self.VigoAPIStopBusesResponse.model_validate_json(r.content.decode(self._response_encoding))
 
     def _parse_response_stop(self, response: VigoAPIStopBusesResponse) -> Optional[Stop]:
         response_stop = response.stop

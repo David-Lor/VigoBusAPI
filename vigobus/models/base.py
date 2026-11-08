@@ -1,26 +1,14 @@
 import datetime
+import typing
 
 import pydantic
 
 
-class BaseString(pydantic.ConstrainedStr, str):
-    strip_whitespace = True
-
-
-class NEString(BaseString):
-    min_length = 1
-
-
-class PosInt(pydantic.ConstrainedInt, int):
-    gt = 0
-
-
-class NonNegInt(pydantic.ConstrainedInt, int):
-    ge = 0
-
-
-class NonNegFloat(pydantic.ConstrainedFloat, float):
-    ge = 0
+BaseString = typing.Annotated[str, pydantic.constr(strip_whitespace=True)]
+NEString = typing.Annotated[str, pydantic.constr(strip_whitespace=True, min_length=1)]
+PosInt = typing.Annotated[int, pydantic.conint(gt=0)]
+NonNegInt = typing.Annotated[int, pydantic.conint(ge=0)]
+NonNegFloat = typing.Annotated[float, pydantic.confloat(ge=0)]
 
 
 class BaseModel(pydantic.BaseModel):
