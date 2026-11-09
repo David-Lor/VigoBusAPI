@@ -33,6 +33,7 @@ class DatasourceQrHtml(BaseDatasource):
         r = await self._request(stop_id)
         soup = bs4.BeautifulSoup(r.text, self.BS4_PARSER)
         buses = self._parse_response_buses(soup)
+        # TODO Find all buses pages
         return BusesResponse(
             buses=buses,
             more_buses_available=False,
@@ -82,15 +83,17 @@ class DatasourceQrHtml(BaseDatasource):
             return buses
 
         now = Utils.datetime_now()
-        buses_rows_styles = (
-            "color:#333333;background-color:#F7F6F3;",
-            "color:#284775;background-color:White;"
-        )
-        buses_rows = (buses_table.find_all("tr", attrs={"style": style}) for style in buses_rows_styles)
-        buses_rows = Utils.flatten(buses_rows, return_as=tuple)
+        buses_rows = buses_table.find_all("tr")
 
         for row in buses_rows:
-            column_line, column_route, column_minutes = row.find_all("td")
+            cols = row.find_all("td")
+            if len(cols) != 3:
+                continue
+
+            column_line, column_route, column_minutes = cols
+            if not column_minutes.text.isdigit():
+                continue  # buses always have a number for minutes
+
             bus_line_original = column_line.text
             bus_route_original = column_route.text
             bus_line, bus_route = Fixers.bus_line_route(bus_line_original, bus_route_original)
