@@ -38,6 +38,7 @@ def test_fix_bus_line_route(line, route, expected_line, expected_route):
     ("Paseo de Alfonso XII (Mirador)", True),
 ])
 def test_fix_stop_name(name, expected_name):
+    # noinspection simplify-boolean-check
     if expected_name is True:
         expected_name = name
     result_name = Fixers.stop_name(name)

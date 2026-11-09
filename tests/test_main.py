@@ -164,7 +164,7 @@ async def test_vigobus_getallstops_real():
     # noinspection PyTypeChecker
     stops_expected_first = Stop(
         id=6930,
-        name="Praza de América 1",
+        name="Praza de América, 1",
         position=Position(lat=42.220997313, lon=-8.732835177),
         metadata=StopMetadata(
             original_name="Praza de América  1",
@@ -180,7 +180,7 @@ async def test_vigobus_getallstops_real():
         stops_result = await vigobus.get_all_stops()
 
     assert len(stops_result) > 1100
-    assert stops_result[0] == stops_expected_first
+    assert stops_result[0].model_dump_json() == stops_expected_first.model_dump_json()
 
 
 @TestMarks.real

@@ -2,6 +2,7 @@ from typing import Optional, List
 
 import bs4
 import httpx
+from pydantic.types import ClassVar
 
 from vigobus.datasources.base import BaseDatasource
 from vigobus.datasources.fixers import Fixers
@@ -11,8 +12,8 @@ from vigobus.utils import Utils
 
 
 class DatasourceQrHtml(BaseDatasource):
-    URL = "http://infobus.vitrasa.es:8002/Default.aspx"
-    HEADERS = {
+    URL: ClassVar = "https://infobus.vitrasa.es:8002/Default.aspx"
+    HEADERS: ClassVar = {
         'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'accept-encoding': 'accept-encoding',
         'accept-language': 'es,en-US;q=0.7,en;q=0.3',
@@ -21,7 +22,7 @@ class DatasourceQrHtml(BaseDatasource):
         'upgrade-insecure-requests': '1',
         'user-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:67.0) Gecko/20100101 Firefox/67.0'
     }
-    BS4_PARSER = "lxml"
+    BS4_PARSER: ClassVar = "lxml"
 
     async def get_stop(self, stop_id: int) -> Optional[Stop]:
         r = await self._request(stop_id)
