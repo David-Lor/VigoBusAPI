@@ -1,11 +1,13 @@
+import random
+from typing import Optional, List
+
 import httpx
 import pydantic
 
-from typing import Optional, List
-
 from vigobus.models import BusesResponse, Stop
 from vigobus.exceptions import DatasourceMethodUnavailableException
-from vigobus.models.base import PosInt, NonNegFloat, NonNegInt
+from vigobus.models.base import NonNegInt
+from vigobus.models.request import HttpSettings
 
 __all__ = ("BaseDatasource",)
 
@@ -13,9 +15,7 @@ __all__ = ("BaseDatasource",)
 class BaseDatasource(pydantic.BaseModel):
     # TODO Docstring
 
-    http_retries: PosInt = 3
-    http_retries_delay_seconds: NonNegFloat = 1
-    http_request_timeout_seconds: NonNegFloat = 5
+    http_settings: HttpSettings = pydantic.Field(default_factory=HttpSettings)
 
     getbuses_notallbuses_limit: Optional[NonNegInt] = None
     """For the `get_buses` method, if get_all_buses=False and the datasource returns all the buses available,
@@ -60,11 +60,15 @@ class BaseDatasource(pydantic.BaseModel):
 
     async def _request_http(self, url: str, raise_status: bool = True, **kwargs) -> httpx.Response:
         """Simple HTTP requester, supporting retries."""
-        async with httpx.AsyncClient(timeout=self.http_request_timeout_seconds) as client:
-            client: httpx.AsyncClient
-            kwargs.setdefault("method", "GET")
 
-            for i in range(self.http_retries):
+        # TODO review retries system. Include retries_delay_seconds
+        retries = self.http_settings.retries
+
+        # noinspection inconsistent-returns
+        for i in range(retries):
+            async with httpx.AsyncClient(timeout=self.http_settings.request_timeout_seconds, proxy=self._get_proxy()) as client:
+                client: httpx.AsyncClient
+                kwargs.setdefault("method", "GET")
                 try:
                     r = await client.request(
                         url=url,
@@ -73,9 +77,18 @@ class BaseDatasource(pydantic.BaseModel):
                     if raise_status:
                         r.raise_for_status()
                     return r
+
                 except httpx.RequestError as ex:
-                    if i + 1 >= self.http_retries:
+                    if i + 1 >= retries:
                         raise ex
+
+        raise httpx.HTTPError("No successful request could be made after {} retries.".format(retries))
+
+    def _get_proxy(self):
+        if not (proxy_settings := self.http_settings.proxy):
+            return None
+
+        return random.choice(proxy_settings.urls)
 
     @property
     def datasource_name(self):
