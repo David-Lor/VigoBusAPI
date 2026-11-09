@@ -1,4 +1,4 @@
 pydantic>=2,<3
-httpx>=0,<1
+httpx[socks]>=0,<1
 beautifulsoup4>=4,<5
 lxml>=5,<6  # optional

@@ -1,9 +1,10 @@
 import asyncio
 import traceback
-from vigobus import Vigobus
 from vigobus.datasources.base import BaseDatasource
 from vigobus.datasources.ds_qrhtml import DatasourceQrHtml
 from vigobus.datasources.ds_vigoapi import DatasourceVigoApi
+
+options = dict()
 
 
 async def amain():
@@ -18,7 +19,7 @@ async def amain():
     selection = input("Enter: ")
     if selection not in datasources_selections:
         selection = "1"
-    datasource_class: BaseDatasource = datasources_selections[selection]()
+    datasource_class: BaseDatasource = datasources_selections[selection](**options)
 
     while True:
         stop_id = input("Enter Stop ID (or 'exit' to quit): ")

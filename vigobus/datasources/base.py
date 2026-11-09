@@ -1,11 +1,12 @@
+import random
+from typing import Optional, List
+
 import httpx
 import pydantic
 
-from typing import Optional, List
-
 from vigobus.models import BusesResponse, Stop
 from vigobus.exceptions import DatasourceMethodUnavailableException
-from vigobus.models.base import PosInt, NonNegFloat, NonNegInt
+from vigobus.models.base import NonNegInt
 from vigobus.models.request import HttpSettings
 
 __all__ = ("BaseDatasource",)
@@ -59,14 +60,15 @@ class BaseDatasource(pydantic.BaseModel):
 
     async def _request_http(self, url: str, raise_status: bool = True, **kwargs) -> httpx.Response:
         """Simple HTTP requester, supporting retries."""
-        async with httpx.AsyncClient(timeout=self.http_settings.request_timeout_seconds) as client:
-            client: httpx.AsyncClient
-            kwargs.setdefault("method", "GET")
-            # TODO review retries system. Include retries_delay_seconds
-            retries = self.http_settings.retries
 
-            # noinspection inconsistent-returns
-            for i in range(retries):
+        # TODO review retries system. Include retries_delay_seconds
+        retries = self.http_settings.retries
+
+        # noinspection inconsistent-returns
+        for i in range(retries):
+            async with httpx.AsyncClient(timeout=self.http_settings.request_timeout_seconds, proxy=self._get_proxy()) as client:
+                client: httpx.AsyncClient
+                kwargs.setdefault("method", "GET")
                 try:
                     r = await client.request(
                         url=url,
@@ -80,7 +82,13 @@ class BaseDatasource(pydantic.BaseModel):
                     if i + 1 >= retries:
                         raise ex
 
-            raise httpx.HTTPError("No successful request could be made after {} retries.".format(retries))
+        raise httpx.HTTPError("No successful request could be made after {} retries.".format(retries))
+
+    def _get_proxy(self):
+        if not (proxy_settings := self.http_settings.proxy):
+            return None
+
+        return random.choice(proxy_settings.urls)
 
     @property
     def datasource_name(self):
