@@ -76,7 +76,7 @@ class Vigobus(BaseDatasource):
     def _initialize_datasources(self):
         """Instance each available Datasource class, with the same attributes as the current class instance.
         """
-        kwargs = self.dict()
+        kwargs = self.model_dump()
         datasources_classes = [v for k, v in kwargs.items() if k.startswith("datasources_")]
         datasources_classes = Utils.flatten(datasources_classes, return_as=set)
         self._datasources = {cls: cls(**kwargs) for cls in datasources_classes}
